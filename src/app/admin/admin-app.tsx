@@ -1,6 +1,7 @@
 "use client";
 import { Admin, Resource, ListGuesser, EditGuesser } from "react-admin";
 import jsonServerProvider from "ra-data-json-server";
+import React from "react";
 
 const dataProvider = jsonServerProvider("https://jsonplaceholder.typicode.com");
 

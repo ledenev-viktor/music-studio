@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-const AdminAppDynamic = dynamic(() => import("./component-app"), {
+const AdminAppDynamic = dynamic(() => import("./admin-app"), {
   ssr: false,
 });
 

@@ -10,4 +10,13 @@ module.exports = {
     config.plugins.push(new StylelintPlugin());
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/home",
+        permanent: true,
+      },
+    ];
+  },
 };
