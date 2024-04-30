@@ -1,3 +1,2 @@
 /// <reference types="cypress" />
-
-export {};
+/// <reference types="@testing-library/cypress" />

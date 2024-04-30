@@ -1,14 +1,15 @@
-import { defineConfig } from "cypress";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { defineConfig } from 'cypress';
 
 export default defineConfig({
-  e2e: {
-    setupNodeEvents(on, config) {},
-    baseUrl: "http://localhost:3000",
-  },
-  component: {
-    devServer: {
-      framework: "next",
-      bundler: "webpack",
+    e2e: {
+        setupNodeEvents(on, config) {},
+        baseUrl: 'http://localhost:3000',
     },
-  },
+    component: {
+        devServer: {
+            framework: 'next',
+            bundler: 'webpack',
+        },
+    },
 });
