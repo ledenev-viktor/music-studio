@@ -1,0 +1,29 @@
+.vscode
+.idea
+/node_modules
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+
+# debug
+npm-debug.log*
+
+# vercel
+.vercel
+next-env.d.ts
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# cypress
+/cypress/screenshots
+/cypress/videos
+
+#env
+.env
