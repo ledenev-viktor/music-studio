@@ -1,8 +1,66 @@
 {
-  "extends": ["next/core-web-vitals", "prettier"],
-  "settings": {
-    "next": {
-      "rootDir": "src"
+    "root": true,
+    "env": { "browser": true, "es2020": true, "cypress/globals": true },
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+        "next/core-web-vitals",
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:jsx-a11y/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:prettier/recommended",
+        "plugin:cypress/recommended"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true // enable linting for jsx files
+        },
+        "ecmaVersion": 11,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "settings": {
+        "import/resolver": {
+            "typescript": {
+                "project": ["tsconfig.json"]
+            }
+        }
+    },
+    "plugins": [
+        "react",
+        "react-hooks",
+        "unused-imports",
+        "prettier",
+        "cypress"
+    ],
+    "rules": {
+        "react/react-in-jsx-scope": "off",
+        "prettier/prettier": "error",
+        "react/jsx-filename-extension": [0],
+        "import/extensions": "off",
+        "import/order": [
+            "error",
+            {
+                "pathGroups": [
+                    { "pattern": "react", "group": "builtin" },
+                    { "pattern": "~components/**", "group": "sibling" },
+                    { "pattern": "~hooks/**", "group": "internal" }
+                ],
+                "pathGroupsExcludedImportTypes": ["builtin"],
+                "groups": [
+                    "builtin",
+                    "external",
+                    "internal",
+                    "parent",
+                    "sibling",
+                    "index"
+                ],
+                "newlines-between": "never"
+            }
+        ]
     }
-  }
 }

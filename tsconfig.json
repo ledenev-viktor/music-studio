@@ -1,36 +1,47 @@
 {
-  "compilerOptions": {
-    "types": ["react", "react-dom", "react-admin"],
-    "baseUrl": "./",
-    "paths": {
-      "react-admin": ["node_modules/react-admin"]
+    "compilerOptions": {
+        "types": ["react", "react-dom", "react-admin", "cypress"],
+        "baseUrl": "./src",
+        "target": "es5",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "incremental": true,
+        "plugins": [
+            {
+                "name": "next"
+            }
+        ],
+        "paths": {
+            "react-admin": ["node_modules/react-admin"],
+
+            "~app": ["app"],
+            "~app/*": ["app/*"],
+
+            "~components": ["components"],
+            "~components/*": ["components/*"],
+
+            "~hooks": ["hooks"],
+            "~hooks/*": ["hooks/*"]
+        }
     },
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
-  },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "next.config.js",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": ["node_modules", "**/*.cy.*"]
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        "next.config.js",
+        ".next/types/**/*.ts",
+        "cypress",
+        "./cypress/**/*.ts"
+    ],
+    "exclude": ["node_modules"]
 }
