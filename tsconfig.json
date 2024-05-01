@@ -24,14 +24,14 @@
         "paths": {
             "react-admin": ["node_modules/react-admin"],
 
-            "~app": ["app"],
-            "~app/*": ["app/*"],
-
             "~components": ["components"],
             "~components/*": ["components/*"],
 
             "~hooks": ["hooks"],
-            "~hooks/*": ["hooks/*"]
+            "~hooks/*": ["hooks/*"],
+
+            "~utils": ["utils"],
+            "~utils/*": ["utils/*"]
         }
     },
     "include": [

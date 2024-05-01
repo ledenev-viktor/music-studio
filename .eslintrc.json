@@ -42,13 +42,15 @@
         "prettier/prettier": "error",
         "react/jsx-filename-extension": [0],
         "import/extensions": "off",
+        "@typescript-eslint/no-explicit-any": "warn",
         "import/order": [
             "error",
             {
                 "pathGroups": [
                     { "pattern": "react", "group": "builtin" },
                     { "pattern": "~components/**", "group": "sibling" },
-                    { "pattern": "~hooks/**", "group": "internal" }
+                    { "pattern": "~hooks/**", "group": "internal" },
+                    { "pattern": "~utils/**", "group": "internal" }
                 ],
                 "pathGroupsExcludedImportTypes": ["builtin"],
                 "groups": [
