@@ -25,4 +25,5 @@ next-env.d.ts
 /cypress/videos
 
 #env
-.env
+.env*
+config/local.json
