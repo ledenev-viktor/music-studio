@@ -1,3 +1,6 @@
+import { useGetDummy } from '~hooks/dummy';
+
 export default function HomePage() {
-    return <div>page 1 is here</div>;
+    const { data } = useGetDummy();
+    return <div>{JSON.stringify(data)}</div>;
 }

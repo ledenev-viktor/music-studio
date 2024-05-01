@@ -19,6 +19,11 @@ module.exports = {
                 destination: '/home',
                 permanent: true,
             },
+            {
+                source: '/api/dummy',
+                destination: 'https://dummyjson.com/products/1',
+                permanent: true,
+            },
         ];
     },
 };
