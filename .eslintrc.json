@@ -73,6 +73,7 @@
                         "group": [
                             "../**/components",
                             "../**/hooks",
+                            "../**/constants",
                             "../**/utils"
                         ],
                         "message": "Prefer absolute imports instead of relatives"

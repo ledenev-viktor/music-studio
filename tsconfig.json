@@ -36,8 +36,8 @@
             "~lib": ["src/lib"],
             "~lib/*": ["src/lib/*"],
 
-            "~constants": ["src/constants"],
-            "~constants/*": ["src/constants/*"]
+            "~types": ["src/types"],
+            "~types/*": ["src/types/*"]
         }
     },
     "include": [

@@ -1,16 +1,15 @@
 # Music studio
 
-## To run the project in config folder create .env file. It should contain two values:
+## To run the project in the root create .env file. It should contain few values (without quotes):
 
 ```
-  PRIVATE_KEY="value"
-  CLIENT_EMAIL="value"
-  BASE_URL=http://localhost:3000/ (for local development)
+  PRIVATE_KEY=value
+  CLIENT_EMAIL=value
+  BASE_URL=http://localhost:3000/
+  CALENDAR_ID=value
 ```
 
-> [!CAUTION]
-> **Do not commit the .env file**: Be very careful here!
-
+> [!CAUTION] > **Do not commit the .env file**: Be very careful here!
 
 <p>
 Проект представляет собой landing page с возможностями просматривать новости, информацию и контакты студии, 

@@ -1,7 +1,12 @@
 import { useGetEvents } from '~hooks';
 
 export default function InitialPage() {
-    const { data } = useGetEvents();
+    const { data: events } = useGetEvents();
 
-    return <div>{JSON.stringify(data)}</div>;
+    return (
+        <div>
+            <h1>Events</h1>
+            <div>{JSON.stringify(events) || 'empty'}</div>
+        </div>
+    );
 }
