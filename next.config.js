@@ -1,16 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const StylelintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = {
     reactStrictMode: true,
-    sassOptions: {
-        includePaths: [path.join(__dirname, 'styles')],
-    },
-    webpack: (config, options) => {
-        config.plugins.push(new StylelintPlugin());
-        return config;
+    compiler: {
+        styledComponents: true,
     },
     async redirects() {
         return [

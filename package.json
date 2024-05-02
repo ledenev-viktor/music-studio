@@ -11,8 +11,6 @@
     "lint": "next lint",
     "lint:ts": "npx eslint \"**/*.{ts, tsx}\"",
     "lint:fix": "npx eslint \"**/*.{ts, tsx}\" --fix",
-    "lint:scss": "npx stylelint \"**/*.scss\"",
-    "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
     "cy:open-e2e": "cypress open --e2e",
     "cy:open-unit": "cypress open --component",
     "cy:run-e2e": "cypress run --e2e",
@@ -59,11 +57,7 @@
     "lint-staged": "^15.2.2",
     "prettier": "3.2.5",
     "react-admin": "^4.16.16",
-    "sass": "^1.75.0",
     "start-server-and-test": "^2.0.3",
-    "stylelint": "^16.4.0",
-    "stylelint-config-standard-scss": "^13.1.0",
-    "stylelint-webpack-plugin": "^5.0.0",
     "typescript": "^5.4.5"
   }
 }
