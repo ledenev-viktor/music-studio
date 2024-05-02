@@ -1,18 +1,18 @@
 export type CalendarEvent = {
-    kind: string;
-    etag: string;
-    id: string;
-    status: string;
-    htmlLink: string;
-    created: string;
-    updated: string;
-    summary: string;
+    kind?: string;
+    etag?: string;
+    id?: string;
+    status?: string;
+    htmlLink?: string;
+    created?: string;
+    updated?: string;
+    summary?: string;
     description?: string;
-    creator: {
+    creator?: {
         email: string;
         self: boolean;
     };
-    organizer: {
+    organizer?: {
         email: string;
         self: boolean;
     };
@@ -20,12 +20,12 @@ export type CalendarEvent = {
         dateTime: string;
         timeZone: string;
     };
-    end: {
+    end?: {
         dateTime: string;
         timeZone: string;
     };
-    iCalUID: string;
-    sequence: number;
+    iCalUID?: string;
+    sequence?: number;
     attendees?: [
         {
             email?: string;
@@ -38,10 +38,28 @@ export type CalendarEvent = {
             responseStatus?: string;
         },
     ];
-    reminders: {
-        useDefault: boolean;
+    hangoutLink?: string;
+    conferenceData?: {
+        entryPoints?: [
+            {
+                entryPointType?: string;
+                uri?: string;
+                label?: string;
+            },
+        ];
+        conferenceSolution?: {
+            key?: {
+                type?: string;
+            };
+            name?: string;
+            iconUri?: string;
+        };
+        conferenceId?: string;
     };
-    eventType: string;
+    reminders?: {
+        useDefault?: boolean;
+    };
+    eventType?: string;
 };
 export const events: CalendarEvent[] = [
     {
