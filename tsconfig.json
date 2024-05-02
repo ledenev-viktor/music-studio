@@ -1,6 +1,15 @@
 {
     "compilerOptions": {
-        "types": ["react", "react-dom", "react-admin", "cypress"],
+        "types": [
+            "react",
+            "react-dom",
+            "react-admin",
+            "cypress",
+            "antd",
+            "moment",
+            "yup",
+            "react-hook-form"
+        ],
         "baseUrl": "./",
         "target": "es5",
         "lib": ["dom", "dom.iterable", "esnext"],
