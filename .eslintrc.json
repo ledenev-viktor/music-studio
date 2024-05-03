@@ -42,13 +42,16 @@
         "prettier/prettier": "error",
         "react/jsx-filename-extension": [0],
         "import/extensions": "off",
+        "@typescript-eslint/no-explicit-any": "warn",
         "import/order": [
             "error",
             {
                 "pathGroups": [
                     { "pattern": "react", "group": "builtin" },
                     { "pattern": "~components/**", "group": "sibling" },
-                    { "pattern": "~hooks/**", "group": "internal" }
+                    { "pattern": "~constants/**", "group": "sibling" },
+                    { "pattern": "~hooks/**", "group": "internal" },
+                    { "pattern": "~utils/**", "group": "internal" }
                 ],
                 "pathGroupsExcludedImportTypes": ["builtin"],
                 "groups": [
@@ -60,6 +63,22 @@
                     "index"
                 ],
                 "newlines-between": "never"
+            }
+        ],
+        "no-restricted-imports": [
+            "error",
+            {
+                "patterns": [
+                    {
+                        "group": [
+                            "../**/components",
+                            "../**/hooks",
+                            "../**/constants",
+                            "../**/utils"
+                        ],
+                        "message": "Prefer absolute imports instead of relatives"
+                    }
+                ]
             }
         ]
     }
