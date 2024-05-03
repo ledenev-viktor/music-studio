@@ -4,6 +4,13 @@ const path = require('path');
 
 module.exports = {
     reactStrictMode: true,
+    serverRuntimeConfig: {
+        privateKey: process.env.PRIVATE_KEY,
+        clientEmail: process.env.CLIENT_EMAIL,
+    },
+    sassOptions: {
+        includePaths: [path.join(__dirname, 'styles')],
+    },
     compiler: {
         styledComponents: true,
     },

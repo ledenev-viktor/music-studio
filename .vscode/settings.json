@@ -16,6 +16,7 @@
     "editor.codeActionsOnSave": {
       "source.fixAll": "explicit"
     },
-    "editor.formatOnType": false
+    "editor.formatOnType": false,
+    "prettier.endOfLine": "auto"
   }
   
