@@ -1,3 +1,10 @@
+import { RegistrationForm } from '~components/registration';
+
 export default function Page() {
-    return <div>home page</div>;
+    return (
+        <div>
+            <div>home page</div>
+            <RegistrationForm />
+        </div>
+    );
 }
