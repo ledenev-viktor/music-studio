@@ -35,10 +35,18 @@
         "react-hooks",
         "unused-imports",
         "prettier",
-        "cypress"
+        "cypress",
+        "@emotion"
     ],
     "rules": {
         "react/react-in-jsx-scope": "off",
+        "react/no-unknown-property": [
+            2,
+            {
+                "ignore": ["jsx", "global"]
+            }
+        ],
+        "@emotion/jsx-import": "error",
         "prettier/prettier": "error",
         "react/jsx-filename-extension": [0],
         "import/extensions": "off",

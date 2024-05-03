@@ -11,4 +11,16 @@ module.exports = {
     sassOptions: {
         includePaths: [path.join(__dirname, 'styles')],
     },
+    compiler: {
+        styledComponents: true,
+    },
+    async redirects() {
+        return [
+            {
+                source: '/',
+                destination: '/home',
+                permanent: true,
+            },
+        ];
+    },
 };

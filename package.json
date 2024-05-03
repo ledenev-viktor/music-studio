@@ -11,8 +11,6 @@
     "lint": "next lint",
     "lint:ts": "npx eslint \"**/*.{ts, tsx}\"",
     "lint:fix": "npx eslint \"**/*.{ts, tsx}\" --fix",
-    "lint:scss": "npx stylelint \"**/*.scss\"",
-    "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
     "cy:open-e2e": "cypress open --e2e",
     "cy:open-unit": "cypress open --component",
     "cy:run-e2e": "cypress run --e2e",
@@ -30,6 +28,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.3.6",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@next/env": "^14.2.3",
     "antd": "^5.17.0",
     "next": "^14.2.3",
@@ -41,6 +41,7 @@
     "@babel/eslint-parser": "^7.24.5",
     "@tanstack/react-query": "^5.32.1",
     "@tanstack/react-query-devtools": "^5.32.1",
+    "@emotion/eslint-plugin": "^11.11.0",
     "@testing-library/cypress": "^10.0.1",
     "@types/node": "^20.12.7",
     "@types/react": "^18.3.1",
@@ -64,7 +65,6 @@
     "lint-staged": "^15.2.2",
     "prettier": "3.2.5",
     "react-admin": "^4.16.16",
-    "sass": "^1.75.0",
     "start-server-and-test": "^2.0.3",
     "typescript": "^5.4.5"
   }
