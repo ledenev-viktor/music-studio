@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { google } from 'googleapis';
 import { NextApiRequest, NextApiResponse } from 'next/types';
-import createGoogleClient from '~utils/api.google';
+import createGoogleClient from '~lib/api.google';
 
 const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
     try {

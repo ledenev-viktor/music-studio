@@ -1,19 +1,22 @@
-import React from 'react';
-import { Admin, Resource, ListGuesser, EditGuesser } from 'react-admin';
-import jsonServerProvider from 'ra-data-json-server';
-
-const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
+'use client';
+import React, { Suspense } from 'react';
+import { signOut } from 'next-auth/react';
+import { Flex, Spin } from 'antd';
+import { useGetAppointments } from '~hooks/appointments';
 
 // needs to be default import for dynamic loading
 export default function AdminApp() {
+    const { data: appointments } = useGetAppointments();
+
     return (
-        <Admin dataProvider={dataProvider}>
-            <Resource
-                name="users"
-                list={ListGuesser}
-                edit={EditGuesser}
-                recordRepresentation="name"
-            />
-        </Admin>
+        <Suspense fallback={<Spin size="large" />}>
+            <Flex vertical gap="20px">
+                <div>admin page</div>
+                <>{JSON.stringify(appointments)}</>
+                <button onClick={() => signOut({ callbackUrl: '/home' })}>
+                    Sign out
+                </button>
+            </Flex>
+        </Suspense>
     );
 }

@@ -17,6 +17,7 @@
       "source.fixAll": "explicit"
     },
     "editor.formatOnType": false,
-    "prettier.endOfLine": "auto"
+    "prettier.endOfLine": "auto",
+    "circleci.persistedProjectSelection": []
   }
   
