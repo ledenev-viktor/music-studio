@@ -1,12 +1,13 @@
-import NextAuth from 'next-auth';
+import NextAuth, { AuthOptions, Account, Profile } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import googleConfig from '~lib/google';
 
-export const authOptions = {
-    secret: process.env.NEXTAUTH_SECRET,
+export const authOptions: AuthOptions = {
+    secret: googleConfig.secret,
     providers: [
         GoogleProvider({
-            clientId: String(process.env.GOOGLE_ADMIN_CLIENT_ID),
-            clientSecret: String(process.env.GOOGLE_ADMIN_CLIENT_KEY),
+            clientId: googleConfig.clientId,
+            clientSecret: googleConfig.clientSecret,
             authorization: {
                 params: {
                     prompt: 'consent',
@@ -17,13 +18,21 @@ export const authOptions = {
         }),
     ],
     callbacks: {
-        async signIn({ account, profile }: any) {
+        async signIn({
+            account,
+            profile,
+        }: {
+            account: Account | null;
+            profile?: Profile;
+        }) {
+            if (!account || !profile) return false;
             if (
                 account.provider === 'google' &&
-                profile.email === process.env.CALENDAR_ID
+                profile.email === googleConfig.calendarId
             ) {
                 return true;
             }
+
             return false;
         },
     },

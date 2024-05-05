@@ -18,6 +18,5 @@
     },
     "editor.formatOnType": false,
     "prettier.endOfLine": "auto",
-    "circleci.persistedProjectSelection": []
   }
   
