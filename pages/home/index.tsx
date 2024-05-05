@@ -1,3 +1,9 @@
+import dynamic from 'next/dynamic';
+
+const RegForm = dynamic(() => import('~components/wigets/registration'), {
+    ssr: false,
+});
+
 export default function Page() {
-    return <div>home page</div>;
+    return <RegForm />;
 }
