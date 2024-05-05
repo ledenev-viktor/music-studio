@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { type AppProps } from 'next/app';
 import Head from 'next/head';
 import {
     HydrationBoundary,
@@ -8,18 +7,22 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { SessionProvider } from 'next-auth/react';
-import { Session } from 'next-auth';
 import { appWithTranslation } from 'next-i18next';
+import { Global } from '@emotion/react';
+import dynamic from 'next/dynamic';
 import { NotificationProvider } from '~notifications';
 import { ModalProvider } from '~modals';
+import { AppPropsWithLayout } from '~types/app';
+import { globalStyles } from 'src/styles/global-styles';
+
+const Layout = dynamic(() => import('~components/layout'), {
+    ssr: false,
+});
 
 const MyApp = ({
     Component,
     pageProps: { session, ...pageProps },
-}: AppProps<{
-    dehydratedState: unknown;
-    session: Session;
-}>) => {
+}: AppPropsWithLayout) => {
     const [queryClient] = useState(
         () =>
             new QueryClient({
@@ -31,6 +34,9 @@ const MyApp = ({
             }),
     );
 
+    const getLayout =
+        Component.getLayout || ((page) => <Layout>{page}</Layout>);
+
     return (
         <QueryClientProvider client={queryClient}>
             <HydrationBoundary state={pageProps.dehydratedState}>
@@ -40,7 +46,8 @@ const MyApp = ({
                 <SessionProvider session={session}>
                     <ModalProvider>
                         <NotificationProvider>
-                            <Component {...pageProps} />
+                            <Global styles={globalStyles} />
+                            {getLayout(<Component {...pageProps} />)}
                         </NotificationProvider>
                     </ModalProvider>
                 </SessionProvider>
