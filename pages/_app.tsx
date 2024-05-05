@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { type AppProps } from 'next/app';
 import Head from 'next/head';
 import {
     HydrationBoundary,
@@ -12,6 +11,8 @@ import { Session } from 'next-auth';
 import { appWithTranslation } from 'next-i18next';
 import { NotificationProvider } from '~notifications';
 import { ModalProvider } from '~modals';
+import { AppPropsWithLayout } from '~types/app';
+import { RootLayout } from '../src/layouts/root-layout';
 
 const MyApp = ({
     Component,
@@ -31,6 +32,9 @@ const MyApp = ({
             }),
     );
 
+    const getLayout =
+        Component.getLayout || ((page) => <RootLayout>{page}</RootLayout>);
+
     return (
         <QueryClientProvider client={queryClient}>
             <HydrationBoundary state={pageProps.dehydratedState}>
@@ -40,7 +44,7 @@ const MyApp = ({
                 <SessionProvider session={session}>
                     <ModalProvider>
                         <NotificationProvider>
-                            <Component {...pageProps} />
+                            {getLayout(<Component {...pageProps} />)}
                         </NotificationProvider>
                     </ModalProvider>
                 </SessionProvider>
