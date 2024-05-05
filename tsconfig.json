@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "types": ["react", "react-dom", "react-admin", "cypress"],
+        "types": ["react", "react-dom", "next-auth", "cypress"],
         "baseUrl": "./",
         "target": "es5",
         "lib": ["dom", "dom.iterable", "esnext"],
@@ -29,9 +29,6 @@
 
             "~hooks": ["src/hooks"],
             "~hooks/*": ["src/hooks/*"],
-
-            "~utils": ["src/utils"],
-            "~utils/*": ["src/utils/*"],
 
             "~lib": ["src/lib"],
             "~lib/*": ["src/lib/*"],
