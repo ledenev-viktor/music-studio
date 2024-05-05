@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { type AppProps } from 'next/app';
 import Head from 'next/head';
 import {
     HydrationBoundary,
@@ -7,13 +6,13 @@ import {
     QueryClientProvider,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { AppPropsWithLayout } from '~types/app';
+import { RootLayout } from '../src/layouts/root-layout';
 
 const MyApp = ({
     Component,
     pageProps: { ...pageProps },
-}: AppProps<{
-    dehydratedState: unknown;
-}>) => {
+}: AppPropsWithLayout) => {
     const [queryClient] = useState(
         () =>
             new QueryClient({
@@ -25,13 +24,16 @@ const MyApp = ({
             }),
     );
 
+    const getLayout =
+        Component.getLayout || ((page) => <RootLayout>{page}</RootLayout>);
+
     return (
         <QueryClientProvider client={queryClient}>
             <HydrationBoundary state={pageProps.dehydratedState}>
                 <Head>
                     <title>Praktika</title>
                 </Head>
-                <Component {...pageProps} />
+                {getLayout(<Component {...pageProps} />)}
             </HydrationBoundary>
             <ReactQueryDevtools />
         </QueryClientProvider>
