@@ -32,7 +32,6 @@ export const authOptions: AuthOptions = {
             ) {
                 return true;
             }
-
             return false;
         },
     },

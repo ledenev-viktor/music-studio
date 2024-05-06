@@ -1,19 +1,19 @@
 import { NextApiRequest, NextApiResponse } from 'next/types';
-import supabase from './supabase';
+import supabase from '../supabase';
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse,
 ) {
     try {
-        const { data, error } = await supabase.from('appointments').select('*');
+        const { data, error } = await supabase.from('pictures').select('*');
 
         if (error) {
-            res.status(500).end(error.message);
+            throw new Error(error.message);
         }
 
         res.status(200).json(data);
     } catch (error) {
-        res.status(500).end(error);
+        res.status(500).json({ success: false, error: error });
     }
 }
