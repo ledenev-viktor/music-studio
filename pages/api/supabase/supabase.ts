@@ -1,6 +1,25 @@
 import { createClient } from '@supabase/supabase-js';
 import supabaseConfig from '~lib/supabase';
 
-const supabase = createClient(supabaseConfig.apiUrl, supabaseConfig.apiKey);
+export const supabase = createClient(
+    supabaseConfig.apiUrl,
+    supabaseConfig.serviceKey,
+);
 
-export default supabase;
+export async function authenticateWithSupabase(
+    accessToken: string | undefined,
+    idToken: string | undefined,
+) {
+    try {
+        if (!idToken) return { error: 'No token was provided' };
+        const data = await supabase.auth.signInWithIdToken({
+            provider: 'google',
+            access_token: accessToken,
+            token: idToken,
+        });
+
+        return data;
+    } catch (error) {
+        return { error };
+    }
+}

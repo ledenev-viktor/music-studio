@@ -8,13 +8,13 @@ import {
     prettifyAppointments,
 } from '~utils/date.helpers';
 
-export const fetchAppointmentsKey = ['fetchAppointments'];
-
 export const useGetAppointments = () => {
     return useQuery({
-        queryKey: fetchAppointmentsKey,
+        queryKey: ['fetchAppointments'],
         queryFn: async () => {
-            const { data } = await api.get<Appointment[]>('api/supabase');
+            const { data } = await api.get<Appointment[]>(
+                'api/supabase/appointments/get',
+            );
 
             const mappedData = data.map((item) => ({
                 ...item,

@@ -1,10 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import api from '~lib/api.helper';
-import { Appointment } from '~types/appointments';
 import { useNotification } from '~notifications';
-import { AppointmentStatuses } from '~constants/status';
 
-export const useUpdateAppointments = () => {
+export const useUploadImages = () => {
     const { notification } = useNotification();
     const queryClient = useQueryClient();
 
@@ -12,21 +10,18 @@ export const useUpdateAppointments = () => {
         any,
         any,
         {
-            appointmentId: Appointment['id'];
-            status: AppointmentStatuses;
+            fileType: string;
+            url: string; //base64 url
+            fileName: string;
         }
     >({
-        mutationFn: (data) =>
-            api.post<any>('api/supabase/appointments/post', {
-                appointmentId: data.appointmentId,
-                status: data.status,
-            }),
+        mutationFn: async (data) => api.post<void>(`api/drive/post`, data),
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: ['fetchAppointments'],
+                queryKey: ['fetchImages'],
             });
             notification.success({
-                message: 'Appointment was successfully updated',
+                message: 'Image was successfully uploaded',
                 placement: 'bottom',
             });
         },

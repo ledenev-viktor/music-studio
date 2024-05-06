@@ -7,13 +7,10 @@ export default async function handler(
 ) {
     try {
         const payload = req.body;
-        const { data, error } = await supabase
-            .from('appointments')
-            .update({
-                updatedAt: Math.floor(new Date().getTime() / 1000),
-                status: payload.status,
-            })
-            .eq('id', payload.appointmentId);
+        const { data, error } = await supabase.from('settings').insert({
+            pictureUrl: payload.pictureUrl,
+            uid: payload.uid,
+        });
 
         if (error) res.status(500).end(error.message);
 

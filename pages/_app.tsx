@@ -10,7 +10,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { SessionProvider } from 'next-auth/react';
 import { Session } from 'next-auth';
 import { appWithTranslation } from 'next-i18next';
-import { NotificationProvider, ModalProvider } from '~components/providers';
+import { NotificationProvider } from '~notifications';
+import { ModalProvider } from '~modals';
 
 const MyApp = ({
     Component,

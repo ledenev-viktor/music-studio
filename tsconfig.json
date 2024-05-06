@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "types": ["react", "react-dom", "next-auth", "cypress", "next-i18next"],
+        "types": ["react", "react-dom", "next-auth", "cypress", "next-i18next", "./global.d.ts"],
         "baseUrl": "./",
         "target": "es5",
         "lib": ["dom", "dom.iterable", "esnext"],
@@ -29,6 +29,9 @@
 
             "~constants": ["src/constants"],
             "~constants/*": ["src/constants/*"],
+
+            "~ui": ["src/components/ui"],
+            "~ui/*": ["src/components/ui/*"],
 
             "~hooks": ["src/hooks"],
             "~hooks/*": ["src/hooks/*"],

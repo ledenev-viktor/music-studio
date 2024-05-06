@@ -6,14 +6,18 @@ export default async function handler(
     res: NextApiResponse,
 ) {
     try {
-        const { data, error } = await supabase.from('pictures').select('*');
+        const { data, error } = await supabase.from('appointments').select('*');
 
         if (error) {
-            throw new Error(error.message);
+            res.status(500).end(error.message);
+        }
+
+        if (!data?.length && !error) {
+            res.status(500).end('Problems with authorization');
         }
 
         res.status(200).json(data);
     } catch (error) {
-        res.status(500).json({ success: false, error: error });
+        res.status(500).end(error);
     }
 }

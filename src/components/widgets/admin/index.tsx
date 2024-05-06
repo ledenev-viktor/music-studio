@@ -1,35 +1,38 @@
 'use client';
 import React, { Key, useState } from 'react';
-import { ConfigProvider, MenuProps } from 'antd';
-import { PictureOutlined, TeamOutlined } from '@ant-design/icons';
-import { useGetPicture } from '~hooks/pictures';
-import { AdminLayout } from './layout';
+import { ConfigProvider, Button, Layout, type MenuProps, Menu } from 'antd';
+import { SettingOutlined, TeamOutlined } from '@ant-design/icons';
+import { useRouter } from 'next/router';
+import { Content, Header } from 'antd/es/layout/layout';
+import Image from 'next/image';
+import { signOut } from 'next-auth/react';
+import { useGetImages } from '~hooks/images';
 import { Appointments } from './Appointments';
-import { Pictures } from './PicturesGallery';
+import { Settings } from './Settings';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
-const menu: { [key: string]: MenuItem } = {
-    appointments: {
+const items: MenuItem[] = [
+    {
         key: 'appointments',
         label: 'Appointments',
         icon: <TeamOutlined />,
     },
-    pictures: {
-        key: 'pictures',
-        label: 'Pictures',
-        icon: <PictureOutlined />,
+    {
+        key: 'settings',
+        label: 'Settings',
+        icon: <SettingOutlined />,
     },
-};
+];
 
 export default function AdminApp() {
-    const items: MenuItem[] = Object.values(menu);
-    const initialTab = items?.[0]?.key;
-    const [currentTab, setCurrentTab] = useState<Key | undefined>(initialTab);
-    const onMenuItemClick: MenuProps['onClick'] = (e) =>
-        setCurrentTab(menu[e.key]?.key);
+    const { query } = useRouter();
+    const initialTab =
+        query.tab && !Array.isArray(query.tab) ? query.tab : 'appointments';
+    const [currentTab, setCurrentTab] = useState<Key>(initialTab);
+    const onMenuItemClick: MenuProps['onClick'] = (e) => setCurrentTab(e.key);
 
-    const { data: pictures } = useGetPicture();
+    const { data: images, isLoading: isLoadingImages } = useGetImages();
 
     return (
         <ConfigProvider
@@ -41,13 +44,46 @@ export default function AdminApp() {
                 },
             }}
         >
-            <AdminLayout menuItems={items} onMenuItemClick={onMenuItemClick}>
-                {currentTab === initialTab ? (
-                    <Appointments />
-                ) : (
-                    <Pictures pictures={pictures} />
-                )}
-            </AdminLayout>
+            <Layout style={{ height: '100vh', margin: 0, padding: 0 }}>
+                <Header
+                    style={{
+                        position: 'sticky',
+                        top: 0,
+                        zIndex: 1,
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Image
+                        src="/praktika.jpg"
+                        alt="logo"
+                        width={50}
+                        height={50}
+                    />
+                    <Menu
+                        onClick={onMenuItemClick}
+                        theme="light"
+                        mode="horizontal"
+                        defaultSelectedKeys={[initialTab]}
+                        style={{ flex: 1, minWidth: 0 }}
+                        items={items}
+                    />
+                    <Button onClick={() => signOut({ callbackUrl: '/home' })}>
+                        Log out
+                    </Button>
+                </Header>
+                <Content style={{ padding: '16px 48px 0' }}>
+                    {currentTab === 'appointments' ? (
+                        <Appointments />
+                    ) : (
+                        <Settings
+                            images={images}
+                            isLoadingImages={isLoadingImages}
+                        />
+                    )}
+                </Content>
+            </Layout>
         </ConfigProvider>
     );
 }

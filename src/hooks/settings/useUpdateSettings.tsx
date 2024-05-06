@@ -1,10 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import api from '~lib/api.helper';
-import { Appointment } from '~types/appointments';
 import { useNotification } from '~notifications';
-import { AppointmentStatuses } from '~constants/status';
 
-export const useUpdateAppointments = () => {
+export const useUpdateSettings = () => {
     const { notification } = useNotification();
     const queryClient = useQueryClient();
 
@@ -12,21 +10,21 @@ export const useUpdateAppointments = () => {
         any,
         any,
         {
-            appointmentId: Appointment['id'];
-            status: AppointmentStatuses;
+            uid: any;
+            pictureUrl: string;
         }
     >({
         mutationFn: (data) =>
-            api.post<any>('api/supabase/appointments/post', {
-                appointmentId: data.appointmentId,
-                status: data.status,
+            api.post<any>('api/supabase/settings/update', {
+                uid: data.uid,
+                pictureUrl: data.pictureUrl,
             }),
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: ['fetchAppointments'],
+                queryKey: ['fetchSettings'],
             });
             notification.success({
-                message: 'Appointment was successfully updated',
+                message: 'Settings were successfully updated',
                 placement: 'bottom',
             });
         },

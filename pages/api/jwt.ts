@@ -6,7 +6,7 @@ const jwtClient = new google.auth.JWT(
     googleConfig.clientEmail,
     undefined,
     googleConfig.privateKey,
-    'https://www.googleapis.com/auth/calendar',
+    'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/docs https://www.googleapis.com/auth/drive',
     undefined,
 );
 

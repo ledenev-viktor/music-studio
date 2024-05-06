@@ -1,7 +1,7 @@
 import { AppointmentStatuses } from '~constants/status';
 
 export type Appointment = {
-    startTimestamp: any;
+    startTimestamp: string;
     date: string;
     comment: string;
     createdAt: string;
