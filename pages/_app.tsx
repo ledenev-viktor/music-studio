@@ -9,6 +9,8 @@ import {
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { SessionProvider } from 'next-auth/react';
 import { Session } from 'next-auth';
+import { NotificationProvider } from './NotificationsProvider';
+import { ModalProvider } from './ModalProvider';
 
 const MyApp = ({
     Component,
@@ -35,7 +37,11 @@ const MyApp = ({
                     <title>Praktika</title>
                 </Head>
                 <SessionProvider session={session}>
-                    <Component {...pageProps} />
+                    <ModalProvider>
+                        <NotificationProvider>
+                            <Component {...pageProps} />
+                        </NotificationProvider>
+                    </ModalProvider>
                 </SessionProvider>
             </HydrationBoundary>
             <ReactQueryDevtools />

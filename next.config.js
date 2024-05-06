@@ -14,6 +14,9 @@ module.exports = {
     compiler: {
         styledComponents: true,
     },
+    images: {
+        domains: ['https://ltjjyxywrvwmkylknicn.supabase.co'],
+    },
     async redirects() {
         return [
             {

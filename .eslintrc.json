@@ -59,6 +59,8 @@
                     { "pattern": "~components/**", "group": "sibling" },
                     { "pattern": "~constants/**", "group": "sibling" },
                     { "pattern": "~hooks/**", "group": "internal" },
+                    { "pattern": "~notifications", "group": "internal"},
+                    { "pattern": "~modals", "group": "internal"},
                     { "pattern": "~lib/**", "group": "internal" }
                 ],
                 "pathGroupsExcludedImportTypes": ["builtin"],
@@ -82,7 +84,8 @@
                             "../**/components",
                             "../**/hooks",
                             "../**/constants",
-                            "../**/lib"
+                            "../**/lib",
+                            "../**/pages"
                         ],
                         "message": "Prefer absolute imports instead of relatives"
                     }
