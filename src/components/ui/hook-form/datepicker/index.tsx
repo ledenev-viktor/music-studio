@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import {
     DatePicker as DatePickerAntD,
     DatePickerProps,
@@ -6,14 +7,22 @@ import {
 } from 'antd';
 import { useController, UseControllerProps } from 'react-hook-form';
 
-export function FormDatePicker({
+type DatePickerBaseProps = {
+    className?: string;
+    label?: string;
+} & DatePickerProps &
+    UseControllerProps;
+
+export function DatePickerBase({
     name,
+    label,
+    className,
     rules,
     defaultValue = '',
     id,
     control,
     ...props
-}: DatePickerProps & UseControllerProps) {
+}: DatePickerBaseProps) {
     const { Text } = Typography;
     const { field, fieldState } = useController({
         name,
@@ -25,7 +34,8 @@ export function FormDatePicker({
     const status = error ? 'error' : '';
 
     return (
-        <Flex vertical>
+        <Flex vertical className={className}>
+            {label && <Text>{label}</Text>}
             <DatePickerAntD
                 {...field}
                 {...props}
@@ -42,3 +52,11 @@ export function FormDatePicker({
         </Flex>
     );
 }
+
+export const DatePicker = styled(DatePickerBase)`
+    margin: 0 0 40px;
+
+    @media screen and (max-width: 767px) {
+        margin: 0 0 20px;
+    }
+`;

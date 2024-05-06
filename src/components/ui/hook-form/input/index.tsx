@@ -3,13 +3,15 @@ import styled from '@emotion/styled';
 import { Input as InputAntD, InputProps, Flex, Typography } from 'antd';
 import { useController, UseControllerProps } from 'react-hook-form';
 
-type FormInputProps = {
+type FormInputBaseProps = {
     className?: string;
+    label?: string;
 } & InputProps &
     UseControllerProps;
 
-export const _FormInput: FC<FormInputProps> = ({
+const FormInputBase: FC<FormInputBaseProps> = ({
     name,
+    label,
     rules,
     defaultValue = '',
     id,
@@ -29,6 +31,7 @@ export const _FormInput: FC<FormInputProps> = ({
 
     return (
         <Flex className={className} vertical>
+            {label && <Text className="label">{label}</Text>}
             <InputAntD
                 {...field}
                 {...props}
@@ -48,7 +51,18 @@ export const _FormInput: FC<FormInputProps> = ({
     );
 };
 
-export const FormInput = styled(_FormInput)`
+export const FormInput = styled(FormInputBase)`
+    margin: 0 0 40px;
+
+    @media screen and (max-width: 767px) {
+        margin: 0 0 20px;
+    }
+
+    .label {
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: 400;
+    }
     input {
         height: 40px;
         font-size: 16px;
