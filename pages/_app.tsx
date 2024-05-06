@@ -7,12 +7,15 @@ import {
     QueryClientProvider,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { SessionProvider } from 'next-auth/react';
+import { Session } from 'next-auth';
 
 const MyApp = ({
     Component,
-    pageProps: { ...pageProps },
+    pageProps: { session, ...pageProps },
 }: AppProps<{
     dehydratedState: unknown;
+    session: Session;
 }>) => {
     const [queryClient] = useState(
         () =>
@@ -31,7 +34,9 @@ const MyApp = ({
                 <Head>
                     <title>Praktika</title>
                 </Head>
-                <Component {...pageProps} />
+                <SessionProvider session={session}>
+                    <Component {...pageProps} />
+                </SessionProvider>
             </HydrationBoundary>
             <ReactQueryDevtools />
         </QueryClientProvider>
