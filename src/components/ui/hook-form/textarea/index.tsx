@@ -4,13 +4,15 @@ import { TextAreaProps } from 'antd/es/input';
 import { useController, UseControllerProps } from 'react-hook-form';
 import styled from '@emotion/styled';
 
-type FormTextareaProps = {
+type FormTextareaBaseProps = {
     className?: string;
+    label?: string;
 } & TextAreaProps &
     UseControllerProps;
 
-export const _FormTextarea: FC<FormTextareaProps> = ({
+export const FormTextareaBase: FC<FormTextareaBaseProps> = ({
     name,
+    label,
     rules,
     defaultValue = '',
     id,
@@ -31,6 +33,7 @@ export const _FormTextarea: FC<FormTextareaProps> = ({
 
     return (
         <Flex vertical className={className}>
+            {label && <Text className="label">{label}</Text>}
             <TextArea
                 {...field}
                 {...props}
@@ -50,7 +53,18 @@ export const _FormTextarea: FC<FormTextareaProps> = ({
     );
 };
 
-export const FormTextarea = styled(_FormTextarea)`
+export const FormTextarea = styled(FormTextareaBase)`
+    margin: 0 0 40px;
+
+    @media screen and (max-width: 767px) {
+        margin: 0 0 20px;
+    }
+
+    .label {
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: 400;
+    }
     textarea {
         resize: none;
         min-height: 100px;

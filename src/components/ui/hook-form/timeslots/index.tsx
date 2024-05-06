@@ -8,13 +8,15 @@ import {
 } from 'react-hook-form';
 import { TimeSlot } from '~components/wigets/registration/types/form';
 
-type TimeSlotsProps = {
+type TimeSlotsBaseProps = {
     timeslots: TimeSlot[];
     className?: string;
+    label?: string;
 } & UseControllerProps;
 
-const _TimeSlots: FC<TimeSlotsProps> = ({
+const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
     name,
+    label,
     rules,
     timeslots = [],
     className,
@@ -30,6 +32,7 @@ const _TimeSlots: FC<TimeSlotsProps> = ({
 
     return (
         <Flex vertical className={className}>
+            {label && <Text className="label">{label}</Text>}
             <div className="timeslots-wrapper">
                 <Controller
                     name={name}
@@ -40,13 +43,15 @@ const _TimeSlots: FC<TimeSlotsProps> = ({
                             {timeslots.map((slot: TimeSlot) => (
                                 <Tag.CheckableTag
                                     key={slot.id}
-                                    checked={value.includes(slot.value)}
+                                    checked={value.some(
+                                        (v: TimeSlot) => v.value === slot.value,
+                                    )}
                                     onChange={(checked) => {
                                         const nextValue = checked
-                                            ? [...value, slot.value]
+                                            ? [...value, slot]
                                             : value.filter(
-                                                  (v: string) =>
-                                                      v !== slot.value,
+                                                  (v: TimeSlot) =>
+                                                      v.value !== slot.value,
                                               );
                                         onChange(nextValue);
                                     }}
@@ -63,7 +68,18 @@ const _TimeSlots: FC<TimeSlotsProps> = ({
     );
 };
 
-export const TimeSlots = styled(_TimeSlots)`
+export const TimeSlots = styled(TimeSlotsBase)`
+    margin: 0 0 40px;
+
+    @media screen and (max-width: 767px) {
+        margin: 0 0 20px;
+    }
+
+    .label {
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: 400;
+    }
     .timeslots-wrapper {
         display: flex;
         max-width: 350px;

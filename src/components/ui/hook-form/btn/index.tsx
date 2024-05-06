@@ -1,20 +1,7 @@
-import { FC } from 'react';
-import { Button as ButtonAntd, ButtonProps } from 'antd';
+import { Button as ButtonAntd } from 'antd';
 import styled from '@emotion/styled';
 
-type BtnProps = {
-    className?: string;
-} & ButtonProps;
-
-const _Btn: FC<BtnProps> = ({ children, className, ...props }) => {
-    return (
-        <ButtonAntd {...props} className={className}>
-            {children}
-        </ButtonAntd>
-    );
-};
-
-export const Btn = styled(_Btn)`
+export const Btn = styled(ButtonAntd)`
     min-width: 150px;
     min-height: 50px;
     display: inline-flex;

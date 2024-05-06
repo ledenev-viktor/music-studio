@@ -1,17 +1,19 @@
-import { useEffect } from 'react';
-import { Flex } from 'antd';
+import { FC, useState } from 'react';
 import { useForm, FieldValues, FormProvider } from 'react-hook-form';
-import {
-    FormInput,
-    FormTextarea,
-    FieldWrapper,
-    TimeSlots,
-    Btn,
-} from '~components/ui/hook-form';
-import { FormLayout } from './layouts/form-layout';
-import { timeslots } from './mock/timeslots';
+import { Flex, Typography } from 'antd';
+import { TimeSlot } from './types/form';
+import { RegForm } from './component';
+import { ResultForm } from './result-form';
+import { Btn } from '~components/ui/hook-form';
 
-const RegistrationForm = () => {
+type RegistrationFormProps = {
+    className?: string;
+};
+const RegistrationForm: FC<RegistrationFormProps> = () => {
+    const [sent, setSent] = useState<FieldValues>({});
+
+    const { Title } = Typography;
+
     const defaultValues = {
         userName: '',
         userNameTelegram: '',
@@ -24,71 +26,38 @@ const RegistrationForm = () => {
         mode: 'onChange',
     });
 
-    const { handleSubmit, control, watch, setValue } = form;
+    const { reset } = form;
 
     const onSubmit = (data: FieldValues) => {
         console.log('data', data);
+        setSent(data);
     };
 
-    const dateEventWatch = watch('dateEvent');
+    const handleSentOk = () => {
+        setSent({});
+        reset();
+    };
 
-    useEffect(() => {
-        setValue('timeSlotEvent', '');
-    }, [dateEventWatch, setValue]);
-
-    return (
-        <FormLayout title="Registration form">
-            <FormProvider {...form}>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <FieldWrapper label="Available timeslots">
-                        <TimeSlots
-                            name="timeSlotEvent"
-                            timeslots={timeslots}
-                            rules={{
-                                required: {
-                                    value: true,
-                                    message: 'This field is required',
-                                },
-                            }}
-                        />
-                    </FieldWrapper>
-                    <FieldWrapper label="Full Name">
-                        <FormInput
-                            name="userName"
-                            control={control}
-                            rules={{
-                                required: {
-                                    value: true,
-                                    message: 'This field is required',
-                                },
-                            }}
-                        />
-                    </FieldWrapper>
-                    <FieldWrapper label="Telegram Username">
-                        <FormInput
-                            name="userNameTelegram"
-                            control={control}
-                            rules={{
-                                required: {
-                                    value: true,
-                                    message: 'This field is required',
-                                },
-                            }}
-                        />
-                    </FieldWrapper>
-                    <FieldWrapper label="Comment">
-                        <FormTextarea
-                            name="comment"
-                            control={control}
-                            placeholder="Indicate additional instruments that will be required for rehearsal"
-                        />
-                    </FieldWrapper>
-                    <Flex>
-                        <Btn htmlType="submit">Submit</Btn>
-                    </Flex>
-                </form>
-            </FormProvider>
-        </FormLayout>
+    return Object.values(sent).length === 0 ? (
+        <FormProvider {...form}>
+            <RegForm onSubmit={onSubmit} />
+        </FormProvider>
+    ) : (
+        <ResultForm>
+            <Title level={2}>Data sent successfully</Title>
+            <Flex style={{ padding: '0 0 20px' }}>
+                Dear {sent.userName}, you have made an appointment for{' '}
+                {sent.timeSlotEvent.length > 1
+                    ? sent.timeSlotEvent
+                          .map((event: TimeSlot) => event.label)
+                          .join(' and ')
+                    : sent.timeSlotEvent
+                          .map((event: TimeSlot) => event.label)
+                          .join('')}
+                !
+            </Flex>
+            <Btn onClick={handleSentOk}>Ok</Btn>
+        </ResultForm>
     );
 };
 
