@@ -9,6 +9,7 @@ import {
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { SessionProvider } from 'next-auth/react';
 import { Session } from 'next-auth';
+import { appWithTranslation } from 'next-i18next';
 
 const MyApp = ({
     Component,
@@ -43,4 +44,4 @@ const MyApp = ({
     );
 };
 
-export default MyApp;
+export default appWithTranslation(MyApp);
