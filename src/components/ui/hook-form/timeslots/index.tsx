@@ -63,13 +63,17 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
                     )}
                 />
             </div>
-            {error && <Text type="danger">{error}</Text>}
+            {error && (
+                <Text style={{ marginTop: '10px' }} type="danger">
+                    {error}
+                </Text>
+            )}
         </Flex>
     );
 };
 
 export const TimeSlots = styled(TimeSlotsBase)`
-    margin: 0 0 40px;
+    margin: 0 0 30px;
 
     @media screen and (max-width: 767px) {
         margin: 0 0 20px;

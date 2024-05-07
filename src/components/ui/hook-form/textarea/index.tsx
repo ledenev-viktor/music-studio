@@ -48,13 +48,17 @@ export const FormTextareaBase: FC<FormTextareaBaseProps> = ({
                     props.onBlur?.(e);
                 }}
             />
-            {error && <Text type="danger">{error}</Text>}
+            {error && (
+                <Text style={{ marginTop: '10px' }} type="danger">
+                    {error}
+                </Text>
+            )}
         </Flex>
     );
 };
 
 export const FormTextarea = styled(FormTextareaBase)`
-    margin: 0 0 40px;
+    margin: 0 0 30px;
 
     @media screen and (max-width: 767px) {
         margin: 0 0 20px;
@@ -68,9 +72,15 @@ export const FormTextarea = styled(FormTextareaBase)`
     textarea {
         resize: none;
         min-height: 100px;
+        font-size: 16px;
 
         &::placeholder {
             font-size: 18px;
+        }
+        @media screen and (max-width: 767px) {
+            &::placeholder {
+                font-size: 16px;
+            }
         }
     }
 `;
