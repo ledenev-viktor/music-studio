@@ -7,7 +7,9 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { SessionProvider } from 'next-auth/react';
+import { Global } from '@emotion/react';
 import { AppPropsWithLayout } from '~types/app';
+import { globalStyles } from 'src/styles/global-styles';
 import { RootLayout } from '../src/layouts/root-layout';
 
 const MyApp = ({
@@ -35,6 +37,7 @@ const MyApp = ({
                     <title>Praktika</title>
                 </Head>
                 <SessionProvider session={session}>
+                    <Global styles={globalStyles} />
                     {getLayout(<Component {...pageProps} />)}
                 </SessionProvider>
             </HydrationBoundary>
