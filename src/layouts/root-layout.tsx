@@ -24,5 +24,10 @@ export const RootLayout = styled(RootLayoutBase)`
 
     main {
         flex-grow: 1;
+        max-width: 1200px;
+        width: 100%;
+        padding: 0 20px;
+        box-sizing: border-box;
+        margin: 0 auto;
     }
 `;
