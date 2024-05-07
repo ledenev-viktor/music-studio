@@ -1,7 +1,25 @@
 import styled from '@emotion/styled';
+import { baseContainerMixin } from 'src/styles/mixins';
 
-const FooterBase = () => {
-    return <div>Footer</div>;
+type FooterBaseProps = {
+    className?: string;
 };
 
-export const Footer = styled(FooterBase)``;
+const FooterBase = ({ className }: FooterBaseProps) => {
+    return (
+        <div className={className}>
+            <div className="footer-inner">Footer</div>
+        </div>
+    );
+};
+
+export const Footer = styled(FooterBase)`
+    color: #fff;
+    background: #333;
+    min-height: 200px;
+    padding: 30px 0;
+    box-sizing: border-box;
+    .footer-inner {
+        ${baseContainerMixin}
+    }
+`;
