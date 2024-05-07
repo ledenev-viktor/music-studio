@@ -45,6 +45,8 @@
             "~types": ["src/types"],
             "~types/*": ["src/types/*"],
 
+            "public": ["public"],
+
             "~notifications": ["src/components/providers/NotificationsProvider.tsx"],
             "~modals": ["src/components/providers/ModalProvider.tsx"]
         }
