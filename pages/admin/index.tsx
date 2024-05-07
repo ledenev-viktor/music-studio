@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import dynamic from 'next/dynamic';
 import { NextPageWithLayout } from '~types/app';
 
-const AdminApp = dynamic(() => import('~components/admin'), {
+const AdminApp = dynamic(() => import('~components/wigets/admin'), {
     ssr: false,
 });
 
