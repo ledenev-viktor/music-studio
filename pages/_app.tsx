@@ -9,9 +9,11 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { SessionProvider } from 'next-auth/react';
 import { Session } from 'next-auth';
 import { appWithTranslation } from 'next-i18next';
+import { Global } from '@emotion/react';
 import { NotificationProvider } from '~notifications';
 import { ModalProvider } from '~modals';
 import { AppPropsWithLayout } from '~types/app';
+import { globalStyles } from 'src/styles/global-styles';
 import { RootLayout } from '../src/layouts/root-layout';
 
 const MyApp = ({
@@ -44,6 +46,7 @@ const MyApp = ({
                 <SessionProvider session={session}>
                     <ModalProvider>
                         <NotificationProvider>
+                            <Global styles={globalStyles} />
                             {getLayout(<Component {...pageProps} />)}
                         </NotificationProvider>
                     </ModalProvider>
