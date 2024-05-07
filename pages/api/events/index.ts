@@ -1,12 +1,10 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { google } from 'googleapis';
 import { NextApiRequest, NextApiResponse } from 'next/types';
-import createGoogleClient from '~utils/api.google';
+import jwtClient from './jwt';
 
 const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-        const jwtClient = createGoogleClient();
-
         const calendar = google.calendar({
             version: 'v3',
             auth: jwtClient,

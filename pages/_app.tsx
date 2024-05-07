@@ -6,12 +6,13 @@ import {
     QueryClientProvider,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { SessionProvider } from 'next-auth/react';
 import { AppPropsWithLayout } from '~types/app';
 import { RootLayout } from '../src/layouts/root-layout';
 
 const MyApp = ({
     Component,
-    pageProps: { ...pageProps },
+    pageProps: { session, ...pageProps },
 }: AppPropsWithLayout) => {
     const [queryClient] = useState(
         () =>
@@ -33,7 +34,9 @@ const MyApp = ({
                 <Head>
                     <title>Praktika</title>
                 </Head>
-                {getLayout(<Component {...pageProps} />)}
+                <SessionProvider session={session}>
+                    {getLayout(<Component {...pageProps} />)}
+                </SessionProvider>
             </HydrationBoundary>
             <ReactQueryDevtools />
         </QueryClientProvider>
