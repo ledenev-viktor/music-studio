@@ -16,6 +16,9 @@ module.exports = {
         styledComponents: true,
     },
     i18n,
+    images: {
+        domains: ['https://ltjjyxywrvwmkylknicn.supabase.co'],
+    },
     async redirects() {
         return [
             {

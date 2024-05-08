@@ -1,0 +1,33 @@
+import { useQuery } from '@tanstack/react-query';
+import api from '~lib/api.helper';
+import { Appointment } from '~types/appointments';
+import {
+    extractDay,
+    extractTime,
+    extractDate,
+    prettifyAppointments,
+} from '~utils/date.helpers';
+
+export const fetchAppointmentsKey = ['fetchAppointments'];
+
+export const useGetAppointments = () => {
+    return useQuery({
+        queryKey: fetchAppointmentsKey,
+        queryFn: async () => {
+            const { data } = await api.get<Appointment[]>('api/supabase');
+
+            const mappedData = data.map((item) => ({
+                ...item,
+                date: extractDate(item.startTime),
+                startTimestamp: item.startTime,
+                startTime: extractTime(item.startTime),
+                endTime: extractTime(item.endTime),
+                day: extractDay(item.startTime),
+            }));
+
+            return mappedData
+                ? prettifyAppointments(mappedData)
+                : { groupedAppointments: {}, sortedDatesArray: [] };
+        },
+    });
+};

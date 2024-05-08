@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-const AdminApp = dynamic(() => import('~components/admin'), {
+const AdminApp = dynamic(() => import('~components/widgets/admin'), {
     ssr: false,
 });
 
