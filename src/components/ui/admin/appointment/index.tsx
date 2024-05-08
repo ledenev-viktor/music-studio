@@ -4,6 +4,8 @@ import { APPOINTMENTS_STATUSES } from '~constants/status';
 import { getCollapsedContent } from './collapse';
 import { AppointmentNoCommentRow } from './AppointmentNoCommentRow';
 
+export * from './FiltersRow';
+
 export const AppointmentRow = ({
     appointment,
 }: {

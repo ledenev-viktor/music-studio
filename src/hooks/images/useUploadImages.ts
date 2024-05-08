@@ -1,21 +1,22 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import api from '~lib/api.helper';
+import api, { AxiosApiError, AxiosApiResponse } from '~lib/api.helper';
 import { useNotification } from '~notifications';
+import { DriveImage } from '~types/images';
 
 export const useUploadImages = () => {
     const { notification } = useNotification();
     const queryClient = useQueryClient();
 
     return useMutation<
-        any,
-        any,
+        AxiosApiResponse<DriveImage>,
+        AxiosApiError,
         {
             fileType: string;
             url: string; //base64 url
             fileName: string;
         }
     >({
-        mutationFn: async (data) => api.post<void>(`api/drive/post`, data),
+        mutationFn: (data) => api.post<DriveImage>(`api/drive/post`, data),
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['fetchImages'],

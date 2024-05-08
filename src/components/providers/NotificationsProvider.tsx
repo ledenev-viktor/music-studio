@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { ReactNode, createContext, useContext } from 'react';
 import { notification } from 'antd';
 import { NotificationInstance } from 'antd/es/notification/interface';

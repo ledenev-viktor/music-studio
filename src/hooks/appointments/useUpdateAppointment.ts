@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import api from '~lib/api.helper';
+import api, { AxiosApiError, AxiosApiResponse } from '~lib/api.helper';
 import { Appointment } from '~types/appointments';
 import { useNotification } from '~notifications';
 import { AppointmentStatuses } from '~constants/status';
@@ -9,15 +9,15 @@ export const useUpdateAppointments = () => {
     const queryClient = useQueryClient();
 
     return useMutation<
-        any,
-        any,
+        AxiosApiResponse<null>,
+        AxiosApiError,
         {
             appointmentId: Appointment['id'];
             status: AppointmentStatuses;
         }
     >({
         mutationFn: (data) =>
-            api.post<any>('api/supabase/appointments/post', {
+            api.post<null>('api/supabase/appointments/post', {
                 appointmentId: data.appointmentId,
                 status: data.status,
             }),

@@ -14,7 +14,7 @@ const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
         const bs = new stream.PassThrough();
         bs.end(buf);
 
-        const data = await drive.files.create({
+        const { data } = await drive.files.create({
             media: {
                 mimeType: fileType,
                 body: bs,
@@ -28,7 +28,7 @@ const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
 
         res.status(200).json(data);
     } catch (error) {
-        res.status(500).json({
+        res.status(500).end({
             error: 'Failed to retrieve access token' + error,
         });
     }

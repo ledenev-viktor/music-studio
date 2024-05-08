@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import api from '~lib/api.helper';
+import api, { AxiosApiError, AxiosApiResponse } from '~lib/api.helper';
 import { useNotification } from '~notifications';
 
 export const useRemoveImages = () => {
@@ -7,8 +7,8 @@ export const useRemoveImages = () => {
     const queryClient = useQueryClient();
 
     return useMutation<
-        any,
-        any,
+        AxiosApiResponse<void>,
+        AxiosApiError,
         {
             fileId: string;
         }
