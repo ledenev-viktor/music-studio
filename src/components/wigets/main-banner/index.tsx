@@ -1,16 +1,16 @@
 'use client';
 import styled from '@emotion/styled';
 import { Flex, Typography } from 'antd';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { COLORS } from 'src/styles/variables';
 import { useMobile } from '~hooks/responsive';
 
 const { white } = COLORS;
 type MainBannerBaseProps = {
-    className: string;
-    src: string;
+    className?: string;
+    src: StaticImageData;
     text: string;
-    shortText: string;
+    shortText?: string;
 };
 const MainBannerBase = ({
     className,
@@ -44,12 +44,8 @@ const MainBannerBase = ({
 };
 
 export const MainBanner = styled(MainBannerBase)`
-    padding: 50px;
     align-items: center;
     gap: 30px;
-    @media screen and (max-width: 1239px) {
-        padding: 50px 0;
-    }
     @media screen and (max-width: 767px) {
         flex-direction: column;
         gap: 0;
@@ -62,6 +58,7 @@ export const MainBanner = styled(MainBannerBase)`
             &:first-child {
                 width: 300px;
                 flex-shrink: 0;
+                position: relative;
                 @media screen and (max-width: 1239px) {
                     width: 200px;
                 }
@@ -94,7 +91,7 @@ export const MainBanner = styled(MainBannerBase)`
         &-shorttext {
             position: absolute;
             max-width: 80px;
-            bottom: 39px;
+            bottom: 70px;
             left: 50%;
             margin-left: -95px;
             color: ${white};
@@ -102,7 +99,7 @@ export const MainBanner = styled(MainBannerBase)`
 
             @media screen and (max-width: 490px) {
                 max-width: 70px;
-                bottom: 110px;
+                bottom: 47px;
                 left: 50%;
                 margin-left: -70px;
                 font-size: 11px;

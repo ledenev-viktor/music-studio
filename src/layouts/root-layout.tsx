@@ -26,8 +26,12 @@ export const RootLayout = styled(RootLayoutBase)`
         flex-grow: 1;
         max-width: 1200px;
         width: 100%;
-        padding: 0 20px;
+        padding: 50px 20px 80px;
         box-sizing: border-box;
         margin: 0 auto;
+
+        @media screen and (max-width: 767px) {
+            padding: 30px 20px 50px;
+        }
     }
 `;
