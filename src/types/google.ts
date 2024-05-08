@@ -1,34 +1,37 @@
-export type Event = {
+export type CalendarEvent = {
     id: string;
     status: string;
     htmlLink: string;
-    created: Intl.DateTimeFormat;
-    upDated: Intl.DateTimeFormat;
+    created: string;
+    upDated: string;
     start: {
         date: Date;
-        datetime: Intl.DateTimeFormat;
+        dateTime: string;
         timeZone: string;
     };
     end: {
         date: Date;
-        datetime: Intl.DateTimeFormat;
+        dateTime: string;
         timeZone: string;
     };
     endTimeUnspecified: boolean;
     originalStartTime: {
         date: Date;
-        datetime: Intl.DateTimeFormat;
+        dateTime: string;
         timeZone: string;
     };
     eventType: string;
 };
+export type CalendarEventWithLabel = CalendarEvent & {
+    label: { start: string; end: string };
+};
 
 export type CalendarEvents = {
-    updated: Intl.DateTimeFormat;
+    updated: string;
     timeZone: string;
     nextPageToken: string;
     nextSyncToken: string;
-    items: Event[];
+    items: CalendarEvent[];
 };
 
 export type CalendarList = {

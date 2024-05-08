@@ -6,10 +6,10 @@ import {
     useFormContext,
     UseControllerProps,
 } from 'react-hook-form';
-import { TimeSlot } from '~components/wigets/registration/types/form';
+import { CalendarEventWithLabel } from '~types/google';
 
 type TimeSlotsBaseProps = {
-    timeslots: TimeSlot[];
+    timeslots: CalendarEventWithLabel[];
     className?: string;
     label?: string;
 } & UseControllerProps;
@@ -40,23 +40,29 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
                     rules={rules}
                     render={({ field: { value, onChange } }) => (
                         <>
-                            {timeslots.map((slot: TimeSlot) => (
+                            {timeslots.map((slot: CalendarEventWithLabel) => (
                                 <Tag.CheckableTag
                                     key={slot.id}
                                     checked={value.some(
-                                        (v: TimeSlot) => v.value === slot.value,
+                                        (v: CalendarEventWithLabel) => {
+                                            return (
+                                                v.start.dateTime ===
+                                                slot.start.dateTime
+                                            );
+                                        },
                                     )}
                                     onChange={(checked) => {
                                         const nextValue = checked
                                             ? [...value, slot]
                                             : value.filter(
-                                                  (v: TimeSlot) =>
-                                                      v.value !== slot.value,
+                                                  (v: CalendarEventWithLabel) =>
+                                                      v.start.dateTime !==
+                                                      slot.start.dateTime,
                                               );
                                         onChange(nextValue);
                                     }}
                                 >
-                                    {slot.label}
+                                    {slot.label.start} - {slot.label.end}
                                 </Tag.CheckableTag>
                             ))}
                         </>

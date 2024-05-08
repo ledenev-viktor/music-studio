@@ -1,16 +1,21 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useForm, FieldValues, FormProvider } from 'react-hook-form';
+import moment from 'moment';
+import { useGetEvents } from '~hooks/events';
 import { FormComponent } from './component';
 
 type RegistrationFormProps = {
     className?: string;
 };
-const RegistrationForm: FC<RegistrationFormProps> = () => {
+
+export const RegistrationForm: FC<RegistrationFormProps> = () => {
+    const { data: events } = useGetEvents();
+
     const defaultValues = {
         date: '',
         userName: '',
         userNameTelegram: '',
-        timeSlotEvent: [],
+        timeSlotsEvent: [],
         comment: '',
     };
 
@@ -19,18 +24,42 @@ const RegistrationForm: FC<RegistrationFormProps> = () => {
         mode: 'onChange',
     });
 
-    const { reset } = form;
+    const [eventsSortedDays, setEventsSortedDays] = useState({
+        days: [],
+        events: [],
+    });
+    useEffect(() => {
+        const eventsWithDays: any = {
+            days: [],
+            events: {},
+        };
 
-    const onSubmit = (data: FieldValues) => {
-        console.log('data', data);
-        reset();
-    };
+        events?.forEach((event) => {
+            const date = moment(event.start.dateTime).format('YYYY-MM-DD');
+            if (!date) return;
+
+            if (date in eventsWithDays.events) {
+                eventsWithDays.events[date]?.push({
+                    ...event,
+                });
+            } else {
+                eventsWithDays.events[date] = [
+                    {
+                        ...event,
+                    },
+                ];
+                eventsWithDays.days.push(date);
+            }
+        });
+
+        setEventsSortedDays(eventsWithDays);
+    }, [events]);
 
     return (
-        <FormProvider {...form}>
-            <FormComponent onSubmit={onSubmit} />
-        </FormProvider>
+        <>
+            <FormProvider {...form}>
+                <FormComponent eventsData={eventsSortedDays} />
+            </FormProvider>
+        </>
     );
 };
-
-export default RegistrationForm;

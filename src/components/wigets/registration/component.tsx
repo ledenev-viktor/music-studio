@@ -1,8 +1,10 @@
-import { FC } from 'react';
-import { Flex, Typography } from 'antd';
-import { useFormContext, FieldValues } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import { Flex, Typography, notification } from 'antd';
+import { useFormContext, FieldValues, useWatch } from 'react-hook-form';
 import styled from '@emotion/styled';
 import moment from 'moment';
+import type { CalendarEvent, CalendarEventWithLabel } from '~types/google';
+import { sendDataAppointments } from '~hooks/send-events-form';
 import {
     FormDatePicker,
     FormInput,
@@ -10,30 +12,80 @@ import {
     TimeSlots,
     Button,
 } from '~components/ui/hook-form';
-import { timeslots } from './mock/timeslots';
 
 type RegFormBaseProps = {
     className?: string;
-    onSubmit: (data: FieldValues) => void;
+    eventsData: {
+        days: string[];
+        events: CalendarEvent[];
+    };
 };
 
-export const FormComponentBase: FC<RegFormBaseProps> = ({
+export const FormComponentBase = ({
     className,
-    onSubmit,
-}) => {
-    const { Title } = Typography;
+    eventsData,
+}: RegFormBaseProps) => {
+    const { Title, Text } = Typography;
     const { handleSubmit, control } = useFormContext();
+    const [currentEvents, setCurrentEvents] = useState([]);
+    const [toast, contextToast] = notification.useNotification();
+
+    const openToast = () => {
+        toast['success']({
+            message: 'Application sent!',
+        });
+    };
+
+    const { reset, resetField } = useFormContext();
+
+    const dateValue = useWatch({ control, name: 'date' });
+
+    const onSubmit = async (data: FieldValues) => {
+        sendDataAppointments(data).then((res) => {
+            if (res.status === 200) openToast();
+        });
+        setCurrentEvents([]);
+        reset();
+    };
+
+    useEffect(() => {
+        if (!eventsData.days || !dateValue) return;
+        setCurrentEvents([]);
+        resetField('timeSlotsEvent');
+
+        const formatCurrentDate = moment(dateValue.$d).format('YYYY-MM-DD');
+
+        const dayEvent = eventsData.days?.find(
+            (element: string) => element === formatCurrentDate,
+        );
+
+        let eventsWithLabel = [];
+        if (dayEvent) {
+            eventsWithLabel = eventsData.events[dayEvent].map(
+                (event: CalendarEventWithLabel) => {
+                    event.label = {
+                        start: moment(event.start.dateTime).format('hh:mm'),
+                        end: moment(event.end.dateTime).format('hh:mm'),
+                    };
+
+                    return event;
+                },
+            );
+        }
+        setCurrentEvents(eventsWithLabel);
+    }, [dateValue, eventsData, handleSubmit, resetField]);
 
     return (
         <form className={className} onSubmit={handleSubmit(onSubmit)}>
+            {contextToast}
             <Title level={2}>Registration form</Title>
             <FormDatePicker
                 name="date"
                 placeholder=""
                 label="Select date"
-                disabledDate={(current) =>
-                    current && current < moment().startOf('day')
-                }
+                disabledDate={(current) => {
+                    return current && current < moment().startOf('day');
+                }}
                 rules={{
                     required: {
                         value: true,
@@ -41,17 +93,26 @@ export const FormComponentBase: FC<RegFormBaseProps> = ({
                     },
                 }}
             />
-            <TimeSlots
-                name="timeSlotEvent"
-                label="Available timeslots"
-                timeslots={timeslots}
-                rules={{
-                    required: {
-                        value: true,
-                        message: 'This field is required',
-                    },
-                }}
-            />
+            {currentEvents.length > 0 ? (
+                <TimeSlots
+                    name="timeSlotsEvent"
+                    label="Available timeslots"
+                    timeslots={currentEvents}
+                    rules={{
+                        required: {
+                            value: true,
+                            message: 'This field is required',
+                        },
+                    }}
+                />
+            ) : (
+                dateValue && (
+                    <Text>
+                        There are no appointments on this day. Please choose
+                        another day.
+                    </Text>
+                )
+            )}
             <FormInput
                 name="userName"
                 label="Full Name"
@@ -81,7 +142,9 @@ export const FormComponentBase: FC<RegFormBaseProps> = ({
                 placeholder="Indicate additional instruments that will be required for rehearsal"
             />
             <Flex>
-                <Button htmlType="submit">Submit</Button>
+                <Button disabled={!currentEvents.length} htmlType="submit">
+                    Submit
+                </Button>
             </Flex>
         </form>
     );
