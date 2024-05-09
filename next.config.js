@@ -17,7 +17,13 @@ module.exports = {
     },
     i18n,
     images: {
-        domains: ['https://ltjjyxywrvwmkylknicn.supabase.co'],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: '*.google.com',
+                pathname: '**',
+            },
+        ],
     },
     async redirects() {
         return [

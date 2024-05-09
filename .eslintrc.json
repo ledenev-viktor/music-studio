@@ -85,7 +85,8 @@
                             "../**/hooks",
                             "../**/constants",
                             "../**/lib",
-                            "../**/pages"
+                            "../**/pages",
+                            "~components/providers/**"
                         ],
                         "message": "Prefer absolute imports instead of relatives"
                     }
