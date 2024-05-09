@@ -25,9 +25,7 @@ export const useGetAppointments = () => {
                 day: extractDay(item.startTime),
             }));
 
-            return mappedData
-                ? prettifyAppointments(mappedData)
-                : { groupedAppointments: {}, sortedDatesArray: [] };
+            return mappedData ? prettifyAppointments(mappedData) : [];
         },
     });
 };

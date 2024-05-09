@@ -1,12 +1,24 @@
 'use client';
-import React from 'react';
-import { Alert, Card, Empty, Flex, Spin } from 'antd';
+import React, { useMemo, useState } from 'react';
+import { Alert, ButtonProps, Card, Empty, Flex, SelectProps, Spin } from 'antd';
+import type { SearchProps } from 'antd/es/input/Search';
 import { Appointment } from '~types/appointments';
 import { useGetAppointments } from '~hooks/appointments';
-import { AppointmentRow } from '~components/ui/admin';
+import { filterAppointments } from '~utils/filterAppointments';
+import { AppointmentRow, FiltersRow } from '~components/ui/admin';
+import { AppointmentStatuses } from '~constants/status';
 
 export const Appointments = () => {
-    const { data, error, isLoading } = useGetAppointments();
+    const [statusFilter, setStatusFilter] = useState<AppointmentStatuses | ''>(
+        '',
+    );
+    const [searchFilter, setSearchFilter] = useState<string>('');
+    const { data: initialData, error, isLoading } = useGetAppointments();
+
+    const data = useMemo(
+        () => filterAppointments(statusFilter, searchFilter, initialData),
+        [initialData, statusFilter, searchFilter],
+    );
 
     if (isLoading)
         return (
@@ -28,35 +40,68 @@ export const Appointments = () => {
         );
     }
 
-    if (!data?.sortedDatesArray?.length)
-        return (
-            <Empty>
-                Seems like no data was fount in database or there were problems
-                with connection
-            </Empty>
-        );
+    const onStatusChange: SelectProps['onChange'] = (value) => {
+        setStatusFilter(value);
+    };
+    const onSearch: SearchProps['onSearch'] = (value) => setSearchFilter(value);
+    const onSearchFilterChange: SearchProps['onChange'] = (event) =>
+        setSearchFilter(event.target.value);
+
+    const onResetAll: ButtonProps['onClick'] = () => {
+        setStatusFilter('');
+        setSearchFilter('');
+    };
 
     return (
         <Flex vertical gap={20} align="center">
-            {data?.sortedDatesArray?.map((dateKey: string) => {
-                const appointments = data?.groupedAppointments?.[dateKey] || [];
-                return (
-                    <Card
-                        key={dateKey}
-                        title={dateKey}
-                        style={{ maxWidth: '1365px', width: '100%' }}
-                    >
-                        <Flex vertical gap={20}>
-                            {appointments.map((appointment: Appointment) => (
-                                <AppointmentRow
-                                    appointment={appointment}
-                                    key={appointment.id}
-                                />
-                            ))}
-                        </Flex>
-                    </Card>
-                );
-            })}
+            <FiltersRow
+                searchValue={searchFilter}
+                handleSearch={onSearch}
+                handleSearchChange={onSearchFilterChange}
+                handleStatusesChange={onStatusChange}
+                handleResetAll={onResetAll}
+                statusValue={statusFilter}
+            />
+            {!data?.length ? (
+                <Card
+                    key="empty"
+                    style={{
+                        maxWidth: '1365px',
+                        width: '100%',
+                        minWidth: '780px',
+                    }}
+                >
+                    <Empty>
+                        Seems like no data was fount in database or there were
+                        problems with connection
+                    </Empty>
+                </Card>
+            ) : (
+                <>
+                    {data?.map(([dateKey, appointments]) => (
+                        <Card
+                            key={dateKey}
+                            title={dateKey}
+                            style={{
+                                maxWidth: '1365px',
+                                width: '100%',
+                                minWidth: '780px',
+                            }}
+                        >
+                            <Flex vertical gap={20}>
+                                {appointments.map(
+                                    (appointment: Appointment) => (
+                                        <AppointmentRow
+                                            appointment={appointment}
+                                            key={appointment.id}
+                                        />
+                                    ),
+                                )}
+                            </Flex>
+                        </Card>
+                    ))}
+                </>
+            )}
         </Flex>
     );
 };

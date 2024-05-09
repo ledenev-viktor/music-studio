@@ -19,7 +19,7 @@ const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
 
         res.status(200).json(mappedUrl);
     } catch (error) {
-        res.status(500).json({
+        res.status(500).end({
             error: 'Failed to retrieve access token' + error,
         });
     }

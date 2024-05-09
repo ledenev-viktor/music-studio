@@ -1,6 +1,14 @@
 {
     "compilerOptions": {
-        "types": ["react", "react-dom", "next-auth", "cypress", "next-i18next", "./global.d.ts"],
+        "types": [
+            "react",
+            "react-dom",
+            "next-auth",
+            "cypress",
+            "next-i18next",
+            "./global.d.ts",
+            "axios"
+        ],
         "baseUrl": "./",
         "target": "es5",
         "lib": ["dom", "dom.iterable", "esnext"],
@@ -45,7 +53,9 @@
             "~types": ["src/types"],
             "~types/*": ["src/types/*"],
 
-            "~notifications": ["src/components/providers/NotificationsProvider.tsx"],
+            "~notifications": [
+                "src/components/providers/NotificationsProvider.tsx"
+            ],
             "~modals": ["src/components/providers/ModalProvider.tsx"]
         }
     },

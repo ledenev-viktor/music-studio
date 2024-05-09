@@ -12,3 +12,5 @@ export type Appointment = {
     telegram: string;
     status: AppointmentStatuses;
 };
+
+export type Appointments = [string, Appointment[]][];

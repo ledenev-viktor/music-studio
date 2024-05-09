@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Image, Upload } from 'antd';
 import type { GetProp, UploadFile, UploadProps } from 'antd';
@@ -25,6 +25,10 @@ export const PicturesUpload = ({ images }: { images?: Images }) => {
         images ? images : [],
     );
 
+    useEffect(() => {
+        setImagesList(images ? images : []);
+    }, [images]);
+
     const handlePreview = async (file: UploadFile) => {
         if (!file.url && !file.preview) {
             file.preview = await getBase64(file.originFileObj as FileType);
@@ -35,6 +39,7 @@ export const PicturesUpload = ({ images }: { images?: Images }) => {
     };
 
     const handleChange: UploadProps['onChange'] = ({ file, fileList }) => {
+        console.log('in handle');
         if (imagesList.length < fileList.length) {
             if (file.originFileObj) {
                 getBase64(file.originFileObj as FileType).then((url) =>
@@ -49,14 +54,20 @@ export const PicturesUpload = ({ images }: { images?: Images }) => {
         setImagesList([...fileList]);
     };
 
+    const handleRemove: UploadProps['onRemove'] = (file) => {
+        removeImage({ fileId: file.uid });
+    };
+
     return (
         <div>
             <Upload
+                accept=".png,.jpg,.jpeg,.webp"
                 listType="picture-card"
-                fileList={imagesList}
+                fileList={images}
                 onPreview={handlePreview}
                 onChange={handleChange}
-                onRemove={(file) => removeImage({ fileId: file.uid })}
+                onRemove={handleRemove}
+                maxCount={32}
             >
                 <button style={{ border: 0, background: 'none' }} type="button">
                     <PlusOutlined />

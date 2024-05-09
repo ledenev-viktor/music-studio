@@ -6,7 +6,10 @@ export default async function handler(
     res: NextApiResponse,
 ) {
     try {
-        const { data, error } = await supabase.from('appointments').select('*');
+        const { data, error } = await supabase
+            .from('appointments')
+            .select('*')
+            .gte('startTime', new Date().toISOString());
 
         if (error) {
             res.status(500).end(error.message);

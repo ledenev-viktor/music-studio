@@ -10,13 +10,13 @@ const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
             auth: jwtClient,
         });
 
-        const events = await calendar.events.list({
+        const { data: events } = await calendar.events.list({
             calendarId: process.env.CALENDAR_ID,
         });
 
-        res.status(200).json({ events });
+        res.status(200).end({ events });
     } catch (error) {
-        res.status(500).json({
+        res.status(500).end({
             error: 'Failed to retrieve access token' + error,
         });
     }

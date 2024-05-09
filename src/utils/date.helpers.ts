@@ -1,4 +1,4 @@
-import { Appointment } from '~types/appointments';
+import { Appointment, Appointments } from '~types/appointments';
 import { DAY_NAMES } from '~constants/dates';
 
 export function extractTime(dateString: string) {
@@ -22,10 +22,9 @@ export function extractDay(dateString: string) {
     return DAY_NAMES[date.getDay()];
 }
 
-export function prettifyAppointments(appointments: Appointment[]): {
-    groupedAppointments?: Record<string, Appointment[]>;
-    sortedDatesArray?: string[];
-} {
+export function prettifyAppointments(
+    appointments: Appointment[],
+): Appointments {
     const appointmentsDates: string[] = [];
     const groupedAppointments = appointments.reduce(
         (acc, obj) => {
@@ -55,5 +54,5 @@ export function prettifyAppointments(appointments: Appointment[]): {
         return dateA - dateB;
     });
 
-    return { groupedAppointments, sortedDatesArray };
+    return sortedDatesArray.map((date) => [date, groupedAppointments[date]]);
 }

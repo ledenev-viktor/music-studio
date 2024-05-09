@@ -6,13 +6,13 @@ const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         const fileId = req.body.fileId;
 
-        const data = await drive.files.delete({
+        await drive.files.delete({
             fileId,
         });
 
-        res.status(200).json(data);
+        res.status(200).end();
     } catch (error) {
-        res.status(500).json({
+        res.status(500).end({
             error: 'Failed to retrieve access token' + error,
         });
     }
