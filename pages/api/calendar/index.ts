@@ -10,7 +10,7 @@ const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
             auth: jwtClient,
         });
 
-        const events = await calendar.events.list({
+        const { data: events } = await calendar.events.list({
             calendarId: process.env.CALENDAR_ID,
         });
 

@@ -10,8 +10,11 @@ export const Settings = ({
     isLoadingImages: boolean;
 }) => {
     return (
-        <Flex vertical gap={20}>
-            <Card title="Images storage">
+        <Flex vertical gap={20} align="center">
+            <Card
+                title="Images storage"
+                style={{ maxWidth: '1365px', width: '100%' }}
+            >
                 {isLoadingImages ? (
                     <Flex align="center" justify="center">
                         <Spin size="large" />
