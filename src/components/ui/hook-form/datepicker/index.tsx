@@ -6,6 +6,7 @@ import {
     Typography,
 } from 'antd';
 import { useController, UseControllerProps } from 'react-hook-form';
+import { BREAKPOINTS } from '~constants/breakpoints';
 
 type FormDatePickerBaseProps = {
     className?: string;
@@ -74,7 +75,7 @@ export const FormDatePicker = styled(FormDatePickerBase)`
         font-size: 16px;
     }
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: ${BREAKPOINTS.mobile}) {
         margin: 0 0 20px;
     }
 `;

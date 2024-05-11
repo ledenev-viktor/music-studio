@@ -2,6 +2,7 @@ import { FC } from 'react';
 import styled from '@emotion/styled';
 import { Input as InputAntD, InputProps, Flex, Typography } from 'antd';
 import { useController, UseControllerProps } from 'react-hook-form';
+import { BREAKPOINTS } from '~constants/breakpoints';
 
 type FormInputBaseProps = {
     className?: string;
@@ -57,8 +58,9 @@ const FormInputBase: FC<FormInputBaseProps> = ({
 
 export const FormInput = styled(FormInputBase)`
     margin: 0 0 30px;
+    width: 100%;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: ${BREAKPOINTS.mobile}) {
         margin: 0 0 20px;
     }
 

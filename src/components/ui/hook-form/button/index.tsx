@@ -9,5 +9,4 @@ export const Button = styled(ButtonAntd)`
     justify-content: center;
     font-size: 16px;
     box-sizing: border-box;
-    margin-left: auto;
 `;

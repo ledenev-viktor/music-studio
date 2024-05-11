@@ -3,6 +3,7 @@ import { Input, Flex, Typography } from 'antd';
 import { TextAreaProps } from 'antd/es/input';
 import { useController, UseControllerProps } from 'react-hook-form';
 import styled from '@emotion/styled';
+import { BREAKPOINTS } from '~constants/breakpoints';
 
 type FormTextareaBaseProps = {
     className?: string;
@@ -60,7 +61,7 @@ export const FormTextareaBase: FC<FormTextareaBaseProps> = ({
 export const FormTextarea = styled(FormTextareaBase)`
     margin: 0 0 30px;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: ${BREAKPOINTS.mobile}) {
         margin: 0 0 20px;
     }
 
@@ -77,7 +78,7 @@ export const FormTextarea = styled(FormTextareaBase)`
         &::placeholder {
             font-size: 18px;
         }
-        @media screen and (max-width: 767px) {
+        @media screen and (max-width: ${BREAKPOINTS.mobile}) {
             &::placeholder {
                 font-size: 16px;
             }
