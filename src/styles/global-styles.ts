@@ -5,12 +5,8 @@ export const globalStyles = css`
     body {
         padding: 0;
         margin: 0;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
         min-width: 320px;
-    }
-    body #__next {
-        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 `;
