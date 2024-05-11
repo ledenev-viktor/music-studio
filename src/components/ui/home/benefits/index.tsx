@@ -44,7 +44,7 @@ const BenefitsBase = ({ className }: { className?: string }) => {
                         lineHeight: '1.1',
                     }}
                 >
-                    {t('We are a wonderful music studio')}
+                    {t('content_benefits_title')}
                 </Typography.Title>
                 <Typography.Title
                     style={{
@@ -54,27 +54,27 @@ const BenefitsBase = ({ className }: { className?: string }) => {
                     }}
                     level={3}
                 >
-                    {t('With us you can')}
+                    {t('content_benefits_description')}
                 </Typography.Title>
                 <Flex justify="space-around" gap={isMobile ? 'small' : 'large'}>
                     <BenefitItem
                         style={{ width: '250px' }}
-                        text={t('Learn from scratch')}
+                        text={t('content_benefit_scratch')}
                         icon={<ICONS.drumsticks width={isMobile ? 50 : 80} />}
                     />
                     <BenefitItem
                         style={{ marginTop: '50px', width: '250px' }}
-                        text={t('Improve your skills')}
+                        text={t('content_benefit_improve')}
                         icon={<ICONS.drum width={isMobile ? 50 : 80} />}
                     />
                     <BenefitItem
                         style={{ width: '250px' }}
-                        text={t('Have fun')}
+                        text={t('content_benefit_fun')}
                         icon={<ICONS.fun width={isMobile ? 50 : 80} />}
                     />
                 </Flex>
                 <Link className="link" style={{}} href="/application">
-                    {t('Try')}
+                    {t('content_get_started_button')}
                 </Link>
             </Flex>
         </Flex>

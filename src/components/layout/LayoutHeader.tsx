@@ -1,17 +1,41 @@
+'use client';
 import React from 'react';
 import { ConfigProvider, Flex, Layout, Menu } from 'antd';
-import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
+import Link from 'next/link';
 import { COLORS } from 'src/styles/variables';
-import { menuItems } from 'mocks/menuItems';
 import { Logo } from '~components/ui/logo';
 import { LangSwitch } from '~components/widgets/lang-switch';
 
-export const Header = () => {
-    const router = useRouter();
-    const { locale } = router;
-    const items = locale
-        ? menuItems[locale as keyof typeof menuItems]
-        : menuItems.en;
+export const LayoutHeader = () => {
+    const { t } = useTranslation();
+
+    const menuItems = [
+        {
+            label: (
+                <Link href="/home" passHref>
+                    {t('header_menu_home')}
+                </Link>
+            ),
+            key: 1,
+        },
+        {
+            label: (
+                <Link href="/application" passHref>
+                    {t('header_menu_application')}
+                </Link>
+            ),
+            key: 2,
+        },
+        {
+            label: (
+                <Link href="/contacts" passHref>
+                    {t('header_menu_contacts')}
+                </Link>
+            ),
+            key: 3,
+        },
+    ];
 
     return (
         <ConfigProvider
@@ -57,7 +81,7 @@ export const Header = () => {
                             maxWidth: '450px',
                             width: '100%',
                         }}
-                        items={items}
+                        items={menuItems}
                     />
                     <LangSwitch />
                     <Logo

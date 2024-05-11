@@ -1,23 +1,26 @@
 {
-    "home page": "домашняя страница",
-    "admin page": "административная страница",
-    "With us you can": "С нами вы можете:",
-    "We are a wonderful music studio": "Мы замечательная музыкальная студия",
-    "Try": "Попробовать",
-    "Learn from scratch": "Учиться с нуля",
-    "Improve your skills": "Совершенствовать свои навыки",
-    "Have fun": "Весело проводить время",
-    "Developers": "Разработчики:",
-    "Music studio": "Музыкальная студия",
-    "5 Mikheil Asatiani St, Tbilisi": "ул. Михаила Асатиани 5, Тбилиси",
-    "Registration form": "Форма регистрации",
-    "This field is required": "Это поле обязательное",
-    "Indicate additional instruments that will be required for rehearsal": "Укажите дополнительные инструменты, которые потребуются для репетиции.",
-    "Submit": "Отправить",
-    "Select date": "Выберите дату",
-    "Available timeslots": "Доступные часы",
-    "Full Name": "Полное имя",
-    "add comment": "добавить комментарий",
-    "Telegram username": "Telegram псевдоним",
-    "Comment": "Комментарий"
+    "header_menu_home": "Главная",
+    "header_menu_application": "Записаться",
+    "header_menu_contacts": "Контакты",
+
+    "content_benefits_title": "Мы замечательная музыкальная студия",
+    "content_benefits_description":  "С нами вы можете:",
+    "content_get_started_button": "Попробовать",
+    "content_benefit_scratch": "Учиться с нуля",
+    "content_benefit_improve": "Совершенствовать свои навыки",
+    "content_benefit_fun": "Весело проводить время",
+
+    "content_studio_name": "Музыкальная студия",
+    "content_studio_address": "ул. Михаила Асатиани 5, Тбилиси",
+    "content_studio_work_hours": "11:00 - 23:00",
+
+    "content_form_select_title": "Выберите дату",
+    "content_form_slots_title": "Доступные часы",
+    "content_form_name_title": "Полное имя",
+    "content_form_comment_title": "Добавить комментарий",
+    "content_form_tg_title": "Telegram никнейм",
+    "content_form_additionals_title":"Укажите дополнительные инструменты, которые потребуются для репетиции",
+    
+    "submit": "Отправить",
+    "required_filed": "Это поле обязательное"
 }

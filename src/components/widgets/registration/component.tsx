@@ -111,29 +111,28 @@ export const FormComponentBase = ({
 
     return (
         <form className={className} onSubmit={handleSubmit(onSubmit)}>
-            <Title>{t('Registration form')}</Title>
             <FormDatePicker
                 name="date"
                 placeholder=""
-                label={t('Select date')}
+                label={t('content_form_select_title')}
                 disabledDate={(current) => {
                     return current && current < moment().startOf('day');
                 }}
                 rules={{
                     required: {
                         value: true,
-                        message: t('This field is required'),
+                        message: t('required_filed'),
                     },
                 }}
             />
             <TimeSlots
                 name="timeSlotsEvent"
-                label={t('Available timeslots')}
+                label={t('content_form_slots_title')}
                 timeslots={timeslots}
                 rules={{
                     required: {
                         value: true,
-                        message: t('This field is required'),
+                        message: t('required_filed'),
                     },
                 }}
             />
@@ -141,12 +140,12 @@ export const FormComponentBase = ({
                 <Col span={isMobile ? 24 : 12}>
                     <FormInput
                         name="userName"
-                        label={t('Full Name')}
+                        label={t('content_form_name_title')}
                         control={control}
                         rules={{
                             required: {
                                 value: true,
-                                message: t('This field is required'),
+                                message: t('required_filed'),
                             },
                         }}
                     />
@@ -154,19 +153,22 @@ export const FormComponentBase = ({
                 <Col span={isMobile ? 24 : 12}>
                     <FormInput
                         name="userNameTelegram"
-                        label={t('Telegram username')}
+                        label={t('content_form_tg_title')}
                         control={control}
                         rules={{
                             required: {
                                 value: true,
-                                message: t('This field is required'),
+                                message: t('required_filed'),
                             },
                         }}
                     />
                 </Col>
             </Row>
             <Flex align="center" style={{ margin: '0 0 15px' }}>
-                <Switch title={t('add comment')} onChange={handleAddComment} />
+                <Switch
+                    title={t('content_form_comment_title')}
+                    onChange={handleAddComment}
+                />
                 <Typography.Text
                     style={{
                         margin: '0 0 0 15px',
@@ -174,22 +176,19 @@ export const FormComponentBase = ({
                         fontWeight: '400',
                     }}
                 >
-                    {t('add comment')}
+                    {t('content_form_comment_title')}
                 </Typography.Text>
             </Flex>
             {addComment && (
                 <FormTextarea
                     name="comment"
-                    label={t('Comment')}
                     control={control}
-                    placeholder={t(
-                        'Indicate additional instruments that will be required for rehearsal',
-                    )}
+                    placeholder={t('content_form_additionals_title')}
                 />
             )}
 
             <Flex className="button-wrapper">
-                <Button htmlType="submit">{t('Submit')}</Button>
+                <Button htmlType="submit">{t('submit')}</Button>
             </Flex>
         </form>
     );

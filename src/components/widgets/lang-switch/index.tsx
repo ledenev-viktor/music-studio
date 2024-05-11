@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 import { COLORS } from 'src/styles/variables';
 
 const LangSwitchBase = ({ className }: { className?: string }) => {
-    const { locale, locales, asPath } = useRouter();
-    const actualLocales = locales?.filter((current) => current !== locale);
+    const { locales, asPath } = useRouter();
+
     return (
         <div className={className}>
-            {actualLocales?.map((locale) => (
+            {locales?.map((locale) => (
                 <Link
                     className="link"
                     key={locale}
