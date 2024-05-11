@@ -1,12 +1,18 @@
+import { ReactElement } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import dynamic from 'next/dynamic';
 import { NextPageWithLayout } from '~types/app';
+import { MainLayout } from 'src/layouts/main-layout';
 
 const PageComponent = dynamic(() => import('~components/widgets/home/'), {
     ssr: false,
 });
 
 const Page: NextPageWithLayout = () => <PageComponent />;
+Page.getLayout = function getLayout(page: ReactElement) {
+    return <MainLayout>{page}</MainLayout>;
+};
+
 export default Page;
 
 export async function getStaticProps({ locale }: { locale: string }) {

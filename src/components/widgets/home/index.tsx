@@ -1,35 +1,45 @@
-import { Flex, Spin, Typography } from 'antd';
-import { useTranslation } from 'react-i18next';
-import { useGetEvents } from '~hooks/events';
-import bannerimg from 'public/mainbg.png';
-import { MainBanner } from '../main-banner';
+'use client';
+import { Flex } from 'antd';
+import { MainSlider } from '../slider';
+import { Benefits } from '../benefits';
 
 const HomePage = () => {
-    const { data: events, isLoading: isEventsLoading } = useGetEvents();
-    const { t } = useTranslation();
+    const slides = [
+        {
+            id: 2,
+            path: 'cat2.webp',
+        },
+        {
+            id: 3,
+            path: 'cat3.webp',
+        },
+        {
+            id: 4,
+            path: 'cat2.webp',
+        },
+        {
+            id: 5,
+            path: 'cat3.webp',
+        },
+    ];
+
     return (
         <>
-            <MainBanner
-                src={bannerimg}
-                text="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero, facere voluptatum corrupti error magnam ducimus ut architecto? A, tempore magni! Ducimus autem eligendi nam ad consequuntur quidem quasi soluta voluptates."
-                shortText="Lorem ipsum dolor sit, amet consectetur"
-            />
             <Flex
                 vertical
                 justify="center"
                 align="center"
-                style={{ padding: '30px' }}
+                style={{ padding: '0' }}
             >
-                <Flex justify="start" style={{ width: '100%' }}>
-                    <Typography.Title>{t('home page')}</Typography.Title>
-                </Flex>
-                {isEventsLoading ? (
-                    <Spin size="large" />
-                ) : (
-                    <Typography.Paragraph>
-                        {JSON.stringify(events) || 'empty'}
-                    </Typography.Paragraph>
-                )}
+                <MainSlider
+                    slides={slides}
+                    autoplay={{
+                        delay: 7500,
+                        disableOnInteraction: false,
+                    }}
+                    speed={1000}
+                />
+                <Benefits />
             </Flex>
         </>
     );
