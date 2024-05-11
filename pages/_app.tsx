@@ -7,22 +7,18 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { SessionProvider } from 'next-auth/react';
-import { Session } from 'next-auth';
 import { appWithTranslation } from 'next-i18next';
 import { Global } from '@emotion/react';
 import { NotificationProvider } from '~notifications';
 import { ModalProvider } from '~modals';
 import { AppPropsWithLayout } from '~types/app';
 import { globalStyles } from 'src/styles/global-styles';
-import { RootLayout } from '../src/layouts/root-layout';
+import { InnerLayout } from '../src/layouts/inner-layout';
 
 const MyApp = ({
     Component,
     pageProps: { session, ...pageProps },
-}: AppProps<{
-    dehydratedState: unknown;
-    session: Session;
-}>) => {
+}: AppPropsWithLayout) => {
     const [queryClient] = useState(
         () =>
             new QueryClient({
@@ -35,7 +31,7 @@ const MyApp = ({
     );
 
     const getLayout =
-        Component.getLayout || ((page) => <RootLayout>{page}</RootLayout>);
+        Component.getLayout || ((page) => <InnerLayout>{page}</InnerLayout>);
 
     return (
         <QueryClientProvider client={queryClient}>
