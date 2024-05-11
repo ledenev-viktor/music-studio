@@ -1,4 +1,23 @@
 {
     "home page": "მთავარი გვერდი",
-    "admin page": "ადმინისტრაციული გვერდი"
+    "admin page": "ადმინისტრაციული გვერდი",
+    "With us you can": "ჩვენთან შეგიძლიათ:",
+    "We are a wonderful music studio": "ჩვენ შესანიშნავი მუსიკალური სტუდია ვართ",
+    "Try": "სცადე",
+    "Learn from scratch": "ისწავლეთ ნულიდან",
+    "Improve your skills": "გააუმჯობესე შენი უნარები",
+    "Have fun": "Გაერთე",
+    "Developers": "დეველოპერები:",
+    "Music studio": "მუსიკალური სტუდია",
+    "5 Mikheil Asatiani St, Tbilisi": "თბილისი, მიხეილ ასათიანის ქ. 5",
+    "Registration form": "Სარეგისტრაციო ფორმა",
+    "This field is required": "ეს ველი სავალდებულოა",
+    "Indicate additional instruments that will be required for rehearsal": "მიუთითეთ დამატებითი ინსტრუმენტები, რომლებიც საჭირო იქნება რეპეტიციისთვის",
+    "Submit": "გაგზავნა",
+    "Select date": "აირჩიეთ თარიღი",
+    "Available timeslots": "ხელმისაწვდომი დროის სლოტები",
+    "Full Name": "Სრული სახელი",
+    "add comment": "დაამატე კომენტარი",
+    "Telegram username": "Telegram მომხმარებლის სახელი",
+    "Comment": "კომენტარი"
 }
