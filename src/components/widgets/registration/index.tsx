@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { useForm, FieldValues, FormProvider } from 'react-hook-form';
 import moment from 'moment';
 import { useGetEvents } from '~hooks/events';
-import { FormComponent } from './component';
+import { FormComponent } from './FormComponent';
 
 type RegistrationFormProps = {
     className?: string;
@@ -56,10 +56,8 @@ export const RegistrationForm: FC<RegistrationFormProps> = () => {
     }, [events]);
 
     return (
-        <>
-            <FormProvider {...form}>
-                <FormComponent eventsData={eventsSortedDays} />
-            </FormProvider>
-        </>
+        <FormProvider {...form}>
+            <FormComponent eventsData={eventsSortedDays} />
+        </FormProvider>
     );
 };

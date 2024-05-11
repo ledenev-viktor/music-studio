@@ -7,7 +7,7 @@ import { useMobile } from '~hooks/responsive';
 import { ICONS } from '~components/ui/icons';
 import { BenefitItem } from './benefit-item';
 
-const BenefitsBase = ({ className }: { className?: string }) => {
+export const Benefits = ({ className }: { className?: string }) => {
     const { t } = useTranslation();
     const isMobile = useMobile();
 
@@ -19,7 +19,7 @@ const BenefitsBase = ({ className }: { className?: string }) => {
                 position: 'relative',
                 left: '50%',
                 transform: 'translateX(-50%)',
-                padding: isMobile ? '50px 0' : '87px 0 108px',
+                padding: isMobile ? '50px 0' : '0 0 25px',
                 margin: '0 auto',
                 background: COLORS.blue,
             }}
@@ -35,65 +35,64 @@ const BenefitsBase = ({ className }: { className?: string }) => {
                     color: COLORS.white,
                 }}
                 vertical
+                gap={50}
             >
-                <Typography.Title
-                    style={{
-                        color: COLORS.white,
-                        textAlign: 'center',
-                        margin: '0 0 30px',
-                        lineHeight: '1.1',
-                    }}
-                >
-                    {t('content_benefits_title')}
-                </Typography.Title>
-                <Typography.Title
-                    style={{
-                        color: COLORS.white,
-                        textAlign: 'center',
-                        margin: '0 0 30px',
-                    }}
-                    level={3}
-                >
-                    {t('content_benefits_description')}
-                </Typography.Title>
+                <Flex vertical gap={0}>
+                    <Typography.Title
+                        style={{
+                            color: COLORS.white,
+                            textAlign: 'center',
+                            lineHeight: '1.1',
+                        }}
+                    >
+                        {t('content_benefits_title')}
+                    </Typography.Title>
+                    <Typography.Title
+                        style={{
+                            color: COLORS.white,
+                            textAlign: 'center',
+                            margin: 0,
+                        }}
+                        level={4}
+                    >
+                        {t('content_benefits_description')}
+                    </Typography.Title>
+                </Flex>
                 <Flex justify="space-around" gap={isMobile ? 'small' : 'large'}>
                     <BenefitItem
-                        style={{ width: '250px' }}
                         text={t('content_benefit_scratch')}
                         icon={<ICONS.drumsticks width={isMobile ? 50 : 80} />}
                     />
                     <BenefitItem
-                        style={{ marginTop: '50px', width: '250px' }}
+                        style={{ marginTop: '50px' }}
                         text={t('content_benefit_improve')}
                         icon={<ICONS.drum width={isMobile ? 50 : 80} />}
                     />
                     <BenefitItem
-                        style={{ width: '250px' }}
                         text={t('content_benefit_fun')}
                         icon={<ICONS.fun width={isMobile ? 50 : 80} />}
                     />
                 </Flex>
-                <Link className="link" style={{}} href="/application">
+                <StyledLink href="/application">
                     {t('content_get_started_button')}
-                </Link>
+                </StyledLink>
             </Flex>
         </Flex>
     );
 };
 
-export const Benefits = styled(BenefitsBase)`
-    .link {
-        min-width: 200px;
-        max-width: 350px;
-        text-align: center;
-        font-size: 24px;
-        color: ${COLORS.blue};
-        background: ${COLORS.white};
-        padding: 10px 15px 12px;
-        border-radius: 8px;
-        margin: 55px auto 0;
-        &:hover {
-            color: ${COLORS.pink};
-        }
+const StyledLink = styled(Link)`
+    min-width: 200px;
+    max-width: 350px;
+    text-align: center;
+    font-size: 24px;
+    color: ${COLORS.blue};
+    background: ${COLORS.white};
+    padding: 10px 15px 12px;
+    border-radius: 8px;
+    margin: 55px auto 0;
+    &:hover {
+        background: ${COLORS.colorInactive};
+        color: ${COLORS.white};
     }
 `;

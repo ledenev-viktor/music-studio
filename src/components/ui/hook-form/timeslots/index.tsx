@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Col, ConfigProvider, Flex, Row, Tag, Typography } from 'antd';
+import { Col, ConfigProvider, Flex, Row, Tag } from 'antd';
 import styled from '@emotion/styled';
 import {
     Controller,
@@ -8,6 +8,7 @@ import {
 } from 'react-hook-form';
 import { useMobile } from '~hooks/responsive';
 import { COLORS } from 'src/styles/variables';
+import { ErrorMessage, Label } from '../common';
 import { BREAKPOINTS } from '~constants/breakpoints';
 
 type TimeSlotsBaseProps = {
@@ -23,8 +24,6 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
     timeslots = [],
     className,
 }) => {
-    const { Text } = Typography;
-
     const {
         control,
         formState: { errors },
@@ -40,17 +39,7 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
             }}
         >
             <Flex vertical className={className}>
-                {label && (
-                    <Text
-                        style={{
-                            marginBottom: ' 10px',
-                            fontSize: '18px',
-                            fontWeight: '400',
-                        }}
-                    >
-                        {label}
-                    </Text>
-                )}
+                {label && <Label>{label}</Label>}
                 <div className="timeslots-wrapper">
                     <Controller
                         name={name}
@@ -88,23 +77,13 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
                         )}
                     />
                 </div>
-                {error && (
-                    <Text style={{ marginTop: '10px' }} type="danger">
-                        {error}
-                    </Text>
-                )}
+                {error && <ErrorMessage>{error}</ErrorMessage>}
             </Flex>
         </ConfigProvider>
     );
 };
 
 export const TimeSlots = styled(TimeSlotsBase)`
-    margin: 0 0 30px;
-
-    @media screen and (max-width: ${BREAKPOINTS.mobile}) {
-        margin: 0 0 20px;
-    }
-
     .ant-tag {
         width: 100%;
         text-align: center;

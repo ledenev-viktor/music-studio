@@ -6,14 +6,18 @@ import { useMobile } from '~hooks/responsive';
 type BenefitItemProps = {
     icon: ReactNode;
     text: string;
-    style: CSSProperties;
+    style?: CSSProperties;
 };
 
-export const BenefitItem = ({ icon, text, ...props }: BenefitItemProps) => {
+export const BenefitItem = ({ icon, text, style }: BenefitItemProps) => {
     const isMobile = useMobile();
 
     return (
-        <Flex justify="flex-start" vertical {...props}>
+        <Flex
+            justify="flex-start"
+            vertical
+            style={{ width: '250px', ...style }}
+        >
             <Flex
                 style={{
                     textAlign: 'center',
@@ -27,7 +31,7 @@ export const BenefitItem = ({ icon, text, ...props }: BenefitItemProps) => {
             <Typography.Text
                 style={{
                     color: COLORS.white,
-                    fontSize: isMobile ? '14px' : '24px',
+                    fontSize: isMobile ? '14px' : '16px',
                     lineHeight: '1.2',
                     textAlign: 'center',
                 }}

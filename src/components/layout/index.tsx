@@ -12,7 +12,7 @@ type RootLayoutProps = {
 
 const MainLayout: FC<RootLayoutProps> = ({
     children,
-    contentPadding = '50px 20px',
+    contentPadding = '40px 0',
 }) => {
     return (
         <ConfigProvider

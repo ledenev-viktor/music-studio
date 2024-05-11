@@ -6,13 +6,12 @@ import { ICONS } from '~components/ui/icons';
 export const LayoutFooter = () => (
     <Layout.Footer
         style={{
-            padding: '30px 20px 0',
             maxWidth: '1200px',
             width: '100%',
             margin: '0 auto',
         }}
     >
-        <Flex gap={30}>
+        <Flex gap={30} align="center">
             <Link
                 style={{
                     color: COLORS.black,
@@ -25,7 +24,7 @@ export const LayoutFooter = () => (
                     <span style={{ lineHeight: 0 }}>
                         <ICONS.github
                             width="25"
-                            style={{ marginRight: '10px' }}
+                            style={{ marginRight: '5px' }}
                         />
                     </span>
                     <span>Yulia Kletsova</span>
@@ -43,7 +42,7 @@ export const LayoutFooter = () => (
                     <span style={{ lineHeight: 0 }}>
                         <ICONS.github
                             width="25"
-                            style={{ marginRight: '10px' }}
+                            style={{ marginRight: '5px' }}
                         />
                     </span>
                     <span>Ledenev Viktor</span>

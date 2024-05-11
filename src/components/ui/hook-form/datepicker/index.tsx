@@ -1,12 +1,7 @@
 import styled from '@emotion/styled';
-import {
-    DatePicker as DatePickerAntD,
-    DatePickerProps,
-    Flex,
-    Typography,
-} from 'antd';
+import { DatePicker as DatePickerAntD, DatePickerProps, Flex } from 'antd';
 import { useController, UseControllerProps } from 'react-hook-form';
-import { BREAKPOINTS } from '~constants/breakpoints';
+import { ErrorMessage, Label } from '../common';
 
 type FormDatePickerBaseProps = {
     className?: string;
@@ -24,7 +19,6 @@ export function FormDatePickerBase({
     control,
     ...props
 }: FormDatePickerBaseProps) {
-    const { Text } = Typography;
     const { field, fieldState } = useController({
         name,
         rules,
@@ -36,7 +30,7 @@ export function FormDatePickerBase({
 
     return (
         <Flex vertical className={className}>
-            {label && <Text className="label">{label}</Text>}
+            {label && <Label>{label}</Label>}
             <DatePickerAntD
                 {...field}
                 {...props}
@@ -49,33 +43,17 @@ export function FormDatePickerBase({
                     field.onBlur();
                 }}
             />
-            {error && (
-                <Text style={{ marginTop: '10px' }} type="danger">
-                    {error}
-                </Text>
-            )}
+            {error && <ErrorMessage>{error}</ErrorMessage>}
         </Flex>
     );
 }
 
 export const FormDatePicker = styled(FormDatePickerBase)`
-    margin: 0 0 30px;
-
-    .label {
-        margin-bottom: 10px;
-        font-size: 18px;
-        font-weight: 400;
-    }
-
     .ant-picker {
         height: 40px;
     }
 
     input {
         font-size: 16px;
-    }
-
-    @media screen and (max-width: ${BREAKPOINTS.mobile}) {
-        margin: 0 0 20px;
     }
 `;
