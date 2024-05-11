@@ -1,18 +1,16 @@
-import { Flex, Typography } from 'antd';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import dynamic from 'next/dynamic';
 
-export default function Page() {
-    const { Title } = Typography;
+const PageComponent = dynamic(() => import('~components/widgets/contacts'), {
+    ssr: false,
+});
 
-    return (
-        <Flex
-            vertical
-            justify="center"
-            align="center"
-            style={{ padding: '30px' }}
-        >
-            <Flex justify="start" style={{ width: '100%' }}>
-                <Title>Contacts</Title>
-            </Flex>
-        </Flex>
-    );
+export default PageComponent;
+
+export async function getStaticProps({ locale }: { locale: string }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ['common'])),
+        },
+    };
 }
