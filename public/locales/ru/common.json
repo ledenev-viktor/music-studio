@@ -4,7 +4,7 @@
     "header_menu_contacts": "Контакты",
 
     "content_benefits_title": "Мы замечательная музыкальная студия",
-    "content_benefits_description":  "С нами вы можете:",
+    "content_benefits_description": "С нами вы можете:",
     "content_get_started_button": "Попробовать",
     "content_benefit_scratch": "Учиться с нуля",
     "content_benefit_improve": "Совершенствовать свои навыки",
@@ -19,8 +19,11 @@
     "content_form_name_title": "Полное имя",
     "content_form_comment_title": "Добавить комментарий",
     "content_form_tg_title": "Telegram никнейм",
-    "content_form_additionals_title":"Укажите дополнительные инструменты, которые потребуются для репетиции",
-    
+    "content_form_additionals_title": "Укажите дополнительные инструменты, которые потребуются для репетиции",
+
     "submit": "Отправить",
+    "continue": "Продолжить",
+    "back": "Назад",
+    "save": "Сохранить",
     "required_filed": "Это поле обязательное"
 }

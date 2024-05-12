@@ -6,7 +6,6 @@ import {
     useFormContext,
     UseControllerProps,
 } from 'react-hook-form';
-import { useMobile } from '~hooks/responsive';
 import { COLORS } from 'src/styles/variables';
 import { ErrorMessage, Label } from '../common';
 import { BREAKPOINTS } from '~constants/breakpoints';
@@ -30,7 +29,6 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
     } = useFormContext();
 
     const error = errors[name] ? <>{errors[name]?.message}</> : '';
-    const isMobile = useMobile();
 
     return (
         <ConfigProvider
@@ -46,9 +44,9 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
                         control={control}
                         rules={rules}
                         render={({ field: { value, onChange } }) => (
-                            <Row justify="space-between" gutter={[20, 20]}>
+                            <Row justify="space-between" gutter={[20, 20]} wrap>
                                 {timeslots.map((slot: any) => (
-                                    <Col key={slot.id} span={isMobile ? 12 : 6}>
+                                    <Col key={slot.id} span={12}>
                                         <Tag.CheckableTag
                                             style={{ width: '100%' }}
                                             checked={value.some(

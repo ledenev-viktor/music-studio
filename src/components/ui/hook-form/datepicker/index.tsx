@@ -1,6 +1,10 @@
 import styled from '@emotion/styled';
 import { DatePicker as DatePickerAntD, DatePickerProps, Flex } from 'antd';
-import { useController, UseControllerProps } from 'react-hook-form';
+import {
+    useController,
+    UseControllerProps,
+    useFormContext,
+} from 'react-hook-form';
 import { ErrorMessage, Label } from '../common';
 
 type FormDatePickerBaseProps = {
@@ -16,9 +20,9 @@ export function FormDatePickerBase({
     rules,
     defaultValue = '',
     id,
-    control,
     ...props
 }: FormDatePickerBaseProps) {
+    const { control } = useFormContext();
     const { field, fieldState } = useController({
         name,
         rules,

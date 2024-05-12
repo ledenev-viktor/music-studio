@@ -1,7 +1,11 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
 import { Input as InputAntD, InputProps, Flex } from 'antd';
-import { useController, UseControllerProps } from 'react-hook-form';
+import {
+    useController,
+    UseControllerProps,
+    useFormContext,
+} from 'react-hook-form';
 import { ErrorMessage, Label } from '../common';
 
 type FormInputBaseProps = {
@@ -16,10 +20,10 @@ const FormInputBase: FC<FormInputBaseProps> = ({
     rules,
     defaultValue = '',
     id,
-    control,
     className,
     ...props
 }) => {
+    const { control } = useFormContext();
     const { field, fieldState } = useController({
         name,
         rules,

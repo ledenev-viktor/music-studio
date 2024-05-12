@@ -1,214 +1,129 @@
 import { useState } from 'react';
-import { Button, Col, Flex, Row, Switch, Typography } from 'antd';
-import { useFormContext, FieldValues } from 'react-hook-form';
+import { Flex, Steps } from 'antd';
+import { useFormContext, FieldValues, useWatch } from 'react-hook-form';
 import styled from '@emotion/styled';
-import moment from 'moment';
-import { useTranslation } from 'next-i18next';
-import type { CalendarEvent } from '~types/google';
-import { useMobile } from '~hooks/responsive';
-import { COLORS } from 'src/styles/variables';
-import {
-    FormDatePicker,
-    FormInput,
-    FormTextarea,
-    TimeSlots,
-} from '~components/ui/hook-form';
 import { BREAKPOINTS } from '~constants/breakpoints';
+import {
+    TimeSlotsScreen,
+    ContactsScreen,
+    AdditionalStep,
+    FinalScreen,
+} from './steps';
+import { MODE, STEP, STEP_NUMBER } from '~constants/registrationSteps';
 
 type RegFormBaseProps = {
     className?: string;
-    eventsData: {
-        days: string[];
-        events: CalendarEvent[];
-    };
 };
 
-const timeslots = [
-    {
-        id: 1,
-        value: 1,
-        label: '11:00 - 12:00',
-    },
-    {
-        id: 2,
-        value: 2,
-        label: '12:00 - 13:00',
-    },
-    {
-        id: 3,
-        value: 3,
-        label: '13:00 - 14:00',
-    },
-    {
-        id: 4,
-        value: 4,
-        label: '14:00 - 15:00',
-    },
-    {
-        id: 5,
-        value: 5,
-        label: '15:00 - 16:00',
-    },
-    {
-        id: 6,
-        value: 6,
-        label: '16:00 - 17:00',
-    },
-    {
-        id: 7,
-        value: 7,
-        label: '17:00 - 18:00',
-    },
-    {
-        id: 8,
-        value: 8,
-        label: '18:00 - 19:00',
-    },
-    {
-        id: 9,
-        value: 9,
-        label: '19:00 - 20:00',
-    },
-    {
-        id: 10,
-        value: 10,
-        label: '20:00 - 21:00',
-    },
-    {
-        id: 11,
-        value: 11,
-        label: '21:00 - 22:00',
-    },
-    {
-        id: 12,
-        value: 12,
-        label: '22:00 - 23:00',
-    },
-];
-
-export const FormComponentBase = ({
-    className,
-    eventsData,
-}: RegFormBaseProps) => {
-    const { t } = useTranslation();
-    const { handleSubmit, control } = useFormContext();
-    const [addComment, setAddComment] = useState(false);
-    const isMobile = useMobile();
-
-    const { reset, resetField } = useFormContext();
+export const FormComponentBase = ({ className }: RegFormBaseProps) => {
+    const {
+        handleSubmit,
+        getValues,
+        trigger,
+        formState: { isValid },
+        clearErrors,
+        reset,
+    } = useFormContext();
+    const [step, setStep] = useState<STEP>(STEP.TIME_SLOTS_STEP);
+    const [mode, setMode] = useState<MODE>(MODE.DEFAULT);
+    const isCommentNeeded = useWatch({ name: 'isCommentNeeded' });
 
     const onSubmit = async (data: FieldValues) => {
         console.log(data);
-        console.log(eventsData);
         reset();
     };
 
-    const handleAddComment = () => {
-        setAddComment(!addComment);
-        if (addComment) resetField('comment');
+    const onSaveEdits = () => {
+        setMode(MODE.DEFAULT);
+        setStep(STEP.FINAL_SCREEN);
+    };
+
+    const onEdit = (step: STEP) => {
+        setMode(MODE.EDIT);
+        setStep(step);
+    };
+
+    const getStep = () => {
+        switch (step) {
+            case STEP.TIME_SLOTS_STEP:
+                return (
+                    <TimeSlotsScreen
+                        onSaveEdits={
+                            mode === MODE.EDIT ? onSaveEdits : undefined
+                        }
+                        onGoToNextStep={() => {
+                            trigger();
+
+                            if (isValid) {
+                                clearErrors(['userName', 'userNameTelegram']);
+                                setStep(STEP.CONTACTS_STEP);
+                            } else return;
+                        }}
+                    />
+                );
+            case STEP.CONTACTS_STEP:
+                return (
+                    <ContactsScreen
+                        onSaveEdits={
+                            mode === MODE.EDIT ? onSaveEdits : undefined
+                        }
+                        onGoToNextStep={() => {
+                            trigger();
+
+                            if (isValid) {
+                                if (isCommentNeeded)
+                                    setStep(STEP.ADDITIONAL_STEP);
+                                else setStep(STEP.FINAL_SCREEN);
+                            }
+                            return;
+                        }}
+                        onGoToPreviousStep={() => setStep(STEP.TIME_SLOTS_STEP)}
+                    />
+                );
+            case STEP.ADDITIONAL_STEP:
+                return (
+                    <AdditionalStep
+                        onSaveEdits={
+                            mode === MODE.EDIT ? onSaveEdits : undefined
+                        }
+                        onGoToPreviousStep={() => setStep(STEP.CONTACTS_STEP)}
+                        onGoToNextStep={() => setStep(STEP.FINAL_SCREEN)}
+                    />
+                );
+            case STEP.FINAL_SCREEN:
+                return (
+                    <FinalScreen
+                        onSubmit={() => {
+                            onSubmit(getValues());
+                            setStep(STEP.TIME_SLOTS_STEP);
+                        }}
+                        handleEdit={onEdit}
+                    />
+                );
+            default:
+                return null;
+        }
     };
 
     return (
         <form className={className} onSubmit={handleSubmit(onSubmit)}>
-            <Flex vertical gap={isMobile ? 10 : 30}>
-                <FormDatePicker
-                    name="date"
-                    placeholder=""
-                    label={t('content_form_select_title')}
-                    disabledDate={(current) => {
-                        return current && current < moment().startOf('day');
-                    }}
-                    rules={{
-                        required: {
-                            value: true,
-                            message: t('required_filed'),
-                        },
-                    }}
+            <Flex vertical align="center" style={{ marginBottom: '30px' }}>
+                <Steps
+                    size="small"
+                    direction="horizontal"
+                    responsive={false}
+                    progressDot
+                    current={STEP_NUMBER[step]}
+                    items={new Array(3).fill({})}
                 />
-                <TimeSlots
-                    name="timeSlotsEvent"
-                    label={t('content_form_slots_title')}
-                    timeslots={timeslots}
-                    rules={{
-                        required: {
-                            value: true,
-                            message: t('required_filed'),
-                        },
-                    }}
-                />
-                <Row gutter={[20, 0]}>
-                    <Col span={isMobile ? 24 : 12}>
-                        <FormInput
-                            name="userName"
-                            label={t('content_form_name_title')}
-                            control={control}
-                            rules={{
-                                required: {
-                                    value: true,
-                                    message: t('required_filed'),
-                                },
-                            }}
-                        />
-                    </Col>
-                    <Col span={isMobile ? 24 : 12}>
-                        <FormInput
-                            name="userNameTelegram"
-                            label={t('content_form_tg_title')}
-                            control={control}
-                            rules={{
-                                required: {
-                                    value: true,
-                                    message: t('required_filed'),
-                                },
-                            }}
-                        />
-                    </Col>
-                </Row>
-                <Flex vertical gap={10}>
-                    <Flex align="center" gap={10}>
-                        <Switch
-                            title={t('content_form_comment_title')}
-                            onChange={handleAddComment}
-                        />
-                        <Typography.Text
-                            style={{
-                                fontSize: '18px',
-                                fontWeight: '400',
-                            }}
-                        >
-                            {t('content_form_comment_title')}
-                        </Typography.Text>
-                    </Flex>
-                    {addComment && (
-                        <FormTextarea
-                            name="comment"
-                            control={control}
-                            placeholder={t('content_form_additionals_title')}
-                        />
-                    )}
-                </Flex>
-                <Flex justify="flex-end">
-                    <Button
-                        htmlType="submit"
-                        style={{
-                            background: COLORS.blue,
-                            padding: '5px 10px',
-                            minWidth: '100px',
-                            boxSizing: 'content-box',
-                            color: COLORS.white,
-                            fontSize: '16px',
-                        }}
-                    >
-                        {t('submit')}
-                    </Button>
-                </Flex>
             </Flex>
+            {getStep()}
         </form>
     );
 };
 
 export const FormComponent = styled(FormComponentBase)`
-    max-width: 900px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 30px 60px 60px;
     box-sizing: border-box;

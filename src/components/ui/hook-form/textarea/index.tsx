@@ -1,7 +1,11 @@
 import { FC } from 'react';
 import { Input, Flex } from 'antd';
 import { TextAreaProps } from 'antd/es/input';
-import { useController, UseControllerProps } from 'react-hook-form';
+import {
+    useController,
+    UseControllerProps,
+    useFormContext,
+} from 'react-hook-form';
 import styled from '@emotion/styled';
 import { ErrorMessage, Label } from '../common';
 import { BREAKPOINTS } from '~constants/breakpoints';
@@ -18,11 +22,11 @@ export const FormTextareaBase: FC<FormTextareaBaseProps> = ({
     rules,
     defaultValue = '',
     id,
-    control,
     className,
     ...props
 }) => {
     const { TextArea } = Input;
+    const { control } = useFormContext();
     const { field, fieldState } = useController({
         name,
         rules,

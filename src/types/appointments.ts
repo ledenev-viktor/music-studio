@@ -12,3 +12,12 @@ export type Appointment = {
     telegram: string;
     status: AppointmentStatuses;
 };
+
+export type FormFields = {
+    date: string;
+    userName: string;
+    userNameTelegram: string;
+    selectedTimeSlots: [];
+    isCommentNeeded: boolean;
+    comment: string;
+};

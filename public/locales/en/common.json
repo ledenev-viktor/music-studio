@@ -14,7 +14,7 @@
     "content_studio_address": "5 Mikheil Asatiani St, Tbilisi",
     "content_studio_work_hours": "11 AM - 11 PM",
 
-    "content_form_select_title":"Select date",
+    "content_form_select_title": "Select date",
     "content_form_slots_title": "Available timeslots",
     "content_form_name_title": "Full Name",
     "content_form_comment_title": "Add comment",
@@ -22,5 +22,8 @@
     "content_form_additionals_title": "Indicate additional instruments that will be required for rehearsal",
 
     "submit": "Submit",
-    "required_filed":  "This field is required"
+    "continue": "Continue",
+    "back": "Back",
+    "save": "Save",
+    "required_filed": "This field is required"
 }
