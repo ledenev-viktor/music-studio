@@ -1,36 +1,26 @@
-import { Flex, Spin, Typography } from 'antd';
+import { ReactElement } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useTranslation } from 'next-i18next';
-import { useGetEvents } from '~hooks/events';
+import dynamic from 'next/dynamic';
+import { GetStaticProps } from 'next/types';
+import { NextPageWithLayout } from '~types/app';
 
-export default function Page() {
-    const { data: events, isLoading: isEventsLoading } = useGetEvents();
-    const { Title, Paragraph } = Typography;
-    const { t } = useTranslation();
+const PageComponent = dynamic(() => import('~components/widgets/home/'), {
+    ssr: false,
+});
 
-    return (
-        <Flex
-            vertical
-            justify="center"
-            align="center"
-            style={{ padding: '30px' }}
-        >
-            <Flex justify="start" style={{ width: '100%' }}>
-                <Title>{t('home page')}</Title>
-            </Flex>
-            {isEventsLoading ? (
-                <Spin size="large" />
-            ) : (
-                <Paragraph>{JSON.stringify(events) || 'empty'}</Paragraph>
-            )}
-        </Flex>
-    );
-}
+const Layout = dynamic(() => import('~components/layout'), {
+    ssr: false,
+});
 
-export async function getStaticProps({ locale }: { locale: string }) {
-    return {
-        props: {
-            ...(await serverSideTranslations(locale, ['common'])),
-        },
-    };
-}
+const Page: NextPageWithLayout = () => <PageComponent />;
+Page.getLayout = function getLayout(page: ReactElement) {
+    return <Layout contentPadding="0 20px">{page}</Layout>;
+};
+
+export default Page;
+
+export const getStaticProps: GetStaticProps = async ({ locale }: any) => ({
+    props: {
+        ...(await serverSideTranslations(locale, ['common'])),
+    },
+});

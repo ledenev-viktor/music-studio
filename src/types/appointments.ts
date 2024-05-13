@@ -14,3 +14,12 @@ export type Appointment = {
 };
 
 export type Appointments = [string, Appointment[]][];
+
+export type FormFields = {
+    date: string;
+    userName: string;
+    userNameTelegram: string;
+    selectedTimeSlots: [];
+    isCommentNeeded: boolean;
+    comment: string;
+};
