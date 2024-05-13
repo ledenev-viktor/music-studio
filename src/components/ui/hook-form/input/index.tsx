@@ -6,6 +6,7 @@ import {
     UseControllerProps,
     useFormContext,
 } from 'react-hook-form';
+import { AnimatePresence } from 'framer-motion';
 import { ErrorMessage, Label } from '../common';
 
 type FormInputBaseProps = {
@@ -35,22 +36,24 @@ const FormInputBase: FC<FormInputBaseProps> = ({
 
     return (
         <Flex className={className} vertical>
-            {label && <Label>{label}</Label>}
-            <InputAntD
-                {...field}
-                {...props}
-                status={status}
-                id={id || name}
-                onChange={(e) => {
-                    field.onChange(e);
-                    props.onChange?.(e);
-                }}
-                onBlur={(e) => {
-                    field.onBlur();
-                    props.onBlur?.(e);
-                }}
-            />
-            {error && <ErrorMessage>{error}</ErrorMessage>}
+            <AnimatePresence mode="wait" initial={false}>
+                {label && <Label>{label}</Label>}
+                <InputAntD
+                    {...field}
+                    {...props}
+                    status={status}
+                    id={id || name}
+                    onChange={(e) => {
+                        field.onChange(e);
+                        props.onChange?.(e);
+                    }}
+                    onBlur={(e) => {
+                        field.onBlur();
+                        props.onBlur?.(e);
+                    }}
+                />
+                {error && <ErrorMessage>{error}</ErrorMessage>}
+            </AnimatePresence>
         </Flex>
     );
 };

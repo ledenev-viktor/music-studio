@@ -1,8 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { ConfigProvider, Layout } from 'antd';
-import { COLORS } from 'src/styles/variables';
-import { LayoutFooter } from './LayoutFooter';
-import { LayoutHeader } from './LayoutHeader';
+import { COLORS } from '~variables';
+import { CustomMenu } from './CustomMenu';
 
 type RootLayoutProps = {
     children?: ReactNode;
@@ -10,36 +9,21 @@ type RootLayoutProps = {
     contentPadding?: string | number;
 };
 
-const MainLayout: FC<RootLayoutProps> = ({
-    children,
-    contentPadding = '40px 0',
-}) => {
+const MainLayout: FC<RootLayoutProps> = ({ children }) => {
     return (
         <ConfigProvider
             theme={{
-                components: {
-                    Layout: {
-                        headerBg: `${COLORS.blue}`,
-                        bodyBg: `${COLORS.white}`,
-                        footerBg: `${COLORS.white}`,
-                    },
+                token: {
+                    colorPrimary: COLORS.blue,
+                    colorPrimaryActive: COLORS.blue2,
+                    colorBorder: COLORS.blue2,
+                    colorPrimaryHover: COLORS.blue2,
                 },
             }}
         >
             <Layout style={{ minHeight: '100vh' }}>
-                <LayoutHeader />
-                <Layout.Content
-                    style={{
-                        flexGrow: '2',
-                        padding: contentPadding,
-                        maxWidth: '1200px',
-                        margin: '0 auto',
-                        width: '100%',
-                    }}
-                >
-                    {children}
-                </Layout.Content>
-                <LayoutFooter />
+                <CustomMenu />
+                {children}
             </Layout>
         </ConfigProvider>
     );

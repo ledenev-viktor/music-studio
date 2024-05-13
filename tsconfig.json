@@ -56,7 +56,9 @@
             "~notifications": [
                 "src/components/providers/NotificationsProvider.tsx"
             ],
-            "~modals": ["src/components/providers/ModalProvider.tsx"]
+            "~modals": ["src/components/providers/ModalProvider.tsx"],
+
+            "~variables": ["src/styles/variables"]
         }
     },
     "include": [

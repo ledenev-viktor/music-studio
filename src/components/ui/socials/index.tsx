@@ -1,66 +1,77 @@
-import { ElementType } from 'react';
-import { Col, Flex, Row } from 'antd';
+import { Flex } from 'antd';
 import Link from 'next/link';
-import styled from '@emotion/styled';
-import { COLORS } from 'src/styles/variables';
-import { useMobile } from '~hooks/responsive';
+import { InstagramOutlined, PhoneOutlined } from '@ant-design/icons';
+import { COLORS } from '~variables';
+import { useScreenDetector } from '~hooks/responsive';
+import { Telegram, LocationPin } from '~components/ui/icons';
 
-type SocialItem = {
-    label: React.ReactNode;
-    link: string;
-    key: number;
-    icon: ElementType;
-};
-type SocialsListBaseProps = {
-    items: SocialItem[];
-    className?: string;
-};
-
-export const SocialsListBase = ({
-    className,
-    items,
-    ...props
-}: SocialsListBaseProps) => {
-    const isMobile = useMobile();
+export const SocialsList = () => {
+    const { isMobile } = useScreenDetector();
+    const items = [
+        {
+            label: 'Instagram',
+            link: 'https://www.instagram.com/praktikastudio/',
+            icon: (
+                <InstagramOutlined
+                    style={{
+                        color: COLORS.white,
+                        fontSize: '30px',
+                    }}
+                />
+            ),
+            key: 1,
+        },
+        {
+            label: 'Praktika Channel',
+            link: 'https://t.me/praktikastudio_ch',
+            icon: <Telegram width={30} fill={COLORS.white} />,
+            key: 2,
+        },
+        {
+            label: 'Praktika Chat',
+            link: 'https://t.me/+ACspuFKLISBkMjky',
+            icon: <Telegram width={30} fill={COLORS.white} />,
+            key: 3,
+        },
+        {
+            label: 'Google Maps',
+            link: 'https://goo.gl/maps/mQv4W9rRn1dmJStN6',
+            icon: <LocationPin width={40} fill={COLORS.white} />,
+            key: 4,
+        },
+        {
+            label: '+995551613311',
+            link: 'tel:+995551613311',
+            icon: (
+                <PhoneOutlined
+                    style={{
+                        color: COLORS.white,
+                        fontSize: '30px',
+                    }}
+                />
+            ),
+            key: 5,
+        },
+    ];
 
     return (
-        <Row
-            {...props}
-            className={className}
-            gutter={isMobile ? [20, 20] : [50, 50]}
-        >
+        <Flex vertical gap={30}>
             {items.map((item) => (
-                <Col span={isMobile ? 24 : 8} key={item.key}>
-                    <Link
-                        className="link"
-                        href={item.link}
-                        style={{ fontSize: '24px' }}
-                    >
-                        <Flex align="center">
-                            <span style={{ lineHeight: 0 }}>
-                                <item.icon
-                                    width={isMobile ? 30 : 50}
-                                    style={{
-                                        marginRight: '20px',
-                                    }}
-                                />
-                            </span>
-                            <span style={{ fontSize: '24px' }}>
-                                {item.label}
-                            </span>
-                        </Flex>
-                    </Link>
-                </Col>
+                <Link
+                    key={item.label}
+                    className="link"
+                    href={item.link}
+                    style={{
+                        fontSize: isMobile ? '20px' : '18px',
+                        color: COLORS.white,
+                    }}
+                >
+                    <Flex align="center" gap={10}>
+                        {item.icon}
+                        {item.label}
+                    </Flex>
+                </Link>
             ))}
-        </Row>
+        </Flex>
     );
 };
-
-export const SocialsList = styled(SocialsListBase)`
-    .link {
-        color: ${COLORS.blue};
-        &:hover {
-            color: ${COLORS.pink};
-        }
-    }
-`;
