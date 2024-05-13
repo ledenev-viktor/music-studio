@@ -27,7 +27,6 @@ export const SocialsListBase = ({
         <Row
             {...props}
             className={className}
-            style={{ margin: '50px 0 0' }}
             gutter={isMobile ? [20, 20] : [50, 50]}
         >
             {items.map((item) => (

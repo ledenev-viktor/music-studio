@@ -1,13 +1,13 @@
 import { FC } from 'react';
-import { Col, ConfigProvider, Flex, Row, Tag, Typography } from 'antd';
+import { Col, ConfigProvider, Flex, Row, Tag } from 'antd';
 import styled from '@emotion/styled';
 import {
     Controller,
     useFormContext,
     UseControllerProps,
 } from 'react-hook-form';
-import { useMobile } from '~hooks/responsive';
 import { COLORS } from 'src/styles/variables';
+import { ErrorMessage, Label } from '../common';
 import { BREAKPOINTS } from '~constants/breakpoints';
 
 type TimeSlotsBaseProps = {
@@ -23,15 +23,12 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
     timeslots = [],
     className,
 }) => {
-    const { Text } = Typography;
-
     const {
         control,
         formState: { errors },
     } = useFormContext();
 
     const error = errors[name] ? <>{errors[name]?.message}</> : '';
-    const isMobile = useMobile();
 
     return (
         <ConfigProvider
@@ -40,26 +37,16 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
             }}
         >
             <Flex vertical className={className}>
-                {label && (
-                    <Text
-                        style={{
-                            marginBottom: ' 10px',
-                            fontSize: '18px',
-                            fontWeight: '400',
-                        }}
-                    >
-                        {label}
-                    </Text>
-                )}
+                {label && <Label>{label}</Label>}
                 <div className="timeslots-wrapper">
                     <Controller
                         name={name}
                         control={control}
                         rules={rules}
                         render={({ field: { value, onChange } }) => (
-                            <Row justify="space-between" gutter={[20, 20]}>
+                            <Row justify="space-between" gutter={[20, 20]} wrap>
                                 {timeslots.map((slot: any) => (
-                                    <Col key={slot.id} span={isMobile ? 12 : 6}>
+                                    <Col key={slot.id} span={12}>
                                         <Tag.CheckableTag
                                             style={{ width: '100%' }}
                                             checked={value.some(
@@ -88,23 +75,13 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
                         )}
                     />
                 </div>
-                {error && (
-                    <Text style={{ marginTop: '10px' }} type="danger">
-                        {error}
-                    </Text>
-                )}
+                {error && <ErrorMessage>{error}</ErrorMessage>}
             </Flex>
         </ConfigProvider>
     );
 };
 
 export const TimeSlots = styled(TimeSlotsBase)`
-    margin: 0 0 30px;
-
-    @media screen and (max-width: ${BREAKPOINTS.mobile}) {
-        margin: 0 0 20px;
-    }
-
     .ant-tag {
         width: 100%;
         text-align: center;

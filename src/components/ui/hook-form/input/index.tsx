@@ -1,8 +1,12 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
-import { Input as InputAntD, InputProps, Flex, Typography } from 'antd';
-import { useController, UseControllerProps } from 'react-hook-form';
-import { BREAKPOINTS } from '~constants/breakpoints';
+import { Input as InputAntD, InputProps, Flex } from 'antd';
+import {
+    useController,
+    UseControllerProps,
+    useFormContext,
+} from 'react-hook-form';
+import { ErrorMessage, Label } from '../common';
 
 type FormInputBaseProps = {
     className?: string;
@@ -16,11 +20,10 @@ const FormInputBase: FC<FormInputBaseProps> = ({
     rules,
     defaultValue = '',
     id,
-    control,
     className,
     ...props
 }) => {
-    const { Text } = Typography;
+    const { control } = useFormContext();
     const { field, fieldState } = useController({
         name,
         rules,
@@ -32,7 +35,7 @@ const FormInputBase: FC<FormInputBaseProps> = ({
 
     return (
         <Flex className={className} vertical>
-            {label && <Text className="label">{label}</Text>}
+            {label && <Label>{label}</Label>}
             <InputAntD
                 {...field}
                 {...props}
@@ -47,28 +50,13 @@ const FormInputBase: FC<FormInputBaseProps> = ({
                     props.onBlur?.(e);
                 }}
             />
-            {error && (
-                <Text style={{ marginTop: '10px' }} type="danger">
-                    {error}
-                </Text>
-            )}
+            {error && <ErrorMessage>{error}</ErrorMessage>}
         </Flex>
     );
 };
 
 export const FormInput = styled(FormInputBase)`
-    margin: 0 0 30px;
     width: 100%;
-
-    @media screen and (max-width: ${BREAKPOINTS.mobile}) {
-        margin: 0 0 20px;
-    }
-
-    .label {
-        margin-bottom: 10px;
-        font-size: 18px;
-        font-weight: 400;
-    }
     input {
         height: 40px;
         font-size: 16px;

@@ -1,17 +1,46 @@
+'use client';
 import React from 'react';
 import { ConfigProvider, Flex, Layout, Menu } from 'antd';
-import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
+import Link from 'next/link';
+import styled from '@emotion/styled';
 import { COLORS } from 'src/styles/variables';
-import { menuItems } from 'mocks/menuItems';
 import { Logo } from '~components/ui/logo';
 import { LangSwitch } from '~components/widgets/lang-switch';
 
-export const Header = () => {
-    const router = useRouter();
-    const { locale } = router;
-    const items = locale
-        ? menuItems[locale as keyof typeof menuItems]
-        : menuItems.en;
+const MenuLabel = styled(Link)`
+    font-size: 16px;
+`;
+
+export const LayoutHeader = () => {
+    const { t } = useTranslation();
+
+    const menuItems = [
+        {
+            label: (
+                <MenuLabel href="/home" passHref>
+                    {t('header_menu_home')}
+                </MenuLabel>
+            ),
+            key: 1,
+        },
+        {
+            label: (
+                <MenuLabel href="/application" passHref>
+                    {t('header_menu_application')}
+                </MenuLabel>
+            ),
+            key: 2,
+        },
+        {
+            label: (
+                <MenuLabel href="/contacts" passHref>
+                    {t('header_menu_contacts')}
+                </MenuLabel>
+            ),
+            key: 3,
+        },
+    ];
 
     return (
         <ConfigProvider
@@ -24,8 +53,8 @@ export const Header = () => {
                         itemBg: 'none',
                         itemColor: `${COLORS.white}`,
                         itemHoverColor: `${COLORS.white}`,
-                        horizontalItemHoverBg: `${COLORS.pink}`,
-                        horizontalItemSelectedBg: `${COLORS.pink}`,
+                        horizontalItemHoverBg: `${COLORS.blueHovered}`,
+                        horizontalItemSelectedBg: `${COLORS.blueHovered}`,
                         horizontalItemSelectedColor: `${COLORS.white}`,
                         activeBarHeight: 0,
                         popupBg: COLORS.blue,
@@ -57,17 +86,19 @@ export const Header = () => {
                             maxWidth: '450px',
                             width: '100%',
                         }}
-                        items={items}
+                        items={menuItems}
                     />
-                    <LangSwitch />
-                    <Logo
-                        link="/"
-                        src={'/cat.jpg'}
-                        alt="music-studio"
-                        width="50"
-                        height="50"
-                        style={{ marginRight: '5px' }}
-                    />
+                    <Flex gap={20} align="center">
+                        <LangSwitch />
+                        <Logo
+                            link="/"
+                            src={'/logo.png'}
+                            alt="music-studio"
+                            width="50"
+                            height="50"
+                            style={{ marginRight: '5px' }}
+                        />
+                    </Flex>
                 </Flex>
             </Layout.Header>
         </ConfigProvider>

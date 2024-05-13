@@ -1,65 +1,30 @@
-import { FC, useEffect, useState } from 'react';
-import { useForm, FieldValues, FormProvider } from 'react-hook-form';
-import moment from 'moment';
-import { useGetEvents } from '~hooks/events';
-import { FormComponent } from './component';
+import { FC } from 'react';
+import { useForm, FormProvider } from 'react-hook-form';
+import { FormFields } from '~types/appointments';
+import { FormComponent } from './FormComponent';
 
 type RegistrationFormProps = {
     className?: string;
 };
 
 export const RegistrationForm: FC<RegistrationFormProps> = () => {
-    const { data: events } = useGetEvents();
-
-    const defaultValues = {
+    const defaultValues: FormFields = {
         date: '',
         userName: '',
         userNameTelegram: '',
-        timeSlotsEvent: [],
+        selectedTimeSlots: [],
+        isCommentNeeded: false,
         comment: '',
     };
 
-    const form = useForm<FieldValues>({
+    const form = useForm<FormFields>({
         defaultValues,
         mode: 'onChange',
     });
 
-    const [eventsSortedDays, setEventsSortedDays] = useState({
-        days: [],
-        events: [],
-    });
-    useEffect(() => {
-        const eventsWithDays: any = {
-            days: [],
-            events: {},
-        };
-
-        events?.forEach((event) => {
-            const date = moment(event.start.dateTime).format('YYYY-MM-DD');
-            if (!date) return;
-
-            if (date in eventsWithDays.events) {
-                eventsWithDays.events[date]?.push({
-                    ...event,
-                });
-            } else {
-                eventsWithDays.events[date] = [
-                    {
-                        ...event,
-                    },
-                ];
-                eventsWithDays.days.push(date);
-            }
-        });
-
-        setEventsSortedDays(eventsWithDays);
-    }, [events]);
-
     return (
-        <>
-            <FormProvider {...form}>
-                <FormComponent eventsData={eventsSortedDays} />
-            </FormProvider>
-        </>
+        <FormProvider {...form}>
+            <FormComponent />
+        </FormProvider>
     );
 };
