@@ -6,7 +6,7 @@ import {
     useFormContext,
     UseControllerProps,
 } from 'react-hook-form';
-import { COLORS } from 'src/styles/variables';
+import { COLORS } from '~variables';
 import { ErrorMessage, Label } from '../common';
 import { BREAKPOINTS } from '~constants/breakpoints';
 

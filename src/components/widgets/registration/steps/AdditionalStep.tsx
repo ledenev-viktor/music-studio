@@ -2,7 +2,12 @@ import { useEffect } from 'react';
 import { Flex } from 'antd';
 import { useTranslation } from 'next-i18next';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { Button, FormSwitch, FormTextarea } from '~components/ui/hook-form';
+import {
+    FormSwitch,
+    FormTextarea,
+    InterruptButton,
+    PrimaryButton,
+} from '~components/ui/hook-form';
 
 export const AdditionalStep = ({
     onGoToNextStep,
@@ -28,22 +33,26 @@ export const AdditionalStep = ({
                 name="isCommentNeeded"
                 label={t('content_form_comment_title')}
             />
-            <FormTextarea
-                name="comment"
-                control={control}
-                placeholder={t('content_form_additionals_title')}
-            />
+            {isCommentNeeded && (
+                <FormTextarea
+                    name="comment"
+                    control={control}
+                    placeholder={t('content_form_additionals_title')}
+                />
+            )}
             <Flex justify="flex-end" gap={10}>
                 {onSaveEdits ? (
-                    <Button onClick={onSaveEdits}>{t('save')}</Button>
+                    <PrimaryButton onClick={onSaveEdits} text={t('save')} />
                 ) : (
                     <>
-                        <Button onClick={onGoToPreviousStep}>
-                            {t('back')}
-                        </Button>
-                        <Button onClick={onGoToNextStep}>
-                            {t('continue')}
-                        </Button>
+                        <InterruptButton
+                            text={t('back')}
+                            onClick={onGoToPreviousStep}
+                        />
+                        <PrimaryButton
+                            onClick={onGoToNextStep}
+                            text={t('continue')}
+                        />
                     </>
                 )}
             </Flex>

@@ -1,7 +1,11 @@
 import { Flex } from 'antd';
 import moment from 'moment';
 import { useTranslation } from 'next-i18next';
-import { FormDatePicker, TimeSlots, Button } from '~components/ui/hook-form';
+import {
+    FormDatePicker,
+    TimeSlots,
+    PrimaryButton,
+} from '~components/ui/hook-form';
 
 const timeslots = [
     {
@@ -104,9 +108,12 @@ export const TimeSlotsScreen = ({
             />
             <Flex justify="flex-end">
                 {onSaveEdits ? (
-                    <Button onClick={onSaveEdits}>{t('save')}</Button>
+                    <PrimaryButton onClick={onSaveEdits} text={t('save')} />
                 ) : (
-                    <Button onClick={onGoToNextStep}>{t('continue')}</Button>
+                    <PrimaryButton
+                        onClick={onGoToNextStep}
+                        text={t('continue')}
+                    />
                 )}
             </Flex>
         </Flex>

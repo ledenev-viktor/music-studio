@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { Badge, Button, Flex } from 'antd';
-import {
+import Icon, {
     ClockCircleOutlined,
     UserOutlined,
     WarningOutlined,
@@ -9,13 +9,14 @@ import {
 import { Appointment } from '~types/appointments';
 import { useModal } from '~modals';
 import { useUpdateAppointments } from '~hooks/appointments';
+import { COLORS } from '~variables';
 import {
     APPOINTMENTS_STATUSES,
     APPOINTMENTS_STATUSES_COLORS,
     AppointmentStatusColors,
     AppointmentStatuses,
 } from '~constants/status';
-import { TelegramButton } from './TelegramContact';
+import { Telegram } from '~components/ui/icons';
 
 export const Footer = ({ appointment }: { appointment: Appointment }) => {
     const { modal } = useModal();
@@ -95,7 +96,22 @@ export const Header = ({ appointment }: { appointment: Appointment }) => {
                     <UserOutlined />
                     <div>{appointment.fullName}</div>
                 </Flex>
-                <TelegramButton telegramNickName={appointment.telegram} />
+                {appointment.telegram && (
+                    <Button
+                        target="_blank"
+                        type="link"
+                        rel="noopener noreferrer"
+                        href={`https://t.me/${appointment.telegram}`}
+                    >
+                        <Flex gap={5}>
+                            <Icon
+                                component={Telegram}
+                                style={{ fill: COLORS.blue, width: 14 }}
+                            />
+                            <div>{appointment.telegram}</div>
+                        </Flex>
+                    </Button>
+                )}
             </Flex>
         </Flex>
     );

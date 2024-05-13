@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Flex, Steps } from 'antd';
-import { useFormContext, FieldValues, useWatch } from 'react-hook-form';
+import { useFormContext, FieldValues } from 'react-hook-form';
 import styled from '@emotion/styled';
+import { useMobile } from '~hooks/responsive';
 import { BREAKPOINTS } from '~constants/breakpoints';
 import {
     TimeSlotsScreen,
@@ -26,7 +27,8 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
     } = useFormContext();
     const [step, setStep] = useState<STEP>(STEP.TIME_SLOTS_STEP);
     const [mode, setMode] = useState<MODE>(MODE.DEFAULT);
-    const isCommentNeeded = useWatch({ name: 'isCommentNeeded' });
+
+    const isMobile = useMobile();
 
     const onSubmit = async (data: FieldValues) => {
         console.log(data);
@@ -35,7 +37,7 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
 
     const onSaveEdits = () => {
         setMode(MODE.DEFAULT);
-        setStep(STEP.FINAL_SCREEN);
+        setStep(STEP.REVIEW_STEP);
     };
 
     const onEdit = (step: STEP) => {
@@ -71,9 +73,7 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                             trigger();
 
                             if (isValid) {
-                                if (isCommentNeeded)
-                                    setStep(STEP.ADDITIONAL_STEP);
-                                else setStep(STEP.FINAL_SCREEN);
+                                setStep(STEP.ADDITIONAL_STEP);
                             }
                             return;
                         }}
@@ -87,10 +87,10 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                             mode === MODE.EDIT ? onSaveEdits : undefined
                         }
                         onGoToPreviousStep={() => setStep(STEP.CONTACTS_STEP)}
-                        onGoToNextStep={() => setStep(STEP.FINAL_SCREEN)}
+                        onGoToNextStep={() => setStep(STEP.REVIEW_STEP)}
                     />
                 );
-            case STEP.FINAL_SCREEN:
+            case STEP.REVIEW_STEP:
                 return (
                     <FinalScreen
                         onSubmit={() => {
@@ -106,24 +106,40 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
     };
 
     return (
-        <form className={className} onSubmit={handleSubmit(onSubmit)}>
-            <Flex vertical align="center" style={{ marginBottom: '30px' }}>
-                <Steps
-                    size="small"
-                    direction="horizontal"
-                    responsive={false}
-                    progressDot
-                    current={STEP_NUMBER[step]}
-                    items={new Array(3).fill({})}
-                />
-            </Flex>
-            {getStep()}
-        </form>
+        <Flex
+            vertical
+            justify="center"
+            style={{ width: '100%', height: `calc(100vh - 140px)` }}
+        >
+            <form
+                className={className}
+                onSubmit={handleSubmit(onSubmit)}
+                style={{ maxHeight: '800px', width: '100%' }}
+            >
+                <Flex
+                    vertical
+                    align="stretch"
+                    style={{
+                        marginBottom: isMobile ? '10px' : '30px',
+                        marginTop: isMobile ? '50px' : 0,
+                    }}
+                >
+                    <Steps
+                        size="small"
+                        direction="horizontal"
+                        responsive={false}
+                        current={mode === MODE.DEFAULT ? STEP_NUMBER[step] : 3}
+                        items={new Array(3).fill({})}
+                    />
+                </Flex>
+                {getStep()}
+            </form>
+        </Flex>
     );
 };
 
 export const FormComponent = styled(FormComponentBase)`
-    max-width: 600px;
+    max-width: 500px;
     margin: 0 auto;
     padding: 30px 60px 60px;
     box-sizing: border-box;

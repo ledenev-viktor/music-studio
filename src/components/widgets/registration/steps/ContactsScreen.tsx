@@ -1,7 +1,11 @@
 import { Flex } from 'antd';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'next-i18next';
-import { Button, FormInput } from '~components/ui/hook-form';
+import {
+    InterruptButton,
+    FormInput,
+    PrimaryButton,
+} from '~components/ui/hook-form';
 
 export const ContactsScreen = ({
     onGoToNextStep,
@@ -41,15 +45,17 @@ export const ContactsScreen = ({
             />
             <Flex justify="flex-end" gap={10}>
                 {onSaveEdits ? (
-                    <Button onClick={onSaveEdits}>{t('save')}</Button>
+                    <PrimaryButton onClick={onSaveEdits} text={t('save')} />
                 ) : (
                     <>
-                        <Button onClick={onGoToPreviousStep}>
-                            {t('back')}
-                        </Button>
-                        <Button onClick={onGoToNextStep}>
-                            {t('continue')}
-                        </Button>
+                        <InterruptButton
+                            text={t('back')}
+                            onClick={onGoToPreviousStep}
+                        />
+                        <PrimaryButton
+                            onClick={onGoToNextStep}
+                            text={t('continue')}
+                        />
                     </>
                 )}
             </Flex>

@@ -1,6 +1,6 @@
 import { CSSProperties, ReactNode } from 'react';
 import { Flex, Typography } from 'antd';
-import { COLORS } from 'src/styles/variables';
+import { COLORS } from '~variables';
 import { useMobile } from '~hooks/responsive';
 
 type BenefitItemProps = {

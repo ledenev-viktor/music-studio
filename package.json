@@ -33,6 +33,7 @@
     "@next/env": "^14.2.3",
     "@supabase/supabase-js": "^2.43.1",
     "antd": "^5.17.0",
+    "framer-motion": "^11.1.9",
     "i18next": "^23.11.3",
     "moment": "^2.30.1",
     "next": "^14.2.3",

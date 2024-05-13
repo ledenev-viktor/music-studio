@@ -1,34 +1,88 @@
-import { ElementType } from 'react';
 import { Col, Flex, Row } from 'antd';
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import { COLORS } from 'src/styles/variables';
+import Icon, { InstagramOutlined, PhoneOutlined } from '@ant-design/icons';
+import { COLORS } from '~variables';
 import { useMobile } from '~hooks/responsive';
+import { Telegram, LocationPin } from '~components/ui/icons';
+import { LAPTOP_SIZE, MOBILE_SIZE } from '~constants/breakpoints';
 
-type SocialItem = {
-    label: React.ReactNode;
-    link: string;
-    key: number;
-    icon: ElementType;
-};
-type SocialsListBaseProps = {
-    items: SocialItem[];
-    className?: string;
-};
-
-export const SocialsListBase = ({
-    className,
-    items,
-    ...props
-}: SocialsListBaseProps) => {
+export const SocialsListBase = ({ className }: { className?: string }) => {
     const isMobile = useMobile();
 
+    const items = [
+        {
+            label: 'Instagram',
+            link: '#',
+            icon: (
+                <InstagramOutlined
+                    style={{
+                        color: COLORS.blue,
+                        fontSize: isMobile ? MOBILE_SIZE : LAPTOP_SIZE,
+                    }}
+                />
+            ),
+            key: 1,
+        },
+        {
+            label: 'Praktika Channel',
+            link: '#',
+            icon: (
+                <Icon
+                    component={Telegram}
+                    style={{
+                        fill: COLORS.blue,
+                        width: isMobile ? MOBILE_SIZE : LAPTOP_SIZE,
+                    }}
+                />
+            ),
+            key: 2,
+        },
+        {
+            label: 'Praktika Chat',
+            link: '#',
+            icon: (
+                <Icon
+                    component={Telegram}
+                    style={{
+                        fill: COLORS.blue,
+                        width: isMobile ? MOBILE_SIZE : LAPTOP_SIZE,
+                    }}
+                />
+            ),
+            key: 3,
+        },
+        {
+            label: 'Google Maps',
+            link: '#',
+            icon: (
+                <Icon
+                    component={LocationPin}
+                    style={{
+                        fill: COLORS.blue,
+                        width: isMobile ? MOBILE_SIZE : LAPTOP_SIZE,
+                    }}
+                />
+            ),
+            key: 4,
+        },
+        {
+            label: '+995551613311',
+            link: 'tel:+995551613311',
+            icon: (
+                <PhoneOutlined
+                    style={{
+                        color: COLORS.blue,
+                        fontSize: isMobile ? MOBILE_SIZE : LAPTOP_SIZE,
+                    }}
+                />
+            ),
+            key: 5,
+        },
+    ];
+
     return (
-        <Row
-            {...props}
-            className={className}
-            gutter={isMobile ? [20, 20] : [50, 50]}
-        >
+        <Row className={className} gutter={isMobile ? [20, 30] : [50, 50]}>
             {items.map((item) => (
                 <Col span={isMobile ? 24 : 8} key={item.key}>
                     <Link
@@ -36,18 +90,9 @@ export const SocialsListBase = ({
                         href={item.link}
                         style={{ fontSize: '24px' }}
                     >
-                        <Flex align="center">
-                            <span style={{ lineHeight: 0 }}>
-                                <item.icon
-                                    width={isMobile ? 30 : 50}
-                                    style={{
-                                        marginRight: '20px',
-                                    }}
-                                />
-                            </span>
-                            <span style={{ fontSize: '24px' }}>
-                                {item.label}
-                            </span>
+                        <Flex align="center" gap={10}>
+                            {item.icon}
+                            {item.label}
                         </Flex>
                     </Link>
                 </Col>
@@ -60,7 +105,7 @@ export const SocialsList = styled(SocialsListBase)`
     .link {
         color: ${COLORS.blue};
         &:hover {
-            color: ${COLORS.pink};
+            color: ${COLORS.colorInactive};
         }
     }
 `;

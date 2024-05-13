@@ -2,28 +2,29 @@ import { Flex, Typography } from 'antd';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import styled from '@emotion/styled';
-import { COLORS } from 'src/styles/variables';
+import { motion } from 'framer-motion';
+import Icon from '@ant-design/icons';
+import { COLORS } from '~variables';
 import { useMobile } from '~hooks/responsive';
-import { ICONS } from '~components/ui/icons';
+import { Drumsticks, Drum, Fun } from '~components/ui/icons';
 import { BenefitItem } from './benefit-item';
+import { MOBILE_SIZE, LAPTOP_SIZE } from '~constants/breakpoints';
 
-export const Benefits = ({ className }: { className?: string }) => {
+export const Benefits = () => {
     const { t } = useTranslation();
     const isMobile = useMobile();
 
     return (
         <Flex
-            className={className}
             style={{
+                height: '100%',
                 width: '100vw',
-                position: 'relative',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                padding: isMobile ? '50px 0' : '0 0 25px',
                 margin: '0 auto',
                 background: COLORS.blue,
+                overflowY: 'scroll',
             }}
             vertical
+            justify="space-around"
         >
             <Flex
                 style={{
@@ -31,11 +32,11 @@ export const Benefits = ({ className }: { className?: string }) => {
                     width: '100%',
                     boxSizing: 'border-box',
                     margin: '0 auto',
-                    padding: '0 20px',
                     color: COLORS.white,
+                    flexShrink: 0,
                 }}
                 vertical
-                gap={50}
+                gap={isMobile ? 'small' : 'large'}
             >
                 <Flex vertical gap={0}>
                     <Typography.Title
@@ -43,7 +44,9 @@ export const Benefits = ({ className }: { className?: string }) => {
                             color: COLORS.white,
                             textAlign: 'center',
                             lineHeight: '1.1',
+                            marginTop: 0,
                         }}
+                        level={isMobile ? 3 : 1}
                     >
                         {t('content_benefits_title')}
                     </Typography.Title>
@@ -61,21 +64,52 @@ export const Benefits = ({ className }: { className?: string }) => {
                 <Flex justify="space-around" gap={isMobile ? 'small' : 'large'}>
                     <BenefitItem
                         text={t('content_benefit_scratch')}
-                        icon={<ICONS.drumsticks width={isMobile ? 50 : 80} />}
+                        icon={
+                            <Icon
+                                component={Drumsticks}
+                                style={{
+                                    width: isMobile ? MOBILE_SIZE : LAPTOP_SIZE,
+                                    fill: COLORS.white,
+                                }}
+                            />
+                        }
                     />
                     <BenefitItem
-                        style={{ marginTop: '50px' }}
+                        style={{ marginTop: isMobile ? '30px' : '50px' }}
                         text={t('content_benefit_improve')}
-                        icon={<ICONS.drum width={isMobile ? 50 : 80} />}
+                        icon={
+                            <Icon
+                                component={Drum}
+                                style={{
+                                    width: isMobile ? MOBILE_SIZE : LAPTOP_SIZE,
+                                    fill: COLORS.white,
+                                }}
+                            />
+                        }
                     />
                     <BenefitItem
                         text={t('content_benefit_fun')}
-                        icon={<ICONS.fun width={isMobile ? 50 : 80} />}
+                        icon={
+                            <Icon
+                                component={Fun}
+                                style={{
+                                    width: isMobile ? MOBILE_SIZE : LAPTOP_SIZE,
+                                    fill: COLORS.white,
+                                }}
+                            />
+                        }
                     />
                 </Flex>
-                <StyledLink href="/application">
-                    {t('content_get_started_button')}
-                </StyledLink>
+            </Flex>
+            <Flex justify="center">
+                <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                >
+                    <StyledLink href="/application">
+                        {t('content_get_started_button')}
+                    </StyledLink>
+                </motion.div>
             </Flex>
         </Flex>
     );
@@ -92,7 +126,6 @@ const StyledLink = styled(Link)`
     border-radius: 8px;
     margin: 55px auto 0;
     &:hover {
-        background: ${COLORS.colorInactive};
-        color: ${COLORS.white};
+        color: ${COLORS.colorInactive};
     }
 `;

@@ -4,9 +4,8 @@ import { ConfigProvider, Flex, Layout, Menu } from 'antd';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import { COLORS } from 'src/styles/variables';
-import { Logo } from '~components/ui/logo';
-import { LangSwitch } from '~components/widgets/lang-switch';
+import { COLORS } from '~variables';
+import { LangSwitch, Logo } from '~components/ui/home';
 
 const MenuLabel = styled(Link)`
     font-size: 16px;

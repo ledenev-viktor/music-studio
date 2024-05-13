@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { ConfigProvider, Layout } from 'antd';
-import { COLORS } from 'src/styles/variables';
+import { COLORS } from '~variables';
 import { LayoutFooter } from './LayoutFooter';
 import { LayoutHeader } from './LayoutHeader';
 
@@ -10,10 +10,7 @@ type RootLayoutProps = {
     contentPadding?: string | number;
 };
 
-const MainLayout: FC<RootLayoutProps> = ({
-    children,
-    contentPadding = '40px 0',
-}) => {
+const MainLayout: FC<RootLayoutProps> = ({ children }) => {
     return (
         <ConfigProvider
             theme={{
@@ -28,17 +25,7 @@ const MainLayout: FC<RootLayoutProps> = ({
         >
             <Layout style={{ minHeight: '100vh' }}>
                 <LayoutHeader />
-                <Layout.Content
-                    style={{
-                        flexGrow: '2',
-                        padding: contentPadding,
-                        maxWidth: '1200px',
-                        margin: '0 auto',
-                        width: '100%',
-                    }}
-                >
-                    {children}
-                </Layout.Content>
+                {children}
                 <LayoutFooter />
             </Layout>
         </ConfigProvider>

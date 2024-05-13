@@ -1,7 +1,7 @@
 import { ConfigProvider, Segmented, SegmentedProps } from 'antd';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
-import { COLORS } from 'src/styles/variables';
+import { COLORS } from '~variables';
 
 export const LangSwitch = () => {
     const { locales, locale: currentLocale, push } = useRouter();

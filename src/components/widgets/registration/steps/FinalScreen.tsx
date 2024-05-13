@@ -4,8 +4,9 @@ import { useTranslation } from 'next-i18next';
 import { useFormContext } from 'react-hook-form';
 import { EditOutlined } from '@ant-design/icons';
 import { extractDate, extractDay } from '~utils/date.helpers';
-import { Button } from '~components/ui/hook-form';
+import { useMobile } from '~hooks/responsive';
 import { STEP, STEP_TYPE } from '~constants/registrationSteps';
+import { PrimaryButton } from '~components/ui/hook-form';
 
 const DescriptionItemContentWrapper = ({
     children,
@@ -31,16 +32,11 @@ export const FinalScreen = ({
     onSubmit: () => void;
     handleEdit: (value: STEP) => void;
 }) => {
+    const isMobile = useMobile();
     const { t } = useTranslation();
     const { getValues } = useFormContext();
-    const {
-        date,
-        userName,
-        userNameTelegram,
-        comment,
-        isCommentNeeded,
-        selectedTimeSlots,
-    } = getValues();
+    const { date, userName, userNameTelegram, comment, selectedTimeSlots } =
+        getValues();
 
     const onClick = (fieldType: STEP_TYPE) => {
         if (fieldType === STEP_TYPE.ADDITIONS) {
@@ -97,29 +93,37 @@ export const FinalScreen = ({
                 </DescriptionItemContentWrapper>
             ),
         },
-    ];
-
-    if (isCommentNeeded)
-        items.push({
+        {
             key: '4',
             label: 'Comment',
             children: (
                 <DescriptionItemContentWrapper
                     onEditClick={() => onClick(STEP_TYPE.ADDITIONS)}
                 >
-                    <Typography.Paragraph>{comment}</Typography.Paragraph>
+                    <Typography.Paragraph>
+                        {comment ? comment : '-'}
+                    </Typography.Paragraph>
                 </DescriptionItemContentWrapper>
             ),
-        });
+        },
+    ];
 
     return (
         <Flex vertical gap={20} align="stretch">
-            <Typography.Title level={3} style={{ margin: 0 }}>
-                Let`s verify appointment
-            </Typography.Title>
-            <Descriptions items={items} column={1} size="middle" bordered />
+            <Flex justify="center">
+                <Typography.Title level={3} style={{ margin: 0 }}>
+                    Let`s verify appointment
+                </Typography.Title>
+            </Flex>
+            <Descriptions
+                items={items}
+                column={1}
+                size="middle"
+                bordered
+                contentStyle={{ padding: isMobile ? '12px 12px' : '12px 24px' }}
+            />
             <Flex justify="flex-end">
-                <Button onClick={onSubmit}>{t('continue')}</Button>
+                <PrimaryButton onClick={onSubmit} text={t('continue')} />
             </Flex>
         </Flex>
     );
