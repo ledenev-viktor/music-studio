@@ -1,30 +1,65 @@
-import { FC } from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
-import { FormFields } from '~types/appointments';
-import { FormComponent } from './FormComponent';
+import { FC, useEffect, useState } from 'react';
+import { useForm, FieldValues, FormProvider } from 'react-hook-form';
+import moment from 'moment';
+import { useGetEvents } from '~hooks/events';
+import { FormComponent } from './component';
 
 type RegistrationFormProps = {
     className?: string;
 };
 
 export const RegistrationForm: FC<RegistrationFormProps> = () => {
-    const defaultValues: FormFields = {
+    const { data: events } = useGetEvents();
+
+    const defaultValues = {
         date: '',
         userName: '',
         userNameTelegram: '',
-        selectedTimeSlots: [],
-        isCommentNeeded: false,
+        timeSlotsEvent: [],
         comment: '',
     };
 
-    const form = useForm<FormFields>({
+    const form = useForm<FieldValues>({
         defaultValues,
         mode: 'onChange',
     });
 
+    const [eventsSortedDays, setEventsSortedDays] = useState({
+        days: [],
+        events: [],
+    });
+    useEffect(() => {
+        const eventsWithDays: any = {
+            days: [],
+            events: {},
+        };
+
+        events?.forEach((event) => {
+            const date = moment(event.start.dateTime).format('YYYY-MM-DD');
+            if (!date) return;
+
+            if (date in eventsWithDays.events) {
+                eventsWithDays.events[date]?.push({
+                    ...event,
+                });
+            } else {
+                eventsWithDays.events[date] = [
+                    {
+                        ...event,
+                    },
+                ];
+                eventsWithDays.days.push(date);
+            }
+        });
+
+        setEventsSortedDays(eventsWithDays);
+    }, [events]);
+
     return (
-        <FormProvider {...form}>
-            <FormComponent />
-        </FormProvider>
+        <>
+            <FormProvider {...form}>
+                <FormComponent eventsData={eventsSortedDays} />
+            </FormProvider>
+        </>
     );
 };

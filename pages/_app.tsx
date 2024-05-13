@@ -9,15 +9,11 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { SessionProvider } from 'next-auth/react';
 import { appWithTranslation } from 'next-i18next';
 import { Global } from '@emotion/react';
-import dynamic from 'next/dynamic';
 import { NotificationProvider } from '~notifications';
 import { ModalProvider } from '~modals';
 import { AppPropsWithLayout } from '~types/app';
 import { globalStyles } from 'src/styles/global-styles';
-
-const Layout = dynamic(() => import('~components/layout'), {
-    ssr: false,
-});
+import { InnerLayout } from '../src/layouts/inner-layout';
 
 const MyApp = ({
     Component,
@@ -35,7 +31,7 @@ const MyApp = ({
     );
 
     const getLayout =
-        Component.getLayout || ((page) => <Layout>{page}</Layout>);
+        Component.getLayout || ((page) => <InnerLayout>{page}</InnerLayout>);
 
     return (
         <QueryClientProvider client={queryClient}>

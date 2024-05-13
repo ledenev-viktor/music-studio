@@ -1,7 +1,7 @@
 'use client';
-import React from 'react';
 import { Flex } from 'antd';
-import { MainSlider, Benefits } from '~ui/home';
+import { MainSlider } from '../slider';
+import { Benefits } from '../benefits';
 
 const HomePage = () => {
     const slides = [
@@ -24,17 +24,24 @@ const HomePage = () => {
     ];
 
     return (
-        <Flex vertical justify="center" align="center" style={{ padding: '0' }}>
-            <MainSlider
-                slides={slides}
-                autoplay={{
-                    delay: 7500,
-                    disableOnInteraction: false,
-                }}
-                speed={1000}
-            />
-            <Benefits />
-        </Flex>
+        <>
+            <Flex
+                vertical
+                justify="center"
+                align="center"
+                style={{ padding: '0' }}
+            >
+                <MainSlider
+                    slides={slides}
+                    autoplay={{
+                        delay: 7500,
+                        disableOnInteraction: false,
+                    }}
+                    speed={1000}
+                />
+                <Benefits />
+            </Flex>
+        </>
     );
 };
 export default HomePage;

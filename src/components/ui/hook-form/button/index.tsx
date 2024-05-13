@@ -1,12 +1,12 @@
-import styled from '@emotion/styled';
 import { Button as ButtonAntd } from 'antd';
-import { COLORS } from 'src/styles/variables';
+import styled from '@emotion/styled';
 
 export const Button = styled(ButtonAntd)`
-    background: ${COLORS.blue};
-    padding: 5px 10px;
-    min-width: 100px;
-    box-sizing: content-box;
-    color: ${COLORS.white};
+    min-width: 150px;
+    min-height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 16px;
+    box-sizing: border-box;
 `;

@@ -1,13 +1,8 @@
 import { FC } from 'react';
-import { Input, Flex } from 'antd';
+import { Input, Flex, Typography } from 'antd';
 import { TextAreaProps } from 'antd/es/input';
-import {
-    useController,
-    UseControllerProps,
-    useFormContext,
-} from 'react-hook-form';
+import { useController, UseControllerProps } from 'react-hook-form';
 import styled from '@emotion/styled';
-import { ErrorMessage, Label } from '../common';
 import { BREAKPOINTS } from '~constants/breakpoints';
 
 type FormTextareaBaseProps = {
@@ -22,11 +17,12 @@ export const FormTextareaBase: FC<FormTextareaBaseProps> = ({
     rules,
     defaultValue = '',
     id,
+    control,
     className,
     ...props
 }) => {
     const { TextArea } = Input;
-    const { control } = useFormContext();
+    const { Text } = Typography;
     const { field, fieldState } = useController({
         name,
         rules,
@@ -38,7 +34,7 @@ export const FormTextareaBase: FC<FormTextareaBaseProps> = ({
 
     return (
         <Flex vertical className={className}>
-            {label && <Label>{label}</Label>}
+            {label && <Text className="label">{label}</Text>}
             <TextArea
                 {...field}
                 {...props}
@@ -53,12 +49,18 @@ export const FormTextareaBase: FC<FormTextareaBaseProps> = ({
                     props.onBlur?.(e);
                 }}
             />
-            {error && <ErrorMessage>{error}</ErrorMessage>}
+            {error && (
+                <Text style={{ marginTop: '10px' }} type="danger">
+                    {error}
+                </Text>
+            )}
         </Flex>
     );
 };
 
 export const FormTextarea = styled(FormTextareaBase)`
+    margin: 0 0 30px;
+
     @media screen and (max-width: ${BREAKPOINTS.mobile}) {
         margin: 0 0 20px;
     }

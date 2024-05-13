@@ -1,19 +1,16 @@
+'use client';
 import React, { FC, ReactNode } from 'react';
 import { ConfigProvider, Layout } from 'antd';
 import { COLORS } from 'src/styles/variables';
-import { LayoutFooter } from './LayoutFooter';
-import { LayoutHeader } from './LayoutHeader';
+import { Footer } from './footer';
+import { Header } from './header';
 
-type RootLayoutProps = {
+type InnerLayoutProps = {
     children?: ReactNode;
     className?: string;
-    contentPadding?: string | number;
 };
 
-const MainLayout: FC<RootLayoutProps> = ({
-    children,
-    contentPadding = '40px 0',
-}) => {
+export const InnerLayout: FC<InnerLayoutProps> = ({ children }) => {
     return (
         <ConfigProvider
             theme={{
@@ -27,11 +24,11 @@ const MainLayout: FC<RootLayoutProps> = ({
             }}
         >
             <Layout style={{ minHeight: '100vh' }}>
-                <LayoutHeader />
+                <Header />
                 <Layout.Content
                     style={{
                         flexGrow: '2',
-                        padding: contentPadding,
+                        padding: '50px 20px',
                         maxWidth: '1200px',
                         margin: '0 auto',
                         width: '100%',
@@ -39,10 +36,8 @@ const MainLayout: FC<RootLayoutProps> = ({
                 >
                     {children}
                 </Layout.Content>
-                <LayoutFooter />
+                <Footer />
             </Layout>
         </ConfigProvider>
     );
 };
-
-export default MainLayout;
