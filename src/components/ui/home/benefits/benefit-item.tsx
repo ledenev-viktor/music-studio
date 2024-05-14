@@ -1,7 +1,7 @@
 import { CSSProperties, ReactNode } from 'react';
 import { Flex, Typography } from 'antd';
 import { COLORS } from '~variables';
-import { useMobile } from '~hooks/responsive';
+import { useScreenDetector } from '~hooks/responsive';
 
 type BenefitItemProps = {
     icon: ReactNode;
@@ -10,7 +10,7 @@ type BenefitItemProps = {
 };
 
 export const BenefitItem = ({ icon, text, style }: BenefitItemProps) => {
-    const isMobile = useMobile();
+    const { isMobile } = useScreenDetector();
 
     return (
         <Flex

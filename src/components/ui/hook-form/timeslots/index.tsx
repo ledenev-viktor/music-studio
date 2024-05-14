@@ -7,7 +7,7 @@ import {
     UseControllerProps,
 } from 'react-hook-form';
 import { COLORS } from '~variables';
-import { useMobile } from '~hooks/responsive';
+import { useScreenDetector } from '~hooks/responsive';
 import { ErrorMessage, Label } from '../common';
 import { BREAKPOINTS } from '~constants/breakpoints';
 
@@ -24,7 +24,7 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
     timeslots = [],
     className,
 }) => {
-    const isMobile = useMobile();
+    const { isSmallMobile } = useScreenDetector();
     const {
         control,
         formState: { errors },
@@ -50,7 +50,7 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
                                 {timeslots.map((slot: any) => (
                                     <Col
                                         key={slot.id}
-                                        span={!isMobile ? 6 : 12}
+                                        span={!isSmallMobile ? 8 : 12}
                                     >
                                         <Tag.CheckableTag
                                             style={{ width: '100%' }}

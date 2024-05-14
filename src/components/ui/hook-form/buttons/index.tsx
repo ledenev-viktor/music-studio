@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
 import { Button, ButtonProps } from 'antd';
-import { useMobile } from '~hooks/responsive';
+import { useScreenDetector } from '~hooks/responsive';
 
 const BaseButton = ({
     onClick,
@@ -13,7 +13,7 @@ const BaseButton = ({
     type: ButtonProps['type'];
     style?: CSSProperties;
 }) => {
-    const isMobile = useMobile();
+    const { isMobile } = useScreenDetector();
     const buttonsStyle: CSSProperties = {
         padding: '5px 20px',
         minWidth: isMobile ? '50px' : '100px',

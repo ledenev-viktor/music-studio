@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { useFormContext } from 'react-hook-form';
 import { EditOutlined } from '@ant-design/icons';
 import { extractDate, extractDay } from '~utils/date.helpers';
-import { useMobile } from '~hooks/responsive';
+import { useScreenDetector } from '~hooks/responsive';
 import { STEP, STEP_TYPE } from '~constants/registrationSteps';
 import { PrimaryButton } from '~components/ui/hook-form';
 
@@ -32,7 +32,7 @@ export const FinalScreen = ({
     onSubmit: () => void;
     handleEdit: (value: STEP) => void;
 }) => {
-    const isMobile = useMobile();
+    const { isMobile } = useScreenDetector();
     const { t } = useTranslation();
     const { getValues } = useFormContext();
     const { date, userName, userNameTelegram, comment, selectedTimeSlots } =

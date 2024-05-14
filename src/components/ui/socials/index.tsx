@@ -2,11 +2,11 @@ import { Flex } from 'antd';
 import Link from 'next/link';
 import { InstagramOutlined, PhoneOutlined } from '@ant-design/icons';
 import { COLORS } from '~variables';
-import { useMobile } from '~hooks/responsive';
+import { useScreenDetector } from '~hooks/responsive';
 import { Telegram, LocationPin } from '~components/ui/icons';
 
 export const SocialsList = () => {
-    const isMobile = useMobile();
+    const { isMobile } = useScreenDetector();
     const items = [
         {
             label: 'Instagram',

@@ -1,13 +1,13 @@
 import React from 'react';
 import { ConfigProvider, Flex, Typography } from 'antd';
 import { useTranslation } from 'next-i18next';
-import { useMobile } from '~hooks/responsive';
+import { useScreenDetector } from '~hooks/responsive';
 import { COLORS } from '~variables';
 import { SocialsList } from '~components/ui/socials';
 import { Logo } from '~components/ui/home';
 
 const ContactsPage = () => {
-    const isMobile = useMobile();
+    const { isMobile } = useScreenDetector();
     const { t } = useTranslation();
 
     return (

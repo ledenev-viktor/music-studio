@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
-import { useMobile } from '~hooks/responsive';
+import { useScreenDetector } from '~hooks/responsive';
 
 const menu = [
     { text: 'header_menu_home', path: '/home' },
@@ -19,7 +19,7 @@ const languages = [
 
 export const MenuContent = ({ toggle }: { toggle: any }) => {
     const { t } = useTranslation();
-    const isMobile = useMobile();
+    const { isMobile } = useScreenDetector();
     const { locale, push } = useRouter();
     const currentPathname = usePathname();
 

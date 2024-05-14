@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Flex, Steps } from 'antd';
 import { useFormContext, FieldValues } from 'react-hook-form';
 import styled from '@emotion/styled';
-import { useMobile } from '~hooks/responsive';
+import { useScreenDetector } from '~hooks/responsive';
 import { COLORS } from '~variables';
 import { BREAKPOINTS } from '~constants/breakpoints';
 import {
@@ -29,7 +29,7 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
     const [step, setStep] = useState<STEP>(STEP.TIME_SLOTS_STEP);
     const [mode, setMode] = useState<MODE>(MODE.DEFAULT);
 
-    const isMobile = useMobile();
+    const { isMobile } = useScreenDetector();
 
     const onSubmit = async (data: FieldValues) => {
         console.log(data);
@@ -144,7 +144,7 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
 };
 
 export const FormComponent = styled(FormComponentBase)`
-    max-width: 900px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 30px 60px 60px;
     box-sizing: border-box;

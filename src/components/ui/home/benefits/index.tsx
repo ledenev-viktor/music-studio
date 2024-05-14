@@ -4,13 +4,13 @@ import { useTranslation } from 'next-i18next';
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 import { COLORS } from '~variables';
-import { useMobile } from '~hooks/responsive';
+import { useScreenDetector } from '~hooks/responsive';
 import { Drumsticks, Drum, Fun } from '~components/ui/icons';
 import { BenefitItem } from './benefit-item';
 
 export const Benefits = () => {
     const { t } = useTranslation();
-    const isMobile = useMobile();
+    const { isMobile, isDesktop } = useScreenDetector();
 
     return (
         <Flex
@@ -24,7 +24,7 @@ export const Benefits = () => {
             }}
             vertical
             justify={isMobile ? 'flex-start' : 'space-around'}
-            gap={isMobile ? 45 : 0}
+            gap={!isDesktop ? 45 : 0}
         >
             <Flex
                 style={{
