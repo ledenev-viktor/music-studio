@@ -20,10 +20,11 @@ export const Benefits = () => {
                 margin: '0 auto',
                 background: COLORS.blue,
                 overflowY: 'scroll',
-                padding: '30px 0',
+                padding: '30px 0 100px',
             }}
             vertical
-            justify="space-around"
+            justify={isMobile ? 'flex-start' : 'space-around'}
+            gap={isMobile ? 45 : 0}
         >
             <Flex
                 style={{
@@ -63,22 +64,32 @@ export const Benefits = () => {
                 <Flex justify="space-around" gap={isMobile ? 'small' : 'large'}>
                     <BenefitItem
                         text={t('content_benefit_scratch')}
-                        icon={<Drumsticks width={80} fill={COLORS.white} />}
+                        icon={
+                            <Drumsticks
+                                width={isMobile ? 80 : 120}
+                                fill={COLORS.white}
+                            />
+                        }
                     />
                     <BenefitItem
                         style={{ marginTop: isMobile ? '50px' : '80px' }}
                         text={t('content_benefit_improve')}
-                        icon={<Drum width={80} />}
+                        icon={<Drum width={isMobile ? 80 : 120} />}
                     />
                     <BenefitItem
                         text={t('content_benefit_fun')}
-                        icon={<Fun width={80} fill={COLORS.white} />}
+                        icon={
+                            <Fun
+                                width={isMobile ? 80 : 120}
+                                fill={COLORS.white}
+                            />
+                        }
                     />
                 </Flex>
             </Flex>
             <Flex justify="center">
                 <motion.div
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.9 }}
                 >
                     <StyledLink href="/application">

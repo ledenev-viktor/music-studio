@@ -1,11 +1,35 @@
 import { CSSProperties } from 'react';
-import { Button } from 'antd';
+import { Button, ButtonProps } from 'antd';
+import { useMobile } from '~hooks/responsive';
 
-const buttonsStyle: CSSProperties = {
-    padding: ' 5px 20px',
-    minWidth: '50px',
-    fontSize: '16px',
-    boxSizing: 'content-box',
+const BaseButton = ({
+    onClick,
+    text,
+    type,
+    style,
+}: {
+    onClick: () => void;
+    text: string;
+    type: ButtonProps['type'];
+    style?: CSSProperties;
+}) => {
+    const isMobile = useMobile();
+    const buttonsStyle: CSSProperties = {
+        padding: '5px 20px',
+        minWidth: isMobile ? '50px' : '100px',
+        fontSize: '16px',
+        boxSizing: 'content-box',
+    };
+
+    return (
+        <Button
+            type={type}
+            onClick={onClick}
+            style={{ ...buttonsStyle, ...style }}
+        >
+            {text}
+        </Button>
+    );
 };
 
 export const InterruptButton = ({
@@ -14,11 +38,7 @@ export const InterruptButton = ({
 }: {
     onClick: () => void;
     text: string;
-}) => (
-    <Button type="dashed" onClick={onClick} style={buttonsStyle}>
-        {text}
-    </Button>
-);
+}) => <BaseButton type="dashed" onClick={onClick} text={text} />;
 
 export const PrimaryButton = ({
     onClick,
@@ -26,14 +46,4 @@ export const PrimaryButton = ({
 }: {
     onClick: () => void;
     text: string;
-}) => (
-    <Button
-        type="primary"
-        onClick={onClick}
-        style={{
-            ...buttonsStyle,
-        }}
-    >
-        {text}
-    </Button>
-);
+}) => <BaseButton type="primary" onClick={onClick} text={text} />;

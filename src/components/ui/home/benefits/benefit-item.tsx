@@ -31,7 +31,7 @@ export const BenefitItem = ({ icon, text, style }: BenefitItemProps) => {
             <Typography.Text
                 style={{
                     color: COLORS.white,
-                    fontSize: isMobile ? '14px' : '16px',
+                    fontSize: isMobile ? '16px' : '20px',
                     lineHeight: '1.2',
                     textAlign: 'center',
                 }}

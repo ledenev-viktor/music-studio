@@ -16,17 +16,19 @@ const ContactsPage = () => {
             style={{
                 height: '100vh',
                 background: COLORS.blue,
-                padding: '5% 15%',
+                padding: isMobile ? '10% 15%' : '5% 15%',
             }}
         >
             <Flex vertical gap={50}>
-                <Logo
-                    link="/"
-                    src={'/logo.png'}
-                    alt="music-studio"
-                    width="100"
-                    height="100"
-                />
+                {!isMobile && (
+                    <Logo
+                        link="/"
+                        src={'/logo.png'}
+                        alt="music-studio"
+                        width="100"
+                        height="100"
+                    />
+                )}
                 <Flex vertical>
                     <ConfigProvider
                         theme={{

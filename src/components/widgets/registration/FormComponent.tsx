@@ -126,7 +126,7 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                     align="stretch"
                     style={{
                         marginBottom: isMobile ? '10px' : '30px',
-                        marginTop: isMobile ? '50px' : 0,
+                        marginTop: isMobile ? '0' : 0,
                     }}
                 >
                     <Steps
@@ -144,7 +144,7 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
 };
 
 export const FormComponent = styled(FormComponentBase)`
-    max-width: 500px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 30px 60px 60px;
     box-sizing: border-box;

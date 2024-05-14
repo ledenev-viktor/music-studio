@@ -55,13 +55,16 @@ export const SocialsList = () => {
     ];
 
     return (
-        <Flex vertical gap={isMobile ? 30 : 15}>
+        <Flex vertical gap={30}>
             {items.map((item) => (
                 <Link
                     key={item.label}
                     className="link"
                     href={item.link}
-                    style={{ fontSize: '18px', color: COLORS.white }}
+                    style={{
+                        fontSize: isMobile ? '20px' : '18px',
+                        color: COLORS.white,
+                    }}
                 >
                     <Flex align="center" gap={10}>
                         {item.icon}

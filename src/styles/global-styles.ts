@@ -60,6 +60,12 @@ export const globalStyles = css`
         z-index: 10;
     }
 
+    @media (max-width: 767px) {
+        .clientMenu {
+            width: 100%;
+        }
+    }
+
     .clientMenuUl {
         display: flex;
         flex-direction: column;
