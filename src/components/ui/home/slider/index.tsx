@@ -67,7 +67,6 @@ const MainSliderBase: FC<MainSliderBaseProps> = ({
 
 export const MainSlider = styled(MainSliderBase)`
     width: 100vw;
-    position: relative;
     margin: 0;
     box-sizing: border-box;
     overflow: hidden;
