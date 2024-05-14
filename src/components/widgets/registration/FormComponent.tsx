@@ -119,6 +119,7 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                     maxHeight: '800px',
                     width: '100%',
                     background: COLORS.white,
+                    minWidth: '340px',
                 }}
             >
                 <Flex

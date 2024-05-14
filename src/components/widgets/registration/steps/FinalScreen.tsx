@@ -5,6 +5,7 @@ import { useFormContext } from 'react-hook-form';
 import { EditOutlined } from '@ant-design/icons';
 import { extractDate, extractDay } from '~utils/date.helpers';
 import { useScreenDetector } from '~hooks/responsive';
+import { COLORS } from '~variables';
 import { STEP, STEP_TYPE } from '~constants/registrationSteps';
 import { PrimaryButton } from '~components/ui/hook-form';
 
@@ -16,10 +17,18 @@ const DescriptionItemContentWrapper = ({
     onEditClick: () => void;
 }) => {
     return (
-        <Flex vertical>
-            <Flex justify="flex-end">
-                <EditOutlined onClick={onEditClick} />
-            </Flex>
+        <Flex vertical style={{ position: 'relative' }}>
+            <EditOutlined
+                onClick={onEditClick}
+                style={{
+                    position: 'absolute',
+                    right: '2%',
+                    top: '30%',
+                    fontSize: '20px',
+                    color: COLORS.grey,
+                    opacity: 0.5,
+                }}
+            />
             {children}
         </Flex>
     );
@@ -60,7 +69,11 @@ export const FinalScreen = ({
                 <DescriptionItemContentWrapper
                     onEditClick={() => onClick(STEP_TYPE.USER_INFO)}
                 >
-                    <Typography.Paragraph>{userName}</Typography.Paragraph>
+                    <Typography.Paragraph
+                        style={{ minWidth: '180px', textWrap: 'pretty' }}
+                    >
+                        {userName}
+                    </Typography.Paragraph>
                 </DescriptionItemContentWrapper>
             ),
         },
@@ -84,8 +97,11 @@ export const FinalScreen = ({
                 <DescriptionItemContentWrapper
                     onEditClick={() => onClick(STEP_TYPE.DATE_INFO)}
                 >
-                    <Typography.Title level={5} style={{ marginTop: 0 }}>
-                        {extractDate(date) + ' ' + extractDay(date)}
+                    <Typography.Title level={5} style={{ margin: 0 }}>
+                        {extractDay(date)}
+                    </Typography.Title>
+                    <Typography.Title level={5} style={{ margin: 0 }}>
+                        {extractDate(date)}
                     </Typography.Title>
                     <Typography.Paragraph>
                         {JSON.stringify(selectedTimeSlots)}

@@ -19,8 +19,7 @@ export const Benefits = () => {
                 width: '100vw',
                 margin: '0 auto',
                 background: COLORS.blue,
-                overflowY: 'scroll',
-                padding: '30px 0 100px',
+                padding: '10px 0 100px',
             }}
             vertical
             justify={isMobile ? 'flex-start' : 'space-around'}
@@ -88,29 +87,67 @@ export const Benefits = () => {
                 </Flex>
             </Flex>
             <Flex justify="center">
-                <motion.div
+                {/* <motion.div
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.9 }}
                 >
                     <StyledLink href="/application">
                         {t('content_get_started_button')}
                     </StyledLink>
+                </motion.div> */}
+                <motion.div
+                    style={{
+                        background: '#fff',
+                        width: '200px',
+                        height: '60px',
+                        borderRadius: '8px',
+                    }}
+                    animate={{
+                        scale: [1, 1.2, 1, 1.2, 1],
+                    }}
+                    transition={{
+                        duration: 1,
+                        ease: 'easeInOut',
+                        repeat: Infinity,
+                        repeatDelay: 10,
+                    }}
+                >
+                    <Flex
+                        align="center"
+                        justify="center"
+                        style={{ width: '100%', height: '100%' }}
+                    >
+                        <StyledLink href="/application">
+                            {t('content_get_started_button')}
+                        </StyledLink>
+                    </Flex>
                 </motion.div>
             </Flex>
         </Flex>
     );
 };
 
+// const StyledLink = styled(Link)`
+//     width: 200px;
+//     height: 200px;
+//     text-align: center;
+//     font-size: 24px;
+//     color: ${COLORS.blue};
+//     background: ${COLORS.white};
+//     padding: 20px 30px;
+//     border-radius: 8px;
+//     &:hover {
+//         color: ${COLORS.colorInactive};
+//     }
+// `;
+
 const StyledLink = styled(Link)`
-    width: 200px;
-    height: 200px;
+    // width: 200px;
+    // height: 200px;
     text-align: center;
     font-size: 24px;
-    color: ${COLORS.blue};
-    background: ${COLORS.white};
+    color: ${COLORS.black};
+    background: 'transparent';
     padding: 20px 30px;
-    border-radius: 8px;
-    &:hover {
-        color: ${COLORS.colorInactive};
-    }
+    // border-radius: 8px;
 `;
