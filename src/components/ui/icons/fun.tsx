@@ -1,5 +1,10 @@
-export const Fun = () => (
+import { SVGProps } from 'react';
+
+export const Fun = ({ width, height, ...rest }: SVGProps<SVGSVGElement>) => (
     <svg
+        width={width}
+        height={height}
+        {...rest}
         enableBackground="new 0 0 512.009 512.009"
         viewBox="0 0 512.009 512.009"
         xmlns="http://www.w3.org/2000/svg"

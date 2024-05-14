@@ -1,8 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { ConfigProvider, Layout } from 'antd';
 import { COLORS } from '~variables';
-import { LayoutFooter } from './LayoutFooter';
-import { LayoutHeader } from './LayoutHeader';
+import { CustomMenu } from './CustomMenu';
 
 type RootLayoutProps = {
     children?: ReactNode;
@@ -14,19 +13,17 @@ const MainLayout: FC<RootLayoutProps> = ({ children }) => {
     return (
         <ConfigProvider
             theme={{
-                components: {
-                    Layout: {
-                        headerBg: `${COLORS.blue}`,
-                        bodyBg: `${COLORS.white}`,
-                        footerBg: `${COLORS.white}`,
-                    },
+                token: {
+                    colorPrimary: COLORS.blue,
+                    colorPrimaryActive: COLORS.blue2,
+                    colorBorder: COLORS.blue2,
+                    colorPrimaryHover: COLORS.blue2,
                 },
             }}
         >
             <Layout style={{ minHeight: '100vh' }}>
-                <LayoutHeader />
+                <CustomMenu />
                 {children}
-                <LayoutFooter />
             </Layout>
         </ConfigProvider>
     );

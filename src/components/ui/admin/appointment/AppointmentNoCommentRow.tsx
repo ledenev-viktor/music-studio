@@ -17,7 +17,11 @@ export const AppointmentNoCommentRow = ({
             }}
             bodyStyle={{ padding: '0' }}
         >
-            <Flex justify="space-between" style={{ marginLeft: '24px' }}>
+            <Flex
+                justify="space-between"
+                style={{ marginLeft: '24px' }}
+                align="center"
+            >
                 <Header appointment={appointment} />
                 <Footer appointment={appointment} />
             </Flex>

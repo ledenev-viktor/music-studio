@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { Badge, Button, Flex } from 'antd';
-import Icon, {
+import {
     ClockCircleOutlined,
     UserOutlined,
     WarningOutlined,
@@ -61,6 +61,7 @@ export const Footer = ({ appointment }: { appointment: Appointment }) => {
                             )
                         }
                         size="small"
+                        style={{ margin: 0 }}
                     >
                         Reject
                     </Button>
@@ -102,12 +103,10 @@ export const Header = ({ appointment }: { appointment: Appointment }) => {
                         type="link"
                         rel="noopener noreferrer"
                         href={`https://t.me/${appointment.telegram}`}
+                        style={{ color: COLORS.blue }}
                     >
                         <Flex gap={5}>
-                            <Icon
-                                component={Telegram}
-                                style={{ fill: COLORS.blue, width: 14 }}
-                            />
+                            <Telegram width={14} fill={COLORS.blue} />
                             <div>{appointment.telegram}</div>
                         </Flex>
                     </Button>

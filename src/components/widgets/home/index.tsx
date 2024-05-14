@@ -28,18 +28,17 @@ const HomePage = () => {
             vertical
             justify="center"
             align="center"
-            style={{ padding: '0', height: `calc(100vh - 140px)` }}
+            style={{ padding: '0', height: '100vh' }}
         >
-            <Flex style={{ height: '500px' }}>
-                <MainSlider
-                    slides={slides}
-                    autoplay={{
-                        delay: 7500,
-                        disableOnInteraction: false,
-                    }}
-                    speed={1000}
-                />
-            </Flex>
+            <MainSlider
+                slides={slides}
+                autoplay={{
+                    delay: 7500,
+                    disableOnInteraction: false,
+                }}
+                speed={1000}
+            />
+
             <Benefits />
         </Flex>
     );

@@ -1,24 +1,21 @@
-import { Col, Flex, Row } from 'antd';
+import { Flex } from 'antd';
 import Link from 'next/link';
-import styled from '@emotion/styled';
-import Icon, { InstagramOutlined, PhoneOutlined } from '@ant-design/icons';
+import { InstagramOutlined, PhoneOutlined } from '@ant-design/icons';
 import { COLORS } from '~variables';
 import { useMobile } from '~hooks/responsive';
 import { Telegram, LocationPin } from '~components/ui/icons';
-import { LAPTOP_SIZE, MOBILE_SIZE } from '~constants/breakpoints';
 
-export const SocialsListBase = ({ className }: { className?: string }) => {
+export const SocialsList = () => {
     const isMobile = useMobile();
-
     const items = [
         {
             label: 'Instagram',
-            link: '#',
+            link: 'https://www.instagram.com/praktikastudio/',
             icon: (
                 <InstagramOutlined
                     style={{
-                        color: COLORS.blue,
-                        fontSize: isMobile ? MOBILE_SIZE : LAPTOP_SIZE,
+                        color: COLORS.white,
+                        fontSize: '30px',
                     }}
                 />
             ),
@@ -26,44 +23,20 @@ export const SocialsListBase = ({ className }: { className?: string }) => {
         },
         {
             label: 'Praktika Channel',
-            link: '#',
-            icon: (
-                <Icon
-                    component={Telegram}
-                    style={{
-                        fill: COLORS.blue,
-                        width: isMobile ? MOBILE_SIZE : LAPTOP_SIZE,
-                    }}
-                />
-            ),
+            link: 'https://t.me/praktikastudio_ch',
+            icon: <Telegram width={30} fill={COLORS.white} />,
             key: 2,
         },
         {
             label: 'Praktika Chat',
-            link: '#',
-            icon: (
-                <Icon
-                    component={Telegram}
-                    style={{
-                        fill: COLORS.blue,
-                        width: isMobile ? MOBILE_SIZE : LAPTOP_SIZE,
-                    }}
-                />
-            ),
+            link: 'https://t.me/+ACspuFKLISBkMjky',
+            icon: <Telegram width={30} fill={COLORS.white} />,
             key: 3,
         },
         {
             label: 'Google Maps',
-            link: '#',
-            icon: (
-                <Icon
-                    component={LocationPin}
-                    style={{
-                        fill: COLORS.blue,
-                        width: isMobile ? MOBILE_SIZE : LAPTOP_SIZE,
-                    }}
-                />
-            ),
+            link: 'https://goo.gl/maps/mQv4W9rRn1dmJStN6',
+            icon: <LocationPin width={40} fill={COLORS.white} />,
             key: 4,
         },
         {
@@ -72,8 +45,8 @@ export const SocialsListBase = ({ className }: { className?: string }) => {
             icon: (
                 <PhoneOutlined
                     style={{
-                        color: COLORS.blue,
-                        fontSize: isMobile ? MOBILE_SIZE : LAPTOP_SIZE,
+                        color: COLORS.white,
+                        fontSize: '30px',
                     }}
                 />
             ),
@@ -82,30 +55,20 @@ export const SocialsListBase = ({ className }: { className?: string }) => {
     ];
 
     return (
-        <Row className={className} gutter={isMobile ? [20, 30] : [50, 50]}>
+        <Flex vertical gap={isMobile ? 30 : 15}>
             {items.map((item) => (
-                <Col span={isMobile ? 24 : 8} key={item.key}>
-                    <Link
-                        className="link"
-                        href={item.link}
-                        style={{ fontSize: '24px' }}
-                    >
-                        <Flex align="center" gap={10}>
-                            {item.icon}
-                            {item.label}
-                        </Flex>
-                    </Link>
-                </Col>
+                <Link
+                    key={item.label}
+                    className="link"
+                    href={item.link}
+                    style={{ fontSize: '18px', color: COLORS.white }}
+                >
+                    <Flex align="center" gap={10}>
+                        {item.icon}
+                        {item.label}
+                    </Flex>
+                </Link>
             ))}
-        </Row>
+        </Flex>
     );
 };
-
-export const SocialsList = styled(SocialsListBase)`
-    .link {
-        color: ${COLORS.blue};
-        &:hover {
-            color: ${COLORS.colorInactive};
-        }
-    }
-`;

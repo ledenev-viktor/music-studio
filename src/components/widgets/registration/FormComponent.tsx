@@ -3,6 +3,7 @@ import { Flex, Steps } from 'antd';
 import { useFormContext, FieldValues } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { useMobile } from '~hooks/responsive';
+import { COLORS } from '~variables';
 import { BREAKPOINTS } from '~constants/breakpoints';
 import {
     TimeSlotsScreen,
@@ -109,12 +110,16 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
         <Flex
             vertical
             justify="center"
-            style={{ width: '100%', height: `calc(100vh - 140px)` }}
+            style={{ width: '100%', height: '100vh', background: COLORS.blue }}
         >
             <form
                 className={className}
                 onSubmit={handleSubmit(onSubmit)}
-                style={{ maxHeight: '800px', width: '100%' }}
+                style={{
+                    maxHeight: '800px',
+                    width: '100%',
+                    background: COLORS.white,
+                }}
             >
                 <Flex
                     vertical
@@ -125,7 +130,7 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                     }}
                 >
                     <Steps
-                        size="small"
+                        size={isMobile ? 'small' : 'default'}
                         direction="horizontal"
                         responsive={false}
                         current={mode === MODE.DEFAULT ? STEP_NUMBER[step] : 3}

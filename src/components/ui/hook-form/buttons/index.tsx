@@ -1,6 +1,5 @@
 import { CSSProperties } from 'react';
 import { Button } from 'antd';
-import { COLORS } from '~variables';
 
 const buttonsStyle: CSSProperties = {
     padding: ' 5px 20px',
@@ -29,11 +28,10 @@ export const PrimaryButton = ({
     text: string;
 }) => (
     <Button
+        type="primary"
         onClick={onClick}
         style={{
             ...buttonsStyle,
-            backgroundColor: COLORS.blue,
-            color: COLORS.white,
         }}
     >
         {text}
