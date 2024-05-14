@@ -17,11 +17,10 @@
     ],
     "parserOptions": {
         "ecmaFeatures": {
-            "jsx": true // enable linting for jsx files
+            "jsx": true
         },
         "ecmaVersion": 11,
-        "sourceType": "module",
-        "project": "./tsconfig.json"
+        "sourceType": "module"
     },
     "settings": {
         "import/resolver": {
@@ -36,6 +35,7 @@
         "unused-imports",
         "prettier",
         "cypress",
+        "jest",
         "@emotion"
     ],
     "rules": {
