@@ -10,9 +10,9 @@ const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
             fileId,
         });
 
-        res.status(200).end();
+        res.status(200).json({ success: true });
     } catch (error) {
-        res.status(500).end({
+        res.status(500).json({
             error: 'Failed to retrieve access token' + error,
         });
     }

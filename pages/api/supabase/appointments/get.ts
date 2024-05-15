@@ -12,15 +12,15 @@ export default async function handler(
             .gte('startTime', new Date().toISOString());
 
         if (error) {
-            res.status(500).end(error.message);
+            res.status(500).json(error);
         }
 
         if (!data?.length && !error) {
-            res.status(500).end('Problems with authorization');
+            res.status(500).json({ error: 'Problems with authorization' });
         }
 
         res.status(200).json(data);
     } catch (error) {
-        res.status(500).end(error);
+        res.status(500).json(error);
     }
 }

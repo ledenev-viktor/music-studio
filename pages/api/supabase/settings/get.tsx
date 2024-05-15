@@ -13,11 +13,11 @@ export default async function handler(
             .limit(1);
 
         if (error) {
-            res.status(500).end(error.message);
+            res.status(500).json(error);
         }
 
         res.status(200).json(data);
     } catch (error) {
-        res.status(500).end(error);
+        res.status(500).json(error);
     }
 }
