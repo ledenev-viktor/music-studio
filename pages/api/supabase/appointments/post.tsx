@@ -15,10 +15,10 @@ export default async function handler(
             })
             .eq('id', payload.appointmentId);
 
-        if (error) res.status(500).end(error.message);
+        if (error) res.status(500).json(error);
 
         res.status(200).json(data);
     } catch (error) {
-        res.status(500).end();
+        res.status(500).json(error);
     }
 }

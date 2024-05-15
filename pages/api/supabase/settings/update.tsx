@@ -12,10 +12,10 @@ export default async function handler(
             uid: payload.uid,
         });
 
-        if (error) res.status(500).end(error.message);
+        if (error) res.status(500).json(error);
 
         res.status(200).json(data);
     } catch (error) {
-        res.status(500).end(error);
+        res.status(500).json(error);
     }
 }
