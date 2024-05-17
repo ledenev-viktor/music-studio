@@ -24,7 +24,12 @@ const HomePage = () => {
     ];
 
     return (
-        <Flex vertical justify="center" align="center" style={{ padding: '0' }}>
+        <Flex
+            vertical
+            justify="center"
+            align="center"
+            style={{ padding: '0', height: '100vh' }}
+        >
             <MainSlider
                 slides={slides}
                 autoplay={{
@@ -33,8 +38,10 @@ const HomePage = () => {
                 }}
                 speed={1000}
             />
+
             <Benefits />
         </Flex>
     );
 };
+
 export default HomePage;

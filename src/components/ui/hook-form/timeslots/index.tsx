@@ -6,7 +6,9 @@ import {
     useFormContext,
     UseControllerProps,
 } from 'react-hook-form';
-import { COLORS } from 'src/styles/variables';
+import { AnimatePresence } from 'framer-motion';
+import { COLORS } from '~variables';
+import { useScreenDetector } from '~hooks/responsive';
 import { ErrorMessage, Label } from '../common';
 import { BREAKPOINTS } from '~constants/breakpoints';
 
@@ -23,6 +25,7 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
     timeslots = [],
     className,
 }) => {
+    const { isSmallMobile } = useScreenDetector();
     const {
         control,
         formState: { errors },
@@ -37,45 +40,57 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
             }}
         >
             <Flex vertical className={className}>
-                {label && <Label>{label}</Label>}
-                <div className="timeslots-wrapper">
-                    <Controller
-                        name={name}
-                        control={control}
-                        rules={rules}
-                        render={({ field: { value, onChange } }) => (
-                            <Row justify="space-between" gutter={[20, 20]} wrap>
-                                {timeslots.map((slot: any) => (
-                                    <Col key={slot.id} span={12}>
-                                        <Tag.CheckableTag
-                                            style={{ width: '100%' }}
-                                            checked={value.some(
-                                                (v: { value: any }) => {
-                                                    return (
-                                                        v.value === slot.value
-                                                    );
-                                                },
-                                            )}
-                                            onChange={(checked) => {
-                                                const nextValue = checked
-                                                    ? [...value, slot]
-                                                    : value.filter(
-                                                          (v: { value: any }) =>
-                                                              v.value !==
-                                                              slot.value,
-                                                      );
-                                                onChange(nextValue);
-                                            }}
+                <AnimatePresence mode="wait" initial={false}>
+                    {label && <Label>{label}</Label>}
+                    <div className="timeslots-wrapper">
+                        <Controller
+                            name={name}
+                            control={control}
+                            rules={rules}
+                            render={({ field: { value, onChange } }) => (
+                                <Row
+                                    justify="space-between"
+                                    gutter={[20, 20]}
+                                    wrap
+                                >
+                                    {timeslots.map((slot: any) => (
+                                        <Col
+                                            key={slot.id}
+                                            span={!isSmallMobile ? 8 : 12}
                                         >
-                                            {slot.label}
-                                        </Tag.CheckableTag>
-                                    </Col>
-                                ))}
-                            </Row>
-                        )}
-                    />
-                </div>
-                {error && <ErrorMessage>{error}</ErrorMessage>}
+                                            <Tag.CheckableTag
+                                                style={{ width: '100%' }}
+                                                checked={value.some(
+                                                    (v: { value: any }) => {
+                                                        return (
+                                                            v.value ===
+                                                            slot.value
+                                                        );
+                                                    },
+                                                )}
+                                                onChange={(checked) => {
+                                                    const nextValue = checked
+                                                        ? [...value, slot]
+                                                        : value.filter(
+                                                              (v: {
+                                                                  value: any;
+                                                              }) =>
+                                                                  v.value !==
+                                                                  slot.value,
+                                                          );
+                                                    onChange(nextValue);
+                                                }}
+                                            >
+                                                {slot.label}
+                                            </Tag.CheckableTag>
+                                        </Col>
+                                    ))}
+                                </Row>
+                            )}
+                        />
+                    </div>
+                    {error && <ErrorMessage>{error}</ErrorMessage>}
+                </AnimatePresence>
             </Flex>
         </ConfigProvider>
     );

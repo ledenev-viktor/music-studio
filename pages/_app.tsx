@@ -5,7 +5,6 @@ import {
     QueryClient,
     QueryClientProvider,
 } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { SessionProvider } from 'next-auth/react';
 import { appWithTranslation } from 'next-i18next';
 import { Global } from '@emotion/react';
@@ -52,7 +51,7 @@ const MyApp = ({
                     </ModalProvider>
                 </SessionProvider>
             </HydrationBoundary>
-            <ReactQueryDevtools />
+            {/* <ReactQueryDevtools /> */}
         </QueryClientProvider>
     );
 };

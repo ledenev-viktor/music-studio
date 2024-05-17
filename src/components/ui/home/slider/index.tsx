@@ -6,7 +6,7 @@ import { Pagination, A11y, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
-import { COLORS } from 'src/styles/variables';
+import { COLORS } from '~variables';
 
 type Slide = { id: number; path: string };
 type MainSliderBaseProps = {
@@ -47,11 +47,11 @@ const MainSliderBase: FC<MainSliderBaseProps> = ({
                 <SwiperSlide key={slide.id}>
                     <Image
                         width={1200}
-                        height={600}
+                        height={900}
                         style={{
                             maxWidth: '100%',
                             width: '100%',
-                            height: 'calc(150px + 10vw)',
+                            height: '50vh',
                             objectFit: 'cover',
                             boxSizing: 'border-box',
                             lineHeight: '0',
@@ -67,9 +67,7 @@ const MainSliderBase: FC<MainSliderBaseProps> = ({
 
 export const MainSlider = styled(MainSliderBase)`
     width: 100vw;
-    position: relative;
     margin: 0;
-    max-height: 600px;
     box-sizing: border-box;
     overflow: hidden;
 

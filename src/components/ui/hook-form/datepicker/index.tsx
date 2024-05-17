@@ -5,6 +5,7 @@ import {
     UseControllerProps,
     useFormContext,
 } from 'react-hook-form';
+import { AnimatePresence } from 'framer-motion';
 import { ErrorMessage, Label } from '../common';
 
 type FormDatePickerBaseProps = {
@@ -29,25 +30,28 @@ export function FormDatePickerBase({
         defaultValue,
         control,
     });
+
     const error = fieldState.error ? fieldState.error.message : '';
     const status = error ? 'error' : '';
 
     return (
         <Flex vertical className={className}>
-            {label && <Label>{label}</Label>}
-            <DatePickerAntD
-                {...field}
-                {...props}
-                status={status}
-                id={id || name}
-                onChange={(e) => {
-                    field.onChange(e);
-                }}
-                onBlur={() => {
-                    field.onBlur();
-                }}
-            />
-            {error && <ErrorMessage>{error}</ErrorMessage>}
+            <AnimatePresence mode="wait" initial={false}>
+                {label && <Label>{label}</Label>}
+                <DatePickerAntD
+                    {...field}
+                    {...props}
+                    status={status}
+                    id={id || name}
+                    onChange={(e) => {
+                        field.onChange(e);
+                    }}
+                    onBlur={() => {
+                        field.onBlur();
+                    }}
+                />
+                {error && <ErrorMessage>{error}</ErrorMessage>}
+            </AnimatePresence>
         </Flex>
     );
 }

@@ -9,13 +9,14 @@ import {
 import { Appointment } from '~types/appointments';
 import { useModal } from '~modals';
 import { useUpdateAppointments } from '~hooks/appointments';
+import { COLORS } from '~variables';
 import {
     APPOINTMENTS_STATUSES,
     APPOINTMENTS_STATUSES_COLORS,
     AppointmentStatusColors,
     AppointmentStatuses,
 } from '~constants/status';
-import { TelegramButton } from './TelegramContact';
+import { Telegram } from '~components/ui/icons';
 
 export const Footer = ({ appointment }: { appointment: Appointment }) => {
     const { modal } = useModal();
@@ -60,6 +61,7 @@ export const Footer = ({ appointment }: { appointment: Appointment }) => {
                             )
                         }
                         size="small"
+                        style={{ margin: 0 }}
                     >
                         Reject
                     </Button>
@@ -95,7 +97,20 @@ export const Header = ({ appointment }: { appointment: Appointment }) => {
                     <UserOutlined />
                     <div>{appointment.fullName}</div>
                 </Flex>
-                <TelegramButton telegramNickName={appointment.telegram} />
+                {appointment.telegram && (
+                    <Button
+                        target="_blank"
+                        type="link"
+                        rel="noopener noreferrer"
+                        href={`https://t.me/${appointment.telegram}`}
+                        style={{ color: COLORS.blue }}
+                    >
+                        <Flex gap={5}>
+                            <Telegram width={14} fill={COLORS.blue} />
+                            <div>{appointment.telegram}</div>
+                        </Flex>
+                    </Button>
+                )}
             </Flex>
         </Flex>
     );

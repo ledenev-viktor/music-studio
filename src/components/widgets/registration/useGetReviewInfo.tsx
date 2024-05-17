@@ -1,10 +1,9 @@
 import { ReactNode } from 'react';
-import { Descriptions, DescriptionsProps, Flex, Typography } from 'antd';
-import { useTranslation } from 'next-i18next';
-import { useFormContext } from 'react-hook-form';
 import { EditOutlined } from '@ant-design/icons';
-import { extractDate, extractDay } from '~utils/date.helpers';
-import { Button } from '~components/ui/hook-form';
+import { Flex, DescriptionsProps, Typography } from 'antd';
+import { FieldValues } from 'react-hook-form';
+import { extractDay, extractDate } from '~utils/date.helpers';
+import { COLORS } from '~variables';
 import { STEP, STEP_TYPE } from '~constants/registrationSteps';
 
 const DescriptionItemContentWrapper = ({
@@ -15,32 +14,29 @@ const DescriptionItemContentWrapper = ({
     onEditClick: () => void;
 }) => {
     return (
-        <Flex vertical>
-            <Flex justify="flex-end">
-                <EditOutlined onClick={onEditClick} />
-            </Flex>
+        <Flex vertical style={{ position: 'relative' }}>
+            <EditOutlined
+                onClick={onEditClick}
+                style={{
+                    position: 'absolute',
+                    right: '2%',
+                    top: '30%',
+                    fontSize: '20px',
+                    color: COLORS.grey,
+                    opacity: 0.5,
+                }}
+            />
             {children}
         </Flex>
     );
 };
 
-export const FinalScreen = ({
-    onSubmit,
-    handleEdit,
-}: {
-    onSubmit: () => void;
-    handleEdit: (value: STEP) => void;
-}) => {
-    const { t } = useTranslation();
-    const { getValues } = useFormContext();
-    const {
-        date,
-        userName,
-        userNameTelegram,
-        comment,
-        isCommentNeeded,
-        selectedTimeSlots,
-    } = getValues();
+export const useGetReviewInfo = (
+    handleEdit: (step: STEP) => void,
+    fields: FieldValues,
+) => {
+    const { date, userName, userNameTelegram, comment, selectedTimeSlots } =
+        fields;
 
     const onClick = (fieldType: STEP_TYPE) => {
         if (fieldType === STEP_TYPE.ADDITIONS) {
@@ -48,7 +44,7 @@ export const FinalScreen = ({
         }
 
         if (fieldType === STEP_TYPE.DATE_INFO) {
-            handleEdit(STEP.TIME_SLOTS_STEP);
+            handleEdit(STEP.DATE_TIME_STEP);
         }
 
         if (fieldType === STEP_TYPE.USER_INFO) {
@@ -56,7 +52,7 @@ export const FinalScreen = ({
         }
     };
 
-    const items: DescriptionsProps['items'] = [
+    return [
         {
             key: '1',
             label: 'Name',
@@ -64,7 +60,11 @@ export const FinalScreen = ({
                 <DescriptionItemContentWrapper
                     onEditClick={() => onClick(STEP_TYPE.USER_INFO)}
                 >
-                    <Typography.Paragraph>{userName}</Typography.Paragraph>
+                    <Typography.Paragraph
+                        style={{ minWidth: '180px', textWrap: 'pretty' }}
+                    >
+                        {userName}
+                    </Typography.Paragraph>
                 </DescriptionItemContentWrapper>
             ),
         },
@@ -88,8 +88,11 @@ export const FinalScreen = ({
                 <DescriptionItemContentWrapper
                     onEditClick={() => onClick(STEP_TYPE.DATE_INFO)}
                 >
-                    <Typography.Title level={5} style={{ marginTop: 0 }}>
-                        {extractDate(date) + ' ' + extractDay(date)}
+                    <Typography.Title level={5} style={{ margin: 0 }}>
+                        {extractDay(date)}
+                    </Typography.Title>
+                    <Typography.Title level={5} style={{ margin: 0 }}>
+                        {extractDate(date)}
                     </Typography.Title>
                     <Typography.Paragraph>
                         {JSON.stringify(selectedTimeSlots)}
@@ -97,30 +100,18 @@ export const FinalScreen = ({
                 </DescriptionItemContentWrapper>
             ),
         },
-    ];
-
-    if (isCommentNeeded)
-        items.push({
+        {
             key: '4',
             label: 'Comment',
             children: (
                 <DescriptionItemContentWrapper
                     onEditClick={() => onClick(STEP_TYPE.ADDITIONS)}
                 >
-                    <Typography.Paragraph>{comment}</Typography.Paragraph>
+                    <Typography.Paragraph>
+                        {comment ? comment : '-'}
+                    </Typography.Paragraph>
                 </DescriptionItemContentWrapper>
             ),
-        });
-
-    return (
-        <Flex vertical gap={20} align="stretch">
-            <Typography.Title level={3} style={{ margin: 0 }}>
-                Let`s verify appointment
-            </Typography.Title>
-            <Descriptions items={items} column={1} size="middle" bordered />
-            <Flex justify="flex-end">
-                <Button onClick={onSubmit}>{t('continue')}</Button>
-            </Flex>
-        </Flex>
-    );
+        },
+    ] as DescriptionsProps['items'];
 };

@@ -1,7 +1,7 @@
-import { Flex } from 'antd';
 import moment from 'moment';
 import { useTranslation } from 'next-i18next';
-import { FormDatePicker, TimeSlots, Button } from '~components/ui/hook-form';
+import { FormDatePicker, TimeSlots } from '~components/ui/hook-form';
+import { StepWrapper } from './StepWrapper';
 
 const timeslots = [
     {
@@ -66,7 +66,7 @@ const timeslots = [
     },
 ];
 
-export const TimeSlotsScreen = ({
+export const DateTimeStep = ({
     onGoToNextStep,
     onSaveEdits,
 }: {
@@ -76,7 +76,7 @@ export const TimeSlotsScreen = ({
     const { t } = useTranslation();
 
     return (
-        <Flex vertical gap={30}>
+        <StepWrapper onSaveEdits={onSaveEdits} onGoToNextStep={onGoToNextStep}>
             <FormDatePicker
                 name="date"
                 placeholder=""
@@ -102,13 +102,6 @@ export const TimeSlotsScreen = ({
                     },
                 }}
             />
-            <Flex justify="flex-end">
-                {onSaveEdits ? (
-                    <Button onClick={onSaveEdits}>{t('save')}</Button>
-                ) : (
-                    <Button onClick={onGoToNextStep}>{t('continue')}</Button>
-                )}
-            </Flex>
-        </Flex>
+        </StepWrapper>
     );
 };

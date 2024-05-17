@@ -1,9 +1,8 @@
-import { Flex } from 'antd';
-import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'next-i18next';
-import { Button, FormInput } from '~components/ui/hook-form';
+import { FormInput } from '~components/ui/hook-form';
+import { StepWrapper } from './StepWrapper';
 
-export const ContactsScreen = ({
+export const ContactsStep = ({
     onGoToNextStep,
     onGoToPreviousStep,
     onSaveEdits,
@@ -13,14 +12,16 @@ export const ContactsScreen = ({
     onSaveEdits?: () => void;
 }) => {
     const { t } = useTranslation();
-    const { control } = useFormContext();
 
     return (
-        <Flex vertical gap={30} align="space-between">
+        <StepWrapper
+            onGoToNextStep={onGoToNextStep}
+            onGoToPreviousStep={onGoToPreviousStep}
+            onSaveEdits={onSaveEdits}
+        >
             <FormInput
                 name="userName"
                 label={t('content_form_name_title')}
-                control={control}
                 rules={{
                     required: {
                         value: true,
@@ -31,7 +32,6 @@ export const ContactsScreen = ({
             <FormInput
                 name="userNameTelegram"
                 label={t('content_form_tg_title')}
-                control={control}
                 rules={{
                     required: {
                         value: true,
@@ -39,20 +39,6 @@ export const ContactsScreen = ({
                     },
                 }}
             />
-            <Flex justify="flex-end" gap={10}>
-                {onSaveEdits ? (
-                    <Button onClick={onSaveEdits}>{t('save')}</Button>
-                ) : (
-                    <>
-                        <Button onClick={onGoToPreviousStep}>
-                            {t('back')}
-                        </Button>
-                        <Button onClick={onGoToNextStep}>
-                            {t('continue')}
-                        </Button>
-                    </>
-                )}
-            </Flex>
-        </Flex>
+        </StepWrapper>
     );
 };

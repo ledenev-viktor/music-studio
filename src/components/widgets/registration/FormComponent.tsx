@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import { Flex, Steps } from 'antd';
-import { useFormContext, FieldValues, useWatch } from 'react-hook-form';
+import { useFormContext, FieldValues } from 'react-hook-form';
 import styled from '@emotion/styled';
+import { AnimatePresence } from 'framer-motion';
+import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
+import { useScreenDetector } from '~hooks/responsive';
+import { COLORS } from '~variables';
 import { BREAKPOINTS } from '~constants/breakpoints';
 import {
-    TimeSlotsScreen,
-    ContactsScreen,
-    AdditionalStep,
-    FinalScreen,
+    ContactsStep,
+    AdditionalsStep,
+    ReviewStep,
+    DateTimeStep,
+    SuccessScreen,
 } from './steps';
 import { MODE, STEP, STEP_NUMBER } from '~constants/registrationSteps';
 
@@ -24,9 +29,10 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
         clearErrors,
         reset,
     } = useFormContext();
-    const [step, setStep] = useState<STEP>(STEP.TIME_SLOTS_STEP);
+    const [step, setStep] = useState<STEP>(STEP.DATE_TIME_STEP);
     const [mode, setMode] = useState<MODE>(MODE.DEFAULT);
-    const isCommentNeeded = useWatch({ name: 'isCommentNeeded' });
+    const [showFirework, setShowFirework] = useState(false);
+    const { isMobile } = useScreenDetector();
 
     const onSubmit = async (data: FieldValues) => {
         console.log(data);
@@ -35,7 +41,7 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
 
     const onSaveEdits = () => {
         setMode(MODE.DEFAULT);
-        setStep(STEP.FINAL_SCREEN);
+        setStep(STEP.REVIEW_STEP);
     };
 
     const onEdit = (step: STEP) => {
@@ -45,9 +51,9 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
 
     const getStep = () => {
         switch (step) {
-            case STEP.TIME_SLOTS_STEP:
+            case STEP.DATE_TIME_STEP:
                 return (
-                    <TimeSlotsScreen
+                    <DateTimeStep
                         onSaveEdits={
                             mode === MODE.EDIT ? onSaveEdits : undefined
                         }
@@ -63,7 +69,7 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                 );
             case STEP.CONTACTS_STEP:
                 return (
-                    <ContactsScreen
+                    <ContactsStep
                         onSaveEdits={
                             mode === MODE.EDIT ? onSaveEdits : undefined
                         }
@@ -71,33 +77,41 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                             trigger();
 
                             if (isValid) {
-                                if (isCommentNeeded)
-                                    setStep(STEP.ADDITIONAL_STEP);
-                                else setStep(STEP.FINAL_SCREEN);
+                                setStep(STEP.ADDITIONAL_STEP);
                             }
                             return;
                         }}
-                        onGoToPreviousStep={() => setStep(STEP.TIME_SLOTS_STEP)}
+                        onGoToPreviousStep={() => setStep(STEP.DATE_TIME_STEP)}
                     />
                 );
             case STEP.ADDITIONAL_STEP:
                 return (
-                    <AdditionalStep
+                    <AdditionalsStep
                         onSaveEdits={
                             mode === MODE.EDIT ? onSaveEdits : undefined
                         }
                         onGoToPreviousStep={() => setStep(STEP.CONTACTS_STEP)}
-                        onGoToNextStep={() => setStep(STEP.FINAL_SCREEN)}
+                        onGoToNextStep={() => setStep(STEP.REVIEW_STEP)}
                     />
                 );
-            case STEP.FINAL_SCREEN:
+            case STEP.REVIEW_STEP:
                 return (
-                    <FinalScreen
+                    <ReviewStep
                         onSubmit={() => {
+                            setShowFirework(true);
                             onSubmit(getValues());
-                            setStep(STEP.TIME_SLOTS_STEP);
+                            setStep(STEP.SUCCESS);
                         }}
                         handleEdit={onEdit}
+                    />
+                );
+            case STEP.SUCCESS:
+                return (
+                    <SuccessScreen
+                        onComplete={() => {
+                            setShowFirework(false);
+                            setStep(STEP.DATE_TIME_STEP);
+                        }}
                     />
                 );
             default:
@@ -106,26 +120,61 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
     };
 
     return (
-        <form className={className} onSubmit={handleSubmit(onSubmit)}>
-            <Flex vertical align="center" style={{ marginBottom: '30px' }}>
-                <Steps
-                    size="small"
-                    direction="horizontal"
-                    responsive={false}
-                    progressDot
-                    current={STEP_NUMBER[step]}
-                    items={new Array(3).fill({})}
-                />
-            </Flex>
-            {getStep()}
-        </form>
+        <Flex
+            vertical
+            justify="center"
+            style={{
+                width: '100%',
+                height: '100vh',
+                background: COLORS.blue,
+                overflow: 'hidden',
+            }}
+        >
+            <form
+                className={className}
+                onSubmit={handleSubmit(onSubmit)}
+                style={{
+                    maxHeight: '650px',
+                    width: '100%',
+                    background: COLORS.white,
+                    minWidth: '340px',
+                }}
+            >
+                {step !== STEP.SUCCESS && (
+                    <Flex
+                        vertical
+                        align="stretch"
+                        style={{
+                            marginBottom: isMobile ? '10px' : '30px',
+                            marginTop: 0,
+                        }}
+                    >
+                        <Steps
+                            size={isMobile ? 'small' : 'default'}
+                            direction="horizontal"
+                            responsive={false}
+                            current={
+                                mode === MODE.DEFAULT ? STEP_NUMBER[step] : 3
+                            }
+                            items={new Array(3).fill({})}
+                        />
+                    </Flex>
+                )}
+                <AnimatePresence mode="wait" initial={false}>
+                    {getStep()}
+                </AnimatePresence>
+            </form>
+            {showFirework && (
+                <Fireworks autorun={{ speed: 3, duration: 3000 }} />
+            )}
+        </Flex>
     );
 };
 
 export const FormComponent = styled(FormComponentBase)`
     max-width: 600px;
     margin: 0 auto;
-    padding: 30px 60px 60px;
+    padding: 50px 60px 60px;
     box-sizing: border-box;
     box-shadow: 0px 0px 20px -14px rgba(0, 0, 0, 1);
     border-radius: 15px;
