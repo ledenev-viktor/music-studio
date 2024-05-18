@@ -3,3 +3,9 @@ export type MenuPoint = {
     link: string;
     name: string;
 };
+
+export type FreeSlots = {
+    id: number;
+    value: string;
+    label: string;
+};
