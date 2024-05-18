@@ -50,12 +50,13 @@ export function FormDatePickerBase({
                         field.onBlur();
                     }}
                 />
-                {error && <ErrorMessage>{error}</ErrorMessage>}
+                {error && <ErrorMessage motionId={name}>{error}</ErrorMessage>}
             </AnimatePresence>
         </Flex>
     );
 }
 
+// TODO: currently is not used, but now we are using experimental datepicker, so let's leave it just in case
 export const FormDatePicker = styled(FormDatePickerBase)`
     .ant-picker {
         height: 40px;

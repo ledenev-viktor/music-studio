@@ -17,7 +17,7 @@
 
     "content_form_select_title": "აირჩიეთ თარიღი",
     "content_form_slots_title": "ხელმისაწვდომი დროის სლოტები",
-    "slots_empty": "თქვენს მიერ არჩეული თარიღისთვის ხელმისაწვდომი საათები არ არის, გთხოვთ, აირჩიოთ სხვა დღე.",
+    "slots_empty": "არ არის ხელმისაწვდომი სლოტები. გთხოვთ, აირჩიოთ სხვა დღე",
     "content_form_name_title": "Სრული სახელი",
     "content_form_comment_title": "დაამატე კომენტარი",
     "content_form_tg_title": "Telegram მომხმარებლის სახელი",

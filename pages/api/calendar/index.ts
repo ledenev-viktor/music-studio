@@ -1,5 +1,4 @@
 /* eslint-disable import/no-anonymous-default-export */
-import dayjs from 'dayjs';
 import { google } from 'googleapis';
 import { NextApiRequest, NextApiResponse } from 'next/types';
 import googleConfig from '~lib/google';
@@ -19,9 +18,18 @@ const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
             auth: jwtClient,
         });
 
+        const { timeMin, timeMax } = req.query;
+
+        if (!timeMin || !timeMax) {
+            return res
+                .status(400)
+                .json({ error: 'Missing timeMin or timeMax parameter' });
+        }
+
         const { data } = await calendar.events.list({
             calendarId: process.env.CALENDAR_ID,
-            timeMin: dayjs().format('YYYY-MM-DD') + 'T00:00:00+04:00',
+            timeMin: timeMin as string,
+            timeMax: timeMax as string,
             timeZone: 'Asia/Tbilisi',
         });
 

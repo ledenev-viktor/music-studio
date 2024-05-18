@@ -5,7 +5,7 @@
 
     "content_benefits_title": "We are a wonderful music studio",
     "content_benefits_description": "With us you can:",
-    "content_get_started_button": "Get started",
+    "content_get_started_button": "Book",
     "content_benefit_scratch": "Learn from scratch",
     "content_benefit_improve": "Improve your skills",
     "content_benefit_fun": "Have fun",
@@ -17,7 +17,7 @@
 
     "content_form_select_title": "Select date",
     "content_form_slots_title": "Available timeslots",
-    "slots_empty": "There are no available hours for the date you selected, please select another day.",
+    "slots_empty": "No slots are available this day. Please select another one.",
     "content_form_name_title": "Full Name",
     "content_form_comment_title": "Add comment",
     "content_form_tg_title": "Telegram username",

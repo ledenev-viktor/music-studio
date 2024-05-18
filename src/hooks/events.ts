@@ -1,14 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
-import { CalendarEvents } from '~types/google';
-import api from '~lib/api.helper';
+import axios from 'axios';
 
-export const fetchEventsKey = ['fetchEvents'];
-
-export const useGetEvents = () => {
+export const useGetEvents = (startDate: string, endDate: string) => {
     return useQuery({
-        queryKey: fetchEventsKey,
+        queryKey: ['fetchEvents', startDate, endDate],
         queryFn: async () => {
-            const { data } = await api.get<CalendarEvents>('/api/calendar');
+            const { data } = await axios.get('/api/calendar', {
+                params: {
+                    timeMin: startDate,
+                    timeMax: endDate,
+                },
+            });
 
             return data.items;
         },

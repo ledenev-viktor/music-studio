@@ -11,11 +11,13 @@ export const StepWrapper = ({
     onSaveEdits,
     onGoToNextStep,
     onGoToPreviousStep,
+    isGoToNextStepDisabled = false,
 }: {
     children: ReactNode;
     onSaveEdits?: () => void;
     onGoToPreviousStep?: () => void;
     onGoToNextStep?: () => void;
+    isGoToNextStepDisabled?: boolean;
 }) => {
     const { t } = useTranslation();
 
@@ -46,18 +48,22 @@ export const StepWrapper = ({
             {onGoToNextStep && (
                 <Flex justify="flex-end" gap={10} style={{ marginTop: 30 }}>
                     {onSaveEdits ? (
-                        <PrimaryButton onClick={onSaveEdits} text={t('save')} />
+                        <PrimaryButton
+                            onClick={onSaveEdits}
+                            title={t('save')}
+                        />
                     ) : (
                         <>
                             {onGoToPreviousStep && (
                                 <InterruptButton
-                                    text={t('back')}
+                                    title={t('back')}
                                     onClick={onGoToPreviousStep}
                                 />
                             )}
                             <PrimaryButton
+                                disabled={isGoToNextStepDisabled}
                                 onClick={onGoToNextStep}
-                                text={t('continue')}
+                                title={t('continue')}
                             />
                         </>
                     )}

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Col, ConfigProvider, Flex, Row, Tag, Typography } from 'antd';
+import { Col, Flex, Row, Tag, Alert } from 'antd';
 import styled from '@emotion/styled';
 import {
     Controller,
@@ -7,7 +7,7 @@ import {
     UseControllerProps,
 } from 'react-hook-form';
 import { AnimatePresence } from 'framer-motion';
-import { useScreenDetector } from '~hooks/responsive';
+import { useTranslation } from 'react-i18next';
 import { COLORS } from 'src/styles/variables';
 import { FreeSlots } from '~types/common';
 import { ErrorMessage, Label } from '../common';
@@ -17,7 +17,6 @@ type TimeSlotsBaseProps = {
     timeslots: FreeSlots[];
     className?: string;
     label?: string;
-    emptySlotsMessage: string;
 } & UseControllerProps;
 
 const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
@@ -25,10 +24,9 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
     label,
     rules,
     timeslots = [],
-    emptySlotsMessage,
     className,
 }) => {
-    const { isSmallMobile } = useScreenDetector();
+    const { t } = useTranslation();
     const {
         control,
         formState: { errors },
@@ -36,76 +34,56 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
 
     const error = errors[name] ? <>{errors[name]?.message}</> : '';
 
+    if (!timeslots.length) {
+        return <Alert type="error" message={t('slots_empty')} />;
+    }
+
+    const getSpan = () => {
+        if (timeslots.length < 6) return 12;
+
+        return 8;
+    };
+
     return (
-        <ConfigProvider
-            theme={{
-                components: {},
-            }}
-        >
-            <Flex vertical className={className}>
-                <AnimatePresence mode="wait" initial={false}>
-                    {label && <Label>{label}</Label>}
-                    <div className="timeslots-wrapper">
-                        <Controller
-                            name={name}
-                            control={control}
-                            rules={rules}
-                            render={({ field: { value, onChange } }) =>
-                                timeslots.length > 0 ? (
-                                    <Row
-                                        justify="space-between"
-                                        gutter={[20, 20]}
-                                        wrap
+        <Flex vertical className={className}>
+            <AnimatePresence mode="wait" initial={false}>
+                {label && <Label>{label}</Label>}
+                <Controller
+                    name={name}
+                    control={control}
+                    rules={rules}
+                    render={({ field: { value, onChange } }) => (
+                        <Row justify="space-between" gutter={[20, 20]} wrap>
+                            {timeslots.map((slot: any) => (
+                                <Col key={slot.id} span={getSpan()}>
+                                    <Tag.CheckableTag
+                                        style={{ width: '100%' }}
+                                        checked={value.some(
+                                            (v: { value: any }) => {
+                                                return v.value === slot.value;
+                                            },
+                                        )}
+                                        onChange={(checked) => {
+                                            const nextValue = checked
+                                                ? [...value, slot]
+                                                : value.filter(
+                                                      (v: { value: any }) =>
+                                                          v.value !==
+                                                          slot.value,
+                                                  );
+                                            onChange(nextValue);
+                                        }}
                                     >
-                                        {timeslots.map((slot: any) => (
-                                            <Col
-                                                key={slot.id}
-                                                span={!isSmallMobile ? 8 : 12}
-                                            >
-                                                <Tag.CheckableTag
-                                                    style={{ width: '100%' }}
-                                                    checked={value.some(
-                                                        (v: { value: any }) => {
-                                                            return (
-                                                                v.value ===
-                                                                slot.value
-                                                            );
-                                                        },
-                                                    )}
-                                                    onChange={(checked) => {
-                                                        const nextValue =
-                                                            checked
-                                                                ? [
-                                                                      ...value,
-                                                                      slot,
-                                                                  ]
-                                                                : value.filter(
-                                                                      (v: {
-                                                                          value: any;
-                                                                      }) =>
-                                                                          v.value !==
-                                                                          slot.value,
-                                                                  );
-                                                        onChange(nextValue);
-                                                    }}
-                                                >
-                                                    {slot.label}
-                                                </Tag.CheckableTag>
-                                            </Col>
-                                        ))}
-                                    </Row>
-                                ) : (
-                                    <Typography.Text>
-                                        {emptySlotsMessage}
-                                    </Typography.Text>
-                                )
-                            }
-                        />
-                    </div>
-                    {error && <ErrorMessage>{error}</ErrorMessage>}
-                </AnimatePresence>
-            </Flex>
-        </ConfigProvider>
+                                        {slot.label}
+                                    </Tag.CheckableTag>
+                                </Col>
+                            ))}
+                        </Row>
+                    )}
+                />
+                {error && <ErrorMessage motionId={name}>{error}</ErrorMessage>}
+            </AnimatePresence>
+        </Flex>
     );
 };
 
@@ -122,16 +100,17 @@ export const TimeSlots = styled(TimeSlotsBase)`
         color: #000;
 
         &:hover {
-            border-color: ${COLORS.blue2};
-            background: none;
+            background-color: ${COLORS.white};
+            border: 1px solid ${COLORS.blue};
             color: #000;
         }
 
         &.ant-tag-checkable-checked {
-            border-color: ${COLORS.blue2};
+            background-color: ${COLORS.white};
+            border: 1px solid ${COLORS.blue};
             color: #000;
-            background: none;
         }
+
         @media screen and (max-width: ${BREAKPOINTS.mobile}) {
             font-size: 14px;
         }

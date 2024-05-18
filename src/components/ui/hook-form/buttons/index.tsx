@@ -4,15 +4,13 @@ import { useScreenDetector } from '~hooks/responsive';
 
 const BaseButton = ({
     onClick,
-    text,
+    title,
     type,
     style,
+    disabled,
 }: {
-    onClick: () => void;
-    text: string;
-    type: ButtonProps['type'];
     style?: CSSProperties;
-}) => {
+} & ButtonProps) => {
     const { isMobile } = useScreenDetector();
     const buttonsStyle: CSSProperties = {
         padding: '5px 20px',
@@ -23,27 +21,20 @@ const BaseButton = ({
 
     return (
         <Button
+            disabled={disabled}
             type={type}
             onClick={onClick}
             style={{ ...buttonsStyle, ...style }}
         >
-            {text}
+            {title}
         </Button>
     );
 };
 
-export const InterruptButton = ({
-    onClick,
-    text,
-}: {
-    onClick: () => void;
-    text: string;
-}) => <BaseButton type="dashed" onClick={onClick} text={text} />;
+export const InterruptButton = (props: Omit<ButtonProps, 'type'>) => (
+    <BaseButton type="dashed" {...props} />
+);
 
-export const PrimaryButton = ({
-    onClick,
-    text,
-}: {
-    onClick: () => void;
-    text: string;
-}) => <BaseButton type="primary" onClick={onClick} text={text} />;
+export const PrimaryButton = (props: Omit<ButtonProps, 'type'>) => (
+    <BaseButton type="primary" {...props} />
+);
