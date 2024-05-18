@@ -21,7 +21,7 @@
         },
         "ecmaVersion": 11,
         "sourceType": "module",
-        "project": "./tsconfig.json"
+        "project": ["./tsconfig.json", "tsconfig.spec.json"]
     },
     "settings": {
         "import/resolver": {

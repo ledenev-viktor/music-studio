@@ -7,7 +7,8 @@
             "cypress",
             "next-i18next",
             "./global.d.ts",
-            "axios"
+            "axios",
+            "jest"
         ],
         "baseUrl": "./",
         "target": "es5",
@@ -68,7 +69,9 @@
         "next.config.js",
         ".next/types/**/*.ts",
         "cypress",
-        "./cypress/**/*.ts"
+        "./cypress/**/*.ts",
+        "src/**/*test.ts",
+        "src/**/*spec.ts"
     ],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"]
 }
