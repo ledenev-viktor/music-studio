@@ -69,9 +69,7 @@
         "next.config.js",
         ".next/types/**/*.ts",
         "cypress",
-        "./cypress/**/*.ts",
-        "src/**/*test.ts",
-        "src/**/*spec.ts"
+        "./cypress/**/*.ts"
     ],
     "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"]
 }
