@@ -1,76 +1,100 @@
 import React from 'react';
-import { ConfigProvider, Flex, Typography } from 'antd';
-import { useTranslation } from 'next-i18next';
+import { motion } from 'framer-motion';
+import { Flex } from 'antd';
 import { useScreenDetector } from '~hooks/responsive';
 import { COLORS } from '~variables';
-import { SocialsList } from '~components/ui/socials';
-import { Logo } from '~components/ui/home';
+import { CardContent } from './CardContent';
 
 const ContactsPage = () => {
-    const { isMobile } = useScreenDetector();
-    const { t } = useTranslation();
+    const { isMobile, isSmallMobile, isDesktop } = useScreenDetector();
+    const finalWidth = window.innerWidth * 0.7;
+    const finalHeight = !isDesktop
+        ? window.innerHeight * 0.75
+        : window.innerHeight * 0.95;
+    const praktika = 'ráktika'.split('');
 
     return (
         <Flex
-            gap={50}
+            vertical
             style={{
                 height: '100vh',
                 background: COLORS.blue,
-                padding: isMobile ? '10% 15%' : '5% 15%',
+                padding: isMobile || isSmallMobile ? '10% 15%' : '5% 15%',
             }}
         >
-            <Flex vertical gap={50}>
-                {!isMobile && (
-                    <Logo
-                        link="/"
-                        src={'/logo.png'}
-                        alt="music-studio"
-                        width="100"
-                        height="100"
-                    />
-                )}
-                <Flex vertical>
-                    <ConfigProvider
-                        theme={{
-                            components: {
-                                Typography: {
-                                    colorText: COLORS.white,
-                                    colorTextHeading: COLORS.white,
-                                },
-                            },
-                        }}
-                    >
-                        <Typography.Title style={{ margin: 0 }}>
-                            {t('content_studio_name')}
-                        </Typography.Title>
-                        <Typography.Text
-                            style={{
-                                fontSize: '24px',
-                                marginTop: 0,
-                            }}
-                        >
-                            {t('content_studio_address')}
-                        </Typography.Text>
-                        <Typography.Text style={{ fontSize: '20px' }}>
-                            {t('content_studio_work_hours')}
-                        </Typography.Text>
-                    </ConfigProvider>
-                </Flex>
-                <SocialsList />
-            </Flex>
-            {!isMobile && (
-                <iframe
-                    title="5 Mikheil Asatiani St"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d744.4220407796702!2d44.74979889506519!3d41.72724740136008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4044731c670393c1%3A0xb19c1409e85cf9f5!2s5%20Mikheil%20Asatiani%20St%2C%20T&#39;bilisi%200171%2C%20Georgia!5e0!3m2!1sen!2sru!4v1715374380181!5m2!1sen!2sru"
-                    height="100%"
-                    width="100%"
+            <motion.div
+                animate={{
+                    y: [finalHeight / 3, 0],
+                    transition: {
+                        duration: 0.3,
+                        delay: 1,
+                    },
+                }}
+            >
+                <motion.img
+                    src={'/logo2.png'}
+                    key="image"
                     style={{
-                        border: 'none',
-                        borderRadius: '8px',
+                        width: isMobile
+                            ? '60px'
+                            : isSmallMobile
+                              ? '50px'
+                              : '80px',
                     }}
-                    loading="lazy"
-                ></iframe>
-            )}
+                    initial={{ opacity: 0 }}
+                    animate={{
+                        opacity: [0, 1],
+                        transition: {
+                            duration: 0.1,
+                        },
+                    }}
+                />
+                {praktika.map((el, i) => (
+                    <motion.span
+                        style={{
+                            fontSize: isMobile
+                                ? '64px'
+                                : isSmallMobile
+                                  ? '48px'
+                                  : '96px',
+                            color: '#efefe7',
+                            fontWeight: 700,
+                        }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{
+                            duration: 0.2,
+                            delay: i / 10 + 0.15,
+                        }}
+                        key={i}
+                    >
+                        {el}
+                    </motion.span>
+                ))}
+            </motion.div>
+            <motion.div
+                initial={{ opacity: 0 }}
+                style={{
+                    background: 'white',
+                    height: finalHeight,
+                    width: finalWidth,
+                    borderRadius: isMobile || isSmallMobile ? '8px' : '16px',
+                    boxShadow: `rgba(0, 0, 0, 0.25) 0px 54px 55px,
+                        rgba(0, 0, 0, 0.12) 0px -12px 30px,
+                        rgba(0, 0, 0, 0.12) 0px 4px 6px,
+                        rgba(0, 0, 0, 0.17) 0px 12px 13px,
+                        rgba(0, 0, 0, 0.09) 0px -3px 5px`,
+                }}
+                animate={{
+                    opacity: [0, 1],
+                    transition: {
+                        duration: 1,
+                        delay: 1.3,
+                    },
+                }}
+            >
+                <CardContent />
+            </motion.div>
         </Flex>
     );
 };

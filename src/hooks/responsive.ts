@@ -16,7 +16,7 @@ export const useScreenDetector = () => {
         };
     }, []);
 
-    const isSmallMobile = width < 375;
+    const isSmallMobile = width <= 375;
     const isMobile = width <= parseInt(BREAKPOINTS.mobile, 10) && width > 375;
     const isTablet =
         width <= parseInt(BREAKPOINTS.tablet, 10) &&
