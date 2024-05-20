@@ -1,6 +1,2 @@
-import { ScheduleDay } from '~types/common';
-
-export const SCHEDULE_DAY: ScheduleDay = {
-    start: 11,
-    end: 23,
-};
+export const START_DAY = 11;
+export const END_DAY = 23;

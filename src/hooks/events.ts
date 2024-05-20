@@ -8,7 +8,7 @@ export const useGetEvents = () => {
     return useQuery({
         queryKey: fetchEventsKey,
         queryFn: async () => {
-            const { data } = await api.get<CalendarEvents>('api/calendar');
+            const { data } = await api.get<CalendarEvents>('/api/calendar');
 
             return data.items;
         },

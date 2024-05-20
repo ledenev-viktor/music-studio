@@ -2,7 +2,7 @@ import { CalendarEvent } from '~types/google';
 import { filterEventsBySchedule } from './filterEventsBySchedule';
 import { getWorkingHours } from './getWorkingHours';
 import { getOffsetUTCFromStringDate } from './getOffsetUTCFromStringDate';
-import { SCHEDULE_DAY } from '~constants/schedule';
+import { START_DAY, END_DAY } from '~constants/schedule';
 
 export function getAvailableSlots(
     day: string,
@@ -10,8 +10,8 @@ export function getAvailableSlots(
 ) {
     if (!events || !day) return [];
 
-    const startDay = SCHEDULE_DAY.start;
-    const endDay = SCHEDULE_DAY.end;
+    const startDay = START_DAY;
+    const endDay = END_DAY;
 
     const startDateTime = day + `T${startDay}:00:00`;
     const endDateTime = day + `T${endDay}:00:00`;

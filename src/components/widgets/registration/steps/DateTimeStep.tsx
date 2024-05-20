@@ -1,6 +1,5 @@
 import { useTranslation } from 'next-i18next';
 import dayjs from 'dayjs';
-import { useWatch } from 'react-hook-form';
 import { Spin } from 'antd';
 import { useGetAvailableSlots } from '~hooks/useGetAvailableSlots';
 import { StepWrapper } from './StepWrapper';
@@ -14,8 +13,7 @@ export const DateTimeStep = ({
     onSaveEdits?: () => void;
 }) => {
     const { t } = useTranslation();
-    const valueDate = useWatch({ name: 'date' });
-    const { slots, isLoadingEvents } = useGetAvailableSlots(valueDate);
+    const { slots, isLoadingEvents } = useGetAvailableSlots();
 
     return (
         <StepWrapper onSaveEdits={onSaveEdits} onGoToNextStep={onGoToNextStep}>

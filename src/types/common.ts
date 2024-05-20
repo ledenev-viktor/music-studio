@@ -9,8 +9,3 @@ export type FreeSlots = {
     value: string;
     label: string;
 };
-
-export type ScheduleDay = {
-    start: number;
-    end: number;
-};

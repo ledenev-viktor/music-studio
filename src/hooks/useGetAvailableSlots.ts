@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
+import { useWatch } from 'react-hook-form';
 import { FreeSlots } from '~types/common';
 import { getAvailableSlots } from '~utils/getAvailableSlots';
 import { useGetEvents } from './events';
 
-export const useGetAvailableSlots = (valueDate: Dayjs) => {
+export const useGetAvailableSlots = () => {
     const { data: events, isLoading } = useGetEvents();
+    const valueDate = useWatch({ name: 'date' });
     const [slots, setSlots] = useState<FreeSlots[]>([]);
 
     useEffect(() => {
