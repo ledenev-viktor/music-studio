@@ -11,7 +11,8 @@
     "content_benefit_fun": "Have fun",
 
     "content_studio_name": "Praktika",
-    "content_studio_address": "5 Mikheil Asatiani St, Tbilisi",
+    "content_studio_address_prefix": "Georgia, Tbilisi",
+    "content_studio_address": "5 Mikheil Asatiani St",
     "content_studio_work_hours": "11 AM - 11 PM",
 
     "content_form_select_title": "Select date",

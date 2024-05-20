@@ -11,7 +11,8 @@
     "content_benefit_fun": "Весело проводить время",
 
     "content_studio_name": "Praktika",
-    "content_studio_address": "ул. Михаила Асатиани 5, Тбилиси",
+    "content_studio_address_prefix": "Тбилиси, Грузия",
+    "content_studio_address": "ул. Михаила Асатиани 5",
     "content_studio_work_hours": "11:00 - 23:00",
 
     "content_form_select_title": "Выберите дату",

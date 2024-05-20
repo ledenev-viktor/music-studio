@@ -11,7 +11,8 @@
     "content_benefit_fun": "Გაერთე",
 
     "content_studio_name": "Praktika",
-    "content_studio_address": "თბილისი, მიხეილ ასათიანის ქ. 5",
+    "content_studio_address_prefix": "საქართველო, თბილისი",
+    "content_studio_address": "მიხეილ ასათიანის ქ. 5",
     "content_studio_work_hours": "11:00 - 23:00",
 
     "content_form_select_title": "აირჩიეთ თარიღი",
