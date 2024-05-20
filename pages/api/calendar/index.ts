@@ -1,4 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
+import dayjs from 'dayjs';
 import { google } from 'googleapis';
 import { NextApiRequest, NextApiResponse } from 'next/types';
 import googleConfig from '~lib/google';
@@ -20,6 +21,8 @@ const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
 
         const { data } = await calendar.events.list({
             calendarId: process.env.CALENDAR_ID,
+            timeMin: dayjs().format('YYYY-MM-DD') + 'T00:00:00+04:00',
+            timeZone: 'Asia/Tbilisi',
         });
 
         res.status(200).json(data);

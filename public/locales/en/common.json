@@ -17,6 +17,7 @@
 
     "content_form_select_title": "Select date",
     "content_form_slots_title": "Available timeslots",
+    "slots_empty": "There are no available hours for the date you selected, please select another day.",
     "content_form_name_title": "Full Name",
     "content_form_comment_title": "Add comment",
     "content_form_tg_title": "Telegram username",

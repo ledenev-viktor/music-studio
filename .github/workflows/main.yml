@@ -23,6 +23,9 @@ jobs:
       - name: linting typescript
         run: npm run lint:ts
         if: always()
+      - name: unit testing
+        run: npm run test
+        if: always()
       - name: build production project
         run: npm run build
         if: always()

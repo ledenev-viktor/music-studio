@@ -22,9 +22,6 @@ export type CalendarEvent = {
     };
     eventType: string;
 };
-export type CalendarEventWithLabel = CalendarEvent & {
-    label: { start: string; end: string };
-};
 
 export type CalendarEvents = {
     updated: string;
@@ -32,11 +29,4 @@ export type CalendarEvents = {
     nextPageToken: string;
     nextSyncToken: string;
     items: CalendarEvent[];
-};
-
-export type CalendarList = {
-    timeZone: string;
-    nextPageToken: string;
-    nextSyncToken: string;
-    items: CalendarEvents[];
 };
