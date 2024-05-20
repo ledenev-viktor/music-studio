@@ -41,6 +41,10 @@ const MyApp = ({
             <HydrationBoundary state={pageProps.dehydratedState}>
                 <Head>
                     <title>Praktika</title>
+                    <meta
+                        name="viewport"
+                        content="width=device-width, initial-scale=1, maximum-scale=1"
+                    />
                 </Head>
                 <SessionProvider session={session}>
                     <ModalProvider>
