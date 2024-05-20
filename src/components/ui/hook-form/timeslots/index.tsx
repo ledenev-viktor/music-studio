@@ -113,23 +113,25 @@ export const TimeSlots = styled(TimeSlotsBase)`
     .ant-tag {
         width: 100%;
         text-align: center;
-        border: 1px solid ${COLORS.grey};
+        border: 2px solid ${COLORS.lightgrey};
         border-radius: 10px;
         padding: 10px 8px;
         box-sizing: border-box;
         line-height: 1;
         font-size: 16px;
-        color: #000;
+        color: ${COLORS.black};
+        background: ${COLORS.lightgrey};
+        transition: all 0.3s ease;
 
         &:hover {
-            border-color: ${COLORS.blue2};
+            border-color: ${COLORS.lightgrey};
             background: none;
             color: #000;
         }
 
         &.ant-tag-checkable-checked {
-            border-color: ${COLORS.blue2};
-            color: #000;
+            border-color: ${COLORS.blue};
+            color: ${COLORS.blue};
             background: none;
         }
         @media screen and (max-width: ${BREAKPOINTS.mobile}) {
