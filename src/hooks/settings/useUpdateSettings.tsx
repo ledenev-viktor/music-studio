@@ -6,19 +6,9 @@ export const useUpdateSettings = () => {
     const { notification } = useNotification();
     const queryClient = useQueryClient();
 
-    return useMutation<
-        any,
-        any,
-        {
-            uid: any;
-            pictureUrl: string;
-        }
-    >({
+    return useMutation<any, any, string[]>({
         mutationFn: (data) =>
-            api.post<any>('api/supabase/settings/update', {
-                uid: data.uid,
-                pictureUrl: data.pictureUrl,
-            }),
+            api.post<any>('api/supabase/settings/update', data),
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['fetchSettings'],

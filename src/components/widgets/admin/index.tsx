@@ -56,7 +56,7 @@ export default function AdminApp() {
                     }}
                 >
                     <Image
-                        src="/praktika.jpg"
+                        src="/logo_blue.jpg"
                         alt="logo"
                         width={50}
                         height={50}

@@ -1,14 +1,15 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Select, SelectProps } from 'antd';
 import { useGetImages } from '~hooks/images';
-import { useNotification } from '~notifications';
+import { useGetSettings, useUpdateSettings } from '~hooks/settings';
 
 export const ImageSelector = () => {
-    const { notification } = useNotification();
     const { data: images, isLoading: isImagesLoading } = useGetImages();
-    // const { mutateAsync: setMainImage } = useSetMainImage();
-
-    const defaultOption = images?.find((image) => image.isSelected);
+    const { mutateAsync: updateSettings } = useUpdateSettings();
+    const { data: settings } = useGetSettings();
+    const [selectedImages, setSelected] = useState<string[]>(
+        settings?.images || [],
+    );
 
     const options = useMemo(
         () =>
@@ -20,24 +21,9 @@ export const ImageSelector = () => {
         [images],
     );
 
-    const onChange: SelectProps['onChange'] = (image) => {
-        const option = options?.find((option) => option.value === image);
-
-        if (!option) {
-            notification.error({
-                message: 'Something went wrong',
-                description: 'Reload page and try again',
-                placement: 'bottom',
-            });
-            return;
-        }
-
-        // setMainImage({
-        //     uid: option.uid,
-        //     name: option.label,
-        //     url: option.value,
-        //     isSelected: true,
-        // });
+    const onDeselect: SelectProps['onDeselect'] = (value) => {
+        setSelected(selectedImages.filter((image) => image !== value));
+        updateSettings(selectedImages);
     };
 
     const filterOption = (
@@ -50,13 +36,20 @@ export const ImageSelector = () => {
             title="Main picture photo"
             loading={isImagesLoading}
             style={{ width: '100%' }}
-            defaultValue={defaultOption?.url}
             showSearch
             placeholder="Select image for main screen"
             optionFilterProp="children"
-            onChange={onChange}
+            onChange={(image) => {
+                setSelected(image);
+            }}
+            onBlur={() => {
+                updateSettings(selectedImages);
+            }}
+            onDeselect={onDeselect}
             filterOption={filterOption}
             options={options}
+            value={selectedImages}
+            mode="multiple"
         />
     );
 };

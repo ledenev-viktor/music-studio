@@ -1,5 +1,5 @@
 export type Settings = {
-    pictureUrl: string;
-    createdAt: Intl.DateTimeFormat;
-    uid: string;
+    settings: {
+        images: string[];
+    };
 };

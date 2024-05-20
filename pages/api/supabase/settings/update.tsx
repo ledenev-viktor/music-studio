@@ -8,8 +8,9 @@ export default async function handler(
     try {
         const payload = req.body;
         const { data, error } = await supabase.from('settings').insert({
-            pictureUrl: payload.pictureUrl,
-            uid: payload.uid,
+            settings: {
+                images: payload,
+            },
         });
 
         if (error) res.status(500).json(error);

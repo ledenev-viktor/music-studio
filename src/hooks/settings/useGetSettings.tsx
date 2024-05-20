@@ -10,7 +10,7 @@ export const useGetSettings = () => {
                 'api/supabase/settings/get',
             );
 
-            return data;
+            return data[0].settings;
         },
     });
 };
