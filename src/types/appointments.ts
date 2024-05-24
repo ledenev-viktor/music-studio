@@ -10,6 +10,8 @@ export type Appointment = {
     id: number;
     startTime: string;
     telegram: string;
+    instagram: string;
+    phone: string;
     status: AppointmentStatuses;
 };
 

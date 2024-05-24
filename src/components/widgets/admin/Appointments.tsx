@@ -2,10 +2,9 @@
 import React, { useMemo, useState } from 'react';
 import { Alert, ButtonProps, Card, Empty, Flex, SelectProps, Spin } from 'antd';
 import type { SearchProps } from 'antd/es/input/Search';
-import { Appointment } from '~types/appointments';
 import { useGetAppointments } from '~hooks/appointments';
 import { filterAppointments } from '~utils/filterAppointments';
-import { AppointmentRow, FiltersRow } from '~components/ui/admin';
+import { AppointmentsList, FiltersRow } from '~components/ui/admin';
 import { AppointmentStatuses } from '~constants/status';
 
 export const Appointments = () => {
@@ -89,14 +88,7 @@ export const Appointments = () => {
                             }}
                         >
                             <Flex vertical gap={20}>
-                                {appointments.map(
-                                    (appointment: Appointment) => (
-                                        <AppointmentRow
-                                            appointment={appointment}
-                                            key={appointment.id}
-                                        />
-                                    ),
-                                )}
+                                <AppointmentsList data={appointments} />
                             </Flex>
                         </Card>
                     ))}
