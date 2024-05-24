@@ -1,27 +1,31 @@
-import { ReactNode } from 'react';
-import { Button, CollapseProps, Flex, Typography, theme } from 'antd';
+import { ReactNode, useState } from 'react';
+import { Button, CollapseProps, Flex, Modal, Typography, theme } from 'antd';
 import {
     InstagramOutlined,
     PhoneOutlined,
     EditOutlined,
 } from '@ant-design/icons';
 import { TFunction } from 'i18next';
-import { Appointment } from '~types/appointments';
+import { Appointment, EditFormData } from '~types/appointments';
 import { COLORS } from '~variables';
+import { useEditAppointments } from '~hooks/appointments';
 import { Footer, Header } from './common';
 import { Telegram } from '~components/ui/icons';
 import { APPOINTMENTS_STATUSES_COLORS } from '~constants/status';
+import { EditForm } from './EditForm';
 
-export const getCollapsedContent: (
+export const useCollapsedContent: (
     appointments: Appointment[],
     t: TFunction,
 ) => CollapseProps['items'] = (appointments, t) => {
     const { token } = theme.useToken();
+    const [showModal, setShowModal] = useState(false);
     const panelStyle: React.CSSProperties = {
         marginBottom: 24,
         background: COLORS.white,
         borderRadius: token.borderRadiusLG,
     };
+    const { mutateAsync: editAppointment } = useEditAppointments();
 
     return appointments?.map((appointment) => ({
         key: appointment.id,
@@ -36,11 +40,15 @@ export const getCollapsedContent: (
             >
                 <Flex vertical>
                     <Flex align="center" gap={20}>
-                        <ContactButton
-                            href={`https://t.me/${appointment.telegram}`}
-                            value={appointment.telegram}
-                            icon={<Telegram width={14} fill={COLORS.blue} />}
-                        />
+                        {appointment.telegram && (
+                            <ContactButton
+                                href={`https://t.me/${appointment.telegram}`}
+                                value={appointment.telegram}
+                                icon={
+                                    <Telegram width={14} fill={COLORS.blue} />
+                                }
+                            />
+                        )}
                         {appointment.instagram && (
                             <ContactButton
                                 href={`https://www.instagram.com/${appointment.instagram}`}
@@ -64,9 +72,28 @@ export const getCollapsedContent: (
                     type="text"
                     style={{ color: COLORS.black }}
                     icon={<EditOutlined />}
+                    onClick={() => setShowModal(!showModal)}
                 >
                     {t('edit')}
                 </Button>
+
+                <Modal
+                    title={`Edit appointment for ${appointment.fullName}`}
+                    open={showModal}
+                    footer={null}
+                    closable={false}
+                >
+                    {showModal && (
+                        <EditForm
+                            appointment={appointment}
+                            onCancel={() => setShowModal(!showModal)}
+                            onSubmit={(data: EditFormData) => {
+                                editAppointment(data);
+                                setShowModal(!showModal);
+                            }}
+                        />
+                    )}
+                </Modal>
             </Flex>
         ),
         extra: <Footer appointment={appointment} />,

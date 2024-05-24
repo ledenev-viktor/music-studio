@@ -1,58 +1,20 @@
-import { Appointment, Appointments } from '~types/appointments';
-import { DAY_NAMES } from '~constants/dates';
+import dayjs, { extend } from 'dayjs';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
 
-export function extractTime(dateString: string) {
-    const date = new Date(dateString);
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    return `${hours}:${minutes}`;
-}
+extend(utc);
+extend(timezone);
 
-export function extractDate(dateString: string) {
-    const options = {
-        year: 'numeric',
-        month: 'long',
-        day: '2-digit',
-    } as Intl.DateTimeFormatOptions;
-    return new Date(dateString).toLocaleDateString('en-GB', options);
-}
+export const extractTime = (dateString: string) =>
+    dayjs(dateString).tz('Asia/Tbilisi').format('HH:ss');
 
-export function extractDay(dateString: string) {
-    const date = new Date(dateString);
-    return DAY_NAMES[date.getDay()];
-}
+export const extractDate = (dateString: string) =>
+    dayjs(dateString).tz('Asia/Tbilisi').format('DD MMMM YYYY');
 
-export function prettifyAppointments(
-    appointments: Appointment[],
-): Appointments {
-    const appointmentsDates: string[] = [];
-    const groupedAppointments = appointments.reduce(
-        (acc, obj) => {
-            const date = obj.date;
-            if (!appointmentsDates.find((it) => it === obj.date))
-                appointmentsDates.push(obj.date);
-            if (!acc[date]) {
-                acc[date] = [];
-            }
-            acc[date].push(obj);
-            return acc;
-        },
-        {} as Record<string, Appointment[]>,
-    );
+export const extractDay = (dateString: string) =>
+    dayjs(dateString).tz('Asia/Tbilisi').format('dddd');
 
-    // Sort the appointments within each date group
-    for (const date in groupedAppointments) {
-        groupedAppointments[date].sort((a, b) => {
-            return a.startTime.localeCompare(b.startTime);
-        });
-    }
-
-    // Sort the array
-    const sortedDatesArray = appointmentsDates.sort((a: string, b: string) => {
-        const dateA = new Date(a).getTime();
-        const dateB = new Date(b).getTime();
-        return dateA - dateB;
-    });
-
-    return sortedDatesArray.map((date) => [date, groupedAppointments[date]]);
-}
+export const getDayJsObject = (date: string, time: string) =>
+    dayjs(date)
+        .hour(dayjs(time, 'HH:mm').hour())
+        .minute(dayjs(time, 'HH:mm').minute());

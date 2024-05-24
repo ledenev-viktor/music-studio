@@ -2,6 +2,7 @@
 import React, { useMemo, useState } from 'react';
 import { Alert, ButtonProps, Card, Empty, Flex, SelectProps, Spin } from 'antd';
 import type { SearchProps } from 'antd/es/input/Search';
+import dayjs from 'dayjs';
 import { useGetAppointments } from '~hooks/appointments';
 import { filterAppointments } from '~utils/filterAppointments';
 import { AppointmentsList, FiltersRow } from '~components/ui/admin';
@@ -80,7 +81,7 @@ export const Appointments = () => {
                     {data?.map(([dateKey, appointments]) => (
                         <Card
                             key={dateKey}
-                            title={dateKey}
+                            title={dayjs(dateKey).format('DD MMMM dddd')}
                             style={{
                                 maxWidth: '1365px',
                                 width: '100%',

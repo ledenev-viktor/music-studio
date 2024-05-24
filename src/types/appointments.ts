@@ -1,3 +1,4 @@
+import { Dayjs } from 'dayjs';
 import { AppointmentStatuses } from '~constants/status';
 
 export type Appointment = {
@@ -24,4 +25,15 @@ export type FormFields = {
     selectedTimeSlots: [];
     isCommentNeeded: boolean;
     comment: string;
+};
+
+export type EditFormData = {
+    // status:,
+    fullName: string;
+    phone: string;
+    time: Dayjs[];
+    comment: string;
+    telegram: string;
+    instagram: string;
+    id: number;
 };
