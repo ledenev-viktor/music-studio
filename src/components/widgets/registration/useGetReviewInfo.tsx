@@ -3,9 +3,11 @@ import { EditOutlined } from '@ant-design/icons';
 import { Flex, DescriptionsProps, Typography } from 'antd';
 import { FieldValues } from 'react-hook-form';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { extractDay, extractDate } from '~utils/date.helpers';
 import { COLORS } from '~variables';
 import { mergeIntervals } from '~utils/mergeIntervals';
+import { convertToAmPm } from '~utils/convertToAmPm';
 import { STEP, STEP_TYPE } from '~constants/registrationSteps';
 
 const DescriptionItemContentWrapper = ({
@@ -38,11 +40,13 @@ export const useGetReviewInfo = (
     fields: FieldValues,
 ) => {
     const { t } = useTranslation();
+    const { locale } = useRouter();
+
     const { date, userName, userNameTelegram, comment, selectedTimeSlots } =
         fields;
 
     const mergedSelectedTimeSlotsLabels = mergeIntervals(selectedTimeSlots).map(
-        (slot) => slot.label,
+        (slot) => (locale === 'en' ? convertToAmPm(slot.label) : slot.label),
     );
 
     const onClick = (fieldType: STEP_TYPE) => {
