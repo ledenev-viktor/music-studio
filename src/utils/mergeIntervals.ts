@@ -1,7 +1,6 @@
 export function mergeIntervals(
     intervals: { id: number; value: string; label: string }[],
 ) {
-    if (intervals.length < 1) return [];
     if (intervals.length < 2) return intervals;
 
     const parseTime = (str: string) => {

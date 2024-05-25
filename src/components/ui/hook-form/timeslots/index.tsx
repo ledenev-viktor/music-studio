@@ -7,6 +7,7 @@ import {
     UseControllerProps,
 } from 'react-hook-form';
 import { AnimatePresence } from 'framer-motion';
+import { useRouter } from 'next/router';
 import { useScreenDetector } from '~hooks/responsive';
 import { COLORS } from 'src/styles/variables';
 import { FreeSlots } from '~types/common';
@@ -23,7 +24,6 @@ type TimeSlotsBaseProps = {
 } & UseControllerProps;
 
 const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
-    locale = 'en',
     name,
     label,
     rules,
@@ -31,6 +31,7 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
     emptySlotsMessage,
     className,
 }) => {
+    const { locale } = useRouter();
     const { isSmallMobile, isMobile } = useScreenDetector();
     const {
         control,

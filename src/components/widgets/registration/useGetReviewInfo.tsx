@@ -2,7 +2,6 @@ import { ReactNode } from 'react';
 import { EditOutlined } from '@ant-design/icons';
 import { Flex, DescriptionsProps, Typography } from 'antd';
 import { FieldValues } from 'react-hook-form';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { extractDay, extractDate } from '~utils/date.helpers';
 import { COLORS } from '~variables';
@@ -39,7 +38,6 @@ export const useGetReviewInfo = (
     handleEdit: (step: STEP) => void,
     fields: FieldValues,
 ) => {
-    const { t } = useTranslation();
     const { locale } = useRouter();
 
     const { date, userName, userNameTelegram, comment, selectedTimeSlots } =
@@ -106,7 +104,7 @@ export const useGetReviewInfo = (
                         {extractDate(date)}
                     </Typography.Title>
                     <Typography.Paragraph>
-                        {mergedSelectedTimeSlotsLabels.join(` ${t('and')} `)}
+                        {mergedSelectedTimeSlotsLabels.join(`, `)}
                     </Typography.Paragraph>
                 </DescriptionItemContentWrapper>
             ),
