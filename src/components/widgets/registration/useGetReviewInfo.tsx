@@ -100,12 +100,14 @@ export const useGetReviewInfo = (
                     <Typography.Title level={5} style={{ margin: 0 }}>
                         {extractDay(date)}
                     </Typography.Title>
-                    <Typography.Title level={5} style={{ margin: 0 }}>
+                    <Typography.Title level={5} style={{ marginTop: 0 }}>
                         {extractDate(date)}
                     </Typography.Title>
-                    <Typography.Paragraph>
-                        {mergedSelectedTimeSlotsLabels.join(`, `)}
-                    </Typography.Paragraph>
+                    {mergedSelectedTimeSlotsLabels.map((slot) => (
+                        <Typography.Paragraph key={slot} style={{ margin: 0 }}>
+                            {slot}
+                        </Typography.Paragraph>
+                    ))}
                 </DescriptionItemContentWrapper>
             ),
         },
