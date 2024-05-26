@@ -9,14 +9,12 @@ import {
 import { Appointment } from '~types/appointments';
 import { useModal } from '~modals';
 import { useUpdateAppointments } from '~hooks/appointments';
-import { COLORS } from '~variables';
 import {
     APPOINTMENTS_STATUSES,
     APPOINTMENTS_STATUSES_COLORS,
     AppointmentStatusColors,
     AppointmentStatuses,
 } from '~constants/status';
-import { Telegram } from '~components/ui/icons';
 
 export const Footer = ({ appointment }: { appointment: Appointment }) => {
     const { modal } = useModal();
@@ -86,7 +84,7 @@ export const Footer = ({ appointment }: { appointment: Appointment }) => {
 export const Header = ({ appointment }: { appointment: Appointment }) => {
     return (
         <Flex justify="space-between">
-            <Flex gap={20} align="center">
+            <Flex gap={20}>
                 <Flex gap={5}>
                     <ClockCircleOutlined />
                     <div>
@@ -97,20 +95,6 @@ export const Header = ({ appointment }: { appointment: Appointment }) => {
                     <UserOutlined />
                     <div>{appointment.fullName}</div>
                 </Flex>
-                {appointment.telegram && (
-                    <Button
-                        target="_blank"
-                        type="link"
-                        rel="noopener noreferrer"
-                        href={`https://t.me/${appointment.telegram}`}
-                        style={{ color: COLORS.blue }}
-                    >
-                        <Flex gap={5}>
-                            <Telegram width={14} fill={COLORS.blue} />
-                            <div>{appointment.telegram}</div>
-                        </Flex>
-                    </Button>
-                )}
             </Flex>
         </Flex>
     );

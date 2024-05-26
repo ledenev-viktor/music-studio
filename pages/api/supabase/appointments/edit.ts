@@ -9,11 +9,8 @@ export default async function handler(
         const payload = req.body;
         const { data, error } = await supabase
             .from('appointments')
-            .update({
-                updatedAt: Math.floor(new Date().getTime() / 1000),
-                status: payload.status,
-            })
-            .eq('id', payload.appointmentId);
+            .update(payload)
+            .eq('id', payload.id);
 
         if (error) res.status(500).json(error);
 
