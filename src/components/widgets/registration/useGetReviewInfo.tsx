@@ -2,8 +2,11 @@ import { ReactNode } from 'react';
 import { EditOutlined } from '@ant-design/icons';
 import { Flex, DescriptionsProps, Typography } from 'antd';
 import { FieldValues } from 'react-hook-form';
+import { useRouter } from 'next/router';
 import { extractDay, extractDate } from '~utils/date.helpers';
 import { COLORS } from '~variables';
+import { mergeIntervals } from '~utils/mergeIntervals';
+import { convertToAmPm } from '~utils/convertToAmPm';
 import { STEP, STEP_TYPE } from '~constants/registrationSteps';
 
 const DescriptionItemContentWrapper = ({
@@ -35,8 +38,14 @@ export const useGetReviewInfo = (
     handleEdit: (step: STEP) => void,
     fields: FieldValues,
 ) => {
+    const { locale } = useRouter();
+
     const { date, userName, userNameTelegram, comment, selectedTimeSlots } =
         fields;
+
+    const mergedSelectedTimeSlotsLabels = mergeIntervals(selectedTimeSlots).map(
+        (slot) => (locale === 'en' ? convertToAmPm(slot.label) : slot.label),
+    );
 
     const onClick = (fieldType: STEP_TYPE) => {
         if (fieldType === STEP_TYPE.ADDITIONS) {
@@ -95,7 +104,7 @@ export const useGetReviewInfo = (
                         {extractDate(date)}
                     </Typography.Title>
                     <Typography.Paragraph>
-                        {JSON.stringify(selectedTimeSlots)}
+                        {mergedSelectedTimeSlotsLabels.join(`, `)}
                     </Typography.Paragraph>
                 </DescriptionItemContentWrapper>
             ),

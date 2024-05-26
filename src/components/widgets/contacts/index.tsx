@@ -7,10 +7,12 @@ import { CardContent } from './CardContent';
 
 const ContactsPage = () => {
     const { isMobile, isSmallMobile, isDesktop } = useScreenDetector();
-    const finalWidth = window.innerWidth * 0.7;
+    const finalWidth = !isDesktop
+        ? window.innerWidth * 0.9
+        : window.innerWidth * 0.7;
     const finalHeight = !isDesktop
         ? window.innerHeight * 0.75
-        : window.innerHeight * 0.95;
+        : window.innerHeight * 0.8;
     const praktika = 'ráktika'.split('');
 
     return (
@@ -19,10 +21,11 @@ const ContactsPage = () => {
             style={{
                 height: '100vh',
                 background: COLORS.blue,
-                padding: isMobile || isSmallMobile ? '10% 15%' : '5% 15%',
+                padding: isMobile || isSmallMobile ? '10% 5%' : '5% 15%',
             }}
         >
             <motion.div
+                style={{ marginLeft: '15px' }}
                 animate={{
                     y: [finalHeight / 3, 0],
                     transition: {
@@ -75,15 +78,19 @@ const ContactsPage = () => {
             <motion.div
                 initial={{ opacity: 0 }}
                 style={{
-                    background: 'white',
+                    background:
+                        isMobile || isSmallMobile ? 'transparent' : 'white',
                     height: finalHeight,
                     width: finalWidth,
                     borderRadius: isMobile || isSmallMobile ? '8px' : '16px',
-                    boxShadow: `rgba(0, 0, 0, 0.25) 0px 54px 55px,
-                        rgba(0, 0, 0, 0.12) 0px -12px 30px,
-                        rgba(0, 0, 0, 0.12) 0px 4px 6px,
-                        rgba(0, 0, 0, 0.17) 0px 12px 13px,
-                        rgba(0, 0, 0, 0.09) 0px -3px 5px`,
+                    boxShadow:
+                        isMobile || isSmallMobile
+                            ? 'none'
+                            : `rgba(0, 0, 0, 0.25) 0px 54px 55px,
+                                rgba(0, 0, 0, 0.12) 0px -12px 30px,
+                                rgba(0, 0, 0, 0.12) 0px 4px 6px,
+                                rgba(0, 0, 0, 0.17) 0px 12px 13px,
+                                rgba(0, 0, 0, 0.09) 0px -3px 5px`,
                 }}
                 animate={{
                     opacity: [0, 1],

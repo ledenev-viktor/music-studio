@@ -137,7 +137,7 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                     maxHeight: '650px',
                     width: '100%',
                     background: COLORS.white,
-                    minWidth: '340px',
+                    minWidth: '320px',
                 }}
             >
                 {step !== STEP.SUCCESS && (

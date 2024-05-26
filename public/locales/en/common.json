@@ -2,19 +2,16 @@
     "header_menu_home": "Home",
     "header_menu_application": "Application",
     "header_menu_contacts": "Contacts",
-
     "content_benefits_title": "We are a wonderful music studio",
     "content_benefits_description": "With us you can:",
     "content_get_started_button": "Book",
     "content_benefit_scratch": "Learn from scratch",
     "content_benefit_improve": "Improve your skills",
     "content_benefit_fun": "Have fun",
-
     "content_studio_name": "Praktika",
     "content_studio_address_prefix": "Georgia, Tbilisi",
     "content_studio_address": "5 Mikheil Asatiani St",
     "content_studio_work_hours": "11 AM - 11 PM",
-
     "content_form_select_title": "Select date",
     "content_form_slots_title": "Available timeslots",
     "slots_empty": "No slots are available this day. Please select another one.",
@@ -22,7 +19,6 @@
     "content_form_comment_title": "Add comment",
     "content_form_tg_title": "Telegram username",
     "content_form_additionals_title": "Indicate additional instruments that will be required for rehearsal",
-
     "submit": "Submit",
     "continue": "Continue",
     "back": "Back",

@@ -12,9 +12,10 @@ export const CardContent = () => {
             justify="space-between"
             gap={50}
             style={{
-                padding: isDesktop ? '40px' : '20px',
+                padding: isDesktop ? '40px' : 0,
                 height: '100%',
                 overflow: 'scroll',
+                marginTop: !isDesktop && !isTablet ? '20px' : 0,
             }}
         >
             {!isDesktop && !isTablet && <MobileLinks />}

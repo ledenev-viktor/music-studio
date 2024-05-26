@@ -1,29 +1,53 @@
-import { ArrowRightOutlined } from '@ant-design/icons';
+import {
+    ArrowRightOutlined,
+    InstagramOutlined,
+    PhoneOutlined,
+} from '@ant-design/icons';
 import { Flex, Typography } from 'antd';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { COLORS } from '~variables';
+import { LocationPin, Telegram } from '../icons';
 
 const items = [
     {
         title: 'INSTAGRAM',
         href: 'https://www.instagram.com/praktikastudio/',
+        icon: (
+            <InstagramOutlined
+                style={{
+                    color: COLORS.black,
+                    fontSize: '20px',
+                }}
+            />
+        ),
     },
     {
         title: 'CHANNEL',
         href: 'https://t.me/praktikastudio_ch',
+        icon: <Telegram width={20} fill={COLORS.black} />,
     },
     {
         title: 'CHAT',
         href: 'https://t.me/+ACspuFKLISBkMjky',
+        icon: <Telegram width={20} fill={COLORS.black} />,
     },
     {
         title: 'GOOGLE MAPS',
         href: 'https://goo.gl/maps/mQv4W9rRn1dmJStN6',
+        icon: <LocationPin width={25} fill={COLORS.black} />,
     },
     {
         title: 'PHONE',
         href: 'tel:+995551613311',
+        icon: (
+            <PhoneOutlined
+                style={{
+                    color: COLORS.black,
+                    fontSize: '20px',
+                }}
+            />
+        ),
     },
 ];
 
@@ -35,8 +59,6 @@ const itemStyles = {
     width: '100%',
     height: '60px',
     fontSize: '16px',
-    boxShadow:
-        'rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px',
 };
 
 export const MobileLinks = () => {
@@ -45,14 +67,15 @@ export const MobileLinks = () => {
     return (
         <Flex
             vertical
-            justify="space-around"
+            justify="space-between"
             style={{ height: '100%', minHeight: 320 }}
         >
-            <Flex vertical style={{ marginBottom: 15 }}>
+            <Flex vertical style={{ marginLeft: '15px' }}>
                 <Typography.Text
                     style={{
                         fontSize: '20px',
                         marginTop: 0,
+                        color: COLORS.white,
                     }}
                 >
                     {t('content_studio_address_prefix')}
@@ -61,11 +84,14 @@ export const MobileLinks = () => {
                     style={{
                         fontSize: '20px',
                         marginTop: 0,
+                        color: COLORS.white,
                     }}
                 >
                     {t('content_studio_address')}
                 </Typography.Text>
-                <Typography.Text style={{ fontSize: '18px' }}>
+                <Typography.Text
+                    style={{ fontSize: '18px', color: COLORS.white }}
+                >
                     {t('content_studio_work_hours')}
                 </Typography.Text>
             </Flex>
@@ -76,7 +102,10 @@ export const MobileLinks = () => {
                         justify="space-between"
                         style={itemStyles}
                     >
-                        {item.title}
+                        <Flex align="center" gap={5}>
+                            {item.icon}
+                            {item.title}
+                        </Flex>
                         <ArrowRightOutlined />
                     </Flex>
                 </Link>
