@@ -3,10 +3,12 @@ import {
     useFormContext,
     Controller,
     UseControllerProps,
+    useWatch,
 } from 'react-hook-form';
 import { Flex } from 'antd';
 import { Dayjs } from 'dayjs';
 import { DaysWithSlots } from '~types/days';
+import { FormFields } from '~types/appointments';
 import { Calendar } from './Calendar';
 
 export const CalendarField = ({
@@ -22,8 +24,12 @@ export const CalendarField = ({
     setStartDate: (value: Dayjs) => void;
     isLoadingSlots: boolean;
 }) => {
-    const { control } = useFormContext();
-
+    const { control, setValue } = useFormContext();
+    const [date, weekStartDay] = useWatch<FormFields, ['date', 'weekStartDay']>(
+        {
+            name: ['date', 'weekStartDay'],
+        },
+    );
     return (
         <Flex vertical>
             <AnimatePresence mode="wait" initial={false}>
@@ -33,12 +39,18 @@ export const CalendarField = ({
                     rules={rules}
                     render={({ field: { onChange } }) => (
                         <Calendar
+                            date={date}
+                            weekStartDay={weekStartDay}
                             isLoadingSlots={isLoadingSlots}
                             days={days}
-                            onDayChange={onChange}
+                            onDayChange={(value) => {
+                                onChange(value);
+                                setValue('selectedTimeSlots', []);
+                            }}
                             onWeekChange={(start: Dayjs, end: Dayjs) => {
                                 setEndDate(end);
                                 setStartDate(start);
+                                setValue('weekStartDay', start);
                             }}
                         />
                     )}

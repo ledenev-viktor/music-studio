@@ -16,13 +16,20 @@ export const DateTimeStep = ({
     onSaveEdits?: () => void;
 }) => {
     const { t } = useTranslation();
-    const date = useWatch<FormFields, 'date'>({ name: 'date' });
-    const [startDate, setStartDate] = useState(dayjs());
-    const [endDate, setEndDate] = useState(dayjs().add(1, 'week'));
+    const [date, weekStartDay] = useWatch<FormFields, ['date', 'weekStartDay']>(
+        {
+            name: ['date', 'weekStartDay'],
+        },
+    );
+    const [startDate, setStartDate] = useState(
+        weekStartDay ? weekStartDay : dayjs(),
+    );
+    const [endDate, setEndDate] = useState(startDate.add(1, 'week'));
 
     const isLoadingSlots = useSetDays(startDate, endDate);
-
     const days = useGetDays(startDate, endDate);
+
+    console.log(days);
 
     return (
         <StepWrapper
@@ -53,7 +60,7 @@ export const DateTimeStep = ({
                 <TimeSlots
                     name="selectedTimeSlots"
                     label={t('content_form_slots_title')}
-                    timeslots={days[date]?.slots}
+                    timeSlots={days[date]?.slots}
                     rules={{
                         required: {
                             value: true,

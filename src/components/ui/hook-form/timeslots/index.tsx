@@ -18,7 +18,7 @@ import { BREAKPOINTS } from '~constants/breakpoints';
 
 type TimeSlotsBaseProps = {
     locale?: string;
-    timeslots: FreeSlots[];
+    timeSlots: FreeSlots[];
     className?: string;
     label?: string;
 } & UseControllerProps;
@@ -27,7 +27,7 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
     name,
     label,
     rules,
-    timeslots = [],
+    timeSlots = [],
     className,
 }) => {
     const { t } = useTranslation();
@@ -40,7 +40,7 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
 
     const error = errors[name] ? <>{errors[name]?.message}</> : '';
 
-    if (!timeslots.length) {
+    if (!timeSlots.length) {
         return <Alert type="error" message={t('slots_empty')} />;
     }
 
@@ -54,7 +54,7 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
                     rules={rules}
                     render={({ field: { value, onChange } }) => (
                         <Row justify="space-between" gutter={[20, 20]} wrap>
-                            {timeslots.map((slot: any) => (
+                            {timeSlots.map((slot: any) => (
                                 <Col
                                     key={slot.id}
                                     span={!isSmallMobile && !isMobile ? 8 : 12}
