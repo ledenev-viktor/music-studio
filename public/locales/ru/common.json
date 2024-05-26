@@ -2,19 +2,16 @@
     "header_menu_home": "Главная",
     "header_menu_application": "Записаться",
     "header_menu_contacts": "Контакты",
-
     "content_benefits_title": "Мы замечательная музыкальная студия",
     "content_benefits_description": "С нами вы можете:",
     "content_get_started_button": "Записаться",
     "content_benefit_scratch": "Учиться с нуля",
     "content_benefit_improve": "Совершенствовать свои навыки",
     "content_benefit_fun": "Весело проводить время",
-
     "content_studio_name": "Praktika",
     "content_studio_address_prefix": "Тбилиси, Грузия",
     "content_studio_address": "ул. Михаила Асатиани 5",
     "content_studio_work_hours": "11:00 - 23:00",
-
     "content_form_select_title": "Выберите дату",
     "content_form_slots_title": "Доступные часы",
     "slots_empty": "На выбранную Вами дату отсутствуют доступные часы, пожалуйста выберите другой день.",
@@ -22,7 +19,6 @@
     "content_form_comment_title": "Добавить комментарий",
     "content_form_tg_title": "Telegram никнейм",
     "content_form_additionals_title": "Укажите дополнительные инструменты, которые потребуются для репетиции",
-
     "submit": "Отправить",
     "continue": "Продолжить",
     "back": "Назад",

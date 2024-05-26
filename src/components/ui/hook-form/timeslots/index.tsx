@@ -7,13 +7,16 @@ import {
     UseControllerProps,
 } from 'react-hook-form';
 import { AnimatePresence } from 'framer-motion';
+import { useRouter } from 'next/router';
 import { useScreenDetector } from '~hooks/responsive';
 import { COLORS } from 'src/styles/variables';
 import { FreeSlots } from '~types/common';
+import { convertToAmPm } from '~utils/convertToAmPm';
 import { ErrorMessage, Label } from '../common';
 import { BREAKPOINTS } from '~constants/breakpoints';
 
 type TimeSlotsBaseProps = {
+    locale?: string;
     timeslots: FreeSlots[];
     className?: string;
     label?: string;
@@ -28,7 +31,8 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
     emptySlotsMessage,
     className,
 }) => {
-    const { isSmallMobile } = useScreenDetector();
+    const { locale } = useRouter();
+    const { isSmallMobile, isMobile } = useScreenDetector();
     const {
         control,
         formState: { errors },
@@ -60,7 +64,11 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
                                         {timeslots.map((slot: any) => (
                                             <Col
                                                 key={slot.id}
-                                                span={!isSmallMobile ? 8 : 12}
+                                                span={
+                                                    !isSmallMobile && !isMobile
+                                                        ? 8
+                                                        : 12
+                                                }
                                             >
                                                 <Tag.CheckableTag
                                                     style={{ width: '100%' }}
@@ -89,7 +97,11 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
                                                         onChange(nextValue);
                                                     }}
                                                 >
-                                                    {slot.label}
+                                                    {locale === 'en'
+                                                        ? convertToAmPm(
+                                                              slot.label,
+                                                          )
+                                                        : slot.label}
                                                 </Tag.CheckableTag>
                                             </Col>
                                         ))}
@@ -118,7 +130,7 @@ export const TimeSlots = styled(TimeSlotsBase)`
         padding: 10px 8px;
         box-sizing: border-box;
         line-height: 1;
-        font-size: 16px;
+        font-size: 14px;
         color: #000;
 
         &:hover {
@@ -132,8 +144,8 @@ export const TimeSlots = styled(TimeSlotsBase)`
             color: #000;
             background: none;
         }
-        @media screen and (max-width: ${BREAKPOINTS.mobile}) {
-            font-size: 14px;
+        @media screen and (max-width: ${BREAKPOINTS.smallMobile}) {
+            font-size: 12px;
         }
     }
 `;
