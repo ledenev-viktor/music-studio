@@ -6,4 +6,6 @@ export const COLORS = {
     blueHovered: '#5559d1',
     colorInactive: '#151633',
     grey: 'rgba(18, 18, 18, 0.8)',
+    lightGrey: 'rgba(18, 18, 18, 0.2)',
+    opacityBlue: 'rgba(94, 99, 232, 0.1)',
 };

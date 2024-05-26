@@ -55,7 +55,6 @@ const MyApp = ({
                     </ModalProvider>
                 </SessionProvider>
             </HydrationBoundary>
-            {/* <ReactQueryDevtools /> */}
         </QueryClientProvider>
     );
 };

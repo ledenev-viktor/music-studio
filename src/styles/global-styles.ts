@@ -108,7 +108,7 @@ export const globalStyles = css`
         z-index: 110;
     }
 
-    button path {
+    #button path {
         fill: var(--background);
     }
 `;

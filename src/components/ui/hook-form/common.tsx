@@ -11,7 +11,13 @@ export const Label = styled(Typography.Text)`
 
 const transition = { duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96] };
 
-export const ErrorMessage = ({ children }: { children: ReactNode }) => {
+export const ErrorMessage = ({
+    children,
+    motionId,
+}: {
+    children: ReactNode;
+    motionId: string;
+}) => {
     return (
         <motion.span
             initial={{ opacity: 0, y: -10 }}
@@ -21,7 +27,7 @@ export const ErrorMessage = ({ children }: { children: ReactNode }) => {
                 y: -10,
                 transition: { duration: 1, delay: 0.3 },
             }}
-            key="logoText"
+            key={motionId}
         >
             <Typography.Text style={{ color: 'red' }}>
                 {children}

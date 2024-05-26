@@ -39,7 +39,6 @@ export const PicturesUpload = ({ images }: { images?: Images }) => {
     };
 
     const handleChange: UploadProps['onChange'] = ({ file, fileList }) => {
-        console.log('in handle');
         if (imagesList.length < fileList.length) {
             if (file.originFileObj) {
                 getBase64(file.originFileObj as FileType).then((url) =>

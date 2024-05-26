@@ -52,7 +52,7 @@ const FormInputBase: FC<FormInputBaseProps> = ({
                         props.onBlur?.(e);
                     }}
                 />
-                {error && <ErrorMessage>{error}</ErrorMessage>}
+                {error && <ErrorMessage motionId={name}>{error}</ErrorMessage>}
             </AnimatePresence>
         </Flex>
     );

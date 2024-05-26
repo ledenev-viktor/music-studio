@@ -14,7 +14,7 @@
     "content_studio_work_hours": "11:00 - 23:00",
     "content_form_select_title": "Выберите дату",
     "content_form_slots_title": "Доступные часы",
-    "slots_empty": "На выбранную Вами дату отсутствуют доступные часы, пожалуйста выберите другой день.",
+    "slots_empty": "В расписании нет свободного времени на этот день, пожалуйста выберите другой день.",
     "content_form_name_title": "Полное имя",
     "content_form_comment_title": "Добавить комментарий",
     "content_form_tg_title": "Telegram никнейм",

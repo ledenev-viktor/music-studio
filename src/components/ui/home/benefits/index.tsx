@@ -12,8 +12,6 @@ import { BREAKPOINTS } from '~constants/breakpoints';
 export const Benefits = () => {
     const { t } = useTranslation();
     const { isMobile, isDesktop, isSmallMobile } = useScreenDetector();
-
-    console.log(isSmallMobile);
     const iconSize = isSmallMobile ? 50 : isMobile ? 80 : 120;
 
     return (

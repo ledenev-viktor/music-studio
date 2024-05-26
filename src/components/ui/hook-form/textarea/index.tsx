@@ -53,7 +53,7 @@ export const FormTextareaBase: FC<FormTextareaBaseProps> = ({
                     props.onBlur?.(e);
                 }}
             />
-            {error && <ErrorMessage>{error}</ErrorMessage>}
+            {error && <ErrorMessage motionId={name}>{error}</ErrorMessage>}
         </Flex>
     );
 };
