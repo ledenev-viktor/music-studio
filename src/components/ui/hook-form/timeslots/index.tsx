@@ -36,6 +36,7 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
     const {
         control,
         formState: { errors },
+        trigger,
     } = useFormContext();
 
     const error = errors[name] ? <>{errors[name]?.message}</> : '';
@@ -67,6 +68,7 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
                                             },
                                         )}
                                         onChange={(checked) => {
+                                            trigger('selectedTimeSlots');
                                             const nextValue = checked
                                                 ? [...value, slot]
                                                 : value.filter(

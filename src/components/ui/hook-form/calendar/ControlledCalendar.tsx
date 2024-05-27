@@ -50,6 +50,7 @@ export const CalendarField = ({
                             onWeekChange={(start: Dayjs, end: Dayjs) => {
                                 setEndDate(end);
                                 setStartDate(start);
+                                setValue('date', '');
                                 setValue('weekStartDay', start);
                             }}
                         />

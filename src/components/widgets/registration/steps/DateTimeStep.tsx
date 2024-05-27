@@ -29,14 +29,8 @@ export const DateTimeStep = ({
     const isLoadingSlots = useSetDays(startDate, endDate);
     const days = useGetDays(startDate, endDate);
 
-    console.log(days);
-
     return (
-        <StepWrapper
-            onSaveEdits={onSaveEdits}
-            onGoToNextStep={onGoToNextStep}
-            isGoToNextStepDisabled={days[date] && !days[date]?.slots.length}
-        >
+        <StepWrapper onSaveEdits={onSaveEdits} onGoToNextStep={onGoToNextStep}>
             <CalendarField
                 days={days}
                 name="date"
