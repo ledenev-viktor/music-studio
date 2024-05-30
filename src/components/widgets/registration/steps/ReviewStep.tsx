@@ -33,6 +33,10 @@ export const ReviewStep = ({
                 contentStyle={{
                     padding: isMobile ? '12px 12px' : '12px 24px',
                 }}
+                style={{
+                    maxHeight: '300px',
+                    overflow: 'hidden auto',
+                }}
             />
         </StepWrapper>
     );

@@ -24,5 +24,10 @@
     "back": "Назад",
     "save": "Сохранить",
     "edit": "Редактировать",
-    "required_filed": "Это поле обязательное"
+    "required_filed": "Это поле обязательное",
+    "content_form_addition_title": "Дополнительное оборудование",
+    "addition_equipment_option_1": "двойная педаль (кардан) 10 ₾/час",
+    "addition_equipment_option_2": "тарелка Китай 10 ₾/час",
+    "addition_equipment_option_3": "бас-гитара 4-струнная Harley Benton 10 ₾/час",
+    "addition_equipment_option_4": "электропианино Thomann DP-28 10 ₾/час"
 }
