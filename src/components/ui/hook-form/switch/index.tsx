@@ -1,6 +1,13 @@
 import { FC } from 'react';
-import { SwitchProps as SwitchBaseProps, Flex, Switch, Typography } from 'antd';
+import {
+    SwitchProps as SwitchBaseProps,
+    Flex,
+    Switch as SwitchAntd,
+    Typography,
+} from 'antd';
 import { useController, UseControllerProps } from 'react-hook-form';
+import styled from '@emotion/styled';
+import { COLORS } from '~variables';
 
 type SwitchProps = {
     className?: string;
@@ -37,3 +44,12 @@ export const FormSwitch: FC<SwitchProps> = ({
         </Flex>
     );
 };
+
+const Switch = styled(SwitchAntd)`
+    &.ant-switch-checked:hover:not(.ant-switch-disabled) {
+        &,
+        & .ant-switch-inner {
+            background: ${COLORS.blue};
+        }
+    }
+`;

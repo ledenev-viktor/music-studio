@@ -7,6 +7,7 @@ import {
     useFormContext,
 } from 'react-hook-form';
 import styled from '@emotion/styled';
+import { COLORS } from '~variables';
 import { ErrorMessage, Label } from '../common';
 import { BREAKPOINTS } from '~constants/breakpoints';
 
@@ -72,6 +73,7 @@ export const FormTextarea = styled(FormTextareaBase)`
         resize: none;
         min-height: 100px;
         font-size: 16px;
+        border-color: ${COLORS.blue};
 
         &::placeholder {
             font-size: 18px;

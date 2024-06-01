@@ -8,4 +8,5 @@ export const COLORS = {
     grey: 'rgba(18, 18, 18, 0.8)',
     lightGrey: 'rgba(18, 18, 18, 0.2)',
     opacityBlue: 'rgba(94, 99, 232, 0.1)',
+    lightgrey: 'rgb(235 235 235 / 50%)',
 };

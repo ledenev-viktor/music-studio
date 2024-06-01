@@ -21,14 +21,7 @@ type RegFormBaseProps = {
 };
 
 export const FormComponentBase = ({ className }: RegFormBaseProps) => {
-    const {
-        handleSubmit,
-        getValues,
-        trigger,
-        formState: { isValid },
-        clearErrors,
-        reset,
-    } = useFormContext();
+    const { handleSubmit, getValues, trigger, reset } = useFormContext();
     const [step, setStep] = useState<STEP>(STEP.DATE_TIME_STEP);
     const [mode, setMode] = useState<MODE>(MODE.DEFAULT);
     const [showFirework, setShowFirework] = useState(false);
@@ -57,11 +50,10 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                         onSaveEdits={
                             mode === MODE.EDIT ? onSaveEdits : undefined
                         }
-                        onGoToNextStep={() => {
-                            trigger();
+                        onGoToNextStep={async () => {
+                            const valid = await trigger();
 
-                            if (isValid) {
-                                clearErrors(['userName', 'userNameTelegram']);
+                            if (valid) {
                                 setStep(STEP.CONTACTS_STEP);
                             } else return;
                         }}
@@ -73,15 +65,17 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                         onSaveEdits={
                             mode === MODE.EDIT ? onSaveEdits : undefined
                         }
-                        onGoToNextStep={() => {
-                            trigger();
+                        onGoToNextStep={async () => {
+                            const valid = await trigger();
 
-                            if (isValid) {
+                            if (valid) {
                                 setStep(STEP.ADDITIONAL_STEP);
                             }
                             return;
                         }}
-                        onGoToPreviousStep={() => setStep(STEP.DATE_TIME_STEP)}
+                        onGoToPreviousStep={() => {
+                            setStep(STEP.DATE_TIME_STEP);
+                        }}
                     />
                 );
             case STEP.ADDITIONAL_STEP:
