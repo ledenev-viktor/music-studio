@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Flex, Steps } from 'antd';
-import { useFormContext, FieldValues } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { AnimatePresence } from 'framer-motion';
 import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
 import { useScreenDetector } from '~hooks/responsive';
 import { COLORS } from '~variables';
+import { useCreateAppointments } from '~hooks/appointments';
+import { FormFields } from '~types/appointments';
 import { BREAKPOINTS } from '~constants/breakpoints';
 import {
     ContactsStep,
@@ -34,9 +36,13 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
     const [showFirework, setShowFirework] = useState(false);
     const { isMobile } = useScreenDetector();
 
-    const onSubmit = async (data: FieldValues) => {
-        console.log(data);
-        reset();
+    const { mutate: sendFormData } = useCreateAppointments();
+    const onSubmit = async (data: FormFields) => {
+        sendFormData(data, {
+            onSuccess: () => {
+                reset();
+            },
+        });
     };
 
     const onSaveEdits = () => {

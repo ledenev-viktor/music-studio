@@ -21,6 +21,8 @@ export const useSetDays = (startDate: Dayjs, endDate: Dayjs) => {
                 id: index,
                 value: `${start}-${end}`,
                 label: `${start}:00 - ${end}:00`,
+                startTime: `${current} ${start}:00:00`,
+                endTime: `${current} ${end}:00:00`,
             }),
         );
 
