@@ -1,5 +1,4 @@
 import { useMutation } from '@tanstack/react-query';
-import dayjs from 'dayjs';
 import api from '~lib/api.helper';
 import { useNotification } from '~notifications';
 import { FormFields } from '~types/appointments';
@@ -14,7 +13,6 @@ export const useCreateAppointments = () => {
 
             const sendArrayData = selectedTimeSlots.map((slot: any) => {
                 return {
-                    createdAt: dayjs(),
                     fullName: userName,
                     comment: comment,
                     telegram: userNameTelegram,

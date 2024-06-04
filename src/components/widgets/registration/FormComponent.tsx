@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Flex, Steps } from 'antd';
-import { useFormContext } from 'react-hook-form';
+import { FieldValues, useFormContext } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { AnimatePresence } from 'framer-motion';
 import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
@@ -31,8 +31,9 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
     const { isMobile } = useScreenDetector();
 
     const { mutate: sendFormData } = useCreateAppointments();
-    const onSubmit = async (data: FormFields) => {
-        sendFormData(data, {
+    const onSubmit = async (data: FieldValues) => {
+        const formData: FormFields = data as FormFields;
+        sendFormData(formData, {
             onSuccess: () => {
                 reset();
             },
