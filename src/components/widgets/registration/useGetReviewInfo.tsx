@@ -28,6 +28,7 @@ const DescriptionItemContentWrapper = ({
                     color: COLORS.grey,
                     opacity: 0.5,
                     zIndex: 2,
+                    transform: 'translateY(-50%)',
                 }}
             />
             {children}
@@ -123,14 +124,18 @@ export const useGetReviewInfo = (
                 <DescriptionItemContentWrapper
                     onEditClick={() => onClick(STEP_TYPE.ADDITIONS)}
                 >
-                    <List
-                        dataSource={additionEquipment!.map(
-                            (item: { label: string }) => item.label,
-                        )}
-                        renderItem={(item: string) => (
-                            <List.Item>{item}</List.Item>
-                        )}
-                    />
+                    {additionEquipment.length > 0 ? (
+                        <List
+                            dataSource={additionEquipment!.map(
+                                (item: { label: string }) => item.label,
+                            )}
+                            renderItem={(item: string) => (
+                                <List.Item>{item}</List.Item>
+                            )}
+                        />
+                    ) : (
+                        '-'
+                    )}
                 </DescriptionItemContentWrapper>
             ),
         },

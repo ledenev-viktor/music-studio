@@ -7,7 +7,7 @@ import {
     useFormContext,
 } from 'react-hook-form';
 import { COLORS } from '~variables';
-import { ErrorMessage, Label } from '../common';
+import { Label } from '../common';
 
 const Checkbox = styled(CheckboxAntd)`
     &.ant-checkbox {
@@ -40,7 +40,7 @@ const Checkbox = styled(CheckboxAntd)`
                 color: ${COLORS.blue};
             }
             .ant-checkbox + span {
-                font-size: 18px;
+                font-size: 16px;
                 line-height: 1.3;
             }
         }
@@ -61,16 +61,11 @@ export const CheckboxGroup = ({
     gutter = [24, 24],
     ...props
 }: CheckboxGroupBaseProps) => {
-    const {
-        control,
-        formState: { errors },
-    } = useFormContext();
-
-    const error = errors[name] ? <>{errors[name]?.message}</> : '';
+    const { control } = useFormContext();
 
     return (
         <Flex vertical>
-            {label && <Label>{label}</Label>}
+            {label && <Label style={{ marginBottom: '25px' }}>{label}</Label>}
             <Controller
                 name={name}
                 control={control}
@@ -103,7 +98,6 @@ export const CheckboxGroup = ({
                     </CheckboxAntd.Group>
                 )}
             />
-            {error && <ErrorMessage motionId={name}>{error}</ErrorMessage>}
         </Flex>
     );
 };
