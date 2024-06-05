@@ -22,6 +22,7 @@ type RegFormBaseProps = {
 
 export const FormComponentBase = ({ className }: RegFormBaseProps) => {
     const { handleSubmit, getValues, reset, trigger } = useFormContext();
+
     const [step, setStep] = useState<STEP>(STEP.DATE_TIME_STEP);
     const [mode, setMode] = useState<MODE>(MODE.DEFAULT);
     const [showFirework, setShowFirework] = useState(false);

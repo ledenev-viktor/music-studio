@@ -7,6 +7,7 @@ import {
     useFormContext,
 } from 'react-hook-form';
 import { AnimatePresence } from 'framer-motion';
+import { COLORS } from '~variables';
 import { ErrorMessage, Label } from '../common';
 
 type FormInputBaseProps = {
@@ -63,5 +64,29 @@ export const FormInput = styled(FormInputBase)`
     input {
         height: 40px;
         font-size: 16px;
+        &:-internal-autofill-selected,
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active {
+            transition: background-color 999999s ease-in-out 0s;
+            background: none;
+        }
+        &:-webkit-autofill::first-line {
+            font-size: 16px;
+            color: ${COLORS.black};
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+        &:-webkit-autofill {
+            animation: onautofillstart 999999s forwards;
+        }
+        &:not(:-webkit-autofill) {
+            animation: onautofillcancel 999999s;
+        }
+
+        &.ant-input-outlined {
+            border-color: ${COLORS.blue};
+        }
     }
 `;
