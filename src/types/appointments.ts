@@ -24,7 +24,9 @@ export type FormFields = {
     userNameTelegram: string;
     selectedTimeSlots: [];
     isCommentNeeded: boolean;
+    additionEquipment: [];
     comment: string;
+    weekStartDay?: Dayjs;
 };
 
 export type EditFormData = {

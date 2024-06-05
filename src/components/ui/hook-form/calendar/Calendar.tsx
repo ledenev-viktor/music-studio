@@ -18,16 +18,27 @@ const CalendarBase = ({
     onDayChange,
     onWeekChange,
     isLoadingSlots,
+    date,
+    weekStartDay,
 }: {
     className?: string;
     days: DaysWithSlots;
     onDayChange: (value: string) => void;
     onWeekChange: (start: Dayjs, end: Dayjs) => void;
     isLoadingSlots: boolean;
+    date?: string;
+    weekStartDay?: Dayjs;
 }) => {
     const today = dayjs();
-    const [selected, setSelected] = useState<Dayjs>();
-    const [current, setCurrent] = useState<Dayjs>(today);
+    const [selected, setSelected] = useState<Dayjs | undefined>(
+        date ? dayjs(date) : today,
+    );
+    // is used as basic for calculating dates
+    const [current, setCurrent] = useState<Dayjs>(
+        weekStartDay ? weekStartDay : today,
+    );
+
+    // those states are needed to display month names
     const [startMonth, setStartMonth] = useState<string>(
         current.startOf('week').format('MMMM'),
     );
@@ -35,21 +46,24 @@ const CalendarBase = ({
         current.endOf('week').format('MMMM'),
     );
 
+    // update the month
     useEffect(() => {
         setStartMonth(current.format('MMMM'));
         setEndMonth(current.add(6, 'day').format('MMMM'));
     }, [current]);
 
-    const startOfCurrentWeek = current;
+    const startOfCurrentWeek = weekStartDay ? weekStartDay : current;
     const daysOfWeek = Array.from({ length: 7 }, (_, i) =>
         startOfCurrentWeek.add(i, 'day'),
     );
 
+    // callback that works when you choose a date
     const handleDayClick = (day: Dayjs) => {
         setSelected(day);
         onDayChange(day.format('YYYY-MM-DD'));
     };
 
+    // just a wrapper for tag the Tag component to have smooth hover animation
     const CalendarItemWrapper = ({
         children,
         day,
@@ -86,6 +100,7 @@ const CalendarBase = ({
         </motion.div>
     );
 
+    // calculate color for the badge
     const getColorForStatus = (day: Dayjs) => {
         if (isLoadingSlots) return CALENDAR_STATUSES_COLORS.CALCULATING;
 

@@ -21,7 +21,8 @@ type RegFormBaseProps = {
 };
 
 export const FormComponentBase = ({ className }: RegFormBaseProps) => {
-    const { handleSubmit, getValues, trigger, reset } = useFormContext();
+    const { handleSubmit, getValues, reset, trigger } = useFormContext();
+  
     const [step, setStep] = useState<STEP>(STEP.DATE_TIME_STEP);
     const [mode, setMode] = useState<MODE>(MODE.DEFAULT);
     const [showFirework, setShowFirework] = useState(false);
@@ -32,14 +33,25 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
         reset();
     };
 
-    const onSaveEdits = () => {
-        setMode(MODE.DEFAULT);
-        setStep(STEP.REVIEW_STEP);
+    const onSaveEdits = async () => {
+        const valid = await trigger();
+
+        if (valid) {
+            setMode(MODE.DEFAULT);
+            setStep(STEP.REVIEW_STEP);
+        }
     };
 
     const onEdit = (step: STEP) => {
         setMode(MODE.EDIT);
         setStep(step);
+    };
+
+    const validateAndProceed = async (fields: string[], nextStep: STEP) => {
+        const valid = await trigger(fields);
+        if (valid) {
+            setStep(nextStep);
+        }
     };
 
     const getStep = () => {
@@ -50,13 +62,12 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                         onSaveEdits={
                             mode === MODE.EDIT ? onSaveEdits : undefined
                         }
-                        onGoToNextStep={async () => {
-                            const valid = await trigger();
-
-                            if (valid) {
-                                setStep(STEP.CONTACTS_STEP);
-                            } else return;
-                        }}
+                        onGoToNextStep={() =>
+                            validateAndProceed(
+                                ['date', 'selectedTimeSlots'],
+                                STEP.CONTACTS_STEP,
+                            )
+                        }
                     />
                 );
             case STEP.CONTACTS_STEP:
@@ -65,17 +76,13 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                         onSaveEdits={
                             mode === MODE.EDIT ? onSaveEdits : undefined
                         }
-                        onGoToNextStep={async () => {
-                            const valid = await trigger();
-
-                            if (valid) {
-                                setStep(STEP.ADDITIONAL_STEP);
-                            }
-                            return;
-                        }}
-                        onGoToPreviousStep={() => {
-                            setStep(STEP.DATE_TIME_STEP);
-                        }}
+                        onGoToNextStep={() =>
+                            validateAndProceed(
+                                ['userName', 'userNameTelegram'],
+                                STEP.ADDITIONAL_STEP,
+                            )
+                        }
+                        onGoToPreviousStep={() => setStep(STEP.DATE_TIME_STEP)}
                     />
                 );
             case STEP.ADDITIONAL_STEP:

@@ -1,4 +1,5 @@
 import { useTranslation } from 'next-i18next';
+import { useFormContext } from 'react-hook-form';
 import { FormInput } from '~components/ui/hook-form';
 import { StepWrapper } from './StepWrapper';
 
@@ -12,11 +13,15 @@ export const ContactsStep = ({
     onSaveEdits?: () => void;
 }) => {
     const { t } = useTranslation();
+    const { clearErrors } = useFormContext();
 
     return (
         <StepWrapper
             onGoToNextStep={onGoToNextStep}
-            onGoToPreviousStep={onGoToPreviousStep}
+            onGoToPreviousStep={async () => {
+                clearErrors(['userName', 'userNameTelegram']);
+                onGoToPreviousStep();
+            }}
             onSaveEdits={onSaveEdits}
         >
             <FormInput

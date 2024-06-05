@@ -14,7 +14,9 @@ export const RegistrationForm: FC<RegistrationFormProps> = () => {
         userNameTelegram: '',
         selectedTimeSlots: [],
         isCommentNeeded: false,
+        additionEquipment: [],
         comment: '',
+        weekStartDay: undefined,
     };
 
     const form = useForm<FormFields>({
