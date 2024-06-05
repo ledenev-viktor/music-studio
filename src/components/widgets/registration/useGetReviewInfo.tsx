@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { EditOutlined } from '@ant-design/icons';
-import { Flex, DescriptionsProps, Typography } from 'antd';
+import { Flex, DescriptionsProps, Typography, List } from 'antd';
 import { FieldValues } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { extractDay, extractDate } from '~utils/date.helpers';
@@ -17,16 +17,18 @@ const DescriptionItemContentWrapper = ({
     onEditClick: () => void;
 }) => {
     return (
-        <Flex vertical style={{ position: 'relative' }}>
+        <Flex vertical style={{ position: 'relative', padding: '0 35px 0 0' }}>
             <EditOutlined
                 onClick={onEditClick}
                 style={{
                     position: 'absolute',
                     right: '2%',
-                    top: '30%',
+                    top: '50%',
                     fontSize: '20px',
                     color: COLORS.grey,
                     opacity: 0.5,
+                    zIndex: 2,
+                    transform: 'translateY(-50%)',
                 }}
             />
             {children}
@@ -40,8 +42,14 @@ export const useGetReviewInfo = (
 ) => {
     const { locale } = useRouter();
 
-    const { date, userName, userNameTelegram, comment, selectedTimeSlots } =
-        fields;
+    const {
+        date,
+        userName,
+        userNameTelegram,
+        additionEquipment,
+        comment,
+        selectedTimeSlots,
+    } = fields;
 
     const mergedSelectedTimeSlotsLabels = mergeIntervals(selectedTimeSlots).map(
         (slot) => (locale === 'en' ? convertToAmPm(slot.label) : slot.label),
@@ -113,6 +121,28 @@ export const useGetReviewInfo = (
         },
         {
             key: '4',
+            label: 'Additionally',
+            children: (
+                <DescriptionItemContentWrapper
+                    onEditClick={() => onClick(STEP_TYPE.ADDITIONS)}
+                >
+                    {additionEquipment.length > 0 ? (
+                        <List
+                            dataSource={additionEquipment!.map(
+                                (item: { label: string }) => item.label,
+                            )}
+                            renderItem={(item: string) => (
+                                <List.Item>{item}</List.Item>
+                            )}
+                        />
+                    ) : (
+                        '-'
+                    )}
+                </DescriptionItemContentWrapper>
+            ),
+        },
+        {
+            key: '5',
             label: 'Comment',
             children: (
                 <DescriptionItemContentWrapper
