@@ -25,6 +25,7 @@ export type FormFields = {
     selectedTimeSlots: [];
     isCommentNeeded: boolean;
     comment: string;
+    weekStartDay?: Dayjs;
 };
 
 export type EditFormData = {

@@ -15,6 +15,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = () => {
         selectedTimeSlots: [],
         isCommentNeeded: false,
         comment: '',
+        weekStartDay: undefined,
     };
 
     const form = useForm<FormFields>({
