@@ -8,16 +8,28 @@ export const useCreateAppointments = () => {
 
     return useMutation<any, any, FormFields>({
         mutationFn: (data) => {
-            const { selectedTimeSlots, userName, userNameTelegram, comment } =
-                data;
+            const {
+                selectedTimeSlots,
+                userName,
+                userNameTelegram,
+                userNameInstagram,
+                additionEquipment,
+                comment,
+            } = data;
 
             const sendArrayData = selectedTimeSlots.map((slot: any) => {
+                const [startTime, endTime] = slot.id.split('~');
+
                 return {
                     fullName: userName,
                     comment: comment,
                     telegram: userNameTelegram,
-                    startTime: slot.startTime,
-                    endTime: slot.endTime,
+                    instagram: userNameInstagram,
+                    equipment: additionEquipment
+                        .map((item: { label: string }) => item?.label)
+                        .join(', '),
+                    startTime,
+                    endTime,
                 };
             });
 

@@ -25,9 +25,11 @@
     "save": "Сохранить",
     "edit": "Редактировать",
     "required_filed": "Это поле обязательное",
+    "required_filed_optional": "Заполните поле никнейм Telegram или Instagram",
     "content_form_addition_title": "Дополнительное оборудование (10 ₾/час за каждый)",
     "addition_equipment_option_1": "двойная педаль (кардан)",
     "addition_equipment_option_2": "тарелка Китай",
     "addition_equipment_option_3": "бас-гитара 4-струнная Harley Benton",
-    "addition_equipment_option_4": "электропианино Thomann DP-28"
+    "addition_equipment_option_4": "электропианино Thomann DP-28",
+    "content_form_inst_title": "Instagram никнейм"
 }

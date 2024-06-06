@@ -12,6 +12,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = () => {
         date: '',
         userName: '',
         userNameTelegram: '',
+        userNameInstagram: '',
         selectedTimeSlots: [],
         isCommentNeeded: false,
         additionEquipment: [],

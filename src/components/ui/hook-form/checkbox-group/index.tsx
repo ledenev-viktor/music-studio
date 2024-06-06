@@ -82,7 +82,6 @@ export const CheckboxGroup = ({
                             const checked = options.filter((option) =>
                                 checkedValues.includes(option.value),
                             );
-                            console.log(checked);
                             onChange(checked);
                         }}
                     >

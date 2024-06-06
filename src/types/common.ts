@@ -5,7 +5,7 @@ export type MenuPoint = {
 };
 
 export type FreeSlots = {
-    id: number;
+    id: string;
     value: string;
     label: string;
 };
