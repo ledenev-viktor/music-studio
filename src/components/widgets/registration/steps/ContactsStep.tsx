@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useFormContext, useWatch } from 'react-hook-form';
+import { FormFields } from '~types/appointments';
 import { FormInput } from '~components/ui/hook-form';
 import { StepWrapper } from './StepWrapper';
 
@@ -14,15 +15,13 @@ export const ContactsStep = ({
     onSaveEdits?: () => void;
 }) => {
     const { t } = useTranslation();
-    const { clearErrors, control } = useFormContext();
+    const { clearErrors } = useFormContext();
 
-    const userNameTelegram = useWatch({
-        control,
-        name: 'userNameTelegram',
-    });
-    const userNameInstagram = useWatch({
-        control,
-        name: 'userNameInstagram',
+    const [userNameTelegram, userNameInstagram] = useWatch<
+        FormFields,
+        ['userNameTelegram', 'userNameInstagram']
+    >({
+        name: ['userNameTelegram', 'userNameInstagram'],
     });
 
     useEffect(() => {
