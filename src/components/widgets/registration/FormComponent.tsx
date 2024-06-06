@@ -31,10 +31,13 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
     const [showFirework, setShowFirework] = useState(false);
     const { isMobile } = useScreenDetector();
 
-    const { mutate: sendFormData } = useCreateAppointments();
+    const { mutate: sendData } = useCreateAppointments();
+
     const onSubmit = async (data: FormFields) => {
-        sendFormData(data, {
+        sendData(data, {
             onSuccess: () => {
+                setShowFirework(true);
+                setStep(STEP.SUCCESS);
                 reset();
             },
         });
@@ -113,9 +116,7 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                 return (
                     <ReviewStep
                         onSubmit={() => {
-                            setShowFirework(true);
                             onSubmit(getValues());
-                            setStep(STEP.SUCCESS);
                         }}
                         handleEdit={onEdit}
                     />
