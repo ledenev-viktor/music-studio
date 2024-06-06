@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Flex, Steps } from 'antd';
-import { FieldValues, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { AnimatePresence } from 'framer-motion';
 import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
@@ -23,7 +23,8 @@ type RegFormBaseProps = {
 };
 
 export const FormComponentBase = ({ className }: RegFormBaseProps) => {
-    const { handleSubmit, getValues, reset, trigger } = useFormContext();
+    const { handleSubmit, getValues, reset, trigger } =
+        useFormContext<FormFields>();
 
     const [step, setStep] = useState<STEP>(STEP.DATE_TIME_STEP);
     const [mode, setMode] = useState<MODE>(MODE.DEFAULT);
@@ -31,9 +32,8 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
     const { isMobile } = useScreenDetector();
 
     const { mutate: sendFormData } = useCreateAppointments();
-    const onSubmit = async (data: FieldValues) => {
-        const formData: FormFields = data as FormFields;
-        sendFormData(formData, {
+    const onSubmit = async (data: FormFields) => {
+        sendFormData(data, {
             onSuccess: () => {
                 reset();
             },
@@ -54,7 +54,10 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
         setStep(step);
     };
 
-    const validateAndProceed = async (fields: string[], nextStep: STEP) => {
+    const validateAndProceed = async (
+        fields: Array<keyof FormFields>,
+        nextStep: STEP,
+    ) => {
         const valid = await trigger(fields);
         if (valid) {
             setStep(nextStep);
@@ -85,7 +88,11 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                         }
                         onGoToNextStep={() =>
                             validateAndProceed(
-                                ['userName', 'userNameTelegram'],
+                                [
+                                    'userName',
+                                    'userNameTelegram',
+                                    'userNameInstagram',
+                                ],
                                 STEP.ADDITIONAL_STEP,
                             )
                         }

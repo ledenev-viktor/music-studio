@@ -17,12 +17,10 @@ export const useSetDays = (startDate: Dayjs, endDate: Dayjs) => {
         const current = startDate.add(i, 'day').format('YYYY-MM-DD');
 
         const daySlots = getAvailableSlots(current, events)?.map(
-            ([start, end], index) => ({
-                id: index,
+            ([start, end]) => ({
+                id: `${current}T${start}:00:00~${current}T${end}:00:00`,
                 value: `${start}-${end}`,
                 label: `${start}:00 - ${end}:00`,
-                startTime: `${current} ${start}:00:00`,
-                endTime: `${current} ${end}:00:00`,
             }),
         );
 

@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 import { FormInput } from '~components/ui/hook-form';
 import { StepWrapper } from './StepWrapper';
 
@@ -13,13 +14,31 @@ export const ContactsStep = ({
     onSaveEdits?: () => void;
 }) => {
     const { t } = useTranslation();
-    const { clearErrors } = useFormContext();
+    const { clearErrors, control } = useFormContext();
+
+    const fieldUserNameTelegram = useWatch({
+        control,
+        name: 'userNameTelegram',
+    });
+    const fieldUserNameInstagram = useWatch({
+        control,
+        name: 'userNameInstagram',
+    });
+
+    useEffect(() => {
+        fieldUserNameInstagram.length > 0 && clearErrors(['userNameTelegram']);
+        fieldUserNameTelegram.length > 0 && clearErrors(['userNameInstagram']);
+    }, [clearErrors, fieldUserNameInstagram, fieldUserNameTelegram]);
 
     return (
         <StepWrapper
             onGoToNextStep={onGoToNextStep}
             onGoToPreviousStep={async () => {
-                clearErrors(['userName', 'userNameTelegram']);
+                clearErrors([
+                    'userName',
+                    'userNameTelegram',
+                    'userNameInstagram',
+                ]);
                 onGoToPreviousStep();
             }}
             onSaveEdits={onSaveEdits}
@@ -38,10 +57,20 @@ export const ContactsStep = ({
                 name="userNameTelegram"
                 label={t('content_form_tg_title')}
                 rules={{
-                    required: {
-                        value: true,
-                        message: t('required_filed'),
-                    },
+                    validate: (value) =>
+                        value?.length > 0 ||
+                        fieldUserNameInstagram?.length > 0 ||
+                        t('required_filed_optional'),
+                }}
+            />
+            <FormInput
+                name="userNameInstagram"
+                label={t('content_form_inst_title')}
+                rules={{
+                    validate: (value) =>
+                        value?.length > 0 ||
+                        fieldUserNameTelegram?.length > 0 ||
+                        t('required_filed_optional'),
                 }}
             />
         </StepWrapper>

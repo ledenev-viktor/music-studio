@@ -25,9 +25,11 @@
     "save": "Save",
     "edit": "Edit",
     "required_filed": "This field is required",
+    "required_filed_optional": "Fill in the Telegram or Instagram nickname field",
     "content_form_addition_title": "Optional equipment (10 ₾/hour for each)",
     "addition_equipment_option_4": "electric piano Thomann DP-28",
     "addition_equipment_option_3": "bass guitar 4-string Harley Benton",
     "addition_equipment_option_2": "plate China",
-    "addition_equipment_option_1": "double pedal (cardan)"
+    "addition_equipment_option_1": "double pedal (cardan)",
+    "content_form_inst_title": "Instagram username"
 }
