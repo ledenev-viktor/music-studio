@@ -16,19 +16,19 @@ export const ContactsStep = ({
     const { t } = useTranslation();
     const { clearErrors, control } = useFormContext();
 
-    const fieldUserNameTelegram = useWatch({
+    const userNameTelegram = useWatch({
         control,
         name: 'userNameTelegram',
     });
-    const fieldUserNameInstagram = useWatch({
+    const userNameInstagram = useWatch({
         control,
         name: 'userNameInstagram',
     });
 
     useEffect(() => {
-        fieldUserNameInstagram.length > 0 && clearErrors(['userNameTelegram']);
-        fieldUserNameTelegram.length > 0 && clearErrors(['userNameInstagram']);
-    }, [clearErrors, fieldUserNameInstagram, fieldUserNameTelegram]);
+        userNameInstagram.length > 0 && clearErrors(['userNameTelegram']);
+        userNameTelegram.length > 0 && clearErrors(['userNameInstagram']);
+    }, [clearErrors, userNameInstagram, userNameTelegram]);
 
     return (
         <StepWrapper
@@ -59,7 +59,7 @@ export const ContactsStep = ({
                 rules={{
                     validate: (value) =>
                         value?.length > 0 ||
-                        fieldUserNameInstagram?.length > 0 ||
+                        userNameInstagram?.length > 0 ||
                         t('required_filed_optional'),
                 }}
             />
@@ -69,7 +69,7 @@ export const ContactsStep = ({
                 rules={{
                     validate: (value) =>
                         value?.length > 0 ||
-                        fieldUserNameTelegram?.length > 0 ||
+                        userNameTelegram?.length > 0 ||
                         t('required_filed_optional'),
                 }}
             />

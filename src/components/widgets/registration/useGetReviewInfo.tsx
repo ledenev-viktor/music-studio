@@ -93,16 +93,16 @@ export const useGetReviewInfo = (
                 <DescriptionItemContentWrapper
                     onEditClick={() => onClick(STEP_TYPE.USER_INFO)}
                 >
-                    <Typography.Paragraph>
-                        <div>
+                    <Flex vertical>
+                        <Typography.Paragraph>
                             Telegram:{' '}
                             {userNameTelegram ? userNameTelegram : '-'}
-                        </div>
-                        <div>
+                        </Typography.Paragraph>
+                        <Typography.Paragraph>
                             Instagram:{' '}
                             {userNameInstagram ? userNameInstagram : '-'}
-                        </div>
-                    </Typography.Paragraph>
+                        </Typography.Paragraph>
+                    </Flex>
                 </DescriptionItemContentWrapper>
             ),
         },
