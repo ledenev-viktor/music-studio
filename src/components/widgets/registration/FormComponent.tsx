@@ -147,6 +147,8 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
         }
     };
 
+    const isNotResultStep = step !== STEP.SUCCESS && step !== STEP.FAIL;
+
     return (
         <Flex
             vertical
@@ -168,7 +170,7 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                     minWidth: '320px',
                 }}
             >
-                {step !== STEP.SUCCESS && (
+                {isNotResultStep && (
                     <Flex
                         vertical
                         align="stretch"
