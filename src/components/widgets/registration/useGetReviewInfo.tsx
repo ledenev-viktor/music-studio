@@ -46,6 +46,7 @@ export const useGetReviewInfo = (
         date,
         userName,
         userNameTelegram,
+        userNameInstagram,
         additionEquipment,
         comment,
         selectedTimeSlots,
@@ -92,9 +93,18 @@ export const useGetReviewInfo = (
                 <DescriptionItemContentWrapper
                     onEditClick={() => onClick(STEP_TYPE.USER_INFO)}
                 >
-                    <Typography.Paragraph>
-                        Telegram: {userNameTelegram}
-                    </Typography.Paragraph>
+                    <Flex vertical>
+                        {userNameTelegram && (
+                            <Typography.Paragraph>
+                                Telegram: {userNameTelegram}
+                            </Typography.Paragraph>
+                        )}
+                        {userNameInstagram && (
+                            <Typography.Paragraph>
+                                Instagram: {userNameInstagram}
+                            </Typography.Paragraph>
+                        )}
+                    </Flex>
                 </DescriptionItemContentWrapper>
             ),
         },

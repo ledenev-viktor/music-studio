@@ -2,31 +2,39 @@ import { useMutation } from '@tanstack/react-query';
 import api from '~lib/api.helper';
 import { useNotification } from '~notifications';
 import { FormFields } from '~types/appointments';
-import { CalendarEvent } from '~types/google';
 
 export const useCreateAppointments = () => {
     const { notification } = useNotification();
 
     return useMutation<any, any, FormFields>({
         mutationFn: (data) => {
-            const { selectedTimeSlots, userName, userNameTelegram, comment } =
-                data;
-            const sendArrayData = selectedTimeSlots.map(
-                (slot: CalendarEvent) => {
-                    return {
-                        id_calendar: slot.id,
-                        createdAt: slot.created,
-                        fullName: userName,
-                        comment: comment,
-                        telegram: userNameTelegram,
-                        startTime: slot.start.dateTime,
-                        endTime: slot.end.dateTime,
-                    };
-                },
-            );
+            const {
+                selectedTimeSlots,
+                userName,
+                userNameTelegram,
+                userNameInstagram,
+                additionEquipment,
+                comment,
+            } = data;
+
+            const sendArrayData = selectedTimeSlots.map((slot: any) => {
+                const [startTime, endTime] = slot.id.split('~');
+
+                return {
+                    fullName: userName,
+                    comment: comment,
+                    telegram: userNameTelegram,
+                    instagram: userNameInstagram,
+                    equipment: additionEquipment
+                        .map((item: { label: string }) => item?.label)
+                        .join(', '),
+                    startTime,
+                    endTime,
+                };
+            });
 
             return api.post<any>(
-                'api/supabase/appointments/insert',
+                '/api/supabase/appointments/insert',
                 sendArrayData,
             );
         },

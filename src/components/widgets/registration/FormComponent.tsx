@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Flex, Steps } from 'antd';
-import { useFormContext, FieldValues } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { AnimatePresence } from 'framer-motion';
 import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
 import { useScreenDetector } from '~hooks/responsive';
 import { COLORS } from '~variables';
+import { useCreateAppointments } from '~hooks/appointments';
+import { FormFields } from '~types/appointments';
 import { BREAKPOINTS } from '~constants/breakpoints';
 import {
     ContactsStep,
@@ -21,16 +23,24 @@ type RegFormBaseProps = {
 };
 
 export const FormComponentBase = ({ className }: RegFormBaseProps) => {
-    const { handleSubmit, getValues, reset, trigger } = useFormContext();
+    const { handleSubmit, getValues, reset, trigger } =
+        useFormContext<FormFields>();
 
     const [step, setStep] = useState<STEP>(STEP.DATE_TIME_STEP);
     const [mode, setMode] = useState<MODE>(MODE.DEFAULT);
     const [showFirework, setShowFirework] = useState(false);
     const { isMobile } = useScreenDetector();
 
-    const onSubmit = async (data: FieldValues) => {
-        console.log(data);
-        reset();
+    const { mutate: sendData } = useCreateAppointments();
+
+    const onSubmit = async (data: FormFields) => {
+        sendData(data, {
+            onSuccess: () => {
+                setShowFirework(true);
+                setStep(STEP.SUCCESS);
+                reset();
+            },
+        });
     };
 
     const onSaveEdits = async () => {
@@ -47,7 +57,10 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
         setStep(step);
     };
 
-    const validateAndProceed = async (fields: string[], nextStep: STEP) => {
+    const validateAndProceed = async (
+        fields: Array<keyof FormFields>,
+        nextStep: STEP,
+    ) => {
         const valid = await trigger(fields);
         if (valid) {
             setStep(nextStep);
@@ -78,7 +91,11 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                         }
                         onGoToNextStep={() =>
                             validateAndProceed(
-                                ['userName', 'userNameTelegram'],
+                                [
+                                    'userName',
+                                    'userNameTelegram',
+                                    'userNameInstagram',
+                                ],
                                 STEP.ADDITIONAL_STEP,
                             )
                         }
@@ -99,9 +116,7 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                 return (
                     <ReviewStep
                         onSubmit={() => {
-                            setShowFirework(true);
                             onSubmit(getValues());
-                            setStep(STEP.SUCCESS);
                         }}
                         handleEdit={onEdit}
                     />

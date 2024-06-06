@@ -22,6 +22,7 @@ export type FormFields = {
     date: string;
     userName: string;
     userNameTelegram: string;
+    userNameInstagram: string;
     selectedTimeSlots: [];
     isCommentNeeded: boolean;
     additionEquipment: [];
