@@ -17,6 +17,7 @@ import {
     SuccessScreen,
 } from './steps';
 import { MODE, STEP, STEP_NUMBER } from '~constants/registrationSteps';
+import { FailScreen } from './steps/FailScreen';
 
 type RegFormBaseProps = {
     className?: string;
@@ -39,6 +40,9 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                 setShowFirework(true);
                 setStep(STEP.SUCCESS);
                 reset();
+            },
+            onError: () => {
+                setStep(STEP.FAIL);
             },
         });
     };
@@ -126,6 +130,14 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                     <SuccessScreen
                         onComplete={() => {
                             setShowFirework(false);
+                            setStep(STEP.DATE_TIME_STEP);
+                        }}
+                    />
+                );
+            case STEP.FAIL:
+                return (
+                    <FailScreen
+                        onComplete={() => {
                             setStep(STEP.DATE_TIME_STEP);
                         }}
                     />

@@ -1,7 +1,7 @@
 import { Flex, Image, Typography } from 'antd';
 import { StepWrapper } from './StepWrapper';
 
-export const SuccessScreen = ({ onComplete }: any) => {
+export const FailScreen = ({ onComplete }: any) => {
     setTimeout(() => onComplete(), 3000);
 
     return (
@@ -18,14 +18,14 @@ export const SuccessScreen = ({ onComplete }: any) => {
                         padding: '20px',
                         width: '100%',
                     }}
-                    alt="success"
-                    src="/success-icon.svg"
+                    alt="fail"
+                    src="/fail-icon.svg"
                 />
                 <Typography.Title level={3} style={{ textAlign: 'center' }}>
-                    Request was sent to admin!
+                    Something went wrong.
                 </Typography.Title>
                 <Typography.Title level={4} style={{ margin: 0 }}>
-                    Admin will contact you soon!
+                    Please try submitting your request later.
                 </Typography.Title>
             </Flex>
         </StepWrapper>

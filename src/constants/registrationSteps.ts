@@ -4,6 +4,7 @@ export enum STEP {
     ADDITIONAL_STEP = 'ADDITIONAL_STEP',
     REVIEW_STEP = 'REVIEW_STEP',
     SUCCESS = 'SUCCESS',
+    FAIL = 'FAIL',
 }
 
 export enum STEP_NUMBER {
