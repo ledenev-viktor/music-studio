@@ -9,7 +9,7 @@ export default async function handler(
     try {
         const payload = req.body;
         const { data, error } = await supabase
-            .from('appointments')
+            .from(process.env.APPOINTMENTS_DB!)
             .update({
                 updatedAt: dayjs().unix(),
                 status: payload.status,

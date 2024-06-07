@@ -7,7 +7,7 @@ export default async function handler(
 ) {
     try {
         const { data, error } = await supabase
-            .from('appointments')
+            .from(process.env.APPOINTMENTS_DB!)
             .select('*')
             .gte('startTime', new Date().toISOString());
 

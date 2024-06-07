@@ -9,7 +9,7 @@ export default async function handler(
         const payload = req.body;
 
         const { data, error } = await supabase
-            .from('appointments')
+            .from(process.env.APPOINTMENTS_DB!)
             .insert(payload);
 
         if (error) {
