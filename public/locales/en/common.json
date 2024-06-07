@@ -31,5 +31,9 @@
     "addition_equipment_option_3": "bass guitar 4-string Harley Benton",
     "addition_equipment_option_2": "plate China",
     "addition_equipment_option_1": "double pedal (cardan)",
-    "content_form_inst_title": "Instagram username"
+    "content_form_inst_title": "Instagram username",
+    "form_success_title": "Request was sent to admin!",
+    "form_success_desc": "Admin will contact you soon!",
+    "form_fail_title": "Something went wrong.",
+    "form_fail_desc": "Please try again later."
 }

@@ -4,6 +4,7 @@ import { useFormContext } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { AnimatePresence } from 'framer-motion';
 import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
+import { useTranslation } from 'react-i18next';
 import { useScreenDetector } from '~hooks/responsive';
 import { COLORS } from '~variables';
 import { useCreateAppointments } from '~hooks/appointments';
@@ -14,7 +15,7 @@ import {
     AdditionalsStep,
     ReviewStep,
     DateTimeStep,
-    SuccessScreen,
+    StatusScreen,
 } from './steps';
 import { MODE, STEP, STEP_NUMBER } from '~constants/registrationSteps';
 
@@ -23,6 +24,8 @@ type RegFormBaseProps = {
 };
 
 export const FormComponentBase = ({ className }: RegFormBaseProps) => {
+    const { t } = useTranslation();
+
     const { handleSubmit, getValues, reset, trigger } =
         useFormContext<FormFields>();
 
@@ -39,6 +42,9 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                 setShowFirework(true);
                 setStep(STEP.SUCCESS);
                 reset();
+            },
+            onError: () => {
+                setStep(STEP.FAIL);
             },
         });
     };
@@ -123,17 +129,33 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                 );
             case STEP.SUCCESS:
                 return (
-                    <SuccessScreen
+                    <StatusScreen
                         onComplete={() => {
                             setShowFirework(false);
                             setStep(STEP.DATE_TIME_STEP);
                         }}
+                        imgProps={{ alt: 'success', path: '/success.svg' }}
+                        title={t('form_success_title')}
+                        description={t('form_success_desc')}
+                    />
+                );
+            case STEP.FAIL:
+                return (
+                    <StatusScreen
+                        onComplete={() => {
+                            setStep(STEP.REVIEW_STEP);
+                        }}
+                        imgProps={{ alt: 'fail', path: '/fail.png' }}
+                        title={t('form_fail_title')}
+                        description={t('form_fail_desc')}
                     />
                 );
             default:
                 return null;
         }
     };
+
+    const isNotResultStep = step !== STEP.SUCCESS && step !== STEP.FAIL;
 
     return (
         <Flex
@@ -156,7 +178,7 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                     minWidth: '320px',
                 }}
             >
-                {step !== STEP.SUCCESS && (
+                {isNotResultStep && (
                     <Flex
                         vertical
                         align="stretch"
