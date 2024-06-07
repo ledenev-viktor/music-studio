@@ -4,6 +4,7 @@ import { useFormContext } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { AnimatePresence } from 'framer-motion';
 import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
+import { useTranslation } from 'react-i18next';
 import { useScreenDetector } from '~hooks/responsive';
 import { COLORS } from '~variables';
 import { useCreateAppointments } from '~hooks/appointments';
@@ -14,16 +15,17 @@ import {
     AdditionalsStep,
     ReviewStep,
     DateTimeStep,
-    SuccessScreen,
+    StatusScreen,
 } from './steps';
 import { MODE, STEP, STEP_NUMBER } from '~constants/registrationSteps';
-import { FailScreen } from './steps/FailScreen';
 
 type RegFormBaseProps = {
     className?: string;
 };
 
 export const FormComponentBase = ({ className }: RegFormBaseProps) => {
+    const { t } = useTranslation();
+
     const { handleSubmit, getValues, reset, trigger } =
         useFormContext<FormFields>();
 
@@ -127,19 +129,25 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                 );
             case STEP.SUCCESS:
                 return (
-                    <SuccessScreen
+                    <StatusScreen
                         onComplete={() => {
                             setShowFirework(false);
                             setStep(STEP.DATE_TIME_STEP);
                         }}
+                        imgProps={{ alt: 'success', path: '/success.svg' }}
+                        title={t('form_success_title')}
+                        description={t('form_success_desc')}
                     />
                 );
             case STEP.FAIL:
                 return (
-                    <FailScreen
+                    <StatusScreen
                         onComplete={() => {
-                            setStep(STEP.DATE_TIME_STEP);
+                            setStep(STEP.REVIEW_STEP);
                         }}
+                        imgProps={{ alt: 'fail', path: '/fail.png' }}
+                        title={t('form_fail_title')}
+                        description={t('form_fail_desc')}
                     />
                 );
             default:

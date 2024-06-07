@@ -31,5 +31,9 @@
     "addition_equipment_option_2": "тарелка Китай",
     "addition_equipment_option_3": "бас-гитара 4-струнная Harley Benton",
     "addition_equipment_option_4": "электропианино Thomann DP-28",
-    "content_form_inst_title": "Instagram никнейм"
+    "content_form_inst_title": "Instagram никнейм",
+    "form_success_title": "Запрос отправлен администратору!",
+    "form_success_desc": "Администратор свяжется с вами в ближайшее время!",
+    "form_fail_title": "Что-то пошло не так.",
+    "form_fail_desc": "Пожалуйста, повторите попытку позже."
 }
