@@ -8,7 +8,7 @@ export default async function handler(
     try {
         const payload = req.body;
         const { data, error } = await supabase
-            .from('appointments')
+            .from(process.env.APPOINTMENTS_DB!)
             .update(payload)
             .eq('id', payload.id);
 

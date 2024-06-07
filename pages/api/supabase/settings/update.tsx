@@ -7,10 +7,12 @@ export default async function handler(
 ) {
     try {
         const payload = req.body;
-        const { data, error } = await supabase.from('settings').insert({
-            pictureUrl: payload.pictureUrl,
-            uid: payload.uid,
-        });
+        const { data, error } = await supabase
+            .from(process.env.SETTINGS_DB!)
+            .insert({
+                pictureUrl: payload.pictureUrl,
+                uid: payload.uid,
+            });
 
         if (error) res.status(500).json(error);
 
