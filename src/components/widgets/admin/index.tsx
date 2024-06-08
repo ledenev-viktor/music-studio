@@ -44,7 +44,14 @@ export default function AdminApp() {
                 },
             }}
         >
-            <Layout style={{ height: '100vh', margin: 0, padding: 0 }}>
+            <Layout
+                style={{
+                    height: '100vh',
+                    margin: 0,
+                    padding: 0,
+                    overflow: 'hidden auto',
+                }}
+            >
                 <Header
                     style={{
                         position: 'sticky',
@@ -73,7 +80,13 @@ export default function AdminApp() {
                         Log out
                     </Button>
                 </Header>
-                <Content style={{ padding: '16px 48px 0' }}>
+                <Content
+                    style={{
+                        padding: '16px 48px',
+                        boxSizing: 'border-box',
+                        minHeight: 'initial',
+                    }}
+                >
                     {currentTab === 'appointments' ? (
                         <Appointments />
                     ) : (
