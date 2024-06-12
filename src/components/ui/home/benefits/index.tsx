@@ -18,7 +18,7 @@ export const Benefits = () => {
         <Flex
             style={{
                 height: '70%',
-                width: '100vw',
+                width: '100%',
                 margin: '0 auto',
                 background: COLORS.blue,
                 padding: '10px 0 100px',

@@ -35,7 +35,8 @@ const ContactsPage = () => {
                 }}
             >
                 <motion.img
-                    src={'/logo2.png'}
+                    src={'/logo.png'}
+                    alt="praktika-logo"
                     key="image"
                     style={{
                         width: isMobile

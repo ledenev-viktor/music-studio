@@ -25,15 +25,6 @@ module.exports = {
             },
         ],
     },
-    async redirects() {
-        return [
-            {
-                source: '/',
-                destination: '/home',
-                permanent: true,
-            },
-        ];
-    },
     // https://github.com/ant-design/pro-components/issues/4852#issuecomment-1364570216
     // fixing the issue with import for antd design and other libraries
     transpilePackages: [
