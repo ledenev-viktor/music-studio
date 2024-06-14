@@ -56,6 +56,7 @@ function useMenuAnimation(isOpen: boolean) {
             //@ts-expect-errordefv
             ...menuAnimations,
         ]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isOpen]);
 
     return scope;

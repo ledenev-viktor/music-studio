@@ -1,10 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
-import api from '~lib/api.helper';
+import api, { AxiosApiError, AxiosApiResponse } from '~lib/api.helper';
 import { FormFields } from '~types/appointments';
 import { mergeIntervals } from '~utils/mergeIntervals';
 
 export const useCreateAppointments = () => {
-    return useMutation<any, any, FormFields>({
+    return useMutation<AxiosApiResponse<void>, AxiosApiError, FormFields>({
         mutationFn: (data) => {
             const {
                 date,
@@ -40,7 +40,7 @@ export const useCreateAppointments = () => {
                 },
             );
 
-            return api.post<any>(
+            return api.post<void>(
                 '/api/supabase/appointments/insert',
                 sendArrayData,
             );

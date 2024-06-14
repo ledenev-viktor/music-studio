@@ -1,8 +1,8 @@
 import { Flex, Typography } from 'antd';
-import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
-import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
+import styled from '@emotion/styled';
+import Link from 'next/link';
 import { COLORS } from '~variables';
 import { useScreenDetector } from '~hooks/responsive';
 import { Drumsticks, Drum, Fun } from '~components/ui/icons';
@@ -146,7 +146,7 @@ export const Benefits = () => {
 //     }
 // `;
 
-const StyledLink = styled(Link)`
+export const StyledLink = styled(Link)`
     // width: 200px;
     // height: 200px;
     text-align: center;

@@ -17,7 +17,7 @@ const languages = [
     { text: 'ქართული', locale: 'ka' },
 ];
 
-export const MenuContent = ({ toggle }: { toggle: any }) => {
+export const MenuContent = ({ toggle }: { toggle: () => void }) => {
     const { t } = useTranslation();
     const { isMobile, isSmallMobile } = useScreenDetector();
     const { locale, push } = useRouter();
