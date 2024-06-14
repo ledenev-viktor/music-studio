@@ -14,7 +14,11 @@ const NotFound = () => {
             vertical
             align="center"
             justify="center"
-            style={{ width: '100%', height: '100vh' }}
+            style={{
+                width: '100%',
+                height: '100vh',
+                backgroundImage: 'url(/p.png)',
+            }}
         >
             <NotFoundSvg
                 svgVariants={{

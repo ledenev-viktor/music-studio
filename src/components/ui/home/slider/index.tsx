@@ -54,6 +54,7 @@ const MainSliderBase: FC<MainSliderBaseProps> = ({
                         }}
                         src={`/${slide.path}`}
                         alt={`slider-image-${slide.id}`}
+                        priority={true}
                     />
                 </SwiperSlide>
             ))}
