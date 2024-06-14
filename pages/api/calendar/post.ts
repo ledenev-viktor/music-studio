@@ -2,17 +2,13 @@
 import dayjs from 'dayjs';
 import { google } from 'googleapis';
 import { NextApiRequest, NextApiResponse } from 'next/types';
-import { jwtClientGoogle } from '~lib/jwtClientGoogle';
+import { jwtClientGoogleCalendar } from '~lib/jwtClientGoogleCalendar';
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
     try {
-        const jwtClient = jwtClientGoogle(
-            'https://www.googleapis.com/auth/calendar',
-        );
-
         const calendar = google.calendar({
             version: 'v3',
-            auth: jwtClient,
+            auth: jwtClientGoogleCalendar,
         });
 
         const appointment = req.body;
@@ -32,7 +28,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 
         const { data } = await calendar.events.insert({
             calendarId: process.env.CALENDAR_ID,
-            auth: jwtClient,
+            auth: jwtClientGoogleCalendar,
             requestBody: event,
         });
 
