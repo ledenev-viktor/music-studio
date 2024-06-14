@@ -47,7 +47,7 @@ const MainSliderBase: FC<MainSliderBaseProps> = ({
                 <SwiperSlide key={slide.id}>
                     <Image
                         width={1200}
-                        height={300}
+                        height={500}
                         style={{
                             maxWidth: '100%',
                             objectFit: 'cover',
