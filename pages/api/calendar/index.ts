@@ -1,21 +1,13 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { google } from 'googleapis';
 import { NextApiRequest, NextApiResponse } from 'next/types';
-import googleConfig from '~lib/google';
+import { jwtClientGoogleCalendar } from '~lib/jwtClientGoogleCalendar';
 
 const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-        const jwtClient = new google.auth.JWT(
-            googleConfig.clientEmail,
-            undefined,
-            googleConfig.privateKey,
-            'https://www.googleapis.com/auth/calendar',
-            undefined,
-        );
-
         const calendar = google.calendar({
             version: 'v3',
-            auth: jwtClient,
+            auth: jwtClientGoogleCalendar,
         });
 
         const { timeMin, timeMax } = req.query;
