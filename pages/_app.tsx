@@ -52,6 +52,7 @@ const MyApp = ({
                     <link rel="manifest" href="/manifest.json" />
                     <meta name="theme-color" content="#ffffff" />
                     <link rel="shortcut icon" href="/favicon.png" />
+                    <link rel="preload" href="/p.png" as="image" />
                 </Head>
                 <SessionProvider session={session}>
                     <ModalProvider>
