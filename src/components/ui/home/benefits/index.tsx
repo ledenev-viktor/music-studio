@@ -1,13 +1,11 @@
 import { Flex, Typography } from 'antd';
-import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
-import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 import { COLORS } from '~variables';
 import { useScreenDetector } from '~hooks/responsive';
 import { Drumsticks, Drum, Fun } from '~components/ui/icons';
 import { BenefitItem } from './benefit-item';
-import { BREAKPOINTS } from '~constants/breakpoints';
+import { StyledLink } from '~components/ui/styled-link';
 
 export const Benefits = () => {
     const { t } = useTranslation();
@@ -131,35 +129,3 @@ export const Benefits = () => {
         </Flex>
     );
 };
-
-// const StyledLink = styled(Link)`
-//     width: 200px;
-//     height: 200px;
-//     text-align: center;
-//     font-size: 24px;
-//     color: ${COLORS.blue};
-//     background: ${COLORS.white};
-//     padding: 20px 30px;
-//     border-radius: 8px;
-//     &:hover {
-//         color: ${COLORS.colorInactive};
-//     }
-// `;
-
-const StyledLink = styled(Link)`
-    // width: 200px;
-    // height: 200px;
-    text-align: center;
-    font-size: 24px;
-    color: ${COLORS.black};
-    background: 'transparent';
-    padding: 20px 30px;
-    // border-radius: 8px;
-    &:hover {
-        color: ${COLORS.colorInactive};
-    }
-
-    @media screen and (max-width: ${BREAKPOINTS.smallMobile}) {
-        font-size: 12px;
-    }
-`;
