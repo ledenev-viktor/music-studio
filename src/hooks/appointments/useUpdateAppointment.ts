@@ -12,21 +12,29 @@ export const useUpdateAppointments = () => {
         null,
         AxiosApiError,
         {
-            appointmentId: Appointment['id'];
+            appointment: Appointment;
             status: AppointmentStatuses;
         }
     >({
-        mutationFn: (data) =>
-            api.post('api/supabase/appointments/post', {
-                appointmentId: data.appointmentId,
+        mutationFn: async (data) => {
+            const { data: eventData } = await api.post(
+                'api/calendar/post',
+                data.appointment,
+            );
+
+            return api.post('api/supabase/appointments/post', {
+                calendarEventId: eventData.id,
+                appointmentId: data.appointment.id,
                 status: data.status,
-            }),
+                calendarLink: eventData.htmlLink,
+            });
+        },
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['fetchAppointments'],
             });
             notification.success({
-                message: 'Appointment was successfully updated',
+                message: 'Event was successfully created!',
                 placement: 'bottom',
             });
         },

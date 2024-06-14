@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { Badge, Button, Flex } from 'antd';
+import { Modal, Badge, Button, Flex } from 'antd';
 import {
     ClockCircleOutlined,
     UserOutlined,
@@ -23,7 +23,7 @@ export const Footer = ({ appointment }: { appointment: Appointment }) => {
     const { mutateAsync: updateAppointment } = useUpdateAppointments();
 
     const onUpdate = (
-        appointmentId: Appointment['id'],
+        appointment: Appointment,
         status: AppointmentStatuses,
     ) => {
         modal.confirm({
@@ -32,9 +32,11 @@ export const Footer = ({ appointment }: { appointment: Appointment }) => {
             content:
                 'This action cannot be undone. Your data will be permanently changed.',
             onOk: async () => {
-                await updateAppointment({
-                    appointmentId,
+                updateAppointment({
+                    appointment,
                     status,
+                }).finally(() => {
+                    Modal.destroyAll();
                 });
             },
         });
@@ -54,7 +56,7 @@ export const Footer = ({ appointment }: { appointment: Appointment }) => {
                         type="text"
                         onClick={() =>
                             onUpdate(
-                                appointment.id,
+                                appointment,
                                 APPOINTMENTS_STATUSES.REJECTED,
                             )
                         }
@@ -67,7 +69,7 @@ export const Footer = ({ appointment }: { appointment: Appointment }) => {
                         type="primary"
                         onClick={() =>
                             onUpdate(
-                                appointment.id,
+                                appointment,
                                 APPOINTMENTS_STATUSES.APPROVED,
                             )
                         }
