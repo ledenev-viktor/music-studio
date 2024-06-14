@@ -2,16 +2,12 @@
 import dayjs from 'dayjs';
 import { google } from 'googleapis';
 import { NextApiRequest, NextApiResponse } from 'next/types';
-import googleConfig from '~lib/google';
+import { jwtClientGoogle } from '~lib/jwtClientGoogle';
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
     try {
-        const jwtClient = new google.auth.JWT(
-            googleConfig.clientEmail,
-            undefined,
-            googleConfig.privateKey,
+        const jwtClient = jwtClientGoogle(
             'https://www.googleapis.com/auth/calendar',
-            undefined,
         );
 
         const calendar = google.calendar({
@@ -43,7 +39,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json({
-            error: 'Failed to retrieve access token' + error,
+            error,
         });
     }
 }

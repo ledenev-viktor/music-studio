@@ -1,16 +1,12 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { google } from 'googleapis';
 import { NextApiRequest, NextApiResponse } from 'next/types';
-import googleConfig from '~lib/google';
+import { jwtClientGoogle } from '~lib/jwtClientGoogle';
 
 const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-        const jwtClient = new google.auth.JWT(
-            googleConfig.clientEmail,
-            undefined,
-            googleConfig.privateKey,
+        const jwtClient = jwtClientGoogle(
             'https://www.googleapis.com/auth/calendar',
-            undefined,
         );
 
         const calendar = google.calendar({
