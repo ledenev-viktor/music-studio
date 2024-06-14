@@ -18,6 +18,7 @@ const NotFound = () => {
                 width: '100%',
                 height: '100vh',
                 backgroundImage: 'url(/p.png)',
+                padding: '0 20px',
             }}
         >
             <NotFoundSvg
