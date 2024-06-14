@@ -55,7 +55,7 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
                     rules={rules}
                     render={({ field: { value, onChange } }) => (
                         <Row justify="space-between" gutter={[20, 20]} wrap>
-                            {timeSlots.map((slot: any) => (
+                            {timeSlots.map((slot: FreeSlots) => (
                                 <Col
                                     key={slot.id}
                                     span={!isSmallMobile && !isMobile ? 8 : 12}
@@ -63,8 +63,8 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
                                     <Tag.CheckableTag
                                         style={{ width: '100%' }}
                                         checked={value.some(
-                                            (v: { value: any }) => {
-                                                return v.value === slot.value;
+                                            ({ value }: { value: string }) => {
+                                                return value === slot.value;
                                             },
                                         )}
                                         onChange={(checked) => {
@@ -72,9 +72,12 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
                                             const nextValue = checked
                                                 ? [...value, slot]
                                                 : value.filter(
-                                                      (v: { value: any }) =>
-                                                          v.value !==
-                                                          slot.value,
+                                                      ({
+                                                          value,
+                                                      }: {
+                                                          value: string;
+                                                      }) =>
+                                                          value !== slot.value,
                                                   );
                                             onChange(nextValue);
                                         }}

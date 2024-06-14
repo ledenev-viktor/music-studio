@@ -1,7 +1,6 @@
 import { ReactElement } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import dynamic from 'next/dynamic';
-import { GetStaticProps } from 'next/types';
 import { NextPageWithLayout } from '~types/app';
 
 const PageComponent = dynamic(() => import('~components/widgets/home/'), {
@@ -19,8 +18,10 @@ Page.getLayout = function getLayout(page: ReactElement) {
 
 export default Page;
 
-export const getStaticProps: GetStaticProps = async ({ locale }: any) => ({
-    props: {
-        ...(await serverSideTranslations(locale, ['common'])),
-    },
-});
+export async function getStaticProps({ locale }: { locale: string }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ['common'])),
+        },
+    };
+}

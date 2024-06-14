@@ -1,3 +1,5 @@
+import { Variant } from 'framer-motion';
+
 export const MenuToggle = ({ toggle }: { toggle: () => void }) => (
     <button id="button" aria-label="menu-button" onClick={toggle}>
         <svg width="23" height="18" viewBox="0 0 23 18">
@@ -22,7 +24,12 @@ export const MenuToggle = ({ toggle }: { toggle: () => void }) => (
     </button>
 );
 
-const Path = (props: any) => (
+const Path = (props: {
+    variants?: { closed: Variant; open: Variant };
+    d: string;
+    opacity?: string;
+    className?: string;
+}) => (
     <path
         fill="transparent"
         strokeWidth="3"
