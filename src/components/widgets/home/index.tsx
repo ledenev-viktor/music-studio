@@ -1,44 +1,25 @@
 'use client';
 import React from 'react';
 import { Flex } from 'antd';
-import { MainSlider, Benefits } from '~ui/home';
+import { Benefits } from '~ui/home';
+import { COLORS } from '~variables';
+import { ParallaxGallery } from '~components/ui/home/parallax-gallery';
+import { slides } from './mockSlides';
 
 const HomePage = () => {
-    const slides = [
-        {
-            id: 2,
-            path: 'cat2.webp',
-        },
-        {
-            id: 3,
-            path: 'cat3.webp',
-        },
-        {
-            id: 4,
-            path: 'cat2.webp',
-        },
-        {
-            id: 5,
-            path: 'cat3.webp',
-        },
-    ];
-
     return (
         <Flex
             vertical
             justify="center"
             align="center"
-            style={{ padding: '0', height: '100vh' }}
+            style={{
+                padding: '0',
+                height: '100vh',
+                transition: 'all 1s ease',
+                background: COLORS.blue,
+            }}
         >
-            <MainSlider
-                slides={slides}
-                autoplay={{
-                    delay: 7500,
-                    disableOnInteraction: false,
-                }}
-                speed={1000}
-            />
-
+            <ParallaxGallery slides={slides} />
             <Benefits />
         </Flex>
     );
