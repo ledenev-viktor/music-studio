@@ -6,18 +6,10 @@ export default async function handler(
     res: NextApiResponse,
 ) {
     try {
-        const { data, error } = await supabase
+        const { data } = await supabase
             .from(process.env.APPOINTMENTS_DB!)
             .select('*')
             .gte('startTime', new Date().toISOString());
-
-        if (error) {
-            res.status(500).json(error);
-        }
-
-        if (!data?.length && !error) {
-            res.status(500).json({ error: 'Problems with authorization' });
-        }
 
         res.status(200).json(data);
     } catch (error) {
