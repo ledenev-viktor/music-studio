@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
 import styled from '@emotion/styled';
 import {
@@ -16,7 +16,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import { Flex } from 'antd';
 import { useScreenDetector } from '~hooks/responsive';
-import { Modal } from '~components/ui/modal';
+import { Fancybox } from '~components/ui/fancybox';
 
 SwiperCore.use([
     Parallax,
@@ -47,18 +47,6 @@ const ParallaxGalleryBase: FC<ParallaxGalleryProps> = ({
 }) => {
     const { isMobile, isSmallMobile } = useScreenDetector();
 
-    const [isModalOpen, setIsModalOpen] = useState({ open: false, id: 0 });
-
-    const showModal = (id: number) => {
-        setIsModalOpen({ open: true, id: id });
-    };
-
-    const handleCancel = () => {
-        setIsModalOpen((prev) => ({ ...prev, open: false }));
-    };
-
-    const currentSlide = slides.find((slide) => slide.id === isModalOpen.id);
-
     return (
         <Flex
             style={{
@@ -68,73 +56,71 @@ const ParallaxGalleryBase: FC<ParallaxGalleryProps> = ({
             className={className}
             vertical
         >
-            <Swiper
-                freeMode={true}
-                mousewheel={true}
-                parallax={true}
-                centeredSlides={true}
-                className="slider-main"
-                initialSlide={2}
-                breakpoints={{
-                    0: {
-                        slidesPerView: 1.2,
-                        spaceBetween: 20,
-                    },
-                    768: {
-                        slidesPerView: 2.5,
-                        spaceBetween: 20,
-                    },
-                    1239: {
-                        slidesPerView: 4.2,
-                        spaceBetween: 10,
+            <Fancybox
+                options={{
+                    Carousel: {
+                        infinite: false,
                     },
                 }}
-                {...props}
             >
-                {slides.map((slide: Slide, index: number) => (
-                    <SwiperSlide
-                        onClick={() => showModal(slide.id)}
-                        className="slide-item"
-                        key={slide.id}
-                        style={{
-                            cursor: slide.modal ? 'pointer' : 'default',
-                        }}
-                    >
-                        <div
-                            className="slide-content"
-                            data-swiper-parallax={`${index % 2 === 0 ? '35%' : '25%'}`}
-                        >
-                            <div className="slide-imgbox">
-                                <img
-                                    className="slide-img"
-                                    src={`/${slide.path}`}
-                                    style={{
-                                        height:
-                                            isMobile || isSmallMobile
-                                                ? '40vh'
-                                                : '50vh',
-                                    }}
-                                    alt={slide?.modal?.title || ''}
-                                />
-                            </div>
-                        </div>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
-            {currentSlide?.modal && (
-                <Modal
-                    open={isModalOpen.open}
-                    onCancel={handleCancel}
-                    footer={null}
+                <Swiper
+                    freeMode={true}
+                    mousewheel={true}
+                    parallax={true}
+                    centeredSlides={true}
+                    className="slider-main"
+                    initialSlide={2}
+                    breakpoints={{
+                        0: {
+                            slidesPerView: 1.2,
+                            spaceBetween: 20,
+                        },
+                        768: {
+                            slidesPerView: 2.5,
+                            spaceBetween: 20,
+                        },
+                        1239: {
+                            slidesPerView: 4.2,
+                            spaceBetween: 10,
+                        },
+                    }}
+                    {...props}
                 >
-                    {currentSlide?.modal?.title && (
-                        <h2>{currentSlide?.modal.title}</h2>
-                    )}
-                    {currentSlide?.modal?.description && (
-                        <p>{currentSlide?.modal.description}</p>
-                    )}
-                </Modal>
-            )}
+                    {slides.map((slide: Slide, index: number) => (
+                        <SwiperSlide
+                            className="slide-item"
+                            key={slide.id}
+                            style={{
+                                cursor: slide.modal ? 'pointer' : 'default',
+                            }}
+                        >
+                            <div
+                                className="slide-content"
+                                data-swiper-parallax={`${index % 2 === 0 ? '35%' : '25%'}`}
+                            >
+                                <div className="slide-imgbox">
+                                    <a
+                                        data-fancybox="gallery"
+                                        href={`/${slide.path}`}
+                                    >
+                                        <img
+                                            className="slide-img"
+                                            src={`/${slide.path}`}
+                                            style={{
+                                                height:
+                                                    isMobile || isSmallMobile
+                                                        ? '40vh'
+                                                        : '50vh',
+                                            }}
+                                            alt={slide?.modal?.title || ''}
+                                        />
+                                    </a>
+                                </div>
+                            </div>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </Fancybox>
         </Flex>
     );
 };
