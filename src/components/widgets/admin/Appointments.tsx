@@ -71,10 +71,7 @@ export const Appointments = () => {
                         minWidth: '780px',
                     }}
                 >
-                    <Empty>
-                        Seems like no data was fount in database or there were
-                        problems with connection
-                    </Empty>
+                    <Empty>Seems like no data was fount in database.</Empty>
                 </Card>
             ) : (
                 <>
