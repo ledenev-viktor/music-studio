@@ -9,6 +9,7 @@ import { signOut } from 'next-auth/react';
 import { useGetImages } from '~hooks/images';
 import { Appointments } from './Appointments';
 import { Settings } from './Settings';
+import { ListSlides } from '~components/ui/admin';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -90,10 +91,13 @@ export default function AdminApp() {
                     {currentTab === 'appointments' ? (
                         <Appointments />
                     ) : (
-                        <Settings
-                            images={images}
-                            isLoadingImages={isLoadingImages}
-                        />
+                        <>
+                            <Settings
+                                images={images}
+                                isLoadingImages={isLoadingImages}
+                            />
+                            <ListSlides />
+                        </>
                     )}
                 </Content>
             </Layout>
