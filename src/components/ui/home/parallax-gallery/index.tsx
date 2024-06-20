@@ -28,12 +28,12 @@ SwiperCore.use([
 ]);
 
 type Slide = {
-    id: number;
-    path: string;
-    modal?: {
-        title?: string;
-        description?: string;
-    };
+    id?: number;
+    title?: string;
+    desc?: string;
+    base64?: string;
+    img?: string;
+    active?: boolean;
 };
 type ParallaxGalleryProps = {
     slides: Slide[];
@@ -46,6 +46,8 @@ const ParallaxGalleryBase: FC<ParallaxGalleryProps> = ({
     ...props
 }) => {
     const { isMobile, isSmallMobile } = useScreenDetector();
+
+    const slidesActive = slides?.filter((slide) => slide.active);
 
     return (
         <Flex
@@ -86,12 +88,15 @@ const ParallaxGalleryBase: FC<ParallaxGalleryProps> = ({
                     }}
                     {...props}
                 >
-                    {slides.map((slide: Slide, index: number) => (
+                    {slidesActive?.map((slide: Slide, index: number) => (
                         <SwiperSlide
                             className="slide-item"
                             key={slide.id}
                             style={{
-                                cursor: slide.modal ? 'pointer' : 'default',
+                                cursor:
+                                    slide.title || slide.desc
+                                        ? 'pointer'
+                                        : 'default',
                             }}
                         >
                             <div
@@ -101,21 +106,23 @@ const ParallaxGalleryBase: FC<ParallaxGalleryProps> = ({
                                 <div className="slide-imgbox">
                                     <a
                                         data-fancybox="gallery"
-                                        href={`/${slide.path}`}
-                                        data-caption={`<h3>Анонс события!</h3><p>
-                                        Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Маленький прямо пояс которой за продолжил, деревни не злых что пунктуация себя текст послушавшись текстов. Имеет решила путь ее! Вскоре.
-                                        </p>`}
+                                        href={`${slide.base64 || slide.img}`}
+                                        data-caption={`<div style="max-width:960px;width=100%;margin:0 auto;">
+                                                ${slide.title ? '<h3>' + slide.title + '</h3>' : ''}
+                                                ${slide.desc ? '<h3>' + slide.desc + '</h3>' : ''}
+                                            </div>`}
                                     >
+                                        {/* TODO: convert to Image Next.js */}
                                         <img
                                             className="slide-img"
-                                            src={`/${slide.path}`}
+                                            src={`${slide.base64 || slide.img}`}
                                             style={{
                                                 height:
                                                     isMobile || isSmallMobile
                                                         ? '40vh'
                                                         : '50vh',
                                             }}
-                                            alt={slide?.modal?.title || ''}
+                                            alt={slide.title || ''}
                                         />
                                     </a>
                                 </div>

@@ -3,10 +3,13 @@ import React from 'react';
 import { Flex } from 'antd';
 import { Benefits } from '~ui/home';
 import { COLORS } from '~variables';
+import { useGetSettingsPreview } from '~hooks/settings_preview';
 import { ParallaxGallery } from '~components/ui/home/parallax-gallery';
-import { slides } from './mockSlides';
 
 const HomePage = () => {
+    const { data: slidesData, isLoading: isLoadingSlidesData } =
+        useGetSettingsPreview();
+
     return (
         <Flex
             vertical
@@ -19,7 +22,9 @@ const HomePage = () => {
                 background: COLORS.blue,
             }}
         >
-            <ParallaxGallery slides={slides} />
+            {!isLoadingSlidesData && (
+                <ParallaxGallery slides={slidesData || []} />
+            )}
             <Benefits />
         </Flex>
     );

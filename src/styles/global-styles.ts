@@ -111,4 +111,8 @@ export const globalStyles = css`
     #button path {
         fill: var(--background);
     }
+
+    .fancybox__container {
+        padding: 20px;
+    }
 `;

@@ -1,10 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from 'react';
-import { Button, Flex, Input, List, AutoComplete } from 'antd';
+import React, { useEffect, useState } from 'react';
+import {
+    Button,
+    Flex,
+    Input,
+    List,
+    AutoComplete,
+    Checkbox,
+    Typography,
+} from 'antd';
 import styled from '@emotion/styled';
+import isEqual from 'lodash/isEqual';
 import { COLORS } from '~variables';
 import { useGetImages } from '~hooks/images';
-import { Modal } from '~components/ui/modal';
+import {
+    useGetSettingsPreview,
+    useUpdateSettingsPreview,
+} from '~hooks/settings_preview';
+import { Close } from '~components/ui/icons/close';
 const { TextArea } = Input;
 
 type Slide = {
@@ -12,211 +25,247 @@ type Slide = {
     img?: string;
     title?: string;
     desc?: string;
+    active: boolean;
+    base64: string;
 };
 
-const data = [
-    {
-        id: 1,
-        img: '/parallax-gallery/1.webp',
-        title: 'Ant Design Title 1',
-        desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque laborum rerum nostrum officiis nesciunt possimus laboriosam animi quasi? Dolorum voluptatibus cupiditate iusto tempora qui voluptatem ad, repudiandae odio officiis assumenda!',
-    },
-];
+const useControlSlides = () => {
+    const { data: slidesData } = useGetSettingsPreview();
+    const { mutate: updateSettingsPreview } = useUpdateSettingsPreview();
+    const [slides, setSlides] = useState<Slide[]>([]);
 
-const useRemoveSlide = (methodRemove: React.Dispatch<any>, slides: Slide[]) => {
-    const [isModalOpenRemove, setIsModalOpenRemove] = useState(false);
+    useEffect(() => {
+        if (!slidesData?.length) return;
 
-    const showModalRemove = () => {
-        setIsModalOpenRemove(true);
+        return setSlides(slidesData);
+    }, [slidesData]);
+
+    const handleAddSlide = () => {
+        setSlides((prev: Slide[]) => [
+            ...prev,
+            {
+                id: prev.length + 1,
+                img: '',
+                title: '',
+                desc: '',
+                base64: '',
+                active: false,
+            },
+        ]);
+    };
+
+    const handleSaveSlides = () => {
+        updateSettingsPreview(slides);
+    };
+
+    const handleResetSlides = () => {
+        if (!slidesData?.length) return;
+
+        setSlides(slidesData);
     };
 
     const handleOkRemove = (id: number) => {
         if (slides.length < 1) return;
-
-        methodRemove(
-            slides?.filter((slide: { id: number }) => slide.id !== id),
-        ),
-            setIsModalOpenRemove(false);
+        setSlides(slides?.filter((slide: { id: number }) => slide.id !== id));
     };
 
-    const handleCancelRemove = () => {
-        setIsModalOpenRemove(false);
+    const changeSlide = (id: number, objProperty: any) => {
+        setSlides((prev: Slide[]) =>
+            prev.map((el) =>
+                el.id === id
+                    ? {
+                          ...el,
+                          ...objProperty,
+                      }
+                    : el,
+            ),
+        );
     };
+
+    const [isChangedSlides, setIsChangedSlides] = useState(false);
+    useEffect(() => {
+        if (!isEqual(slidesData, slides)) setIsChangedSlides(true);
+        else setIsChangedSlides(false);
+    }, [slides, slidesData]);
 
     return {
-        isModalOpenRemove,
-        showModalRemove,
+        slides,
+        handleAddSlide,
+        handleSaveSlides,
+        handleResetSlides,
         handleOkRemove,
-        handleCancelRemove,
+        changeSlide,
+        isChangedSlides,
     };
 };
 
-const ListSlidesBase = ({ className }: { className: string }) => {
-    const [slides, setSlides] = useState<any>(data);
-    const handleAddSlide = () => {
-        setSlides((prev: any) => [
-            ...prev,
-            { id: prev.length + 1, img: '', title: '', desc: '' },
-        ]);
-    };
-
-    console.log('slides', slides);
-
-    const {
-        isModalOpenRemove,
-        showModalRemove,
-        handleOkRemove,
-        handleCancelRemove,
-    } = useRemoveSlide(setSlides, slides);
-
+const useCreateImageOptions = () => {
     const { data: images } = useGetImages();
-    console.log('images', images);
 
-    const optionImages = images?.map((image) => {
+    return images?.map((image) => {
         return {
-            value: <img key={image.url} src={image.url} alt="" />,
+            label: <img src={image.url} alt="" />,
+            value: image.url,
+            base64: image.base64,
         };
     });
+};
+
+const ListSlidesBase = ({ className }: { className?: string }) => {
+    const {
+        slides,
+        handleAddSlide,
+        handleSaveSlides,
+        handleResetSlides,
+        handleOkRemove,
+        changeSlide,
+        isChangedSlides,
+    } = useControlSlides();
+
+    const imageOptions = useCreateImageOptions();
 
     return (
         <Flex
             vertical
             className={className}
-            style={{ maxWidth: '1365px', width: '100%', margin: '0 auto' }}
+            style={{
+                maxWidth: '1365px',
+                width: '100%',
+                margin: '0 auto',
+                background: COLORS.white,
+                padding: '25px',
+                borderRadius: '8px',
+                marginTop: '15px',
+            }}
         >
+            <Flex
+                style={{
+                    position: 'sticky',
+                    top: '64px',
+                    background: COLORS.white,
+                    zIndex: 3,
+                }}
+                gap={10}
+                justify="space-between"
+                align="center"
+            >
+                <Flex vertical>
+                    <Typography.Title level={2}>
+                        Slider on the main page
+                    </Typography.Title>
+                </Flex>
+                {isChangedSlides && (
+                    <Flex gap={10} style={{ background: COLORS.white }}>
+                        <Button onClick={handleResetSlides}>Сбросить</Button>
+                        <Button onClick={handleSaveSlides}>Сохранить</Button>
+                    </Flex>
+                )}
+            </Flex>
             <List
                 itemLayout="horizontal"
                 dataSource={slides}
-                renderItem={(item) => (
+                renderItem={(slide: Slide) => (
                     <List.Item>
-                        <Modal
-                            title="Basic Modal"
-                            open={isModalOpenRemove}
-                            onOk={() => handleOkRemove(item.id)}
-                            onCancel={handleCancelRemove}
-                        >
-                            Вы действительно хотите удалить слайд?
-                        </Modal>
                         <Flex className="list-item-inner">
                             <div className="close-button-wrapper">
                                 <button
                                     className="close-button"
-                                    onClick={showModalRemove}
+                                    onClick={() => handleOkRemove(slide.id)}
                                 >
-                                    <svg
-                                        width="18"
-                                        height="18"
-                                        viewBox="0 0 18 18"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M1.71143e-08 16.1422L16.1421 1.3374e-05L17.5564 1.41423L1.41421 17.5564L1.71143e-08 16.1422Z"
-                                            fill="currentColor"
-                                        />
-                                        <path
-                                            d="M1.41406 6.10523e-05L17.5562 16.1422L16.142 17.5564L-0.000151038 1.41427L1.41406 6.10523e-05Z"
-                                            fill="currentColor"
-                                        />
-                                    </svg>
+                                    <Close width={18} hanging={18} />
                                 </button>
                             </div>
                             <div className="imgbox">
+                                {/* TODO: convert to Image Nextjs */}
                                 <img
-                                    src={item.img || '/logo.png'}
+                                    src={slide.img || '/logo.png'}
                                     width={150}
                                     height={80}
-                                    alt={item.title || ''}
+                                    alt={slide.title || ''}
                                 />
                             </div>
                             <Flex className="list-inputs" vertical>
                                 <div>
                                     <AutoComplete
-                                        options={optionImages}
-                                        placeholder="Путь до картинки"
-                                        value={item.img || ''}
+                                        options={imageOptions}
+                                        placeholder="The path to the image"
+                                        value={slide.img || ''}
                                         onChange={(inputValue) => {
-                                            console.log(
-                                                'inputValue',
-                                                inputValue,
-                                            );
-                                            setSlides((prev) =>
-                                                prev.map((el) =>
-                                                    el.id === item.id
-                                                        ? {
-                                                              ...el,
-                                                              img: inputValue,
-                                                          }
-                                                        : el,
-                                                ),
-                                            );
-                                        }}
-                                        filterOption={(inputValue, option) => {
-                                            console.log('option', option);
-                                            return false;
+                                            const currentOption =
+                                                imageOptions?.find(
+                                                    (option) =>
+                                                        option.value ===
+                                                        inputValue,
+                                                );
+                                            changeSlide(slide.id, {
+                                                img: inputValue,
+                                                base64: currentOption?.base64,
+                                            });
                                         }}
                                     />
                                 </div>
                                 <div>
                                     <Input
-                                        value={item.title}
+                                        value={slide.title}
                                         onChange={(e) => {
-                                            console.log(item.id);
-                                            setSlides((prev) =>
-                                                prev.map((el) => {
-                                                    return el.id === item.id
-                                                        ? {
-                                                              ...el,
-                                                              title: e.target
-                                                                  .value,
-                                                          }
-                                                        : el;
-                                                }),
-                                            );
+                                            changeSlide(slide.id, {
+                                                title: e.target.value,
+                                            });
                                         }}
-                                        placeholder="Заголовок"
+                                        placeholder="Title"
                                     />
                                 </div>
                                 <div>
                                     <TextArea
-                                        value={item.desc}
+                                        value={slide.desc}
                                         onChange={(e) => {
-                                            setSlides((prev) =>
-                                                prev.map((el) =>
-                                                    el.id === item.id
-                                                        ? {
-                                                              ...el,
-                                                              desc: e.target
-                                                                  .value,
-                                                          }
-                                                        : el,
-                                                ),
-                                            );
+                                            changeSlide(slide.id, {
+                                                desc: e.target.value,
+                                            });
                                         }}
-                                        placeholder="Описание"
+                                        placeholder="Description"
                                     />
+                                </div>
+                                <div>
+                                    <Checkbox
+                                        checked={slide.active}
+                                        onChange={(e) => {
+                                            changeSlide(slide.id, {
+                                                active: e.target.checked,
+                                            });
+                                        }}
+                                    >
+                                        Active
+                                    </Checkbox>
                                 </div>
                             </Flex>
                         </Flex>
                     </List.Item>
                 )}
             />
-            <Button onClick={handleAddSlide}>Добавить слайд</Button>
+            <Button onClick={handleAddSlide}>Add a slide</Button>
         </Flex>
     );
 };
 
 export const ListSlides = styled(ListSlidesBase)`
     .list-item-inner {
-        gap: 15px;
         width: 100%;
-        padding: 35px 50px 24px 24px;
-        background: white;
         position: relative;
+        width: 100%;
+        gap: 15px;
+        padding: 35px 50px 24px 24px;
+        background: ${COLORS.white};
         border-radius: 8px;
         transition: all 0.3s ease;
+        border: 1px solid ${COLORS.white};
+
         &:hover {
-            background: ${COLORS.blueHovered};
+            border-color: ${COLORS.blueHovered};
+
+            & .close-button {
+                opacity: 1;
+            }
         }
     }
 
@@ -231,9 +280,12 @@ export const ListSlides = styled(ListSlidesBase)`
             line-height: 0;
             cursor: pointer;
             transition: all 0.3s ease;
+            color: ${COLORS.black};
+            opacity: 0;
+
             &:hover {
-                background: red;
-                color: #fff;
+                background: ${COLORS.red};
+                color: ${COLORS.white};
             }
         }
         &-wrapper {
