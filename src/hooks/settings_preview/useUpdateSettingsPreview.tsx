@@ -35,7 +35,7 @@ export const useUpdateSettingsPreview = () => {
                 queryKey: ['fetchSettingsPreview'],
             });
             notification.success({
-                message: 'Данные успешно сохранены',
+                message: 'Data saved successfully',
                 placement: 'bottom',
             });
         },
