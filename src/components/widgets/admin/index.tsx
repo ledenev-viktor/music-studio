@@ -76,7 +76,7 @@ export default function AdminApp() {
                         style={{ flex: 1, minWidth: 0 }}
                         items={items}
                     />
-                    <Button onClick={() => signOut({ callbackUrl: '/home' })}>
+                    <Button onClick={() => signOut({ callbackUrl: '/' })}>
                         Log out
                     </Button>
                 </Header>
