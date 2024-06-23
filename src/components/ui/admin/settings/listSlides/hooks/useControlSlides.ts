@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import isEqual from 'lodash/isEqual';
-import { useUpdateSettingsPreview } from '~hooks/settings_preview';
-import { Slide } from '../types';
+import { useUpdateSettings } from '~hooks/settings';
+import { Slide } from '~types/settings';
 
 export const useControlSlides = (slidesData: Slide[]) => {
-    const { mutate: updateSettingsPreview } = useUpdateSettingsPreview();
+    const { mutate: updateSettings } = useUpdateSettings();
     const [slides, setSlides] = useState<Slide[]>([]);
 
     useEffect(() => {
@@ -28,7 +28,7 @@ export const useControlSlides = (slidesData: Slide[]) => {
     };
 
     const handleSaveSlides = () => {
-        updateSettingsPreview(slides);
+        updateSettings(slides);
     };
 
     const handleResetSlides = () => {

@@ -72,7 +72,7 @@ const ParallaxGalleryBase: FC<ParallaxGalleryProps> = ({
                     parallax={true}
                     centeredSlides={true}
                     className="slider-main"
-                    initialSlide={2}
+                    initialSlide={Math.floor((slidesActive.length - 1) / 2)}
                     breakpoints={{
                         0: {
                             slidesPerView: 1.2,

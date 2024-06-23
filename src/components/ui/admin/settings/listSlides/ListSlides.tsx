@@ -3,7 +3,7 @@ import { Button, Flex, Typography } from 'antd';
 import styled from '@emotion/styled';
 import { Reorder } from 'framer-motion';
 import { COLORS } from '~variables';
-import { Slide } from './types';
+import { Slide } from '~types/settings';
 import { useControlSlides } from './hooks/useControlSlides';
 import { useCreateImageOptions } from './hooks/useCreateImageOptions';
 import { PointSlide } from './PointSlide';

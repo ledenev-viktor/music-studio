@@ -12,21 +12,28 @@ export const useUpdateSettings = () => {
         any,
         any,
         {
-            uid: any;
-            pictureUrl: string;
-        }
+            id: number;
+            pictureUrl?: string;
+            fileDownload?: string;
+            title?: string;
+            desc?: string;
+            active?: boolean;
+        }[]
     >({
-        mutationFn: (data) =>
-            api.post<any>('api/supabase/settings/update', {
-                uid: data.uid,
-                pictureUrl: data.pictureUrl,
-            }),
+        mutationFn: (data) => {
+            const prepareData = data?.map((item: any) => {
+                return {
+                    settings: item,
+                };
+            });
+            return api.post<any>('api/supabase/settings/update', prepareData);
+        },
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['fetchSettings'],
             });
             notification.success({
-                message: 'Settings were successfully updated',
+                message: 'Data saved successfully',
                 placement: 'bottom',
             });
         },

@@ -19,7 +19,7 @@ export default async function handler(
 ) {
     try {
         const { data, error } = await supabase
-            .from(process.env.SETTINGS_PREVIEW_DB!)
+            .from(process.env.SETTINGS_DB!)
             .select('*');
 
         const dataWithBase64 = await processItems(data!);

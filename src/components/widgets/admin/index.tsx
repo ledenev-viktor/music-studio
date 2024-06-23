@@ -15,7 +15,7 @@ import { Content, Header } from 'antd/es/layout/layout';
 import Image from 'next/image';
 import { signOut } from 'next-auth/react';
 import { useGetImages } from '~hooks/images';
-import { useGetSettingsPreview } from '~hooks/settings_preview';
+import { useGetSettings } from '~hooks/settings';
 import { Appointments } from './Appointments';
 import { Settings } from './Settings';
 
@@ -42,9 +42,8 @@ export default function AdminApp() {
     const onMenuItemClick: MenuProps['onClick'] = (e) => setCurrentTab(e.key);
 
     const { data: images, isLoading: isLoadingImages } = useGetImages();
-
     const { data: slidesData, isLoading: isLoadingSlidesData } =
-        useGetSettingsPreview();
+        useGetSettings();
 
     return (
         <ConfigProvider
@@ -106,8 +105,7 @@ export default function AdminApp() {
                             {!isLoadingImages || !isLoadingSlidesData ? (
                                 <Settings
                                     images={images}
-                                    isLoadingImages={isLoadingImages}
-                                    slidesData={slidesData}
+                                    slidesData={slidesData || []}
                                 />
                             ) : (
                                 <Flex vertical style={{ minHeight: '150px' }}>

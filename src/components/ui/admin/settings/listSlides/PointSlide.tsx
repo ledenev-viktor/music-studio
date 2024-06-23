@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
 import { Flex, Input, AutoComplete, Checkbox } from 'antd';
 import { useMotionValue, Reorder } from 'framer-motion';
+import { Slide } from '~types/settings';
 import { Close } from '~components/ui/icons/close';
 import { useRaisedShadow } from './hooks/useRaisedShadow';
-import { Slide } from './types';
 const { TextArea } = Input;
 
 type PointSlideProps = {

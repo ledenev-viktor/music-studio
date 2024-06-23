@@ -2,12 +2,11 @@ import React from 'react';
 import { Flex } from 'antd';
 import { Benefits, Spin } from '~ui/home';
 import { COLORS } from '~variables';
-import { useGetSettingsPreviewBase64 } from '~hooks/settings_preview';
+import { useGetSettingsBase64 } from '~hooks/settings';
 import { ParallaxGallery } from '~components/ui/home/parallax-gallery';
 
 const HomePage = () => {
-    const { data: slides, isLoading: isLoadingSlides } =
-        useGetSettingsPreviewBase64();
+    const { data: slides, isLoading: isLoadingSlides } = useGetSettingsBase64();
 
     return (
         <Flex
