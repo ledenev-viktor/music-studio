@@ -28,10 +28,10 @@ SwiperCore.use([
 ]);
 
 type Slide = {
+    base64?: string;
     id?: number;
     title?: string;
     desc?: string;
-    base64?: string;
     img?: string;
     active?: boolean;
 };
@@ -66,6 +66,7 @@ const ParallaxGalleryBase: FC<ParallaxGalleryProps> = ({
                 }}
             >
                 <Swiper
+                    {...props}
                     freeMode={true}
                     mousewheel={true}
                     parallax={true}
@@ -88,47 +89,50 @@ const ParallaxGalleryBase: FC<ParallaxGalleryProps> = ({
                     }}
                     {...props}
                 >
-                    {slidesActive?.map((slide: Slide, index: number) => (
-                        <SwiperSlide
-                            className="slide-item"
-                            key={slide.id}
-                            style={{
-                                cursor:
-                                    slide.title || slide.desc
-                                        ? 'pointer'
-                                        : 'default',
-                            }}
-                        >
-                            <div
-                                className="slide-content"
-                                data-swiper-parallax={`${index % 2 === 0 ? '35%' : '25%'}`}
+                    {slidesActive?.map((slide: Slide, index: number) => {
+                        return (
+                            <SwiperSlide
+                                key={slide.id}
+                                className="slide-item"
+                                style={{
+                                    cursor:
+                                        slide.title || slide.desc
+                                            ? 'pointer'
+                                            : 'default',
+                                }}
                             >
-                                <div className="slide-imgbox">
-                                    <a
-                                        data-fancybox="gallery"
-                                        href={`${slide.base64 || slide.img}`}
-                                        data-caption={`<div style="max-width:960px;width=100%;margin:0 auto;">
+                                <div
+                                    className="slide-content"
+                                    data-swiper-parallax={`${index % 2 === 0 ? '35%' : '25%'}`}
+                                >
+                                    <div className="slide-imgbox">
+                                        <a
+                                            data-fancybox="gallery"
+                                            href={`${slide.base64 || slide.img}`}
+                                            data-caption={`<div style="max-width:960px;width=100%;margin:0 auto;">
                                                 ${slide.title ? '<h3>' + slide.title + '</h3>' : ''}
                                                 ${slide.desc ? '<h3>' + slide.desc + '</h3>' : ''}
                                             </div>`}
-                                    >
-                                        {/* TODO: convert to Image Next.js */}
-                                        <img
-                                            className="slide-img"
-                                            src={`${slide.base64 || slide.img}`}
-                                            style={{
-                                                height:
-                                                    isMobile || isSmallMobile
-                                                        ? '40vh'
-                                                        : '50vh',
-                                            }}
-                                            alt={slide.title || ''}
-                                        />
-                                    </a>
+                                        >
+                                            {/* TODO: convert to Image Next.js */}
+                                            <img
+                                                className="slide-img"
+                                                src={`${slide.base64 || slide.img}`}
+                                                style={{
+                                                    height:
+                                                        isMobile ||
+                                                        isSmallMobile
+                                                            ? '40vh'
+                                                            : '50vh',
+                                                }}
+                                                alt={slide.title || ''}
+                                            />
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                        </SwiperSlide>
-                    ))}
+                            </SwiperSlide>
+                        );
+                    })}
                 </Swiper>
             </Fancybox>
         </Flex>

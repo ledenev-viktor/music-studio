@@ -1,14 +1,13 @@
-'use client';
 import React from 'react';
 import { Flex } from 'antd';
-import { Benefits } from '~ui/home';
+import { Benefits, Spin } from '~ui/home';
 import { COLORS } from '~variables';
-import { useGetSettingsPreview } from '~hooks/settings_preview';
+import { useGetSettingsPreviewBase64 } from '~hooks/settings_preview';
 import { ParallaxGallery } from '~components/ui/home/parallax-gallery';
 
 const HomePage = () => {
-    const { data: slidesData, isLoading: isLoadingSlidesData } =
-        useGetSettingsPreview();
+    const { data: slides, isLoading: isLoadingSlides } =
+        useGetSettingsPreviewBase64();
 
     return (
         <Flex
@@ -22,8 +21,17 @@ const HomePage = () => {
                 background: COLORS.blue,
             }}
         >
-            {!isLoadingSlidesData && (
-                <ParallaxGallery slides={slidesData || []} />
+            {!isLoadingSlides ? (
+                <ParallaxGallery slides={slides || []} />
+            ) : (
+                <Flex
+                    vertical
+                    justify="center"
+                    align="center"
+                    style={{ minHeight: '150px' }}
+                >
+                    <Spin />
+                </Flex>
             )}
             <Benefits />
         </Flex>

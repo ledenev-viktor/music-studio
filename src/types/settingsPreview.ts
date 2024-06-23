@@ -5,7 +5,7 @@ export type SettingsPreview = {
         title: string;
         desc: string;
         active: boolean;
-        base64: string;
+        base64?: string;
     };
     created_at: Intl.DateTimeFormat;
     id: number;

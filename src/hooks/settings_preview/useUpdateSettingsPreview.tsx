@@ -14,6 +14,7 @@ export const useUpdateSettingsPreview = () => {
         {
             id: number;
             pictureUrl?: string;
+            fileDownload?: string;
             title?: string;
             desc?: string;
             active?: boolean;

@@ -6,19 +6,25 @@ import { COLORS } from '~variables';
 import { Slide } from './types';
 import { useControlSlides } from './hooks/useControlSlides';
 import { useCreateImageOptions } from './hooks/useCreateImageOptions';
-import { Item } from './item';
+import { PointSlide } from './PointSlide';
 
-const ListSlidesBase = ({ className }: { className?: string }) => {
+const ListSlidesBase = ({
+    className,
+    slidesData,
+}: {
+    className?: string;
+    slidesData: any;
+}) => {
     const {
         slides,
         handleAddSlide,
         handleSaveSlides,
         handleResetSlides,
-        handleOkRemove,
+        handleRemove,
         changeSlide,
         isChangedSlides,
         setSlides,
-    } = useControlSlides();
+    } = useControlSlides(slidesData);
 
     const imageOptions = useCreateImageOptions();
 
@@ -54,16 +60,17 @@ const ListSlidesBase = ({ className }: { className?: string }) => {
                 </Flex>
                 {isChangedSlides && (
                     <Flex gap={10} style={{ background: COLORS.white }}>
-                        <Button onClick={handleResetSlides}>Сбросить</Button>
-                        <Button onClick={handleSaveSlides}>Сохранить</Button>
+                        <Button onClick={handleResetSlides}>Reset</Button>
+                        <Button onClick={handleSaveSlides}>Save</Button>
                     </Flex>
                 )}
             </Flex>
             <Reorder.Group
                 style={{
-                    margin: 0,
+                    margin: '0 0 25px',
                     padding: 0,
                     listStyle: 'none',
+                    overflow: 'hidden',
                 }}
                 className="slides-list"
                 axis="y"
@@ -72,11 +79,11 @@ const ListSlidesBase = ({ className }: { className?: string }) => {
             >
                 {slides?.map((slide: Slide) => {
                     return (
-                        <Item
+                        <PointSlide
                             key={slide.id}
                             slide={slide}
-                            handleOkRemove={handleOkRemove}
-                            imageOptions={imageOptions}
+                            handleRemove={handleRemove}
+                            imageOptions={imageOptions!}
                             changeSlide={changeSlide}
                         />
                     );
@@ -142,7 +149,7 @@ export const ListSlides = styled(ListSlidesBase)`
         & img {
             width: auto;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             max-height: 140px;
             border-radius: 10px;
             max-width: 210px;

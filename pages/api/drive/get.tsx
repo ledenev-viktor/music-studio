@@ -3,6 +3,8 @@ import { NextApiRequest, NextApiResponse } from 'next/types';
 import { DriveImages } from 'types/drive';
 import { drive } from './index';
 
+const baseUrlDrive = 'https://drive.google.com';
+
 const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         const { data } = await drive.files.list();
@@ -12,21 +14,9 @@ const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
             ([] as DriveImages);
 
         const imagePromises = images.map(async (image) => {
-            const { data: fileData } = await drive.files.get(
-                {
-                    fileId: image.id!,
-                    alt: 'media',
-                },
-                { responseType: 'arraybuffer' },
-            );
-
-            const buffer = Buffer.from(fileData as Buffer);
-            const base64 = buffer.toString('base64');
-            const mimeType = image.mimeType || 'image/jpeg';
-
             return {
-                url: `https://drive.google.com/thumbnail?id=${image.id}`,
-                base64: `data:${mimeType};base64,${base64}`,
+                url: `${baseUrlDrive}/thumbnail?id=${image.id}`,
+                urlFileDownload: `${baseUrlDrive}/uc?export=download&id=${image.id}`,
                 uid: image.id,
                 name: image.name,
             };
