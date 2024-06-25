@@ -13,7 +13,7 @@ const ListSlidesBase = ({
     slidesData,
 }: {
     className?: string;
-    slidesData: any;
+    slidesData: Slide[];
 }) => {
     const {
         slides,
@@ -83,7 +83,7 @@ const ListSlidesBase = ({
                             key={slide.id}
                             slide={slide}
                             handleRemove={handleRemove}
-                            imageOptions={imageOptions!}
+                            imageOptions={imageOptions}
                             changeSlide={changeSlide}
                         />
                     );

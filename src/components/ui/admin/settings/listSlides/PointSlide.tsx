@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Flex, Input, AutoComplete, Checkbox } from 'antd';
 import { useMotionValue, Reorder } from 'framer-motion';
+import Image from 'next/image';
 import { Slide } from '~types/settings';
 import { Close } from '~components/ui/icons/close';
 import { useRaisedShadow } from './hooks/useRaisedShadow';
@@ -9,7 +10,7 @@ const { TextArea } = Input;
 type PointSlideProps = {
     slide: Slide;
     handleRemove: (id: number) => void;
-    imageOptions: {
+    imageOptions?: {
         fileDownload: string;
         label: ReactNode | string;
         value: string;
@@ -43,8 +44,7 @@ export const PointSlide: React.FC<PointSlideProps> = ({
                     </button>
                 </div>
                 <div className="imgbox">
-                    {/* TODO: convert to Image Nextjs */}
-                    <img
+                    <Image
                         src={slide.img || '/logo.png'}
                         width={150}
                         height={80}

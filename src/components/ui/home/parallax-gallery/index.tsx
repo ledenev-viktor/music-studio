@@ -114,7 +114,6 @@ const ParallaxGalleryBase: FC<ParallaxGalleryProps> = ({
                                                 ${slide.desc ? '<h3>' + slide.desc + '</h3>' : ''}
                                             </div>`}
                                         >
-                                            {/* TODO: convert to Image Next.js */}
                                             <img
                                                 className="slide-img"
                                                 src={`${slide.base64 || slide.img}`}
@@ -126,6 +125,7 @@ const ParallaxGalleryBase: FC<ParallaxGalleryProps> = ({
                                                             : '50vh',
                                                 }}
                                                 alt={slide.title || ''}
+                                                aria-label={slide.title || ''}
                                             />
                                         </a>
                                     </div>
