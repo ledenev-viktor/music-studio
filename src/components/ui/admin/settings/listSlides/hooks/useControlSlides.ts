@@ -1,14 +1,10 @@
 import { useEffect, useState } from 'react';
 import isEqual from 'lodash/isEqual';
-import {
-    useGetSettingsPreview,
-    useUpdateSettingsPreview,
-} from '~hooks/settings_preview';
-import { Slide } from '../types';
+import { useUpdateSettings } from '~hooks/settings';
+import { Slide } from '~types/settings';
 
-export const useControlSlides = () => {
-    const { data: slidesData } = useGetSettingsPreview();
-    const { mutate: updateSettingsPreview } = useUpdateSettingsPreview();
+export const useControlSlides = (slidesData: Slide[]) => {
+    const { mutate: updateSettings } = useUpdateSettings();
     const [slides, setSlides] = useState<Slide[]>([]);
 
     useEffect(() => {
@@ -23,16 +19,16 @@ export const useControlSlides = () => {
             {
                 id: prev.length + 1,
                 img: '',
+                fileDownload: '',
                 title: '',
                 desc: '',
-                base64: '',
                 active: false,
             },
         ]);
     };
 
     const handleSaveSlides = () => {
-        updateSettingsPreview(slides);
+        updateSettings(slides);
     };
 
     const handleResetSlides = () => {
@@ -41,12 +37,12 @@ export const useControlSlides = () => {
         setSlides(slidesData);
     };
 
-    const handleOkRemove = (id: number) => {
+    const handleRemove = (id: number) => {
         if (slides.length < 1) return;
         setSlides(slides?.filter((slide: { id: number }) => slide.id !== id));
     };
 
-    const changeSlide = (id: number, objProperty: any) => {
+    const changeSlide = (id: number, objProperty: Partial<Slide>) => {
         setSlides((prev: Slide[]) =>
             prev.map((el) =>
                 el.id === id
@@ -70,7 +66,7 @@ export const useControlSlides = () => {
         handleAddSlide,
         handleSaveSlides,
         handleResetSlides,
-        handleOkRemove,
+        handleRemove,
         changeSlide,
         isChangedSlides,
         setSlides,

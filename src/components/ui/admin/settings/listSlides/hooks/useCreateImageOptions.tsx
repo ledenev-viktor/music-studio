@@ -7,7 +7,7 @@ export const useCreateImageOptions = () => {
         return {
             label: <img src={image.url} alt="" />,
             value: image.url,
-            base64: image.base64,
+            fileDownload: image.urlFileDownload,
         };
     });
 };

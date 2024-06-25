@@ -1,15 +1,23 @@
 'use client';
 import React, { Key, useState } from 'react';
-import { ConfigProvider, Button, Layout, type MenuProps, Menu } from 'antd';
+import {
+    ConfigProvider,
+    Button,
+    Layout,
+    type MenuProps,
+    Menu,
+    Flex,
+    Spin,
+} from 'antd';
 import { SettingOutlined, TeamOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 import { Content, Header } from 'antd/es/layout/layout';
 import Image from 'next/image';
 import { signOut } from 'next-auth/react';
 import { useGetImages } from '~hooks/images';
+import { useGetSettings } from '~hooks/settings';
 import { Appointments } from './Appointments';
 import { Settings } from './Settings';
-import { ListSlides } from '~components/ui/admin';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -34,6 +42,8 @@ export default function AdminApp() {
     const onMenuItemClick: MenuProps['onClick'] = (e) => setCurrentTab(e.key);
 
     const { data: images, isLoading: isLoadingImages } = useGetImages();
+    const { data: slidesData, isLoading: isLoadingSlidesData } =
+        useGetSettings();
 
     return (
         <ConfigProvider
@@ -92,11 +102,16 @@ export default function AdminApp() {
                         <Appointments />
                     ) : (
                         <>
-                            <Settings
-                                images={images}
-                                isLoadingImages={isLoadingImages}
-                            />
-                            <ListSlides />
+                            {!isLoadingImages || !isLoadingSlidesData ? (
+                                <Settings
+                                    images={images}
+                                    slidesData={slidesData || []}
+                                />
+                            ) : (
+                                <Flex vertical style={{ minHeight: '150px' }}>
+                                    <Spin />
+                                </Flex>
+                            )}
                         </>
                     )}
                 </Content>

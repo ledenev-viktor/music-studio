@@ -8,9 +8,7 @@ export default async function handler(
     try {
         const { data, error } = await supabase
             .from(process.env.SETTINGS_DB!)
-            .select('*')
-            .order('id', { ascending: false })
-            .limit(1);
+            .select('*');
 
         if (error) {
             res.status(500).json(error);
