@@ -5,6 +5,7 @@ export const globalStyles = css`
         --white: #fafafa;
         --background: var(--white);
         --accent: rgba(18, 18, 18, 0.8);
+        --accent-hover: rgba(18, 18, 18, 1);
         //rgba(94, 99, 232, 0.9);
         margin: 0;
         padding: 0;
@@ -98,17 +99,27 @@ export const globalStyles = css`
         -ms-user-select: none;
         cursor: pointer;
         position: absolute;
-        top: 18px;
-        right: 15px;
+        top: 50px;
+        right: 20px;
         width: 50px;
         height: 50px;
         border-radius: 50%;
         background: var(--accent);
         padding: 10px;
         z-index: 110;
+        box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: var(--accent-hover);
+        }
     }
 
     #button path {
         fill: var(--background);
+    }
+
+    .fancybox__container {
+        padding: 20px;
     }
 `;

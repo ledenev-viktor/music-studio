@@ -11,21 +11,20 @@ import { BREAKPOINTS } from '~constants/breakpoints';
 
 export const Benefits = () => {
     const { t } = useTranslation();
-    const { isMobile, isDesktop, isSmallMobile } = useScreenDetector();
-    const iconSize = isSmallMobile ? 50 : isMobile ? 80 : 120;
+    const { isMobile, isSmallMobile } = useScreenDetector();
+    const iconSize = isSmallMobile || isMobile ? '7vh' : '10vh';
 
     return (
         <Flex
             style={{
-                height: '70%',
+                height: isMobile || isSmallMobile ? '100%' : '50%',
                 width: '100%',
                 margin: '0 auto',
-                background: COLORS.blue,
-                padding: '10px 0 100px',
+                padding: '30px',
+                justifyContent: 'center',
             }}
             vertical
             justify={isMobile ? 'flex-start' : 'space-around'}
-            gap={!isDesktop ? 45 : 0}
         >
             <Flex
                 style={{
@@ -35,9 +34,10 @@ export const Benefits = () => {
                     margin: '0 auto',
                     color: COLORS.white,
                     flexShrink: 0,
+                    padding: '0 0 20px',
                 }}
                 vertical
-                gap={isMobile || isSmallMobile ? '10px' : '50px'}
+                gap={isMobile || isSmallMobile ? '1vh' : '2vh'}
             >
                 <Flex vertical gap={0}>
                     <Typography.Title
@@ -73,10 +73,6 @@ export const Benefits = () => {
                         }
                     />
                     <BenefitItem
-                        style={{
-                            marginTop:
-                                isMobile || isSmallMobile ? '30px' : '80px',
-                        }}
                         text={t('content_benefit_improve')}
                         icon={<Drum width={iconSize} />}
                     />
@@ -87,14 +83,6 @@ export const Benefits = () => {
                 </Flex>
             </Flex>
             <Flex justify="center">
-                {/* <motion.div
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.9 }}
-                >
-                    <StyledLink href="/application">
-                        {t('content_get_started_button')}
-                    </StyledLink>
-                </motion.div> */}
                 <motion.div
                     style={{
                         background: '#fff',
@@ -132,29 +120,12 @@ export const Benefits = () => {
     );
 };
 
-// const StyledLink = styled(Link)`
-//     width: 200px;
-//     height: 200px;
-//     text-align: center;
-//     font-size: 24px;
-//     color: ${COLORS.blue};
-//     background: ${COLORS.white};
-//     padding: 20px 30px;
-//     border-radius: 8px;
-//     &:hover {
-//         color: ${COLORS.colorInactive};
-//     }
-// `;
-
 export const StyledLink = styled(Link)`
-    // width: 200px;
-    // height: 200px;
     text-align: center;
     font-size: 24px;
     color: ${COLORS.black};
     background: 'transparent';
     padding: 20px 30px;
-    // border-radius: 8px;
     &:hover {
         color: ${COLORS.colorInactive};
     }

@@ -1,31 +1,32 @@
-import { Card, Flex, Spin } from 'antd';
+import { Card, Flex, Typography } from 'antd';
 import { Images } from '~types/images';
-import { ImageSelector, PicturesUpload } from '~ui/admin/settings';
+import { ListSlides, PicturesUpload } from '~ui/admin/settings';
+import { Slide } from '~types/settings';
 
 export const Settings = ({
     images,
-    isLoadingImages,
+    slidesData,
 }: {
     images?: Images;
-    isLoadingImages: boolean;
+    slidesData: Slide[];
 }) => {
     return (
-        <Flex vertical gap={20} align="center">
-            <Card
-                title="Images storage"
-                style={{ maxWidth: '1365px', width: '100%' }}
-            >
-                {isLoadingImages ? (
-                    <Flex align="center" justify="center">
-                        <Spin size="large" />
-                    </Flex>
-                ) : (
+        <>
+            <Flex vertical gap={20} align="center">
+                <Card
+                    title={
+                        <Typography.Title level={2}>
+                            Images storage
+                        </Typography.Title>
+                    }
+                    style={{ maxWidth: '1365px', width: '100%' }}
+                >
                     <Flex vertical gap={10}>
                         <PicturesUpload images={images} />
-                        <ImageSelector />
                     </Flex>
-                )}
-            </Card>
-        </Flex>
+                </Card>
+            </Flex>
+            <ListSlides slidesData={slidesData} />
+        </>
     );
 };
