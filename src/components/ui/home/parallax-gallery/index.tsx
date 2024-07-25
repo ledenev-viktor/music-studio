@@ -54,6 +54,7 @@ const ParallaxGalleryBase: FC<ParallaxGalleryProps> = ({
             style={{
                 userSelect: 'none',
                 boxSizing: 'border-box',
+                flexGrow: '2',
             }}
             className={className}
             vertical
