@@ -27,7 +27,7 @@ const HomePage = () => {
                     vertical
                     justify="center"
                     align="center"
-                    style={{ minHeight: '150px' }}
+                    style={{ minHeight: '150px', flexGrow: '2' }}
                 >
                     <Spin />
                 </Flex>
