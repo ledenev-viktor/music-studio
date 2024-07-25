@@ -19,7 +19,6 @@ export const Benefits = () => {
     return (
         <Flex
             style={{
-                // isMaxMobile ? 'auto' : '50%'
                 height: 'auto',
                 width: '100%',
                 margin: '0 auto',

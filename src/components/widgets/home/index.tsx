@@ -20,7 +20,6 @@ const HomePage = () => {
                 background: COLORS.blue,
             }}
         >
-            {/* !isLoadingSlides */}
             {!isLoadingSlides ? (
                 <ParallaxGallery slides={slides || []} />
             ) : (
