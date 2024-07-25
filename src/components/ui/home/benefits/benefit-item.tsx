@@ -10,7 +10,7 @@ type BenefitItemProps = {
 };
 
 export const BenefitItem = ({ icon, text, style }: BenefitItemProps) => {
-    const { isMobile } = useScreenDetector();
+    const { isMobile, isSmallMobile } = useScreenDetector();
 
     return (
         <Flex
@@ -31,7 +31,7 @@ export const BenefitItem = ({ icon, text, style }: BenefitItemProps) => {
             <Typography.Text
                 style={{
                     color: COLORS.white,
-                    fontSize: isMobile ? '16px' : '20px',
+                    fontSize: isMobile || isSmallMobile ? '16px' : '20px',
                     lineHeight: '1.2',
                     textAlign: 'center',
                 }}
