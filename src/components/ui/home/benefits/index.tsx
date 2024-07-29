@@ -14,14 +14,17 @@ export const Benefits = () => {
     const { isMobile, isSmallMobile } = useScreenDetector();
     const iconSize = isSmallMobile || isMobile ? '7vh' : '10vh';
 
+    const isMaxMobile = isMobile || isSmallMobile;
+
     return (
         <Flex
             style={{
-                height: isMobile || isSmallMobile ? '100%' : '50%',
+                height: 'auto',
                 width: '100%',
                 margin: '0 auto',
                 padding: '30px',
                 justifyContent: 'center',
+                minHeight: isMaxMobile ? '470px' : '0',
             }}
             vertical
             justify={isMobile ? 'flex-start' : 'space-around'}
