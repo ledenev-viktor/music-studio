@@ -1,9 +1,14 @@
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 import { CalendarEvent } from '~types/google';
 import { filterEventsBySchedule } from './filterEventsBySchedule';
 import { getWorkingHours } from './getWorkingHours';
 import { getOffsetUTCFromStringDate } from './getOffsetUTCFromStringDate';
 import { START_DAY, END_DAY } from '~constants/schedule';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export function getAvailableSlots(
     day: string,
@@ -31,14 +36,13 @@ export function getAvailableSlots(
         filteredEvents[0].start.dateTime,
     );
 
-    const dateNow = dayjs().format('YYYY-MM-DDTHH:mm:ss');
+    const dateNow = dayjs().tz('Asia/Tbilisi').format('YYYY-MM-DDTHH:mm:ss');
 
     for (let i = 0; i < workingHours?.length; i += 1) {
         const [hourStart, hourEnd] = workingHours[i];
 
         const dateStart = day + `T${hourStart}:00:00${offsetUTC}`;
         const dateEnd = day + `T${hourEnd}:00:00${offsetUTC}`;
-
         const dateWithSubtractedHour = dayjs(dateStart).subtract(1, 'hour'); // appointments must be made 1 hour in advance
 
         if (dayjs(dateNow).isAfter(dateWithSubtractedHour)) {
