@@ -9,6 +9,7 @@ import {
 import { AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
+import cn from 'classnames';
 import { useScreenDetector } from '~hooks/responsive';
 import { COLORS } from 'src/styles/variables';
 import { FreeSlots } from '~types/common';
@@ -41,7 +42,10 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
 
     const error = errors[name] ? <>{errors[name]?.message}</> : '';
 
-    if (!timeSlots.length) {
+    if (
+        !timeSlots.length ||
+        !timeSlots.filter((item) => !item.disabled).length
+    ) {
         return <Alert type="error" message={t('slots_empty')} />;
     }
 
@@ -61,6 +65,9 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
                                     span={!isSmallMobile && !isMobile ? 8 : 12}
                                 >
                                     <Tag.CheckableTag
+                                        className={cn('tag', {
+                                            dsabled: slot?.disabled,
+                                        })}
                                         style={{ width: '100%' }}
                                         checked={value.some(
                                             ({ value }: { value: string }) => {
@@ -110,6 +117,11 @@ export const TimeSlots = styled(TimeSlotsBase)`
         color: ${COLORS.black};
         background: ${COLORS.lightgrey};
         transition: all 0.3s ease;
+
+        &.dsabled {
+            pointer-events: none;
+            opacity: 0.3;
+        }
 
         &:hover {
             border-color: ${COLORS.lightgrey};

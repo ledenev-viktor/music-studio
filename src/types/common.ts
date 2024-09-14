@@ -5,6 +5,7 @@ export type MenuPoint = {
 };
 
 export type FreeSlots = {
+    disabled?: boolean;
     id: string;
     value: string;
     label: string;

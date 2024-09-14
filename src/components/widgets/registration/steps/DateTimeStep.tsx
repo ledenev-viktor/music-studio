@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { Alert } from 'antd';
 import { useWatch } from 'react-hook-form';
@@ -29,6 +29,18 @@ export const DateTimeStep = ({
     const isLoadingSlots = useSetDays(startDate, endDate);
     const days = useGetDays(startDate, endDate);
 
+    const availableTime = useMemo(
+        () =>
+            days[date]?.slots.map((day) => {
+                const date1 = day.id.split('~')[0];
+                const dateWithSubtractedHour = dayjs(date1).subtract(1, 'hour'); // appointments must be made 1 hour in advance
+                const dateNow = dayjs().format('YYYY-MM-DDTHH:mm:ss');
+                const disabled = dayjs(dateNow).isAfter(dateWithSubtractedHour);
+                return { ...day, disabled };
+            }),
+        [date, days],
+    );
+
     return (
         <StepWrapper onSaveEdits={onSaveEdits} onGoToNextStep={onGoToNextStep}>
             <CalendarField
@@ -54,7 +66,7 @@ export const DateTimeStep = ({
                 <TimeSlots
                     name="selectedTimeSlots"
                     label={t('content_form_slots_title')}
-                    timeSlots={days[date]?.slots}
+                    timeSlots={availableTime}
                     rules={{
                         required: {
                             value: true,
