@@ -71,7 +71,7 @@ const AnimatedLink = ({ title, href }: { title: string; href: string }) => {
                     }}
                     isHovered={isHovered}
                 />
-                {!isTablet && <LinkOutlined style={{ fontSize }} />}
+                {!isTablet && href && <LinkOutlined style={{ fontSize }} />}
             </Flex>
             <div style={{ position: 'absolute', top: 0 }}>
                 <AnimatedWord
