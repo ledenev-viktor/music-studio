@@ -1,11 +1,14 @@
-/* eslint-disable import/no-anonymous-default-export */
-import { NextApiRequest, NextApiResponse } from 'next/types';
+import { NextApiResponse } from 'next/types';
 import { DriveImages } from 'types/drive';
+import {
+    NextApiRequestWithSession,
+    withSessionCheck,
+} from '~lib/withCheckSession';
 import { drive } from './index';
 
 const baseUrlDrive = 'https://drive.google.com';
 
-const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
+async function handler(req: NextApiRequestWithSession, res: NextApiResponse) {
     try {
         const { data } = await drive.files.list();
 
@@ -29,6 +32,6 @@ const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
             error: 'Failed to retrieve access token' + error,
         });
     }
-};
+}
 
-export default fetchApi;
+export default withSessionCheck(handler);

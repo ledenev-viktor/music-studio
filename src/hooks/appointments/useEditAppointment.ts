@@ -20,7 +20,7 @@ export const useEditAppointments = () => {
                 phone: data.phone,
                 updatedAt: dayjs().unix(),
                 id: data.id,
-                // status: data.status,
+                status: data.status,
             });
         },
         onSuccess: () => {

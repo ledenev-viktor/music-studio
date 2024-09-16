@@ -31,7 +31,7 @@ export type FormFields = {
 };
 
 export type EditFormData = {
-    // status:,
+    status: AppointmentStatuses;
     fullName: string;
     phone: string;
     time: Dayjs[];

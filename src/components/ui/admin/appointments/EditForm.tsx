@@ -1,7 +1,12 @@
-import { Button, Form, Input, Space, TimePicker } from 'antd';
+import { Badge, Button, Form, Input, Select, Space, TimePicker } from 'antd';
 import styled from '@emotion/styled';
 import { Appointment, EditFormData } from '~types/appointments';
 import { getDayJsObject } from '~utils/date.helpers';
+import {
+    APPOINTMENTS_STATUSES,
+    APPOINTMENTS_STATUSES_COLORS,
+    AppointmentStatuses,
+} from '~constants/status';
 
 export const EditForm = ({
     appointment,
@@ -44,22 +49,27 @@ export const EditForm = ({
                 phone: appointment.phone,
             }}
         >
-            {/* <Form.Item label="Status" name="status">
+            <Form.Item label="Status" name="status">
                 <Select>
-                    {Object.keys(APPOINTMENTS_STATUSES_COLORS).map((status) => (
-                        <Select.Option value={status} key={status}>
-                            <Badge
-                                color={
-                                    APPOINTMENTS_STATUSES_COLORS[
-                                        status as AppointmentStatuses
-                                    ]
-                                }
-                                text={status}
-                            />
-                        </Select.Option>
-                    ))}
+                    {Object.keys(APPOINTMENTS_STATUSES_COLORS).map((status) => {
+                        if (status === APPOINTMENTS_STATUSES.REJECTED)
+                            return null;
+
+                        return (
+                            <Select.Option value={status} key={status}>
+                                <Badge
+                                    color={
+                                        APPOINTMENTS_STATUSES_COLORS[
+                                            status as AppointmentStatuses
+                                        ]
+                                    }
+                                    text={status}
+                                />
+                            </Select.Option>
+                        );
+                    })}
                 </Select>
-            </Form.Item> */}
+            </Form.Item>
             <Form.Item label="Name" name="fullName">
                 <Input variant="outlined" />
             </Form.Item>

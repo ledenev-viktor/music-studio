@@ -1,9 +1,12 @@
-/* eslint-disable import/no-anonymous-default-export */
 import { google } from 'googleapis';
-import { NextApiRequest, NextApiResponse } from 'next/types';
+import { NextApiResponse } from 'next/types';
 import { jwtClientGoogleCalendar } from '~lib/jwtClientGoogleCalendar';
+import {
+    NextApiRequestWithSession,
+    withSessionCheck,
+} from '~lib/withCheckSession';
 
-const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
+async function handler(req: NextApiRequestWithSession, res: NextApiResponse) {
     try {
         const calendar = google.calendar({
             version: 'v3',
@@ -31,6 +34,6 @@ const fetchApi = async (req: NextApiRequest, res: NextApiResponse) => {
             error: 'Failed to retrieve access token' + error,
         });
     }
-};
+}
 
-export default fetchApi;
+export default withSessionCheck(handler);

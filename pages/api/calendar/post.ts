@@ -1,10 +1,24 @@
-/* eslint-disable import/no-anonymous-default-export */
 import dayjs from 'dayjs';
 import { google } from 'googleapis';
-import { NextApiRequest, NextApiResponse } from 'next/types';
+import { NextApiResponse } from 'next/types';
+import {
+    NextApiRequestWithSession,
+    withSessionCheck,
+} from '~lib/withCheckSession';
 import { jwtClientGoogleCalendar } from '~lib/jwtClientGoogleCalendar';
+import { Appointment } from '~types/appointments';
 
-export default async function (req: NextApiRequest, res: NextApiResponse) {
+const getSummary = (appointment: Appointment) => {
+    let summary = `${appointment.fullName} ${appointment.phone} tlgr: ${appointment.telegram}`;
+
+    if (appointment.instagram) {
+        summary += ` IG: ${appointment.instagram}`;
+    }
+
+    return summary;
+};
+
+async function handler(req: NextApiRequestWithSession, res: NextApiResponse) {
     try {
         const calendar = google.calendar({
             version: 'v3',
@@ -15,7 +29,8 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
         const prepareDate = dayjs(appointment.date).format('YYYY-MM-DD');
 
         const event = {
-            summary: appointment.fullName,
+            summary: getSummary(appointment),
+            description: `Created by admin: ${req.session.user?.email}`,
             start: {
                 dateTime: `${prepareDate}T${appointment.startTime}:00`,
                 timeZone: 'Asia/Tbilisi',
@@ -24,8 +39,8 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
                 dateTime: `${prepareDate}T${appointment.endTime}:00`,
                 timeZone: 'Asia/Tbilisi',
             },
+            colorId: '6',
         };
-
         const { data } = await calendar.events.insert({
             calendarId: process.env.CALENDAR_ID,
             auth: jwtClientGoogleCalendar,
@@ -39,3 +54,5 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
         });
     }
 }
+
+export default withSessionCheck(handler);
