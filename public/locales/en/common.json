@@ -25,6 +25,7 @@
     "save": "Save",
     "edit": "Edit",
     "404_title": "Looks like you got lost",
+    "content_no_date_selected": "Please select date to see available time",
     "required_filed": "This field is required",
     "required_filed_optional": "Fill in the Telegram or Instagram nickname field",
     "content_form_addition_title": "Optional equipment (10 ₾/hour for each)",
