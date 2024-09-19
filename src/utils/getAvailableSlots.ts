@@ -10,6 +10,8 @@ import { START_DAY, END_DAY } from '~constants/schedule';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
+const subtractHourDate = (date: string) => dayjs(date).subtract(1, 'hour'); // appointments must be made 1 hour in advance
+
 export function getAvailableSlots(
     day: string,
     events: CalendarEvent[] | undefined,
@@ -28,22 +30,37 @@ export function getAvailableSlots(
         endDateTime,
     ]);
 
-    if (!filteredEvents?.length) return workingHours;
+    const dateNow = dayjs().tz('Asia/Tbilisi').format('YYYY-MM-DDTHH:mm:ss');
+
+    const result = [];
+
+    if (!filteredEvents?.length) {
+        for (let i = 0; i < workingHours?.length; i += 1) {
+            const [hourStart, hourEnd] = workingHours[i];
+
+            const dateStart = day + `T${hourStart}:00:00`;
+            const dateWithSubtractedHour = subtractHourDate(dateStart);
+
+            if (!dayjs(dateNow).isAfter(dateWithSubtractedHour)) {
+                result.push([hourStart, hourEnd]);
+            }
+        }
+        return result;
+    }
 
     let j = 0;
-    const result = [];
+
     const offsetUTC = getOffsetUTCFromStringDate(
         filteredEvents[0].start.dateTime,
     );
-
-    const dateNow = dayjs().tz('Asia/Tbilisi').format('YYYY-MM-DDTHH:mm:ss');
 
     for (let i = 0; i < workingHours?.length; i += 1) {
         const [hourStart, hourEnd] = workingHours[i];
 
         const dateStart = day + `T${hourStart}:00:00${offsetUTC}`;
         const dateEnd = day + `T${hourEnd}:00:00${offsetUTC}`;
-        const dateWithSubtractedHour = dayjs(dateStart).subtract(1, 'hour'); // appointments must be made 1 hour in advance
+
+        const dateWithSubtractedHour = subtractHourDate(dateStart);
 
         if (dayjs(dateNow).isAfter(dateWithSubtractedHour)) {
             continue;
