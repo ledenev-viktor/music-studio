@@ -44,12 +44,7 @@ export const DateTimeStep = ({
                 setEndDate={setEndDate}
                 isLoadingSlots={isLoadingSlots}
             />
-            {!date && (
-                <Alert
-                    type="warning"
-                    message="Please select date to see available time"
-                />
-            )}
+            {!date && <Alert type="warning" message={t('required_filed')} />}
             {date && (
                 <TimeSlots
                     name="selectedTimeSlots"
