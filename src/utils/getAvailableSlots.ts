@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { CalendarEvent } from '~types/google';
 import { filterEventsBySchedule } from './filterEventsBySchedule';
 import { getWorkingHours } from './getWorkingHours';
@@ -10,7 +11,11 @@ export function getAvailableSlots(
 ) {
     if (!events || !day) return [];
 
-    const startDay = START_DAY;
+    const todayDay = dayjs();
+    const today = todayDay.format('YYYY-MM-DD');
+    const currentHour = Number(todayDay.format('HH'));
+
+    const startDay = day === today ? currentHour + 1 : START_DAY;
     const endDay = END_DAY;
 
     const startDateTime = day + `T${startDay}:00:00`;
