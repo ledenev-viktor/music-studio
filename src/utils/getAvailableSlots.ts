@@ -15,7 +15,13 @@ export function getAvailableSlots(
     const today = todayDay.format('YYYY-MM-DD');
     const currentHour = Number(todayDay.format('HH'));
 
-    const startDay = day === today ? currentHour + 1 : START_DAY;
+    const isCurrentHourInWorkingHours =
+        START_DAY <= currentHour && currentHour <= END_DAY;
+
+    const startDay =
+        day === today && isCurrentHourInWorkingHours
+            ? currentHour + 1
+            : START_DAY;
     const endDay = END_DAY;
 
     const startDateTime = day + `T${startDay}:00:00`;
