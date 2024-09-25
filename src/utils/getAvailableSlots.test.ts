@@ -1,33 +1,24 @@
 import { getAvailableSlots } from './getAvailableSlots';
-import { getWorkingHours } from './getWorkingHours';
-
-jest.mock('./getWorkingHours', () => ({
-    getWorkingHours: jest.fn(),
-}));
-
-const allSlots = [
-    ['11', '12'],
-    ['12', '13'],
-    ['13', '14'],
-    ['14', '15'],
-    ['15', '16'],
-    ['16', '17'],
-    ['17', '18'],
-    ['18', '19'],
-    ['19', '20'],
-    ['20', '21'],
-    ['21', '22'],
-    ['22', '23'],
-];
 
 describe('No data was transferred at all or incomplete data was transferred', () => {
-    (getWorkingHours as jest.Mock).mockImplementationOnce(() => allSlots);
     describe('There are no events', () => {
         const events = [];
         const date = '2024-05-21';
-
         it('Events is empty', () => {
-            expect(getAvailableSlots(date, events)).toEqual(allSlots);
+            expect(getAvailableSlots(date, events)).toEqual([
+                ['11', '12'],
+                ['12', '13'],
+                ['13', '14'],
+                ['14', '15'],
+                ['15', '16'],
+                ['16', '17'],
+                ['17', '18'],
+                ['18', '19'],
+                ['19', '20'],
+                ['20', '21'],
+                ['21', '22'],
+                ['22', '23'],
+            ]);
         });
     });
     describe('Events take up the whole day', () => {
@@ -68,10 +59,6 @@ describe('Checking slot filtering', () => {
         ];
 
         it('The slot from 11 - 12 should be filtered', () => {
-            (getWorkingHours as jest.Mock).mockImplementationOnce(
-                () => allSlots,
-            );
-
             expect(getAvailableSlots(date, events)).toEqual([
                 ['12', '13'],
                 ['13', '14'],
@@ -96,10 +83,6 @@ describe('Checking slot filtering', () => {
         ];
 
         it('The slot from 17 - 18 should be filtered', () => {
-            (getWorkingHours as jest.Mock).mockImplementationOnce(
-                () => allSlots,
-            );
-
             expect(getAvailableSlots(date, events)).toEqual([
                 ['11', '12'],
                 ['12', '13'],
@@ -124,10 +107,6 @@ describe('Checking slot filtering', () => {
         ];
 
         it('The slot from 22 - 23 should be filtered', () => {
-            (getWorkingHours as jest.Mock).mockImplementationOnce(
-                () => allSlots,
-            );
-
             expect(getAvailableSlots(date, events)).toEqual([
                 ['11', '12'],
                 ['12', '13'],
@@ -152,10 +131,6 @@ describe('Checking slot filtering', () => {
         ];
 
         it('The slot from 11 - 12, 12 - 13 should be filtered', () => {
-            (getWorkingHours as jest.Mock).mockImplementationOnce(
-                () => allSlots,
-            );
-
             expect(getAvailableSlots(date, events)).toEqual([
                 ['13', '14'],
                 ['14', '15'],
@@ -191,10 +166,6 @@ describe('Checking slot filtering', () => {
         ];
 
         it('Slots from 11 - 15 hours of the schedule should be filtered', () => {
-            (getWorkingHours as jest.Mock).mockImplementationOnce(
-                () => allSlots,
-            );
-
             expect(getAvailableSlots(date, events)).toEqual([
                 ['15', '16'],
                 ['16', '17'],
@@ -224,10 +195,6 @@ describe('Checking slot filtering', () => {
         ];
 
         it('Slots from 11 - 12, 13 - 14, 21 - 23 hours of the schedule should be filtered', () => {
-            (getWorkingHours as jest.Mock).mockImplementationOnce(
-                () => allSlots,
-            );
-
             expect(getAvailableSlots(date, events)).toEqual([
                 ['12', '13'],
                 ['14', '15'],
@@ -257,10 +224,6 @@ describe('Checking slot filtering', () => {
         ];
 
         it('Slots from 11 - 12, 13 - 14, 21 - 23 hours of the schedule should be filtered whth timezone -03:00', () => {
-            (getWorkingHours as jest.Mock).mockImplementationOnce(
-                () => allSlots,
-            );
-
             expect(getAvailableSlots(date, events)).toEqual([
                 ['12', '13'],
                 ['14', '15'],
@@ -272,40 +235,5 @@ describe('Checking slot filtering', () => {
                 ['20', '21'],
             ]);
         });
-    });
-});
-
-describe('Checking the exclusion of past slots at the moment', () => {
-    const events = [
-        {
-            start: { dateTime: '2024-05-21T11:00:00+03:00' },
-            end: { dateTime: '2024-05-21T12:00:00+03:00' },
-        },
-    ];
-
-    const date = '2024-05-21';
-
-    it('Slots from 11am to 3pm should be excluded.', () => {
-        (getWorkingHours as jest.Mock).mockImplementationOnce(() => [
-            ['15', '16'],
-            ['16', '17'],
-            ['17', '18'],
-            ['18', '19'],
-            ['19', '20'],
-            ['20', '21'],
-            ['21', '22'],
-            ['22', '23'],
-        ]);
-
-        expect(getAvailableSlots(date, events)).toEqual([
-            ['15', '16'],
-            ['16', '17'],
-            ['17', '18'],
-            ['18', '19'],
-            ['19', '20'],
-            ['20', '21'],
-            ['21', '22'],
-            ['22', '23'],
-        ]);
     });
 });

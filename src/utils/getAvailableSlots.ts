@@ -15,7 +15,7 @@ export function getAvailableSlots(
 
     const startDateTime = day + `T${startDay}:00:00`;
     const endDateTime = day + `T${endDay}:00:00`;
-    const workingHours: string[][] = getWorkingHours(startDay, endDay, day);
+    const workingHours: string[][] = getWorkingHours(startDay, endDay);
 
     const filteredEvents = filterEventsBySchedule(events, [
         startDateTime,
