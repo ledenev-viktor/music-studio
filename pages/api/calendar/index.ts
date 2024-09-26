@@ -1,12 +1,8 @@
 import { google } from 'googleapis';
-import { NextApiResponse } from 'next/types';
+import { NextApiRequest, NextApiResponse } from 'next/types';
 import { jwtClientGoogleCalendar } from '~lib/jwtClientGoogleCalendar';
-import {
-    NextApiRequestWithSession,
-    withSessionCheck,
-} from '~lib/withCheckSession';
 
-async function handler(req: NextApiRequestWithSession, res: NextApiResponse) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
         const calendar = google.calendar({
             version: 'v3',
@@ -36,4 +32,4 @@ async function handler(req: NextApiRequestWithSession, res: NextApiResponse) {
     }
 }
 
-export default withSessionCheck(handler);
+export default handler;
