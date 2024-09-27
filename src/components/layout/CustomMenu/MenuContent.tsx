@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import React, { CSSProperties } from 'react';
 import { Button } from 'antd';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
@@ -33,7 +33,11 @@ export const MenuContent = ({ toggle }: { toggle: () => void }) => {
     return (
         <nav
             className="clientMenu"
-            style={{ paddingTop: isMobile || isSmallMobile ? '50px' : '100px' }}
+            style={{
+                paddingTop: isMobile || isSmallMobile ? '3rem' : '6rem',
+                paddingLeft: isMobile ? '1rem' : '2rem',
+                paddingRight: isMobile ? '1rem' : '2rem',
+            }}
         >
             <ul className="clientMenuUl">
                 {menu.map((item) => (
@@ -52,7 +56,7 @@ export const MenuContent = ({ toggle }: { toggle: () => void }) => {
             <ul
                 className="clientMenuUl"
                 style={{
-                    paddingTop: isMobile ? '50px' : '100px',
+                    paddingTop: isMobile ? '3rem' : '6rem',
                 }}
             >
                 {languages.map((item) => (
@@ -83,6 +87,8 @@ const LiComponent = ({
     onClick: () => void;
     styles?: CSSProperties;
 }) => {
+    const { isMobile } = useScreenDetector();
+
     return (
         <li className="clientMenuLi">
             <Button
@@ -90,10 +96,10 @@ const LiComponent = ({
                 onClick={onClick}
                 style={{
                     fontWeight: 'bold',
-                    fontSize: '32px',
-                    padding: '10px',
+                    fontSize: isMobile ? '1.5rem' : '2rem',
+                    padding: isMobile ? '0.5rem' : '1rem',
                     color: 'white',
-                    width: '100%',
+                    width: isMobile ? '90%' : '100%',
                     ...styles,
                 }}
             >

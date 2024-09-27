@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAnimate, stagger } from 'framer-motion';
 import { MenuToggle } from './MenuToggle';
 import { MenuContent } from './MenuContent';
