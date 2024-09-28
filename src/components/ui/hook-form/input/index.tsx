@@ -25,7 +25,7 @@ const FormInputBase: FC<FormInputBaseProps> = ({
     className,
     ...props
 }) => {
-    const { control } = useFormContext();
+    const { control, trigger } = useFormContext();
     const { field, fieldState } = useController({
         name,
         rules,
@@ -49,6 +49,7 @@ const FormInputBase: FC<FormInputBaseProps> = ({
                         props.onChange?.(e);
                     }}
                     onBlur={(e) => {
+                        trigger(name);
                         field.onBlur();
                         props.onBlur?.(e);
                     }}

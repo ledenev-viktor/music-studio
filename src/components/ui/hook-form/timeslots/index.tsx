@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Col, Flex, Row, Tag, Alert } from 'antd';
 import styled from '@emotion/styled';
 import {
     Controller,
     useFormContext,
     UseControllerProps,
+    useWatch,
 } from 'react-hook-form';
 import { AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
@@ -41,6 +42,14 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
 
     const error = errors[name] ? <>{errors[name]?.message}</> : '';
 
+    const valueField = useWatch({ control, name });
+
+    useEffect(() => {
+        if (Array.isArray(valueField) && valueField.length > 0) {
+            trigger(name);
+        }
+    }, [name, trigger, valueField]);
+
     if (!timeSlots.length) {
         return <Alert type="error" message={t('slots_empty')} />;
     }
@@ -68,7 +77,6 @@ const TimeSlotsBase: FC<TimeSlotsBaseProps> = ({
                                             },
                                         )}
                                         onChange={(checked) => {
-                                            trigger('selectedTimeSlots');
                                             const nextValue = checked
                                                 ? [...value, slot]
                                                 : value.filter(

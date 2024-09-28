@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Flex, Steps } from 'antd';
 import { useFormContext } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { AnimatePresence } from 'framer-motion';
 import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/router';
 import { useScreenDetector } from '~hooks/responsive';
 import { COLORS } from '~variables';
 import { useCreateAppointments } from '~hooks/appointments';
@@ -25,9 +26,27 @@ type RegFormBaseProps = {
 
 export const FormComponentBase = ({ className }: RegFormBaseProps) => {
     const { t } = useTranslation();
+    const { locale } = useRouter();
 
-    const { handleSubmit, getValues, reset, trigger } =
-        useFormContext<FormFields>();
+    const {
+        handleSubmit,
+        getValues,
+        reset,
+        trigger,
+        formState: { errors },
+    } = useFormContext<FormFields>();
+
+    useEffect(() => {
+        const currentErrors = Object.keys(errors) as Array<keyof FormFields>;
+
+        if (currentErrors.length > 0) {
+            const timeoutId = setTimeout(() => {
+                trigger(currentErrors);
+            }, 0);
+
+            return () => clearTimeout(timeoutId);
+        }
+    }, [locale, errors, trigger]);
 
     const [step, setStep] = useState<STEP>(STEP.DATE_TIME_STEP);
     const [mode, setMode] = useState<MODE>(MODE.DEFAULT);
@@ -98,6 +117,7 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                         onGoToNextStep={() =>
                             validateAndProceed(
                                 [
+                                    'phone',
                                     'userName',
                                     'userNameTelegram',
                                     'userNameInstagram',
@@ -163,7 +183,7 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
             justify="center"
             style={{
                 width: '100%',
-                height: '100vh',
+                minHeight: '100vh',
                 background: COLORS.blue,
                 overflow: 'hidden',
             }}
@@ -172,7 +192,6 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                 className={className}
                 onSubmit={handleSubmit(onSubmit)}
                 style={{
-                    maxHeight: '650px',
                     width: '100%',
                     background: COLORS.white,
                     minWidth: '320px',

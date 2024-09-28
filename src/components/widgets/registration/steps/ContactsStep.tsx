@@ -1,9 +1,13 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useFormContext, useWatch } from 'react-hook-form';
+import { PhoneNumberUtil } from 'google-libphonenumber';
 import { FormFields } from '~types/appointments';
 import { FormInput } from '~components/ui/hook-form';
 import { StepWrapper } from './StepWrapper';
+import { InputPhone } from '~components/ui/hook-form/input-phone';
+
+const phoneUtil = PhoneNumberUtil.getInstance();
 
 export const ContactsStep = ({
     onGoToNextStep,
@@ -34,6 +38,7 @@ export const ContactsStep = ({
             onGoToNextStep={onGoToNextStep}
             onGoToPreviousStep={async () => {
                 clearErrors([
+                    'phone',
                     'userName',
                     'userNameTelegram',
                     'userNameInstagram',
@@ -42,6 +47,27 @@ export const ContactsStep = ({
             }}
             onSaveEdits={onSaveEdits}
         >
+            <InputPhone
+                name="phone"
+                listCountries={['ge', 'us', 'ru']}
+                label={t('content_form_phone')}
+                rules={{
+                    validate: (value: string) => {
+                        const message = t('required_filed_phone');
+                        try {
+                            return (
+                                (value?.length > 0 &&
+                                    phoneUtil.isValidNumber(
+                                        phoneUtil.parseAndKeepRawInput(value),
+                                    )) ||
+                                message
+                            );
+                        } catch (error) {
+                            return message;
+                        }
+                    },
+                }}
+            />
             <FormInput
                 name="userName"
                 label={t('content_form_name_title')}

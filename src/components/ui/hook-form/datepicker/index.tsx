@@ -23,7 +23,7 @@ export function FormDatePickerBase({
     id,
     ...props
 }: FormDatePickerBaseProps) {
-    const { control } = useFormContext();
+    const { control, trigger } = useFormContext();
     const { field, fieldState } = useController({
         name,
         rules,
@@ -47,6 +47,7 @@ export function FormDatePickerBase({
                         field.onChange(e);
                     }}
                     onBlur={() => {
+                        trigger(name);
                         field.onBlur();
                     }}
                 />
