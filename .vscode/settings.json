@@ -19,5 +19,8 @@
     "editor.formatOnType": false,
     "prettier.endOfLine": "auto",
     "react-i18n.i18nPaths": "public\\locales",
+    "cSpell.words": [
+      "Забронировать"
+    ],
   }
   
