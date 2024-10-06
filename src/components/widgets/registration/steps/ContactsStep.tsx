@@ -4,6 +4,7 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import { FormFields } from '~types/appointments';
 import { FormInput } from '~components/ui/hook-form';
 import { StepWrapper } from './StepWrapper';
+import { InputPhone } from '~components/ui/hook-form/input-phone';
 
 export const ContactsStep = ({
     onGoToNextStep,
@@ -34,6 +35,7 @@ export const ContactsStep = ({
             onGoToNextStep={onGoToNextStep}
             onGoToPreviousStep={async () => {
                 clearErrors([
+                    'phone',
                     'userName',
                     'userNameTelegram',
                     'userNameInstagram',
@@ -42,6 +44,7 @@ export const ContactsStep = ({
             }}
             onSaveEdits={onSaveEdits}
         >
+            <InputPhone name="phone" label={t('content_form_phone')} />
             <FormInput
                 name="userName"
                 label={t('content_form_name_title')}

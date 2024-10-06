@@ -10,6 +10,7 @@ type RegistrationFormProps = {
 export const RegistrationForm: FC<RegistrationFormProps> = () => {
     const defaultValues: FormFields = {
         date: '',
+        phone: '',
         userName: '',
         userNameTelegram: '',
         userNameInstagram: '',
@@ -22,7 +23,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = () => {
 
     const form = useForm<FormFields>({
         defaultValues,
-        mode: 'onChange',
+        mode: 'onSubmit',
     });
 
     return (

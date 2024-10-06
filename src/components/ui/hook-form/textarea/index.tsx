@@ -27,7 +27,7 @@ export const FormTextareaBase: FC<FormTextareaBaseProps> = ({
     ...props
 }) => {
     const { TextArea } = Input;
-    const { control } = useFormContext();
+    const { control, trigger } = useFormContext();
     const { field, fieldState } = useController({
         name,
         rules,
@@ -52,6 +52,7 @@ export const FormTextareaBase: FC<FormTextareaBaseProps> = ({
                 onBlur={(e) => {
                     field.onBlur();
                     props.onBlur?.(e);
+                    trigger(name);
                 }}
             />
             {error && <ErrorMessage motionId={name}>{error}</ErrorMessage>}

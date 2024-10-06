@@ -24,7 +24,7 @@ export const CalendarField = ({
     setStartDate: (value: Dayjs) => void;
     isLoadingSlots: boolean;
 }) => {
-    const { control, setValue } = useFormContext();
+    const { control, setValue, trigger } = useFormContext();
     const [date, weekStartDay] = useWatch<FormFields, ['date', 'weekStartDay']>(
         {
             name: ['date', 'weekStartDay'],
@@ -52,6 +52,7 @@ export const CalendarField = ({
                                 setStartDate(start);
                                 setValue('date', '');
                                 setValue('weekStartDay', start);
+                                trigger(name);
                             }}
                         />
                     )}
