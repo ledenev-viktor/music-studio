@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
     PhoneInput,
     PhoneInputProps,
@@ -29,7 +30,6 @@ const InputPhoneBase = ({
     label,
     rules,
     defaultValue = '',
-    listCountries = [],
     className,
     ...props
 }: InputPhoneProps) => {
@@ -44,10 +44,19 @@ const InputPhoneBase = ({
 
     const countries = defaultCountries.filter((country) => {
         const { iso2 } = parseCountry(country);
-        return listCountries.length > 0
-            ? listCountries.slice().includes(iso2)
-            : [];
+        return ['ge', 'us', 'ru'].slice().includes(iso2);
     });
+
+    const [mask, setMask] = useState<string | undefined>();
+    const [iso, setIso] = useState<string | undefined>();
+
+    useEffect(() => {
+        switch (iso) {
+            case 'ge':
+                setMask('.. ... ....');
+                break;
+        }
+    }, [iso]);
 
     return (
         <Flex className={cn(className, { error: fieldState.error })} vertical>
@@ -56,12 +65,14 @@ const InputPhoneBase = ({
                 <PhoneInput
                     {...field}
                     {...props}
+                    defaultMask={mask}
+                    forceDialCode={true}
                     defaultCountry="ge"
                     countries={countries}
                     className={cn('inputPhone', { error: fieldState.error })}
-                    onChange={(e) => {
+                    onChange={(e, data) => {
+                        setIso(data?.country.iso2);
                         field.onChange(e);
-                        // props.onChange?.(e);
                     }}
                     onBlur={(e) => {
                         trigger(name);
