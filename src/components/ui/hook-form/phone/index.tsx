@@ -1,10 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-    PhoneInput,
-    PhoneInputProps,
-    defaultCountries,
-    parseCountry,
-} from 'react-international-phone';
+import { PhoneInput, PhoneInputProps } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import styled from '@emotion/styled';
 import { Flex } from 'antd';
@@ -18,6 +13,7 @@ import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { COLORS } from '~variables';
 import { ErrorMessage, Label } from '../common';
+import { countries } from './countries';
 
 type InputPhoneProps = {
     className?: string;
@@ -62,11 +58,6 @@ const InputPhoneBase = ({
         },
     });
     const error = fieldState.error ? fieldState.error.message : '';
-
-    const countries = defaultCountries.filter((country) => {
-        const { iso2 } = parseCountry(country);
-        return ['ge', 'ru'].slice().includes(iso2);
-    });
 
     useEffect(() => {
         switch (phoneMeta?.iso) {
