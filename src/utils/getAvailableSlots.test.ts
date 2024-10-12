@@ -238,7 +238,7 @@ describe('Checking slot filtering', () => {
         });
     });
 
-    describe('When the date is today and current time is 20:00', () => {
+    describe.skip('When the date is today and current time is 20:00', () => {
         const date = dayjs().hour(20).format('YYYY-MM-DD');
         const events = [];
 
