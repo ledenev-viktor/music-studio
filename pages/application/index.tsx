@@ -8,10 +8,7 @@ export default function Page() {
 export async function getStaticProps({ locale }: { locale: string }) {
     return {
         props: {
-            ...(await serverSideTranslations(locale, [
-                'application',
-                'common',
-            ])),
+            ...(await serverSideTranslations(locale, 'application')),
         },
     };
 }
