@@ -3,7 +3,6 @@ import { Button } from 'antd';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
-import { useScreenDetector } from '~hooks/responsive';
 
 const menu = [
     { text: 'common:menuHomeButton', path: '/' },
@@ -19,7 +18,6 @@ const languages = [
 
 export const MenuContent = ({ toggle }: { toggle: () => void }) => {
     const { t } = useTranslation();
-    const { isMobile, isSmallMobile } = useScreenDetector();
     const { locale, push } = useRouter();
     const currentPathname = usePathname();
 
@@ -31,10 +29,7 @@ export const MenuContent = ({ toggle }: { toggle: () => void }) => {
     };
 
     return (
-        <nav
-            className="clientMenu"
-            style={{ paddingTop: isMobile || isSmallMobile ? '50px' : '100px' }}
-        >
+        <nav className="clientMenu" style={{ paddingTop: '30px' }}>
             <ul className="clientMenuUl">
                 {menu.map((item) => (
                     <LiComponent
@@ -52,7 +47,7 @@ export const MenuContent = ({ toggle }: { toggle: () => void }) => {
             <ul
                 className="clientMenuUl"
                 style={{
-                    paddingTop: isMobile ? '50px' : '100px',
+                    paddingTop: '30px',
                 }}
             >
                 {languages.map((item) => (
@@ -91,9 +86,10 @@ const LiComponent = ({
                 style={{
                     fontWeight: 'bold',
                     fontSize: '32px',
-                    padding: '10px',
+                    padding: '0',
                     color: 'white',
                     width: '100%',
+                    height: 'auto',
                     ...styles,
                 }}
             >
