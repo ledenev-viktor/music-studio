@@ -1,4 +1,4 @@
-name: linting, testing, building
+name: linting, testing
 
 on:
   push:
@@ -25,7 +25,4 @@ jobs:
         if: always()
       - name: unit testing
         run: npm run test
-        if: always()
-      - name: build production project
-        run: npm run build
         if: always()
