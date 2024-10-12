@@ -60,6 +60,7 @@ export const globalStyles = css`
         transform: translateX(120%);
         will-change: transform;
         z-index: 100;
+        overflow: hidden auto;
     }
 
     @media (max-width: 767px) {
@@ -81,7 +82,6 @@ export const globalStyles = css`
         display: block;
         transform-origin: 300px 50%;
         font-weight: bold;
-        font-size: 48px;
         padding: 10px;
         will-change: transform, opacity, filter;
     }
