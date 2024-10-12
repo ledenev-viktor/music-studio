@@ -78,7 +78,7 @@ export const MobileLinks = () => {
                         color: COLORS.white,
                     }}
                 >
-                    {t('content_studio_address_prefix')}
+                    {t('contacts:addressPrefix')}
                 </Typography.Text>
                 <Typography.Text
                     style={{
@@ -87,12 +87,12 @@ export const MobileLinks = () => {
                         color: COLORS.white,
                     }}
                 >
-                    {t('content_studio_address')}
+                    {t('contacts:addressMain')}
                 </Typography.Text>
                 <Typography.Text
                     style={{ fontSize: '18px', color: COLORS.white }}
                 >
-                    {t('content_studio_work_hours')}
+                    {t('contacts:workingHoursMobile')}
                 </Typography.Text>
             </Flex>
             {items.map((item, i) => (

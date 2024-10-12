@@ -3,6 +3,7 @@ import { EditOutlined } from '@ant-design/icons';
 import { Flex, DescriptionsProps, Typography, List } from 'antd';
 import { FieldValues } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
 import { extractDay, extractDate } from '~utils/date.helpers';
 import { COLORS } from '~variables';
 import { mergeIntervals } from '~utils/mergeIntervals';
@@ -40,6 +41,7 @@ export const useGetReviewInfo = (
     handleEdit: (step: STEP) => void,
     fields: FieldValues,
 ) => {
+    const { t } = useTranslation();
     const { locale } = useRouter();
 
     const {
@@ -74,7 +76,7 @@ export const useGetReviewInfo = (
     return [
         {
             key: '1',
-            label: 'Name',
+            label: t('application:nameTitle'),
             children: (
                 <DescriptionItemContentWrapper
                     onEditClick={() => onClick(STEP_TYPE.USER_INFO)}
@@ -89,27 +91,17 @@ export const useGetReviewInfo = (
         },
         {
             key: '2',
-            label: 'Phone',
-            children: (
-                <DescriptionItemContentWrapper
-                    onEditClick={() => onClick(STEP_TYPE.USER_INFO)}
-                >
-                    <Typography.Paragraph
-                        style={{ minWidth: '180px', textWrap: 'pretty' }}
-                    >
-                        {phone}
-                    </Typography.Paragraph>
-                </DescriptionItemContentWrapper>
-            ),
-        },
-        {
-            key: '3',
-            label: 'Contacts',
+            label: t('application:reviewStepContacts'),
             children: (
                 <DescriptionItemContentWrapper
                     onEditClick={() => onClick(STEP_TYPE.USER_INFO)}
                 >
                     <Flex vertical>
+                        <Typography.Paragraph
+                            style={{ minWidth: '180px', textWrap: 'pretty' }}
+                        >
+                            {phone}
+                        </Typography.Paragraph>
                         {userNameTelegram && (
                             <Typography.Paragraph>
                                 Telegram: {userNameTelegram}
@@ -125,8 +117,8 @@ export const useGetReviewInfo = (
             ),
         },
         {
-            key: '4',
-            label: 'Selected Time',
+            key: '3',
+            label: t('application:reviewStepTime'),
             children: (
                 <DescriptionItemContentWrapper
                     onEditClick={() => onClick(STEP_TYPE.DATE_INFO)}
@@ -146,8 +138,8 @@ export const useGetReviewInfo = (
             ),
         },
         {
-            key: '5',
-            label: 'Additionally',
+            key: '4',
+            label: t('application:reviewStepAdditionally'),
             children: (
                 <DescriptionItemContentWrapper
                     onEditClick={() => onClick(STEP_TYPE.ADDITIONS)}
@@ -168,8 +160,8 @@ export const useGetReviewInfo = (
             ),
         },
         {
-            key: '6',
-            label: 'Comment',
+            key: '5',
+            label: t('application:reviewStepComment'),
             children: (
                 <DescriptionItemContentWrapper
                     onEditClick={() => onClick(STEP_TYPE.ADDITIONS)}

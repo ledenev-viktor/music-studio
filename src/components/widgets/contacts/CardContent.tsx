@@ -29,13 +29,13 @@ export const CardContent = () => {
                             level={3}
                             style={{ color: COLORS.blue, margin: 0 }}
                         >
-                            {t('content_work_hours')}
+                            {t('contacts:workingHours')}
                         </Typography.Title>
                         <Typography.Title
                             level={3}
                             style={{ color: COLORS.blue, margin: 0 }}
                         >
-                            {t('content_contact_us')}
+                            {t('contacts:contactUs')}
                         </Typography.Title>
                     </Flex>
                     <LaptopLinks />

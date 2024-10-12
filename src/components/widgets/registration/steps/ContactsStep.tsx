@@ -43,45 +43,48 @@ export const ContactsStep = ({
             }}
             onSaveEdits={onSaveEdits}
         >
-            <InputPhone name="phone" label={t('content_form_phone')} />
+            <InputPhone
+                name="phone"
+                label={t('application:phoneNumberTitle')}
+            />
             <FormInput
                 name="userName"
-                label={t('content_form_name_title')}
+                label={t('application:nameTitle')}
                 rules={{
                     required: {
                         value: true,
-                        message: t('required_filed'),
+                        message: t('application:required'),
                     },
                 }}
             />
             <FormInput
                 name="userNameTelegram"
-                label={t('content_form_tg_title')}
+                label={t('application:tgTitle')}
                 rules={{
                     validate: (value) => {
                         if (/[а-яА-ЯЁё]/.test(value)) {
-                            return t('latin_char_available');
+                            return t('application:incorrectSymbolsError');
                         }
                         return (
                             value?.length > 0 ||
                             userNameInstagram?.length > 0 ||
-                            t('required_filed_optional')
+                            t('application:optionalFieldError')
                         );
                     },
                 }}
             />
             <FormInput
                 name="userNameInstagram"
-                label={t('content_form_inst_title')}
+                label={t('application:instTitle')}
                 rules={{
                     validate: (value) => {
                         if (/[а-яА-ЯЁё]/.test(value)) {
-                            return t('latin_char_available');
+                            return t('application:incorrectSymbolsError');
                         }
                         return (
                             value?.length > 0 ||
                             userNameTelegram?.length > 0 ||
-                            t('required_filed_optional')
+                            t('application:optionalFieldError')
                         );
                     },
                 }}
