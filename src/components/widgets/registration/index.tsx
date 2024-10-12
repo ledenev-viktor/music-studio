@@ -9,6 +9,7 @@ type RegistrationFormProps = {
 
 export const RegistrationForm: FC<RegistrationFormProps> = () => {
     const defaultValues: FormFields = {
+        phone: '',
         date: '',
         userName: '',
         userNameTelegram: '',
