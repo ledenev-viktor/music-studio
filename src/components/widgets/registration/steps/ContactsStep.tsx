@@ -4,6 +4,7 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import { FormFields } from '~types/appointments';
 import { FormInput } from '~components/ui/hook-form';
 import { StepWrapper } from './StepWrapper';
+import { InputPhone } from '~components/ui/hook-form/phone';
 
 export const ContactsStep = ({
     onGoToNextStep,
@@ -42,6 +43,7 @@ export const ContactsStep = ({
             }}
             onSaveEdits={onSaveEdits}
         >
+            <InputPhone name="phone" label={t('content_form_phone')} />
             <FormInput
                 name="userName"
                 label={t('content_form_name_title')}
@@ -56,20 +58,32 @@ export const ContactsStep = ({
                 name="userNameTelegram"
                 label={t('content_form_tg_title')}
                 rules={{
-                    validate: (value) =>
-                        value?.length > 0 ||
-                        userNameInstagram?.length > 0 ||
-                        t('required_filed_optional'),
+                    validate: (value) => {
+                        if (/[а-яА-ЯЁё]/.test(value)) {
+                            return t('latin_char_available');
+                        }
+                        return (
+                            value?.length > 0 ||
+                            userNameInstagram?.length > 0 ||
+                            t('required_filed_optional')
+                        );
+                    },
                 }}
             />
             <FormInput
                 name="userNameInstagram"
                 label={t('content_form_inst_title')}
                 rules={{
-                    validate: (value) =>
-                        value?.length > 0 ||
-                        userNameTelegram?.length > 0 ||
-                        t('required_filed_optional'),
+                    validate: (value) => {
+                        if (/[а-яА-ЯЁё]/.test(value)) {
+                            return t('latin_char_available');
+                        }
+                        return (
+                            value?.length > 0 ||
+                            userNameTelegram?.length > 0 ||
+                            t('required_filed_optional')
+                        );
+                    },
                 }}
             />
         </StepWrapper>

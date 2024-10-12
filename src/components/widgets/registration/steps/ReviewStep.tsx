@@ -34,7 +34,7 @@ export const ReviewStep = ({
                     padding: isMobile ? '12px 12px' : '12px 24px',
                 }}
                 style={{
-                    maxHeight: '300px',
+                    maxHeight: '90vh',
                     overflow: 'hidden auto',
                 }}
             />
