@@ -3,6 +3,7 @@ import { Button } from 'antd';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
+import cn from 'classnames';
 import { useScreenDetector } from '~hooks/responsive';
 
 const menu = [
@@ -19,7 +20,6 @@ const languages = [
 
 export const MenuContent = ({ toggle }: { toggle: () => void }) => {
     const { t } = useTranslation();
-    const { isMobile, isSmallMobile } = useScreenDetector();
     const { locale, push } = useRouter();
     const currentPathname = usePathname();
 
@@ -31,30 +31,20 @@ export const MenuContent = ({ toggle }: { toggle: () => void }) => {
     };
 
     return (
-        <nav
-            className="clientMenu"
-            style={{ paddingTop: isMobile || isSmallMobile ? '50px' : '100px' }}
-        >
+        <nav className="clientMenu">
             <ul className="clientMenuUl">
                 {menu.map((item) => (
                     <LiComponent
                         key={item.text}
                         text={t(item.text)}
                         onClick={() => onMenuItemClick(item.path)}
-                        styles={
-                            item.path !== currentPathname
-                                ? { opacity: 0.5 }
-                                : undefined
-                        }
+                        className={cn({
+                            active: item.path !== currentPathname,
+                        })}
                     />
                 ))}
             </ul>
-            <ul
-                className="clientMenuUl"
-                style={{
-                    paddingTop: isMobile ? '50px' : '100px',
-                }}
-            >
+            <ul className="clientMenuUl">
                 {languages.map((item) => (
                     <LiComponent
                         key={item.text}
@@ -62,11 +52,9 @@ export const MenuContent = ({ toggle }: { toggle: () => void }) => {
                         onClick={() =>
                             onMenuItemClick(currentPathname, item.locale)
                         }
-                        styles={
-                            item.locale !== locale
-                                ? { opacity: 0.5 }
-                                : undefined
-                        }
+                        className={cn({
+                            active: item.locale !== locale,
+                        })}
                     />
                 ))}
             </ul>
@@ -78,22 +66,26 @@ const LiComponent = ({
     text,
     onClick,
     styles,
+    className,
 }: {
     text: string;
     onClick: () => void;
     styles?: CSSProperties;
+    className?: string;
 }) => {
+    const { isTinyDesktop } = useScreenDetector();
+
     return (
-        <li className="clientMenuLi">
+        <li className={cn('clientMenuLi', className)}>
             <Button
                 type="link"
                 onClick={onClick}
                 style={{
                     fontWeight: 'bold',
-                    fontSize: '32px',
-                    padding: '10px',
+                    fontSize: isTinyDesktop ? '24px' : '32px',
                     color: 'white',
                     width: '100%',
+                    height: 'auto',
                     ...styles,
                 }}
             >

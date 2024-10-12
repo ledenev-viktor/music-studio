@@ -59,6 +59,14 @@ export const globalStyles = css`
         transform: translateX(120%);
         will-change: transform;
         z-index: 100;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 50px;
+        @media (max-width: 1440px) {
+            gap: 15px;
+            width: 320px;
+        }
     }
 
     @media (max-width: 767px) {
@@ -80,9 +88,15 @@ export const globalStyles = css`
         display: block;
         transform-origin: 300px 50%;
         font-weight: bold;
-        font-size: 48px;
-        padding: 10px;
         will-change: transform, opacity, filter;
+
+        button {
+            padding: 0;
+        }
+
+        &.active button {
+            opacity: 0.5;
+        }
     }
 
     .clientMenuUl,

@@ -21,7 +21,8 @@ export const useScreenDetector = () => {
     const isTablet =
         width <= parseInt(BREAKPOINTS.tablet, 10) &&
         width > parseInt(BREAKPOINTS.mobile, 10);
+    const isTinyDesktop = width <= parseInt(BREAKPOINTS.desktop, 10);
     const isDesktop = width > parseInt(BREAKPOINTS.tablet, 10);
 
-    return { isSmallMobile, isMobile, isTablet, isDesktop };
+    return { isSmallMobile, isMobile, isTablet, isTinyDesktop, isDesktop };
 };
