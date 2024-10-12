@@ -44,6 +44,7 @@ export const useGetReviewInfo = (
 
     const {
         date,
+        phone,
         userName,
         userNameTelegram,
         userNameInstagram,
@@ -88,6 +89,21 @@ export const useGetReviewInfo = (
         },
         {
             key: '2',
+            label: 'Phone',
+            children: (
+                <DescriptionItemContentWrapper
+                    onEditClick={() => onClick(STEP_TYPE.USER_INFO)}
+                >
+                    <Typography.Paragraph
+                        style={{ minWidth: '180px', textWrap: 'pretty' }}
+                    >
+                        {phone}
+                    </Typography.Paragraph>
+                </DescriptionItemContentWrapper>
+            ),
+        },
+        {
+            key: '3',
             label: 'Contacts',
             children: (
                 <DescriptionItemContentWrapper
@@ -109,7 +125,7 @@ export const useGetReviewInfo = (
             ),
         },
         {
-            key: '3',
+            key: '4',
             label: 'Selected Time',
             children: (
                 <DescriptionItemContentWrapper
@@ -130,7 +146,7 @@ export const useGetReviewInfo = (
             ),
         },
         {
-            key: '4',
+            key: '5',
             label: 'Additionally',
             children: (
                 <DescriptionItemContentWrapper
@@ -152,7 +168,7 @@ export const useGetReviewInfo = (
             ),
         },
         {
-            key: '5',
+            key: '6',
             label: 'Comment',
             children: (
                 <DescriptionItemContentWrapper

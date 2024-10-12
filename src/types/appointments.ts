@@ -20,6 +20,7 @@ export type Appointments = [string, Appointment[]][];
 
 export type FormFields = {
     date: string;
+    phone: string;
     userName: string;
     userNameTelegram: string;
     userNameInstagram: string;

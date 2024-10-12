@@ -8,6 +8,7 @@ export const useCreateAppointments = () => {
         mutationFn: (data) => {
             const {
                 date,
+                phone,
                 selectedTimeSlots,
                 userName,
                 userNameTelegram,
@@ -27,6 +28,7 @@ export const useCreateAppointments = () => {
                     ];
 
                     return {
+                        phone,
                         fullName: userName,
                         comment: comment,
                         telegram: userNameTelegram,

@@ -42,6 +42,7 @@ export const useCollapsedContent: (
                     <Flex align="center" gap={20}>
                         {appointment.telegram && (
                             <ContactButton
+                                target="_blank"
                                 href={`https://t.me/${appointment.telegram}`}
                                 value={appointment.telegram}
                                 icon={
@@ -51,6 +52,7 @@ export const useCollapsedContent: (
                         )}
                         {appointment.instagram && (
                             <ContactButton
+                                target="_blank"
                                 href={`https://www.instagram.com/${appointment.instagram}`}
                                 value={appointment.instagram}
                                 icon={<InstagramOutlined />}
@@ -58,7 +60,7 @@ export const useCollapsedContent: (
                         )}
                         {appointment.phone && (
                             <ContactButton
-                                href={`https://www.instagram.com/${appointment.phone}`}
+                                href={`tel:${appointment.phone}`}
                                 value={appointment.phone}
                                 icon={<PhoneOutlined />}
                             />
@@ -108,13 +110,15 @@ const ContactButton = ({
     href,
     value,
     icon,
+    target,
 }: {
     href: string;
     value: string;
     icon: ReactNode;
+    target?: string;
 }) => (
     <Button
-        target="_blank"
+        target={target}
         type="link"
         rel="noopener noreferrer"
         href={href}
