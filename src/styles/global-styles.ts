@@ -10,7 +10,8 @@ export const globalStyles = css`
         margin: 0;
         padding: 0;
         background-color: var(--background);
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: visible;
         min-height: 100vh;
         min-width: 320px;
     }
