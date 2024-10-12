@@ -153,8 +153,8 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                             setStep(STEP.DATE_TIME_STEP);
                         }}
                         imgProps={{ alt: 'success', path: '/success.svg' }}
-                        title={t('form_success_title')}
-                        description={t('form_success_desc')}
+                        title={t('application:successStepTitle')}
+                        description={t('application:successStepDescription')}
                     />
                 );
             case STEP.FAIL:
@@ -164,8 +164,8 @@ export const FormComponentBase = ({ className }: RegFormBaseProps) => {
                             setStep(STEP.REVIEW_STEP);
                         }}
                         imgProps={{ alt: 'fail', path: '/fail.png' }}
-                        title={t('form_fail_title')}
-                        description={t('form_fail_desc')}
+                        title={t('application:failScreenTitle')}
+                        description={t('application:failScreenDescription')}
                     />
                 );
             default:

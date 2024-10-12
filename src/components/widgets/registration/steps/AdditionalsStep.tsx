@@ -27,22 +27,22 @@ export const AdditionalsStep = ({
         {
             key: '1',
             value: 'value1',
-            label: t('addition_equipment_option_1'),
+            label: t('application:additionEquipmentOption1'),
         },
         {
             key: '2',
             value: 'value2',
-            label: t('addition_equipment_option_2'),
+            label: t('application:additionEquipmentOption2'),
         },
         {
             key: '3',
             value: 'value3',
-            label: t('addition_equipment_option_3'),
+            label: t('application:additionEquipmentOption3'),
         },
         {
             key: '4',
             value: 'value4',
-            label: t('addition_equipment_option_4'),
+            label: t('application:additionEquipmentOption4'),
         },
     ];
 
@@ -54,17 +54,17 @@ export const AdditionalsStep = ({
         >
             <CheckboxGroup
                 name="additionEquipment"
-                label={t('content_form_addition_title')}
+                label={t('application:additionStepTitle')}
                 options={additionEquipment}
             />
             <FormSwitch
                 name="isCommentNeeded"
-                label={t('content_form_comment_title')}
+                label={t('application:commentTitle')}
             />
             {isCommentNeeded && (
                 <FormTextarea
                     name="comment"
-                    placeholder={t('content_form_additionals_title')}
+                    placeholder={t('application:commentPlaceholder')}
                 />
             )}
         </StepWrapper>

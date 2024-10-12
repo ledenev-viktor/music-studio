@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "header_menu_home": "Главная",
     "header_menu_application": "Записаться",
     "header_menu_contacts": "Контакты",
@@ -43,4 +44,11 @@
     "form_success_desc": "Администратор свяжется с вами в ближайшее время!",
     "form_fail_title": "Что-то пошло не так.",
     "form_fail_desc": "Пожалуйста, повторите попытку позже."
+=======
+    "404_title": "Похоже, ты заблудился.",
+    "go_home": "На главную страницу",
+    "menuApplicationButton": "Запись",
+    "menuContactsButton": "Контакты",
+    "menuHomeButton": "Главная"
+>>>>>>> 621dddb (i18nexus)
 }

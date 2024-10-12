@@ -6,9 +6,9 @@ import { useTranslation } from 'react-i18next';
 import { useScreenDetector } from '~hooks/responsive';
 
 const menu = [
-    { text: 'header_menu_home', path: '/' },
-    { text: 'header_menu_application', path: '/application' },
-    { text: 'header_menu_contacts', path: '/contacts' },
+    { text: 'common:menuHomeButton', path: '/' },
+    { text: 'common:menuApplicationButton', path: '/application' },
+    { text: 'common:menuContactsButton', path: '/contacts' },
 ];
 
 const languages = [

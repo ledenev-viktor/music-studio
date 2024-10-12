@@ -56,14 +56,14 @@ export const StepWrapper = ({
                         <>
                             {onGoToPreviousStep && (
                                 <InterruptButton
-                                    title={t('back')}
+                                    title={t('application:backButton')}
                                     onClick={onGoToPreviousStep}
                                 />
                             )}
                             <PrimaryButton
                                 disabled={isGoToNextStepDisabled}
                                 onClick={onGoToNextStep}
-                                title={t('continue')}
+                                title={t('application:continueButton')}
                             />
                         </>
                     )}

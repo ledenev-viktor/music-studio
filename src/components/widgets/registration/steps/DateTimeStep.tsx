@@ -37,23 +37,25 @@ export const DateTimeStep = ({
                 rules={{
                     required: {
                         value: true,
-                        message: t('required_filed'),
+                        message: t('application:required'),
                     },
                 }}
                 setStartDate={setStartDate}
                 setEndDate={setEndDate}
                 isLoadingSlots={isLoadingSlots}
             />
-            {!date && <Alert type="warning" message={t('required_filed')} />}
+            {!date && (
+                <Alert type="warning" message={t('application:required')} />
+            )}
             {date && (
                 <TimeSlots
                     name="selectedTimeSlots"
-                    label={t('content_form_slots_title')}
+                    label={t('application:timeSlotsTitle')}
                     timeSlots={days[date]?.slots}
                     rules={{
                         required: {
                             value: true,
-                            message: t('required_filed'),
+                            message: t('application:required'),
                         },
                     }}
                 />

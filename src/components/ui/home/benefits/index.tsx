@@ -52,7 +52,7 @@ export const Benefits = () => {
                         }}
                         level={isMobile || isSmallMobile ? 3 : 1}
                     >
-                        {t('content_benefits_title')}
+                        {t('home:benefitsTitle')}
                     </Typography.Title>
                     <Typography.Title
                         style={{
@@ -62,7 +62,7 @@ export const Benefits = () => {
                         }}
                         level={4}
                     >
-                        {t('content_benefits_description')}
+                        {t('home:benefitsDescription')}
                     </Typography.Title>
                 </Flex>
                 <Flex
@@ -70,17 +70,17 @@ export const Benefits = () => {
                     gap={isMobile || isSmallMobile ? 'small' : 'large'}
                 >
                     <BenefitItem
-                        text={t('content_benefit_scratch')}
+                        text={t('home:benefitsScratch')}
                         icon={
                             <Drumsticks width={iconSize} fill={COLORS.white} />
                         }
                     />
                     <BenefitItem
-                        text={t('content_benefit_improve')}
+                        text={t('home:benefitsImprove')}
                         icon={<Drum width={iconSize} />}
                     />
                     <BenefitItem
-                        text={t('content_benefit_fun')}
+                        text={t('home:benefitsFun')}
                         icon={<Fun width={iconSize} fill={COLORS.white} />}
                     />
                 </Flex>
@@ -114,7 +114,7 @@ export const Benefits = () => {
                         style={{ width: '100%', height: '100%' }}
                     >
                         <StyledLink href="/application">
-                            {t('content_get_started_button')}
+                            {t('home:getStartedButton')}
                         </StyledLink>
                     </Flex>
                 </motion.div>

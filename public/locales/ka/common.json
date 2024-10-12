@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "header_menu_home": "მთავარი",
     "header_menu_application": "დარეგისტრირდით",
     "header_menu_contacts": "კონტაქტები",
@@ -29,18 +30,11 @@
     "back": "უკან",
     "save": "გადარჩენა",
     "edit": "რედაქტირება",
+=======
+>>>>>>> 621dddb (i18nexus)
     "404_title": "როგორც ჩანს დაიკარგე",
-    "content_no_date_selected": "აირჩიეთ თარიღი",
-    "required_filed": "ეს ველი სავალდებულოა",
-    "required_filed_optional": "შეავსეთ Telegram ან Instagram მეტსახელის ველი",
-    "content_form_addition_title": "პირობითი აღჭურვილობა (10 ₾/სთ თითოეულისთვის)",
-    "addition_equipment_option_4": "ელექტრო პიანინო Thomann DP-28",
-    "addition_equipment_option_3": "ბას გიტარა 4 სიმებიანი ჰარლი ბენტონი",
-    "addition_equipment_option_2": "ფირფიტა ჩინეთი",
-    "addition_equipment_option_1": "ორმაგი პედლები (კარდანი)",
-    "content_form_inst_title": "ინსტაგრამის მომხმარებლის სახელი",
-    "form_success_title": "მოთხოვნა გაეგზავნა ადმინისტრატორს!",
-    "form_success_desc": "ადმინი მალე დაგიკავშირდებათ!",
-    "form_fail_title": "Რაღაც არასწორად წავიდა.",
-    "form_fail_desc": "Გთხოვთ სცადოთ მოგვიანებით."
+    "go_home": "მთავარ გვერდზე",
+    "menuApplicationButton": "განაცხადი",
+    "menuContactsButton": "კონტაქტები",
+    "menuHomeButton": "მთავარი"
 }
