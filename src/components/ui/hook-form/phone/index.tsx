@@ -65,7 +65,7 @@ const InputPhoneBase = ({
 
     const countries = defaultCountries.filter((country) => {
         const { iso2 } = parseCountry(country);
-        return ['ge', 'us', 'ru'].slice().includes(iso2);
+        return ['ge', 'ru'].slice().includes(iso2);
     });
 
     useEffect(() => {
@@ -75,9 +75,6 @@ const InputPhoneBase = ({
                 break;
             case 'ru':
                 setMask('... ... .. ..');
-                break;
-            case 'us':
-                setMask('... ... ....');
                 break;
             default:
                 setMask('');
@@ -97,7 +94,6 @@ const InputPhoneBase = ({
                     countries={countries}
                     className={cn('inputPhone', { error: fieldState.error })}
                     onChange={(e, data) => {
-                        console.log('data', data);
                         const { iso2, dialCode } = data.country;
                         setPhoneMeta({ iso: iso2, code: dialCode });
                         field.onChange(e);
