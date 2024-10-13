@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Button, Flex, Typography } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { SlideWithBase64 } from '~types/settings';
 import { COLORS } from '~variables';
 import { BREAKPOINTS } from '~constants/breakpoints';
@@ -12,8 +13,8 @@ const GalleryCardBase = ({
     slide: SlideWithBase64;
     className?: string;
 }) => {
-    const { base64, img, title } = slide;
-    const price = '';
+    const { base64, img, title, price } = slide;
+    const { t } = useTranslation();
 
     return (
         <Flex className={className}>
@@ -26,7 +27,7 @@ const GalleryCardBase = ({
                         textAlign: 'left',
                     }}
                 >
-                    {title}
+                    {t(`slider:${title}`)}
                 </Typography.Title>
                 {price && (
                     <Action>
