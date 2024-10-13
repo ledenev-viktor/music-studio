@@ -5,6 +5,7 @@ export type SlideWithBase64 = {
     desc: string;
     active: boolean;
     base64?: string;
+    price?: number;
 };
 
 export type Settings = {
