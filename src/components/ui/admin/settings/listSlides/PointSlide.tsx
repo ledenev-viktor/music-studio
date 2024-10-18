@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Slide } from '~types/settings';
 import { Close } from '~components/ui/icons/close';
 import { useRaisedShadow } from './hooks/useRaisedShadow';
+import { InputMoney } from '~components/ui/hook-form';
 const { TextArea } = Input;
 
 type PointSlideProps = {
@@ -75,6 +76,15 @@ export const PointSlide: React.FC<PointSlideProps> = ({
                             });
                         }}
                         placeholder="Title"
+                    />
+                    <InputMoney
+                        prefix={'₾'}
+                        onChange={(value) => {
+                            changeSlide(slide.id, {
+                                price: Number(value),
+                            });
+                        }}
+                        placeholder="Price"
                     />
                     <TextArea
                         value={slide.desc}
