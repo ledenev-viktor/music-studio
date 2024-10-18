@@ -3,8 +3,10 @@ import { Flex, Input, AutoComplete, Checkbox } from 'antd';
 import { useMotionValue, Reorder } from 'framer-motion';
 import Image from 'next/image';
 import { Slide } from '~types/settings';
+import { useScreenDetector } from '~hooks/responsive';
 import { Close } from '~components/ui/icons/close';
 import { useRaisedShadow } from './hooks/useRaisedShadow';
+import { InputMoney } from '~components/ui/hook-form';
 const { TextArea } = Input;
 
 type PointSlideProps = {
@@ -26,6 +28,7 @@ export const PointSlide: React.FC<PointSlideProps> = ({
 }) => {
     const y = useMotionValue(0);
     const boxShadow = useRaisedShadow(y);
+    const { isMobile } = useScreenDetector();
 
     return (
         <Reorder.Item
@@ -67,15 +70,26 @@ export const PointSlide: React.FC<PointSlideProps> = ({
                             });
                         }}
                     />
-                    <Input
-                        value={slide.title}
-                        onChange={(e) => {
-                            changeSlide(slide.id, {
-                                title: e.target.value,
-                            });
-                        }}
-                        placeholder="Title"
-                    />
+                    <Flex vertical={isMobile} gap={10}>
+                        <Input
+                            value={slide.title}
+                            onChange={(e) => {
+                                changeSlide(slide.id, {
+                                    title: e.target.value,
+                                });
+                            }}
+                            placeholder="Title"
+                        />
+                        <InputMoney
+                            prefix={'₾'}
+                            onChange={(value) => {
+                                changeSlide(slide.id, {
+                                    price: Number(value),
+                                });
+                            }}
+                            placeholder="Price"
+                        />
+                    </Flex>
                     <TextArea
                         value={slide.desc}
                         onChange={(e) => {
