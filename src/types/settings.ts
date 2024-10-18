@@ -19,6 +19,7 @@ export type Slide = {
     img?: string;
     fileDownload?: string;
     title?: string;
+    price?: number;
     desc?: string;
     price?: string;
     active: boolean;
