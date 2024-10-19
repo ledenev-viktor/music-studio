@@ -21,7 +21,11 @@ export default Page;
 export async function getStaticProps({ locale }: { locale: string }) {
     return {
         props: {
-            ...(await serverSideTranslations(locale, 'home')),
+            ...(await serverSideTranslations(locale, [
+                'home',
+                'common',
+                'slider',
+            ])),
         },
     };
 }

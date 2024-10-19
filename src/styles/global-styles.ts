@@ -123,4 +123,9 @@ export const globalStyles = css`
     .fancybox__container {
         padding: 20px;
     }
+
+    .swiper {
+        width: 240px;
+        height: 400px;
+    }
 `;

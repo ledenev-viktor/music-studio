@@ -3,15 +3,17 @@ import { Flex } from 'antd';
 import { Benefits, Spin } from '~ui/home';
 import { COLORS } from '~variables';
 import { useGetSettingsBase64 } from '~hooks/settings';
-import { ParallaxGallery } from '~components/ui/home/parallax-gallery';
+import { useScreenDetector } from '~hooks/responsive';
+import { Gallery } from '../Gallery/Gallery';
 
 const HomePage = () => {
+    const { isMobile, isSmallMobile } = useScreenDetector();
     const { data: slides, isLoading: isLoadingSlides } = useGetSettingsBase64();
 
     return (
         <Flex
             vertical
-            justify="center"
+            justify={isMobile || isSmallMobile ? 'center' : 'space-around'}
             align="center"
             style={{
                 padding: '0',
@@ -21,13 +23,13 @@ const HomePage = () => {
             }}
         >
             {!isLoadingSlides ? (
-                <ParallaxGallery slides={slides || []} />
+                <Gallery slides={slides || []} />
             ) : (
                 <Flex
                     vertical
                     justify="center"
                     align="center"
-                    style={{ minHeight: '150px', flexGrow: '2' }}
+                    style={{ minHeight: '410px' }}
                 >
                     <Spin />
                 </Flex>
