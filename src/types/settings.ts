@@ -5,7 +5,7 @@ export type SlideWithBase64 = {
     desc: string;
     active: boolean;
     base64?: string;
-    price?: string;
+    price?: number;
 };
 
 export type Settings = {
@@ -19,8 +19,7 @@ export type Slide = {
     img?: string;
     fileDownload?: string;
     title?: string;
-    price?: number;
     desc?: string;
-    price?: string;
+    price?: number;
     active: boolean;
 };

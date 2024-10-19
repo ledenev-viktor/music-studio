@@ -29,7 +29,7 @@ const GalleryCardBase = ({
                 >
                     {t(`slider:${title}`)}
                 </Typography.Title>
-                {price && (
+                {price !== 0 && (
                     <Action>
                         <ActionButton>Забронировать</ActionButton>
                         <Price>{price} ₾</Price>
