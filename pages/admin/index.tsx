@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextPageWithLayout } from '~types/app';
 
-const AdminApp = dynamic(() => import('~components/widgets/admin'), {
+const AdminApp = dynamic(() => import('~layout/AdminLayout'), {
     ssr: false,
 });
 

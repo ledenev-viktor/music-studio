@@ -5,3 +5,5 @@ export { TimeSlots } from './timeslots';
 export * from './buttons';
 export * from './switch';
 export { CalendarField } from './calendar/ControlledCalendar';
+export * from './phone';
+export * from './checkbox-group';

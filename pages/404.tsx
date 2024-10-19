@@ -2,8 +2,7 @@ import { Flex, Typography } from 'antd';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
-import { BrokenDrumstick, NotFoundSvg } from '~components/ui/icons';
-import { AnimatedBorderButton } from '~components/ui/button-animated-border';
+import { BrokenDrumstick, NotFoundSvg, AnimatedBorderButton } from '~ui';
 
 const NotFound = () => {
     const { t } = useTranslation();

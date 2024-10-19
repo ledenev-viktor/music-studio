@@ -1,7 +1,7 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import dynamic from 'next/dynamic';
 
-const PageComponent = dynamic(() => import('~components/widgets/contacts'), {
+const PageComponent = dynamic(() => import('~widgets/contacts'), {
     ssr: false,
 });
 

@@ -36,6 +36,9 @@
             "~components": ["src/components"],
             "~components/*": ["src/components/*"],
 
+            "~layout/*": ["src/layout/*"],
+            "~widgets/*": ["src/widgets/*"],
+
             "~constants": ["src/constants"],
             "~constants/*": ["src/constants/*"],
 

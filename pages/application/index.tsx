@@ -1,5 +1,5 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { RegistrationForm } from '~components/widgets/registration';
+import { RegistrationForm } from '~widgets/registration';
 
 export default function Page() {
     return <RegistrationForm />;

@@ -3,11 +3,11 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import dynamic from 'next/dynamic';
 import { NextPageWithLayout } from '~types/app';
 
-const PageComponent = dynamic(() => import('~components/widgets/home/'), {
+const PageComponent = dynamic(() => import('~widgets/home/'), {
     ssr: false,
 });
 
-const Layout = dynamic(() => import('~components/layout'), {
+const Layout = dynamic(() => import('~layout/MainLayout'), {
     ssr: false,
 });
 

@@ -5,3 +5,4 @@ export * from './location-pin';
 export * from './telegram';
 export * from './broken-drumstick';
 export * from './animated';
+export * from './close';
