@@ -2,13 +2,13 @@ import React from 'react';
 import { Flex } from 'antd';
 import { Benefits, Spin } from '~ui/home';
 import { COLORS } from '~variables';
-import { useGetSettings } from '~hooks/settings';
+import { useGetSettingsBase64 } from '~hooks/settings';
 import { useScreenDetector } from '~hooks/responsive';
 import { Gallery } from '../Gallery/Gallery';
 
 const HomePage = () => {
     const { isMobile, isSmallMobile } = useScreenDetector();
-    const { data: slides, isLoading: isLoadingSlides } = useGetSettings();
+    const { data: slides, isLoading: isLoadingSlides } = useGetSettingsBase64();
 
     return (
         <Flex
