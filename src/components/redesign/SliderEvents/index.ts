@@ -1,0 +1,1 @@
+export { SliderEvents } from './SliderEvents';

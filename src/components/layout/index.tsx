@@ -1,7 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { ConfigProvider, Layout } from 'antd';
 import { COLORS } from '~variables';
-import { CustomMenu } from './CustomMenu';
 
 type RootLayoutProps = {
     children?: ReactNode;
@@ -21,10 +20,7 @@ const MainLayout: FC<RootLayoutProps> = ({ children }) => {
                 },
             }}
         >
-            <Layout style={{ minHeight: '100vh' }}>
-                <CustomMenu />
-                {children}
-            </Layout>
+            <Layout style={{ minHeight: '100vh' }}>{children}</Layout>
         </ConfigProvider>
     );
 };

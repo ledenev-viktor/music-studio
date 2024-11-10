@@ -1,0 +1,10 @@
+export { Layout } from './layout';
+export { MainBanner } from './MainBanner';
+export { Logo } from './Logo';
+export { RegistrationForm } from './registration';
+export { CustomMenu } from './CustomMenu';
+export { SliderEvents } from './SliderEvents';
+export { OurTeam } from './OurTeam';
+export { Faq } from './Faq';
+export { Map } from './Map';
+export * from './socials';
