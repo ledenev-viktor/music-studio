@@ -7,6 +7,10 @@
     font-size: 48px;
     line-height: 1.4;
     font-weight: 700;
+
+    @media (max-width: $medium) {
+        font-size: 28px;
+    }
 }
 
 .collapse {

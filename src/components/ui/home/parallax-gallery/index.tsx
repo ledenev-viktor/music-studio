@@ -93,7 +93,7 @@ const ParallaxGalleryBase: FC<ParallaxGalleryProps> = ({
                     {slidesActive?.map((slide: Slide, index: number) => {
                         return (
                             <SwiperSlide
-                                key={slide.id}
+                                key={slide?.id}
                                 className="slide-item"
                                 style={{
                                     cursor:

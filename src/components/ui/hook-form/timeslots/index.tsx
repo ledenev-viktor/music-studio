@@ -123,7 +123,7 @@ export const TimeSlots = styled(TimeSlotsBase)`
             color: ${COLORS.blue};
             background: none;
         }
-        @media screen and (max-width: ${BREAKPOINTS.smallMobile}) {
+        @media screen and (max-width: ${BREAKPOINTS.small}) {
             font-size: 12px;
         }
     }

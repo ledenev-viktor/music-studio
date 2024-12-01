@@ -80,7 +80,7 @@ const ListSlidesBase = ({
                 {slides?.map((slide: Slide) => {
                     return (
                         <PointSlide
-                            key={slide.id}
+                            key={slide?.id}
                             slide={slide}
                             handleRemove={handleRemove}
                             imageOptions={imageOptions}

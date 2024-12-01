@@ -32,7 +32,7 @@ export const PointSlide: React.FC<PointSlideProps> = ({
 
     return (
         <Reorder.Item
-            key={slide.id}
+            key={slide?.id}
             value={slide}
             id={slide.img}
             style={{ boxShadow, y }}

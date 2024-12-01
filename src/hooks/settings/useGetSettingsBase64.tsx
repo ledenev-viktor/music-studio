@@ -5,13 +5,15 @@ import { Settings, SlideWithBase64 } from '~types/settings';
 export const useGetSettingsBase64 = () => {
     return useQuery<any, any, SlideWithBase64[]>({
         queryKey: ['fetchSettingsBase64'],
-        queryFn: async () => {
-            const { data } = await api.get<Settings[]>(
-                'api/supabase/settings/getWithBase64',
-            );
-
-            return data.map((item) => item.settings);
-        },
+        queryFn: async () =>
+            api.get<Settings[]>('api/supabase/settings/getWithBase64'),
+        select: (res) =>
+            res.data
+                .map((item: Settings) => {
+                    const slide = item.settings;
+                    return slide;
+                })
+                .filter((item: SlideWithBase64) => item.active),
         staleTime: Infinity,
     });
 };

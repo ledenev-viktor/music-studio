@@ -234,7 +234,7 @@ export const FormComponent = styled(FormComponentBase)`
     box-shadow: 0px 0px 20px -14px rgba(0, 0, 0, 1);
     border-radius: 15px;
 
-    @media screen and (max-width: ${BREAKPOINTS.mobile}) {
+    @media screen and (max-width: ${BREAKPOINTS.medium}) {
         padding: 20px;
     }
 
@@ -246,7 +246,7 @@ export const FormComponent = styled(FormComponentBase)`
             margin: 0 10px;
         }
 
-        @media screen and (max-width: ${BREAKPOINTS.mobile}) {
+        @media screen and (max-width: ${BREAKPOINTS.medium}) {
             margin: 0;
             flex-wrap: wrap;
             &-item {

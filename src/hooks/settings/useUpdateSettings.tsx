@@ -31,7 +31,7 @@ export const useUpdateSettings = () => {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: ['fetchSettings'],
+                queryKey: ['fetchSettings', 'fetchSettingsBase64'],
             });
             notification.success({
                 message: 'Data saved successfully',

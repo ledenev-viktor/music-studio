@@ -15,7 +15,7 @@ import {
 import s from './home.module.scss';
 
 const HomePage = () => {
-    const { data: slides, isLoading: isLoadingSlides } = useGetSettingsBase64();
+    const { data: slides } = useGetSettingsBase64();
 
     return (
         <Layout
@@ -44,7 +44,9 @@ const HomePage = () => {
             }
         >
             <MainBanner videoSrc={'/video/drums.mp4'} />
-            {!isLoadingSlides && <SliderEvents slides={slides || []} />}
+            {slides && slides?.length > 0 && (
+                <SliderEvents slides={slides || []} />
+            )}
             <RegistrationForm />
             <OurTeam />
             <Faq />

@@ -16,8 +16,10 @@ export const MainBanner = ({ videoSrc }: { videoSrc: string }) => {
                     </video>
                 )}
                 <div className={s.info}>
-                    <h1>Мы студия Практика!</h1>
-                    <h2>У нас ты прокачаешь свои навыки!</h2>
+                    <div className={s.infoInner}>
+                        <h1>Мы студия Практика!</h1>
+                        <h2>У нас ты прокачаешь свои навыки!</h2>
+                    </div>
                 </div>
             </div>
         </div>

@@ -30,8 +30,8 @@ export const Gallery = ({ slides }: { slides: SlideWithBase64[] }) => {
                     disableOnInteraction: true,
                 }}
             >
-                {slides.map((slide) => (
-                    <SwiperSlide key={slide.id}>
+                {slides?.map((slide) => (
+                    <SwiperSlide key={slide?.id}>
                         <GalleryCard slide={slide} />
                     </SwiperSlide>
                 ))}
@@ -56,8 +56,8 @@ export const Gallery = ({ slides }: { slides: SlideWithBase64[] }) => {
                     disableOnInteraction: true,
                 }}
             >
-                {slides.map((slide) => (
-                    <SwiperSlide key={slide.id}>
+                {slides?.map((slide) => (
+                    <SwiperSlide key={slide?.id}>
                         <GalleryCard slide={slide} />
                     </SwiperSlide>
                 ))}
@@ -69,7 +69,7 @@ export const Gallery = ({ slides }: { slides: SlideWithBase64[] }) => {
 const MobileSlider = styled(Swiper)`
     display: none;
 
-    @media screen and (max-width: ${BREAKPOINTS.mobile}) {
+    @media screen and (max-width: ${BREAKPOINTS.medium}) {
         display: block;
         width: 100%;
         height: 410px;
@@ -82,7 +82,7 @@ const DesktopSlider = styled(Swiper)`
     width: 100%;
     padding: 20px 150px 30px;
 
-    @media screen and (max-width: ${BREAKPOINTS.mobile}) {
+    @media screen and (max-width: ${BREAKPOINTS.medium}) {
         display: none;
     }
 `;

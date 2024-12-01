@@ -16,12 +16,14 @@ export const useScreenDetector = () => {
         };
     }, []);
 
-    const isSmallMobile = width <= 375;
-    const isMobile = width <= parseInt(BREAKPOINTS.mobile, 10) && width > 375;
+    const isSmallMobile = width <= parseInt(BREAKPOINTS.small, 10);
+    const isMobile =
+        width <= parseInt(BREAKPOINTS.medium, 10) &&
+        width > parseInt(BREAKPOINTS.small, 10);
     const isTablet =
-        width <= parseInt(BREAKPOINTS.tablet, 10) &&
-        width > parseInt(BREAKPOINTS.mobile, 10);
-    const isDesktop = width > parseInt(BREAKPOINTS.tablet, 10);
+        width <= parseInt(BREAKPOINTS.large, 10) &&
+        width > parseInt(BREAKPOINTS.medium, 10);
+    const isDesktop = width > parseInt(BREAKPOINTS.large, 10);
 
     return { isSmallMobile, isMobile, isTablet, isDesktop };
 };

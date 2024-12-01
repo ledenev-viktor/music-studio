@@ -3,15 +3,15 @@ import isEqual from 'lodash/isEqual';
 import { useUpdateSettings } from '~hooks/settings';
 import { Slide } from '~types/settings';
 
-export const useControlSlides = (slidesData: Slide[]) => {
+export const useControlSlides = (slidesData: Slide[] = []) => {
     const { mutate: updateSettings } = useUpdateSettings();
-    const [slides, setSlides] = useState<Slide[]>([]);
+    const [slides, setSlides] = useState<Slide[]>(slidesData);
 
-    useEffect(() => {
-        if (!slidesData?.length) return;
+    // useEffect(() => {
+    //     if (!slidesData?.length) return;
 
-        return setSlides(slidesData);
-    }, [slidesData]);
+    //     return setSlides(slidesData);
+    // }, [slidesData]);
 
     const handleAddSlide = () => {
         setSlides((prev: Slide[]) => [

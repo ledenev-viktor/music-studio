@@ -130,7 +130,7 @@ export const StyledLink = styled(Link)`
         color: ${COLORS.colorInactive};
     }
 
-    @media screen and (max-width: ${BREAKPOINTS.smallMobile}) {
+    @media screen and (max-width: ${BREAKPOINTS.small}) {
         font-size: 12px;
     }
 `;

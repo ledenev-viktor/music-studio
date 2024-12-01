@@ -1,6 +1,6 @@
 {
     "[typescript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "vscode.typescript-language-features"
     },
     "[javascript]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -18,5 +18,14 @@
     },
     "editor.formatOnType": false,
     "prettier.endOfLine": "auto",
+    "[scss]": {
+      "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
+    },
   }
   

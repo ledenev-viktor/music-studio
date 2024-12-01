@@ -31,9 +31,20 @@ export const SliderEvents = ({ slides }: { slides: SlideWithBase64[] }) => {
                         delay: 5000,
                         disableOnInteraction: true,
                     }}
+                    breakpoints={{
+                        0: {
+                            slidesPerView: 1,
+                        },
+                        768: {
+                            slidesPerView: 2,
+                        },
+                        1024: {
+                            slidesPerView: 3,
+                        },
+                    }}
                 >
-                    {slides.map((slide) => (
-                        <SwiperSlide key={slide.id}>
+                    {slides?.map((slide) => (
+                        <SwiperSlide key={slide?.id}>
                             <GalleryCard slide={slide} />
                         </SwiperSlide>
                     ))}

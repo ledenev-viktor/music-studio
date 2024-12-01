@@ -44,7 +44,7 @@ const MainSliderBase: FC<MainSliderBaseProps> = ({
             {...props}
         >
             {slides.map((slide: Slide) => (
-                <SwiperSlide key={slide.id}>
+                <SwiperSlide key={slide?.id}>
                     <Image
                         width={1200}
                         height={500}

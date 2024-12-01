@@ -10,7 +10,11 @@ module.exports = {
         clientEmail: process.env.CLIENT_EMAIL,
     },
     sassOptions: {
-        includePaths: [path.join(__dirname, 'styles')],
+        includePaths: [path.join(__dirname, 'src/')],
+        prependData: `
+        @import "styles/colors.scss";
+        @import "styles/breakpoints.scss";
+        `,
     },
     compiler: {
         styledComponents: true,

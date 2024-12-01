@@ -10,6 +10,7 @@ import { Dayjs } from 'dayjs';
 import { DaysWithSlots } from '~types/days';
 import { FormFields } from '~types/appointments';
 import { Calendar } from './Calendar';
+// import s from './Calendar.module.scss';
 
 export const CalendarField = ({
     name,

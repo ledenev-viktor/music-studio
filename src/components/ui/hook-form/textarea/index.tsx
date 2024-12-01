@@ -60,7 +60,7 @@ export const FormTextareaBase: FC<FormTextareaBaseProps> = ({
 };
 
 export const FormTextarea = styled(FormTextareaBase)`
-    @media screen and (max-width: ${BREAKPOINTS.mobile}) {
+    @media screen and (max-width: ${BREAKPOINTS.medium}) {
         margin: 0 0 20px;
     }
 
@@ -78,7 +78,7 @@ export const FormTextarea = styled(FormTextareaBase)`
         &::placeholder {
             font-size: 18px;
         }
-        @media screen and (max-width: ${BREAKPOINTS.mobile}) {
+        @media screen and (max-width: ${BREAKPOINTS.medium}) {
             &::placeholder {
                 font-size: 16px;
             }

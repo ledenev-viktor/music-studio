@@ -11,6 +11,7 @@ import {
     CalendarStatuses,
 } from '~constants/calendar';
 import { CalendarHeader } from './CalendarHeader';
+import s from './Calendar.module.scss';
 
 const CalendarBase = ({
     className,
@@ -81,7 +82,7 @@ const CalendarBase = ({
             }}
             style={{ width: '100%' }}
         >
-            <Flex vertical style={{ width: '100%' }}>
+            <Flex vertical className={s.days} style={{ width: '100%' }}>
                 <Tag.CheckableTag
                     style={{
                         width: '100%',

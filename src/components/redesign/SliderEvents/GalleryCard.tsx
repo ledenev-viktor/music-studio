@@ -13,7 +13,7 @@ const GalleryCardBase = ({
     slide: SlideWithBase64;
     className?: string;
 }) => {
-    const { base64, img, title, price } = slide;
+    const { base64, img, title, price } = slide ?? {};
     const { t } = useTranslation();
 
     return (
@@ -29,7 +29,7 @@ const GalleryCardBase = ({
                 >
                     {t(`slider:${title}`)}
                 </Typography.Title>
-                {price !== 0 && (
+                {!!price && (
                     <Action>
                         <ActionButton>Забронировать</ActionButton>
                         <Price>{price} ₾</Price>
@@ -83,7 +83,7 @@ const Action = styled.div`
     align-items: center;
     gap: 20px;
 
-    @media screen and (max-width: ${BREAKPOINTS.mobile}) {
+    @media screen and (max-width: ${BREAKPOINTS.medium}) {
         justify-content: space-between;
     }
 `;

@@ -59,7 +59,9 @@
             ],
             "~modals": ["src/components/providers/ModalProvider.tsx"],
 
-            "~variables": ["src/styles/variables"]
+            "~variables": ["src/styles/variables"],
+
+            "~styles": ["src/styles"]
         }
     },
     "include": [

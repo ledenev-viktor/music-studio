@@ -7,12 +7,11 @@ import {
 } from '@tanstack/react-query';
 import { SessionProvider } from 'next-auth/react';
 import { appWithTranslation } from 'next-i18next';
-import { Global } from '@emotion/react';
 import dynamic from 'next/dynamic';
 import { NotificationProvider } from '~notifications';
 import { ModalProvider } from '~modals';
 import { AppPropsWithLayout } from '~types/app';
-import { globalStyles } from 'src/styles/global-styles';
+import 'src/styles/global-styles.scss';
 
 const Layout = dynamic(() => import('~components/layout'), {
     ssr: false,
@@ -57,7 +56,6 @@ const MyApp = ({
                 <SessionProvider session={session}>
                     <ModalProvider>
                         <NotificationProvider>
-                            <Global styles={globalStyles} />
                             {getLayout(<Component {...pageProps} />)}
                         </NotificationProvider>
                     </ModalProvider>
