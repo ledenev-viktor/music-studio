@@ -1,7 +1,7 @@
 import React from 'react';
 import { Spin as SpinAnt } from 'antd';
 import styled from '@emotion/styled';
-import { COLORS } from '~variables';
+import { COLORS } from '~shared/constants';
 
 const SpinBase: React.FC<{
     template?: 'light' | 'dark';

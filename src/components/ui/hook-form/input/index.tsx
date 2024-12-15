@@ -7,8 +7,8 @@ import {
     useFormContext,
 } from 'react-hook-form';
 import { AnimatePresence } from 'framer-motion';
-import { COLORS } from '~variables';
 import { ErrorMessage, Label } from '../common';
+import { COLORS } from '~shared/constants';
 
 type FormInputBaseProps = {
     className?: string;

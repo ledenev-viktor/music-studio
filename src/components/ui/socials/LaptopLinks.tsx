@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Flex } from 'antd';
 import { motion } from 'framer-motion';
 import { LinkOutlined } from '@ant-design/icons';
-import { COLORS } from '~variables';
 import { useScreenDetector } from '~hooks/responsive';
+import { COLORS } from '~shared/constants';
 
 const items = [
     {

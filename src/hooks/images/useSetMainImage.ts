@@ -1,5 +1,5 @@
 // import { useMutation, useQueryClient } from '@tanstack/react-query';
-// import api from '~lib/api.helper';
+// import api from '~shared/lib/api.helper';
 // import { useNotification } from '~notifications';
 // import { Image } from '~types/images';
 

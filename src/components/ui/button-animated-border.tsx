@@ -1,7 +1,7 @@
 import { Typography } from 'antd';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { COLORS } from '~variables';
+import { COLORS } from '~shared/constants';
 
 /**
  * Button with border that "rotates" around. Not configurable

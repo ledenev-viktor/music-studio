@@ -29,18 +29,19 @@ const titleTransition = {
     staggerChildren: 0.03,
 };
 
-export const LaptopLinks = () => (
-    <Flex justify="space-between">
-        {items.map((item, i) => (
-            <AnimatedLink title={item.title} href={item.href} key={i} />
-        ))}
-    </Flex>
-);
+export const LaptopLinks = () => {
+    const { isMobile } = useScreenDetector();
+    return (
+        <Flex gap={16} vertical={isMobile}>
+            {items.map((item, i) => (
+                <AnimatedLink title={item.title} href={item.href} key={i} />
+            ))}
+        </Flex>
+    );
+};
 
 const AnimatedLink = ({ title, href }: { title: string; href: string }) => {
     const [isHovered, setHovered] = useState(false);
-    const { isTablet } = useScreenDetector();
-
     const fontSize = '20px';
 
     return (
@@ -71,7 +72,7 @@ const AnimatedLink = ({ title, href }: { title: string; href: string }) => {
                     }}
                     isHovered={isHovered}
                 />
-                {!isTablet && href && <LinkOutlined style={{ fontSize }} />}
+                {href && <LinkOutlined style={{ fontSize }} />}
             </Flex>
             <div style={{ position: 'absolute', top: 0 }}>
                 <AnimatedWord

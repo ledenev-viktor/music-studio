@@ -11,8 +11,8 @@ import {
 import { AnimatePresence } from 'framer-motion';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { COLORS } from '~variables';
 import { ErrorMessage, Label } from '../common';
+import { COLORS } from '~shared/constants';
 import { countries } from './countries';
 
 type InputPhoneProps = {

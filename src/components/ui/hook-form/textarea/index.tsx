@@ -7,8 +7,8 @@ import {
     useFormContext,
 } from 'react-hook-form';
 import styled from '@emotion/styled';
-import { COLORS } from '~variables';
 import { ErrorMessage, Label } from '../common';
+import { COLORS } from '~shared/constants';
 import { BREAKPOINTS } from '~constants/breakpoints';
 
 type FormTextareaBaseProps = {

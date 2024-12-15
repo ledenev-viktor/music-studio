@@ -1,0 +1,11 @@
+.wrapper {
+    :global {
+        .ant-picker {
+            height: 40px;
+        }
+
+        input {
+            font-size: 16px;
+        }
+    }
+}

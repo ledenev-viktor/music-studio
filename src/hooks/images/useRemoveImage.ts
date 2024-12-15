@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import api, { AxiosApiError } from '~lib/api.helper';
 import { useNotification } from '~notifications';
+import api, { AxiosApiError } from '~shared/lib/api.helper';
 
 export const useRemoveImages = () => {
     const { notification } = useNotification();

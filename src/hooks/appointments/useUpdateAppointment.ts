@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import api, { AxiosApiError } from '~lib/api.helper';
 import { Appointment } from '~types/appointments';
 import { useNotification } from '~notifications';
+import api, { AxiosApiError } from '~shared/lib/api.helper';
 import { AppointmentStatuses } from '~constants/status';
 
 export const useUpdateAppointments = () => {

@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import supabaseConfig from '~lib/supabase';
+import supabaseConfig from '~shared/lib/supabase';
 
 export const supabase = createClient(
     supabaseConfig.apiUrl,

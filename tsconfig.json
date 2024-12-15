@@ -61,7 +61,21 @@
 
             "~variables": ["src/styles/variables"],
 
-            "~styles": ["src/styles"]
+            "~styles": ["src/styles"],
+
+            // fsd
+            "~shared": ["src/shared"],
+            "~shared/*": ["src/shared/*"],
+            "~entities": ["src/entities"],
+            "~entities/*": ["src/entities/*"],
+            "~features": ["src/features"],
+            "~features/*": ["src/features/*"],
+            "~widgets": ["src/widgets"],
+            "~widgets/*": ["src/widgets/*"],
+            "~pages": ["src/pages"],
+            "~pages/*": ["src/pages/*"],
+            "~app": ["src/app"],
+            "~app/*": ["src/app/*"]
         }
     },
     "include": [

@@ -11,7 +11,7 @@ import dynamic from 'next/dynamic';
 import { NotificationProvider } from '~notifications';
 import { ModalProvider } from '~modals';
 import { AppPropsWithLayout } from '~types/app';
-import 'src/styles/global-styles.scss';
+import '~app/styles/global-styles.scss';
 
 const Layout = dynamic(() => import('~components/layout'), {
     ssr: false,

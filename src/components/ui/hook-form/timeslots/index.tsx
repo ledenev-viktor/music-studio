@@ -10,10 +10,10 @@ import { AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
 import { useScreenDetector } from '~hooks/responsive';
-import { COLORS } from 'src/styles/variables';
 import { FreeSlots } from '~types/common';
 import { convertToAmPm } from '~utils/convertToAmPm';
 import { ErrorMessage, Label } from '../common';
+import { COLORS } from '~shared/constants';
 import { BREAKPOINTS } from '~constants/breakpoints';
 
 type TimeSlotsBaseProps = {

@@ -6,7 +6,7 @@ import { Pagination, A11y, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
-import { COLORS } from '~variables';
+import { COLORS } from '~shared/constants';
 
 type Slide = { id: number; path: string };
 type MainSliderBaseProps = {

@@ -7,7 +7,7 @@ import {
 } from 'antd';
 import { useController, UseControllerProps } from 'react-hook-form';
 import styled from '@emotion/styled';
-import { COLORS } from '~variables';
+import { COLORS } from '~shared/constants';
 
 type SwitchProps = {
     className?: string;

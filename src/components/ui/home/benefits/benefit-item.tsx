@@ -1,7 +1,7 @@
 import { CSSProperties, ReactNode } from 'react';
 import { Flex, Typography } from 'antd';
-import { COLORS } from '~variables';
 import { useScreenDetector } from '~hooks/responsive';
+import { COLORS } from '~shared/constants';
 
 type BenefitItemProps = {
     icon: ReactNode;

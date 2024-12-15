@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import api from '~lib/api.helper';
 import { Settings } from '~types/settings';
+import api from '~shared/lib/api.helper';
 
 export const useGetSettings = () => {
     return useQuery({

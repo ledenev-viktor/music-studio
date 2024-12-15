@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Button, Flex, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { SlideWithBase64 } from '~types/settings';
-import { COLORS } from '~variables';
+import { COLORS } from '~shared/constants';
 import { BREAKPOINTS } from '~constants/breakpoints';
 import './index.module.css';
 

@@ -12,8 +12,8 @@ module.exports = {
     sassOptions: {
         includePaths: [path.join(__dirname, 'src/')],
         prependData: `
-        @import "styles/colors.scss";
-        @import "styles/breakpoints.scss";
+        @import "app/styles/colors.scss";
+        @import "app/styles/breakpoints.scss";
         `,
     },
     compiler: {
@@ -54,4 +54,37 @@ module.exports = {
         'rc-tooltip',
         'next-auth',
     ],
+    webpack(config) {
+        const fileLoaderRule = config.module.rules.find((rule) =>
+            rule.test?.test?.('.svg'),
+        );
+        if (fileLoaderRule) {
+            fileLoaderRule.exclude = /\.svg$/;
+        }
+
+        config.module.rules.push({
+            test: /\.svg$/,
+            issuer: /\.[jt]sx?$/,
+            use: [
+                {
+                    loader: '@svgr/webpack',
+                    options: {
+                        svgo: true,
+                        svgoConfig: {
+                            plugins: [
+                                {
+                                    name: 'preset-default',
+                                    params: {
+                                        overrides: { removeViewBox: false },
+                                    },
+                                },
+                            ],
+                        },
+                    },
+                },
+            ],
+        });
+
+        return config;
+    },
 };

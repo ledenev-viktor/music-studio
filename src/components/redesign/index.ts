@@ -1,4 +1,3 @@
-export { Layout } from './layout';
 export { MainBanner } from './MainBanner';
 export { Logo } from './Logo';
 export { RegistrationForm } from './registration';

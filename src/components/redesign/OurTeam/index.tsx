@@ -16,9 +16,6 @@ export const OurTeam = () => {
                     <div>
                         <div className={s.personName}>Олег Олегов</div>
                         <p className={s.personPosition}>Большой бос</p>
-                        {/* <div className={s.personQuote}>
-                            <span>В Риме был, а папы не видал.</span>
-                        </div> */}
                     </div>
                 </div>
                 <div className={cn(s.person)}>

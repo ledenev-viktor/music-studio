@@ -6,8 +6,8 @@ import {
     UseControllerProps,
     useFormContext,
 } from 'react-hook-form';
-import { COLORS } from '~variables';
 import { Label } from '../common';
+import { COLORS } from '~shared/constants';
 
 const Checkbox = styled(CheckboxAntd)`
     &.ant-checkbox {

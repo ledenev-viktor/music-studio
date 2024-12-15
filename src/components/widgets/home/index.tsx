@@ -1,18 +1,18 @@
 import cn from 'classnames';
 import { useGetSettingsBase64 } from '~hooks/settings';
 import {
-    Layout,
-    MainBanner,
     Logo,
     RegistrationForm,
     CustomMenu,
     SliderEvents,
     OurTeam,
     Faq,
-    Map,
-    LaptopLinks,
 } from '~components/redesign';
+import { Layout } from '~entities/Layout';
 import s from './home.module.scss';
+import { MainBannerWidget } from '~widgets/MainBanner';
+import { LaptopLinks } from '~components/redesign';
+import { MapWidget } from '~widgets/Map';
 
 const HomePage = () => {
     const { data: slides } = useGetSettingsBase64();
@@ -39,11 +39,11 @@ const HomePage = () => {
                             </div>
                         </div>
                     </div>
-                    <Map />
+                    <MapWidget />
                 </>
             }
         >
-            <MainBanner videoSrc={'/video/drums.mp4'} />
+            <MainBannerWidget videoSrc={'/video/drums.mp4'} />
             {slides && slides?.length > 0 && (
                 <SliderEvents slides={slides || []} />
             )}

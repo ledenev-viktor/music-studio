@@ -6,8 +6,8 @@ import {
 import { Flex, Typography } from 'antd';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
-import { COLORS } from '~variables';
-import { LocationPin, Telegram } from '../../ui/icons';
+import { COLORS } from '~shared/constants';
+// import { LocationPin, Telegram } from '../../ui/icons';
 
 const items = [
     {
@@ -25,17 +25,17 @@ const items = [
     {
         title: 'CHANNEL',
         href: 'https://t.me/praktikastudio_ch',
-        icon: <Telegram width={20} fill={COLORS.black} />,
+        // icon: <Telegram width={20} fill={COLORS.black} />,
     },
     {
         title: 'CHAT',
         href: 'https://t.me/+ACspuFKLISBkMjky',
-        icon: <Telegram width={20} fill={COLORS.black} />,
+        // icon: <Telegram width={20} fill={COLORS.black} />,
     },
     {
         title: 'GOOGLE MAPS',
         href: 'https://goo.gl/maps/mQv4W9rRn1dmJStN6',
-        icon: <LocationPin width={25} fill={COLORS.black} />,
+        // icon: <LocationPin width={25} fill={COLORS.black} />,
     },
     {
         title: 'PHONE',
@@ -98,6 +98,7 @@ export const MobileLinks = () => {
             {items.map((item, i) => (
                 <Link key={i} href={item.href} target="_blank">
                     <Flex
+                        gap={16}
                         align="center"
                         justify="space-between"
                         style={itemStyles}

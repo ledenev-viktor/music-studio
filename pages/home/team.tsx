@@ -1,4 +1,4 @@
-import { Layout } from '~components/redesign/layout';
+import { Layout } from '~entities/Layout';
 
 const Home = () => {
     return <Layout footer={<div>Footer</div>}>CONTENT</Layout>;

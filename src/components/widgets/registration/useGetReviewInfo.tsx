@@ -5,9 +5,9 @@ import { FieldValues } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { extractDay, extractDate } from '~utils/date.helpers';
-import { COLORS } from '~variables';
 import { mergeIntervals } from '~utils/mergeIntervals';
 import { convertToAmPm } from '~utils/convertToAmPm';
+import { COLORS } from '~shared/constants';
 import { STEP, STEP_TYPE } from '~constants/registrationSteps';
 
 const DescriptionItemContentWrapper = ({

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // TODO: fix when change the file
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import api from '~lib/api.helper';
 import { useNotification } from '~notifications';
+import api from '~shared/lib/api.helper';
 
 export const useUpdateSettings = () => {
     const { notification } = useNotification();

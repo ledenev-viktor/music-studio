@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import api from '~lib/api.helper';
+import api from '~shared/lib/api.helper';
 
 export const fetchPicturesKey = ['fetchPictures'];
 

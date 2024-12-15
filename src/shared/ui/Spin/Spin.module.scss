@@ -1,0 +1,13 @@
+.spin {
+    &.dark {
+        .ant-spin-dot-item {
+            background-color: $black;
+        }
+    }
+
+    &.light {
+        .ant-spin-dot-item {
+            background-color: $white;
+        }
+    }
+}

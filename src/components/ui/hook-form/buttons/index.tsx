@@ -2,7 +2,7 @@ import { CSSProperties } from 'react';
 import { Button, ButtonProps } from 'antd';
 import styled from '@emotion/styled';
 import { useScreenDetector } from '~hooks/responsive';
-import { COLORS } from '~variables';
+import { COLORS } from '~shared/constants';
 
 const BaseButtonBase = ({
     onClick,

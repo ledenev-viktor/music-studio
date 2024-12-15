@@ -6,8 +6,8 @@ import {
 import { Flex, Typography } from 'antd';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
-import { COLORS } from '~variables';
 import { LocationPin, Telegram } from '../icons';
+import { COLORS } from '~shared/constants';
 
 const items = [
     {

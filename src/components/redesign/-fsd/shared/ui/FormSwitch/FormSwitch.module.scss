@@ -1,0 +1,10 @@
+.switch {
+    :global {
+        &.ant-switch-checked:hover:not(.ant-switch-disabled) {
+            &,
+            & .ant-switch-inner {
+                background: $blue;
+            }
+        }
+    }
+}

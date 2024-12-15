@@ -6,10 +6,8 @@ import Fireworks from 'react-canvas-confetti/dist/presets/fireworks';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
 import { useScreenDetector } from '~hooks/responsive';
-import { COLORS } from '~variables';
 import { useCreateAppointments } from '~hooks/appointments';
 import { FormFields } from '~types/appointments';
-import s from './style.module.scss';
 import {
     ContactsStep,
     AdditionalsStep,
@@ -18,6 +16,8 @@ import {
     StatusScreen,
 } from './steps';
 import { MODE, STEP, STEP_NUMBER } from '~constants/registrationSteps';
+import { Icon } from '~shared/ui';
+import s from './style.module.scss';
 
 export const FormComponent = () => {
     const { t } = useTranslation();
@@ -175,15 +175,14 @@ export const FormComponent = () => {
             <div>
                 <h2 className={s.formTitle}>Запишитесь на занятия</h2>
             </div>
-            <form
-                className={s.form}
-                onSubmit={handleSubmit(onSubmit)}
-                style={{
-                    width: '100%',
-                    background: COLORS.white,
-                    minWidth: '320px',
-                }}
-            >
+            <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+                <Icon
+                    name="notes"
+                    fill="currentColor"
+                    className={s.notes}
+                    size="auto"
+                    height="100%"
+                />
                 {isNotResultStep && (
                     <Flex
                         vertical

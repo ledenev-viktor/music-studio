@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
-import api, { AxiosApiError, AxiosApiResponse } from '~lib/api.helper';
 import { FormFields } from '~types/appointments';
 import { mergeIntervals } from '~utils/mergeIntervals';
+import api, { AxiosApiError, AxiosApiResponse } from '~shared/lib/api.helper';
 
 export const useCreateAppointments = () => {
     return useMutation<AxiosApiResponse<void>, AxiosApiError, FormFields>({

@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
-import api, { AxiosApiError } from '~lib/api.helper';
 import { EditFormData } from '~types/appointments';
 import { useNotification } from '~notifications';
+import api, { AxiosApiError } from '~shared/lib/api.helper';
 
 export const useEditAppointments = () => {
     const { notification } = useNotification();

@@ -3,7 +3,7 @@ import { DriveImages } from 'types/drive';
 import {
     NextApiRequestWithSession,
     withSessionCheck,
-} from '~lib/withCheckSession';
+} from '~shared/lib/withCheckSession';
 import { drive } from './index';
 
 const baseUrlDrive = 'https://drive.google.com';

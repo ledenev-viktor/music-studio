@@ -4,8 +4,8 @@ import dayjs, { Dayjs } from 'dayjs';
 import { Badge, Flex, Tag, Typography } from 'antd';
 import { motion } from 'framer-motion';
 import styled from '@emotion/styled';
-import { COLORS } from '~variables';
 import { DaysWithSlots } from '~types/days';
+import { COLORS } from '~shared/constants';
 import {
     CALENDAR_STATUSES_COLORS,
     CalendarStatuses,
