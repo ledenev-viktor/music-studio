@@ -21,7 +21,9 @@ export const MenuContent = ({ toggle }: { toggle: () => void }) => {
     const { locale, push } = useRouter();
     const currentPathname = usePathname();
 
-    const onMenuItemClick = (path: string, newLocale?: string) => {
+    const onMenuItemClick = (path: string | null, newLocale?: string) => {
+        if (!path) return;
+
         let finalLocale = locale;
         toggle();
         if (newLocale) finalLocale = newLocale;
