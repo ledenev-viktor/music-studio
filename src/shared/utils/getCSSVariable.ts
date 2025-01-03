@@ -1,5 +1,9 @@
 export const getCSSVariable = (variableName: string): string => {
-    return getComputedStyle(document.documentElement)
-        .getPropertyValue(variableName)
-        .trim();
+    if (typeof document !== 'undefined') {
+        return getComputedStyle(document.documentElement)
+            .getPropertyValue(variableName)
+            .trim();
+    }
+
+    return '';
 };
