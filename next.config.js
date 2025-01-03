@@ -19,9 +19,6 @@ module.exports = {
     compiler: {
         styledComponents: true,
     },
-    experimental: {
-        esmExternals: true,
-    },
     i18n,
     images: {
         remotePatterns: [
