@@ -12,11 +12,10 @@ export const useGetPicture = () => {
             >('api/supabase/pictures');
 
             return response.map(
-                (item: { id: number; picture_url: string }) =>
-                    ({
-                        id: item.id,
-                        pictureUrl: item.picture_url,
-                    }) || [],
+                (item: { id: number; picture_url: string }) => ({
+                    id: item.id,
+                    pictureUrl: item.picture_url,
+                }),
             );
         },
     });
