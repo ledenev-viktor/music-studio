@@ -31,37 +31,11 @@
             }
         ],
         "paths": {
-            "react-admin": ["node_modules/react-admin"],
-
-            "~components": ["src/components"],
-            "~components/*": ["src/components/*"],
-
-            "~constants": ["src/constants"],
-            "~constants/*": ["src/constants/*"],
-
-            "~ui": ["src/components/ui"],
-            "~ui/*": ["src/components/ui/*"],
-
-            "~hooks": ["src/shared/hooks"],
-            "~hooks/*": ["src/shared/hooks/*"],
-
-            "~lib": ["src/lib"],
-            "~lib/*": ["src/lib/*"],
-
-            // "~shared/utils": ["src/utils"],
-            // "~shared/utils/*": ["src/utils/*"],
-
             "~types": ["src/types"],
             "~types/*": ["src/types/*"],
 
-            "~notifications": [
-                "src/components/providers/NotificationsProvider.tsx"
-            ],
-            "~modals": ["src/components/providers/ModalProvider.tsx"],
-
-            "~variables": ["src/styles/variables"],
-
-            "~styles": ["src/styles"],
+            "~constants": ["src/constants"],
+            "~constants/*": ["src/constants/*"],
 
             // fsd
             "~shared": ["src/shared"],

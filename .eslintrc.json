@@ -56,12 +56,7 @@
             {
                 "pathGroups": [
                     { "pattern": "react", "group": "builtin" },
-                    { "pattern": "~components/**", "group": "sibling" },
                     { "pattern": "~constants/**", "group": "sibling" },
-                    { "pattern": "~hooks/**", "group": "internal" },
-                    { "pattern": "~notifications", "group": "internal" },
-                    { "pattern": "~modals", "group": "internal" },
-                    { "pattern": "~lib/**", "group": "internal" },
                     // fsd
                     { "pattern": "~app/**", "group": "sibling" },
                     { "pattern": "~pages/**", "group": "sibling" },

@@ -1,4 +1,4 @@
-import { useGetSettingsBase64 } from '~hooks/settings';
+import { useGetSettingsBase64 } from '~shared/hooks/settings';
 import { SliderEvents } from '~features/events';
 import s from './SliderEventsWidget.module.scss';
 import { Title } from '~shared/ui';
