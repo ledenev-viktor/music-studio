@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Select, SelectProps } from 'antd';
-import { useGetImages } from '~hooks/images';
-import { useNotification } from '~notifications';
+import { useGetImages } from '~shared/hooks/images';
+import { useNotification } from '~shared/providers';
 
 export const ImageSelector = () => {
     const { notification } = useNotification();

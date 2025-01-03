@@ -1,7 +1,7 @@
 import { Card, Flex, Typography } from 'antd';
 import { Images } from '~types/images';
-import { ListSlides, PicturesUpload } from '~ui/admin/settings';
 import { Slide } from '~types/settings';
+import { ListSlides, PicturesUpload } from '~features/admin';
 
 export const Settings = ({
     images,

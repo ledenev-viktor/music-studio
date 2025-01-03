@@ -8,12 +8,11 @@ import {
 import { SessionProvider } from 'next-auth/react';
 import { appWithTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
-import { NotificationProvider } from '~notifications';
-import { ModalProvider } from '~modals';
 import { AppPropsWithLayout } from '~types/app';
+import { ModalProvider, NotificationProvider } from '~shared/providers';
 import '~app/styles/global-styles.scss';
 
-const Layout = dynamic(() => import('~components/layout'), {
+const Layout = dynamic(() => import('~app/MainLayout'), {
     ssr: false,
 });
 

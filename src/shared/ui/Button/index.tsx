@@ -1,8 +1,12 @@
 import { CSSProperties } from 'react';
 import { Button as AntdButton, ButtonProps } from 'antd';
 import cn from 'classnames';
-import { useScreenDetector } from '~hooks/responsive';
+import { useScreenDetector } from '~shared/hooks/responsive';
 import s from './Button.module.scss';
+
+type BaseButtonProps = {
+    style?: CSSProperties;
+} & ButtonProps;
 
 const BaseButton = ({
     onClick,
@@ -11,9 +15,7 @@ const BaseButton = ({
     style,
     disabled,
     className,
-}: {
-    style?: CSSProperties;
-} & ButtonProps) => {
+}: BaseButtonProps) => {
     const { isMobile } = useScreenDetector();
     const buttonsStyle: CSSProperties = {
         padding: '5px 20px',
@@ -35,7 +37,7 @@ const BaseButton = ({
     );
 };
 
-export const Button = ({ type, ...props }: { type: 'primary' | 'dashed' }) => {
+export const Button = ({ type, ...props }: BaseButtonProps) => {
     switch (type) {
         case 'primary':
             return <BaseButton type="primary" {...props} />;

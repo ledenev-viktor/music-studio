@@ -3,10 +3,9 @@ import { Flex, Input, AutoComplete, Checkbox } from 'antd';
 import { useMotionValue, Reorder } from 'framer-motion';
 import Image from 'next/image';
 import { Slide } from '~types/settings';
-import { useScreenDetector } from '~hooks/responsive';
-import { Close } from '~components/ui/icons/close';
+import { useScreenDetector } from '~shared/hooks/responsive';
 import { useRaisedShadow } from './hooks/useRaisedShadow';
-import { InputMoney } from '~components/ui/hook-form';
+import { Icon, InputMoney } from '~shared/ui';
 const { TextArea } = Input;
 
 type PointSlideProps = {
@@ -43,7 +42,7 @@ export const PointSlide: React.FC<PointSlideProps> = ({
                         className="close-button"
                         onClick={() => handleRemove(slide.id)}
                     >
-                        <Close width={18} hanging={18} />
+                        <Icon name="close" />
                     </button>
                 </div>
                 <div className="imgbox">

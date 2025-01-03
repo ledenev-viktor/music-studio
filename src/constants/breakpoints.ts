@@ -1,4 +1,4 @@
-import { getCSSVariable } from '~utils/getCSSVariable';
+import { getCSSVariable } from '~shared/utils/getCSSVariable';
 
 export const BREAKPOINTS = {
     wideLarge: getCSSVariable('--wide-large'),

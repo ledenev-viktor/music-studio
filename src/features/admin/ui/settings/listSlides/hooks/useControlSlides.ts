@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import isEqual from 'lodash/isEqual';
-import { useUpdateSettings } from '~hooks/settings';
 import { Slide } from '~types/settings';
+import { useUpdateSettings } from '~shared/hooks/settings';
 
 export const useControlSlides = (slidesData: Slide[] = []) => {
     const { mutate: updateSettings } = useUpdateSettings();

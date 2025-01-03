@@ -2,6 +2,7 @@ import React from 'react';
 import type { CollapseProps } from 'antd';
 import { Collapse } from 'antd';
 import s from './style.module.scss';
+import { Title } from '~shared/ui';
 
 const items: CollapseProps['items'] = [
     {
@@ -79,10 +80,7 @@ export const FaqWidget = () => {
     };
     return (
         <div className={s.wrapper}>
-            <div>
-                <h2 className={s.title}>Частые вопросы</h2>
-            </div>
-
+            <Title>Частые вопросы</Title>
             <Collapse
                 className={s.collapse}
                 items={items}

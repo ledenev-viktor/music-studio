@@ -7,8 +7,8 @@ import {
     WarningOutlined,
 } from '@ant-design/icons';
 import { Appointment } from '~types/appointments';
-import { useModal } from '~modals';
-import { useUpdateAppointments } from '~hooks/appointments';
+import { useModal } from '~shared/providers';
+import { useUpdateAppointments } from '~shared/hooks/appointments';
 import {
     APPOINTMENTS_STATUSES,
     APPOINTMENTS_STATUSES_COLORS,

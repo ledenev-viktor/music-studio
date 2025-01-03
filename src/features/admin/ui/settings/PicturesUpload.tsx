@@ -4,7 +4,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Image, Upload } from 'antd';
 import type { GetProp, UploadFile, UploadProps } from 'antd';
 import { Images } from '~types/images';
-import { useRemoveImages, useUploadImages } from '~hooks/images';
+import { useRemoveImages, useUploadImages } from '~shared/hooks/images';
 
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 

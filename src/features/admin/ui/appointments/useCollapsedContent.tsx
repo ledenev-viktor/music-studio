@@ -7,12 +7,12 @@ import {
 } from '@ant-design/icons';
 import { TFunction } from 'i18next';
 import { Appointment, EditFormData } from '~types/appointments';
-import { useEditAppointments } from '~hooks/appointments';
+import { useEditAppointments } from '~shared/hooks/appointments';
 import { COLORS } from '~shared/constants';
 import { Footer, Header } from './common';
-import { Telegram } from '~components/ui/icons';
 import { APPOINTMENTS_STATUSES_COLORS } from '~constants/status';
 import { EditForm } from './EditForm';
+import { Icon } from '~shared/ui';
 
 export const useCollapsedContent: (
     appointments: Appointment[],
@@ -45,9 +45,7 @@ export const useCollapsedContent: (
                                 target="_blank"
                                 href={`https://t.me/${appointment.telegram}`}
                                 value={appointment.telegram}
-                                icon={
-                                    <Telegram width={14} fill={COLORS.blue} />
-                                }
+                                icon={<Icon name="telegram" />}
                             />
                         )}
                         {appointment.instagram && (

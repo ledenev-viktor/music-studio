@@ -12,3 +12,5 @@ export { Spin } from './Spin';
 export { Icon } from './Icon';
 export { LogoOld } from './LogoOld';
 export { Logo } from './Logo';
+export { CheckboxGroup } from './CheckboxGroup';
+export { Title } from './Title';

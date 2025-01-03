@@ -3,9 +3,9 @@ import React, { useMemo, useState } from 'react';
 import { Alert, ButtonProps, Card, Empty, Flex, SelectProps, Spin } from 'antd';
 import type { SearchProps } from 'antd/es/input/Search';
 import dayjs from 'dayjs';
-import { useGetAppointments } from '~hooks/appointments';
-import { filterAppointments } from '~utils/filterAppointments';
-import { AppointmentsList, FiltersRow } from '~components/ui/admin';
+import { useGetAppointments } from '~shared/hooks/appointments';
+import { filterAppointments } from '~shared/utils/filterAppointments';
+import { AppointmentsList, FiltersRow } from '~features/admin';
 import { AppointmentStatuses } from '~constants/status';
 
 export const Appointments = () => {

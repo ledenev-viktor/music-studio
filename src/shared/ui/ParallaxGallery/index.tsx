@@ -14,8 +14,9 @@ import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import { Flex } from 'antd';
 import cn from 'classnames';
-import { useScreenDetector } from '~hooks/responsive';
-import { Fancybox } from '~components/ui/fancybox';
+import Image from 'next/image';
+import { useScreenDetector } from '~shared/hooks/responsive';
+import { Fancybox } from '~shared/ui';
 import s from './ParallaxGallery.module.scss';
 
 SwiperCore.use([
@@ -46,6 +47,8 @@ export const ParallaxGallery: FC<ParallaxGalleryProps> = ({
     ...props
 }) => {
     const { isMobile, isSmallMobile } = useScreenDetector();
+
+    const isMobileOrTablet = isMobile || isSmallMobile;
 
     const slidesActive = slides?.filter((slide) => slide.active);
 
@@ -115,18 +118,16 @@ export const ParallaxGallery: FC<ParallaxGalleryProps> = ({
                                                 ${slide.desc ? '<h3>' + slide.desc + '</h3>' : ''}
                                             </div>`}
                                         >
-                                            <img
+                                            <Image
                                                 className="slide-img"
                                                 src={`${slide.base64 || slide.img}`}
-                                                style={{
-                                                    height:
-                                                        isMobile ||
-                                                        isSmallMobile
-                                                            ? '40vh'
-                                                            : '50vh',
-                                                }}
                                                 alt={slide.title || ''}
                                                 aria-label={slide.title || ''}
+                                                style={{
+                                                    height: isMobileOrTablet
+                                                        ? '40vh'
+                                                        : '50vh',
+                                                }}
                                             />
                                         </a>
                                     </div>

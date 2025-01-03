@@ -14,8 +14,8 @@ import { useRouter } from 'next/router';
 import { Content, Header } from 'antd/es/layout/layout';
 import Image from 'next/image';
 import { signOut } from 'next-auth/react';
-import { useGetImages } from '~hooks/images';
-import { useGetSettings } from '~hooks/settings';
+import { useGetImages } from '~shared/hooks/images';
+import { useGetSettings } from '~shared/hooks/settings';
 import { Settings, Appointments } from '~widgets/admin';
 
 type MenuItem = Required<MenuProps>['items'][number];

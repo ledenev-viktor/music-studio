@@ -1,4 +1,4 @@
-import { useGetImages } from '~hooks/images';
+import { useGetImages } from '~shared/hooks/images';
 
 export const useCreateImageOptions = () => {
     const { data: images } = useGetImages();

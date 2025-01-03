@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { Col, Flex, Row, Tag, Alert } from 'antd';
 import {
     Controller,
@@ -10,10 +9,11 @@ import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
 import cn from 'classnames';
 import { FreeSlots } from '~types/common';
-import { convertToAmPm } from '~utils/convertToAmPm';
-import { useScreenDetector } from '~hooks/responsive';
 import { ErrorMessage } from '../ErrorMessage';
 import { Label } from '../Label';
+import { convertToAmPm } from '~shared/utils/convertToAmPm';
+import { useScreenDetector } from '~shared/hooks/responsive';
+import s from './TimeSlots.module.scss';
 
 type TimeSlotsBaseProps = {
     locale?: string;
@@ -22,13 +22,13 @@ type TimeSlotsBaseProps = {
     label?: string;
 } & UseControllerProps;
 
-export const TimeSlots: FC<TimeSlotsBaseProps> = ({
+export const TimeSlots = ({
     name,
     label,
     rules,
     timeSlots = [],
     className,
-}) => {
+}: TimeSlotsBaseProps) => {
     const { t } = useTranslation();
     const { locale } = useRouter();
     const { isSmallMobile, isMobile } = useScreenDetector();
@@ -38,7 +38,10 @@ export const TimeSlots: FC<TimeSlotsBaseProps> = ({
         trigger,
     } = useFormContext();
 
-    const error = errors[name] ? <>{errors[name]?.message}</> : '';
+    const error =
+        errors[name] && typeof errors[name]?.message === 'string'
+            ? errors[name]?.message
+            : '';
 
     if (!timeSlots.length) {
         return <Alert type="error" message={t('slots_empty')} />;
@@ -90,7 +93,11 @@ export const TimeSlots: FC<TimeSlotsBaseProps> = ({
                         </Row>
                     )}
                 />
-                {error && <ErrorMessage motionId={name}>{error}</ErrorMessage>}
+                {error && (
+                    <ErrorMessage motionId={name}>
+                        <>{error}</>
+                    </ErrorMessage>
+                )}
             </AnimatePresence>
         </Flex>
     );
