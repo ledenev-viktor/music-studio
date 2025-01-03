@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import { iconsMap, TIconMapKeys } from './IconMap';
 
 export interface IconProps {
@@ -6,6 +7,7 @@ export interface IconProps {
     height?: number | string;
     className?: string;
     fill?: string;
+    style?: CSSProperties;
 }
 
 export const Icon = ({
@@ -14,12 +16,13 @@ export const Icon = ({
     height,
     className,
     fill,
+    style,
 }: IconProps) => {
     const IconComponent = iconsMap[name];
 
     return (
         <IconComponent
-            style={{ width: size, height: height || size, fill }}
+            style={{ width: size, height: height || size, fill, ...style }}
             className={className}
         />
     );

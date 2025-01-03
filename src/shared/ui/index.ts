@@ -14,3 +14,4 @@ export { LogoOld } from './LogoOld';
 export { Logo } from './Logo';
 export { CheckboxGroup } from './CheckboxGroup';
 export { Title } from './Title';
+export { AnimatedBorderButton } from './AnimatedBorderButton';
