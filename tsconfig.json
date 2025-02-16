@@ -31,8 +31,8 @@
             }
         ],
         "paths": {
-            "~types": ["src/types"],
-            "~types/*": ["src/types/*"],
+            "~types": ["src/shared/types"],
+            "~types/*": ["src/shared/types/*"],
 
             "~constants": ["src/constants"],
             "~constants/*": ["src/constants/*"],

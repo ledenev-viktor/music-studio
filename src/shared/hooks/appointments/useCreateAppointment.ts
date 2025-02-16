@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { FormFields } from '~types/appointments';
+import { FormFields } from '~shared/types/appointments';
 import { mergeIntervals } from '~shared/utils/mergeIntervals';
 import api, { AxiosApiError, AxiosApiResponse } from '~shared/lib/api.helper';
 

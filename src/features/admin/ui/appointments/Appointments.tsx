@@ -2,7 +2,7 @@ import React from 'react';
 import { CaretRightOutlined } from '@ant-design/icons';
 import { Collapse } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { Appointment } from '~types/appointments';
+import { Appointment } from '~shared/types/appointments';
 import { useCollapsedContent } from './useCollapsedContent';
 
 export const AppointmentsList = ({ data }: { data: Appointment[] }) => {

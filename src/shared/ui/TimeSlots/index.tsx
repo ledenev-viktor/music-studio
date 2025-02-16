@@ -8,9 +8,9 @@ import { AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
 import cn from 'classnames';
-import { FreeSlots } from '~types/common';
 import { ErrorMessage } from '../ErrorMessage';
 import { Label } from '../Label';
+import { FreeSlots } from '~shared/types/common';
 import { convertToAmPm } from '~shared/utils/convertToAmPm';
 import { useScreenDetector } from '~shared/hooks/responsive';
 import s from './TimeSlots.module.scss';
@@ -63,6 +63,7 @@ export const TimeSlots = ({
                                     span={!isSmallMobile && !isMobile ? 8 : 12}
                                 >
                                     <Tag.CheckableTag
+                                        className={s.timeSlot}
                                         style={{ width: '100%' }}
                                         checked={value.some(
                                             ({ value }: { value: string }) => {

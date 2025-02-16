@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
-import { EditFormData } from '~types/appointments';
+import { EditFormData } from '~shared/types/appointments';
 import { useNotification } from '~shared/providers';
 import api, { AxiosApiError } from '~shared/lib/api.helper';
 

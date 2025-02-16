@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import dynamic from 'next/dynamic';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { NextPageWithLayout } from '~types/app';
+import { NextPageWithLayout } from '~shared/types/app';
 
 const AdminApp = dynamic(() => import('~pages/admin'), {
     ssr: false,

@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { CalendarEvent } from '~types/google';
+import { CalendarEvent } from '~shared/types/google';
 import { filterEventsBySchedule } from './filterEventsBySchedule';
 import { getWorkingHours } from './getWorkingHours';
 import { getOffsetUTCFromStringDate } from './getOffsetUTCFromStringDate';

@@ -1,4 +1,4 @@
-import { CalendarEvent } from '~types/google';
+import { CalendarEvent } from '~shared/types/google';
 
 export const filterEventsBySchedule = (
     events: CalendarEvent[],

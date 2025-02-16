@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { FormFields } from '~types/appointments';
+import { FormFields } from '~shared/types/appointments';
 import { FormInput, InputPhone } from '~shared/ui';
 import { StepWrapper } from './StepWrapper';
 

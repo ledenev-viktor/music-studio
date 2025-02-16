@@ -1,6 +1,6 @@
 import { Card, Flex, Typography } from 'antd';
-import { Images } from '~types/images';
-import { Slide } from '~types/settings';
+import { Images } from '~shared/types/images';
+import { Slide } from '~shared/types/settings';
 import { ListSlides, PicturesUpload } from '~features/admin';
 
 export const Settings = ({

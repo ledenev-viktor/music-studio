@@ -17,7 +17,6 @@ import {
     StatusScreen,
 } from './steps';
 import { MODE, STEP, STEP_NUMBER } from '~constants/registrationSteps';
-import { Icon } from '~shared/ui';
 
 export const FormComponent = () => {
     const { t } = useTranslation();
@@ -172,37 +171,41 @@ export const FormComponent = () => {
 
     return (
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-            <Icon
+            {/* <Icon
                 name="notes"
                 fill="currentColor"
                 className={s.notes}
                 size="auto"
                 height="100%"
-            />
-            {isNotResultStep && (
-                <Flex
-                    vertical
-                    align="stretch"
-                    style={{
-                        marginBottom: isMobile ? '10px' : '30px',
-                        marginTop: 0,
-                    }}
-                >
-                    <Steps
-                        size={isMobile ? 'small' : 'default'}
-                        direction="horizontal"
-                        responsive={false}
-                        current={mode === MODE.DEFAULT ? STEP_NUMBER[step] : 3}
-                        items={new Array(3).fill({})}
-                    />
-                </Flex>
-            )}
-            <AnimatePresence mode="wait" initial={false}>
-                {getStep()}
-            </AnimatePresence>
-            {showFirework && (
-                <Fireworks autorun={{ speed: 3, duration: 3000 }} />
-            )}
+            /> */}
+            <div className={s.formInner}>
+                {isNotResultStep && (
+                    <Flex
+                        vertical
+                        align="stretch"
+                        style={{
+                            marginBottom: isMobile ? '10px' : '30px',
+                            marginTop: 0,
+                        }}
+                    >
+                        <Steps
+                            size={isMobile ? 'small' : 'default'}
+                            direction="horizontal"
+                            responsive={false}
+                            current={
+                                mode === MODE.DEFAULT ? STEP_NUMBER[step] : 3
+                            }
+                            items={new Array(3).fill({})}
+                        />
+                    </Flex>
+                )}
+                <AnimatePresence mode="wait" initial={false}>
+                    {getStep()}
+                </AnimatePresence>
+                {showFirework && (
+                    <Fireworks autorun={{ speed: 3, duration: 3000 }} />
+                )}
+            </div>
         </form>
     );
 };

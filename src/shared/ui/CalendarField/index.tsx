@@ -7,8 +7,8 @@ import {
 } from 'react-hook-form';
 import { Flex } from 'antd';
 import { Dayjs } from 'dayjs';
-import { DaysWithSlots } from '~types/days';
-import { FormFields } from '~types/appointments';
+import { DaysWithSlots } from '~shared/types/days';
+import { FormFields } from '~shared/types/appointments';
 import { Calendar } from './Calendar';
 
 export const CalendarField = ({

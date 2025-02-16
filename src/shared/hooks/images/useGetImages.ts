@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Images } from '~types/images';
+import { Images } from '~shared/types/images';
 import api from '~shared/lib/api.helper';
 
 export const useGetImages = () => {

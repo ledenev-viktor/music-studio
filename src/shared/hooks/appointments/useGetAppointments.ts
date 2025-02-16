@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Appointment } from '~types/appointments';
+import { Appointment } from '~shared/types/appointments';
 import {
     extractDay,
     extractTime,

@@ -13,7 +13,6 @@
 
 .form {
     margin: 0 auto;
-    padding: 50px 60px 60px;
     box-sizing: border-box;
     box-shadow: 0px 0px 20px -14px rgba(0, 0, 0, 1);
     background-color: rgba(24, 32, 35, 0.2);
@@ -21,6 +20,8 @@
     min-width: 300px;
     border-radius: 15px;
     border-radius: 3px;
+
+    padding: 50px 60px 60px;
 
     position: relative;
     overflow: hidden;
@@ -59,3 +60,12 @@
     right: 0;
     transform: translateY(-50%);
 }
+
+// .formInner {
+//     background: rgba(27, 35, 44, 0.01);
+//     -webkit-backdrop-filter: blur(3px);
+//     backdrop-filter: blur(3px);
+//     padding: 15px;
+//     z-index: 100;
+//     padding: 50px 60px 60px;
+// }

@@ -6,7 +6,7 @@ import {
     EditOutlined,
 } from '@ant-design/icons';
 import { TFunction } from 'i18next';
-import { Appointment, EditFormData } from '~types/appointments';
+import { Appointment, EditFormData } from '~shared/types/appointments';
 import { useEditAppointments } from '~shared/hooks/appointments';
 import { COLORS } from '~shared/constants';
 import { Footer, Header } from './common';

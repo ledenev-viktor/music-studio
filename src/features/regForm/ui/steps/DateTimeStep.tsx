@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next';
 import { Alert } from 'antd';
 import { useWatch } from 'react-hook-form';
 import dayjs from 'dayjs';
-import { FormFields } from '~types/appointments';
+import { FormFields } from '~shared/types/appointments';
 import { useGetDays, useSetDays } from '~shared/hooks/useDays';
 import { StepWrapper } from './StepWrapper';
 import { TimeSlots, CalendarField } from '~shared/ui';

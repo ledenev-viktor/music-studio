@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Settings } from '~types/settings';
+import { Settings } from '~shared/types/settings';
 import api from '~shared/lib/api.helper';
 
 export const useGetSettings = () => {

@@ -1,4 +1,4 @@
-import { Appointment, Appointments } from '~types/appointments';
+import { Appointment, Appointments } from '~shared/types/appointments';
 
 export function prettifyAppointments(
     appointments: Appointment[],

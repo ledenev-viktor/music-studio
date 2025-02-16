@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { google } from 'googleapis';
 import { NextApiResponse } from 'next/types';
-import { Appointment } from '~types/appointments';
+import { Appointment } from '~shared/types/appointments';
 import {
     NextApiRequestWithSession,
     withSessionCheck,

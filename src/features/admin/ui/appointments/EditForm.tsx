@@ -1,6 +1,6 @@
 import { Badge, Button, Form, Input, Select, Space, TimePicker } from 'antd';
 import styled from '@emotion/styled';
-import { Appointment, EditFormData } from '~types/appointments';
+import { Appointment, EditFormData } from '~shared/types/appointments';
 import { getDayJsObject } from '~shared/utils/date.helpers';
 import {
     APPOINTMENTS_STATUSES,

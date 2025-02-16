@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Settings, SlideWithBase64 } from '~types/settings';
+import { Settings, SlideWithBase64 } from '~shared/types/settings';
 import api from '~shared/lib/api.helper';
 
 export const useGetSettingsBase64 = () => {

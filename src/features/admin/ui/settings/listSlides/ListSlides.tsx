@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Flex, Typography } from 'antd';
 import styled from '@emotion/styled';
 import { Reorder } from 'framer-motion';
-import { Slide } from '~types/settings';
+import { Slide } from '~shared/types/settings';
 import { COLORS } from '~shared/constants';
 import { useControlSlides } from './hooks/useControlSlides';
 import { useCreateImageOptions } from './hooks/useCreateImageOptions';

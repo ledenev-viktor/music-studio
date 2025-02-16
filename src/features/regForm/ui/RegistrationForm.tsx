@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-import { FormFields } from '~types/appointments';
+import { FormFields } from '~shared/types/appointments';
 import { FormComponent } from './FormComponent';
 
 type RegistrationFormProps = {

@@ -1,29 +1,34 @@
+.calendarTitle {
+    color: $white;
+}
+
 .wrapper {
-    .ant-tag {
-        width: 100%;
-        text-align: center;
-        border-radius: 10px;
-        padding: 10px 8px;
-        box-sizing: border-box;
-        line-height: 1;
-        font-size: 16px;
-        color: $black;
-        background-color: $white;
-
-        border: 1px solid $lightGrey;
-
-        &:hover {
-            background-color: $white;
-
-            border: 1px solid $blue;
-            color: $black;
+    :global {
+        .ant-tag-checkable-checked {
+            border-color: $white;
         }
-
-        &.ant-tag-checkable-checked {
-            background-color: $white;
-
-            border: 1px solid $blue;
-            color: $black;
+        .ant-tag-checkable-checked:hover {
+            background: rgba(27, 35, 44, 0.1);
+            border-color: $white;
         }
     }
+}
+
+.dayWrapper {
+    background: rgba(27, 35, 44, 0.5);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    color: $white;
+
+    width: 100%;
+    padding: 12px;
+    border: 1px solid transparent;
+}
+
+.dayName {
+    color: $white;
+    font-size: 18px;
+}
+.dayNumber {
+    color: $white;
 }

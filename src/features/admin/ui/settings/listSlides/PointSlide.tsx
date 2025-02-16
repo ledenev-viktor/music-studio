@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { Flex, Input, AutoComplete, Checkbox } from 'antd';
 import { useMotionValue, Reorder } from 'framer-motion';
 import Image from 'next/image';
-import { Slide } from '~types/settings';
+import { Slide } from '~shared/types/settings';
 import { useScreenDetector } from '~shared/hooks/responsive';
 import { useRaisedShadow } from './hooks/useRaisedShadow';
 import { Icon, InputMoney } from '~shared/ui';

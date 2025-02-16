@@ -6,7 +6,7 @@ import {
     UserOutlined,
     WarningOutlined,
 } from '@ant-design/icons';
-import { Appointment } from '~types/appointments';
+import { Appointment } from '~shared/types/appointments';
 import { useModal } from '~shared/providers';
 import { useUpdateAppointments } from '~shared/hooks/appointments';
 import {

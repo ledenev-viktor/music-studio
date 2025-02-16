@@ -8,7 +8,7 @@ import {
 import { SessionProvider } from 'next-auth/react';
 import { appWithTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
-import { AppPropsWithLayout } from '~types/app';
+import { AppPropsWithLayout } from '~shared/types/app';
 import { ModalProvider, NotificationProvider } from '~shared/providers';
 import '~app/styles/global-styles.scss';
 

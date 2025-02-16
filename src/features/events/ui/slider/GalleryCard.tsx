@@ -2,7 +2,7 @@ import { Button, Flex, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 import cn from 'classnames';
-import { SlideWithBase64 } from '~types/settings';
+import { SlideWithBase64 } from '~shared/types/settings';
 import { COLORS } from '~shared/constants';
 import s from './SliderEvents.module.scss';
 

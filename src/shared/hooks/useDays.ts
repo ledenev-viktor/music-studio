@@ -1,6 +1,6 @@
 import { Dayjs } from 'dayjs';
 import { useQueryClient } from '@tanstack/react-query';
-import { DaysWithSlots } from '~types/days';
+import { DaysWithSlots } from '~shared/types/days';
 import { getAvailableSlots } from '~shared/utils/getAvailableSlots';
 import { formatToUtcStartDay } from '~shared/utils/dayjs.helpers';
 import { useGetEvents } from './events';

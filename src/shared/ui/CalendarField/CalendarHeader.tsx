@@ -4,6 +4,7 @@ import { Dayjs } from 'dayjs';
 import { Button, Col, Row, Typography } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { COLORS } from '~shared/constants';
+import s from './Calendar.module.scss';
 
 export const CalendarHeader = ({
     current,
@@ -35,7 +36,11 @@ export const CalendarHeader = ({
             )}
         </Col>
         <Col xs={18} style={{ textAlign: 'center' }}>
-            <Typography.Title level={3} style={{ margin: 0 }}>
+            <Typography.Title
+                className={s.calendarTitle}
+                level={3}
+                style={{ margin: 0 }}
+            >
                 {endMonth !== startMonth
                     ? `${startMonth} - ${endMonth}`
                     : startMonth}

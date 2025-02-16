@@ -4,7 +4,8 @@ import dayjs, { Dayjs } from 'dayjs';
 import { Badge, Flex, Tag, Typography } from 'antd';
 import { motion } from 'framer-motion';
 import cn from 'classnames';
-import { DaysWithSlots } from '~types/days';
+import { Spin } from '../Spin';
+import { DaysWithSlots } from '~shared/types/days';
 import { CalendarHeader } from './CalendarHeader';
 import {
     CALENDAR_STATUSES_COLORS,
@@ -74,20 +75,16 @@ export const Calendar = ({
         <motion.div
             key={day.toString()}
             whileHover={{
-                scale: 1.1,
+                scale: 1.05,
             }}
             whileTap={{
-                scale: 0.9,
+                scale: 1,
             }}
             style={{ width: '100%' }}
         >
             <Flex vertical className={s.days} style={{ width: '100%' }}>
                 <Tag.CheckableTag
-                    style={{
-                        width: '100%',
-                        color: 'rgba(0, 0, 0, 0.25)',
-                        padding: '4px 8px',
-                    }}
+                    className={s.dayWrapper}
                     checked={
                         selected?.format('YYYY-MM-DD') ===
                         day.format('YYYY-MM-DD')
@@ -126,7 +123,7 @@ export const Calendar = ({
                 endMonth={endMonth}
                 onWeekChange={onWeekChange}
             />
-            <Flex justify="space-between" gap={5}>
+            <Flex justify="space-between" gap={15}>
                 {daysOfWeek.map((day: Dayjs) => (
                     <CalendarItemWrapper key={day.toString()} day={day}>
                         <Flex
@@ -134,14 +131,19 @@ export const Calendar = ({
                             style={{
                                 padding: '0 0 4px 0',
                             }}
+                            className={s.dayName}
                         >
                             {day.format('dd')}
                         </Flex>
                         <Flex vertical gap={5} align="center">
-                            <Typography.Text>
+                            <Typography.Text className={s.dayNumber}>
                                 {day.format('DD')}
                             </Typography.Text>
-                            <Badge color={getColorForStatus(day)} />
+                            {isLoadingSlots ? (
+                                <Spin size="small" />
+                            ) : (
+                                <Badge color={getColorForStatus(day)} />
+                            )}
                         </Flex>
                     </CalendarItemWrapper>
                 ))}

@@ -1,13 +1,17 @@
 .spin {
     &.dark {
-        .ant-spin-dot-item {
-            background-color: $black;
+        :global {
+            .ant-spin-dot-item {
+                background-color: $black;
+            }
         }
     }
 
     &.light {
-        .ant-spin-dot-item {
-            background-color: $white;
+        :global {
+            .ant-spin-dot-item {
+                background-color: $white;
+            }
         }
     }
 }

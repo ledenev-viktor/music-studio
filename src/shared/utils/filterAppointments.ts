@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Appointment } from '~types/appointments';
+import { Appointment } from '~shared/types/appointments';
 import { AppointmentStatuses } from '~constants/status';
 
 type Item = [string, Appointment[]];
