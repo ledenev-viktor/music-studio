@@ -140,7 +140,7 @@ export const Calendar = ({
                                 {day.format('DD')}
                             </Typography.Text>
                             {isLoadingSlots ? (
-                                <Spin size="small" />
+                                <Spin />
                             ) : (
                                 <Badge color={getColorForStatus(day)} />
                             )}
