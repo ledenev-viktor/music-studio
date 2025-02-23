@@ -1,91 +1,32 @@
-import React from 'react';
-import type { CollapseProps } from 'antd';
+import React, { useMemo } from 'react';
 import { Collapse } from 'antd';
 import s from './style.module.scss';
-import { Title } from '~shared/ui';
-
-const items: CollapseProps['items'] = [
-    {
-        key: '1',
-        label: 'This is panel header 1',
-        children: (
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Pariatur voluptatibus adipisci qui hic deleniti id nam provident
-                sapiente doloribus reprehenderit!
-            </p>
-        ),
-    },
-    {
-        key: '2',
-        label: 'This is panel header 2',
-        children: (
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
-                praesentium accusamus doloribus, nobis voluptas provident velit
-                veniam obcaecati commodi modi ipsam? Dolor autem, optio officia
-                alias amet esse eum excepturi! Id esse praesentium fuga eveniet
-                animi! Rerum architecto laudantium enim dicta consectetur
-                tenetur dolor voluptatum eos provident? Harum, modi numquam.
-            </p>
-        ),
-    },
-    {
-        key: '3',
-        label: 'This is panel header 3',
-        children: (
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Repellat, minus harum! Fugit omnis laudantium et saepe officia,
-                doloremque corrupti laborum.
-            </p>
-        ),
-    },
-    {
-        key: '4',
-        label: 'This is panel header 3',
-        children: (
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Repellat, minus harum! Fugit omnis.
-            </p>
-        ),
-    },
-    {
-        key: '5',
-        label: 'This is panel header 3',
-        children: (
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Repellat, minus harum! Fugit omnis laudantium et saepe officia,
-                doloremque corrupti laborum.
-            </p>
-        ),
-    },
-    {
-        key: '6',
-        label: 'This is panel header 3',
-        children: (
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Repellat, minus harum!
-            </p>
-        ),
-    },
-];
+import { Spin, Title } from '~shared/ui';
+import { useGetFaq } from '~shared/hooks/faq/useGetFaq';
 
 export const FaqWidget = () => {
-    const onChange = (key: string | string[]) => {
-        console.log(key);
-    };
+    const { data: faqData, isLoading } = useGetFaq();
+
+    const items = useMemo(
+        () =>
+            faqData?.map((item) => ({
+                key: item.id,
+                label: item.question,
+                children: item.answer,
+            })),
+        [faqData],
+    );
+
+    console.log('items', items);
+
+    if (isLoading) return <Spin />;
+
+    if (!items?.length) return null;
+
     return (
         <div className={s.wrapper}>
             <Title>Частые вопросы</Title>
-            <Collapse
-                className={s.collapse}
-                items={items}
-                onChange={onChange}
-            />
+            <Collapse className={s.collapse} items={items} />
         </div>
     );
 };

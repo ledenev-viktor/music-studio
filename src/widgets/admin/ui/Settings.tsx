@@ -1,7 +1,7 @@
 import { Card, Flex, Typography } from 'antd';
 import { Images } from '~shared/types/images';
 import { Slide } from '~shared/types/settings';
-import { ListSlides, PicturesUpload } from '~features/admin';
+import { ListSlides, PicturesUpload, ListQuestionsEdit } from '~features/admin';
 
 export const Settings = ({
     images,
@@ -27,6 +27,7 @@ export const Settings = ({
                 </Card>
             </Flex>
             <ListSlides slidesData={slidesData} />
+            <ListQuestionsEdit />
         </>
     );
 };
