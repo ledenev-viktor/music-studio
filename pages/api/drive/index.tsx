@@ -1,5 +1,5 @@
 import { google } from 'googleapis';
-import googleConfig from '~lib/google';
+import googleConfig from '~shared/lib/google';
 
 const jwtClient = new google.auth.JWT(
     googleConfig.clientEmail,

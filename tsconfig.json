@@ -31,35 +31,25 @@
             }
         ],
         "paths": {
-            "react-admin": ["node_modules/react-admin"],
-
-            "~components": ["src/components"],
-            "~components/*": ["src/components/*"],
+            "~types": ["src/shared/types"],
+            "~types/*": ["src/shared/types/*"],
 
             "~constants": ["src/constants"],
             "~constants/*": ["src/constants/*"],
 
-            "~ui": ["src/components/ui"],
-            "~ui/*": ["src/components/ui/*"],
-
-            "~hooks": ["src/hooks"],
-            "~hooks/*": ["src/hooks/*"],
-
-            "~lib": ["src/lib"],
-            "~lib/*": ["src/lib/*"],
-
-            "~utils": ["src/utils"],
-            "~utils/*": ["src/utils/*"],
-
-            "~types": ["src/types"],
-            "~types/*": ["src/types/*"],
-
-            "~notifications": [
-                "src/components/providers/NotificationsProvider.tsx"
-            ],
-            "~modals": ["src/components/providers/ModalProvider.tsx"],
-
-            "~variables": ["src/styles/variables"]
+            // fsd
+            "~shared": ["src/shared"],
+            "~shared/*": ["src/shared/*"],
+            "~entities": ["src/entities"],
+            "~entities/*": ["src/entities/*"],
+            "~features": ["src/features"],
+            "~features/*": ["src/features/*"],
+            "~widgets": ["src/widgets"],
+            "~widgets/*": ["src/widgets/*"],
+            "~pages": ["src/pages"],
+            "~pages/*": ["src/pages/*"],
+            "~app": ["src/app"],
+            "~app/*": ["src/app/*"]
         }
     },
     "include": [

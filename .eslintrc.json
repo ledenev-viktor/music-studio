@@ -56,12 +56,14 @@
             {
                 "pathGroups": [
                     { "pattern": "react", "group": "builtin" },
-                    { "pattern": "~components/**", "group": "sibling" },
                     { "pattern": "~constants/**", "group": "sibling" },
-                    { "pattern": "~hooks/**", "group": "internal" },
-                    { "pattern": "~notifications", "group": "internal" },
-                    { "pattern": "~modals", "group": "internal" },
-                    { "pattern": "~lib/**", "group": "internal" }
+                    // fsd
+                    { "pattern": "~app/**", "group": "sibling" },
+                    { "pattern": "~pages/**", "group": "sibling" },
+                    { "pattern": "~widgets/**", "group": "sibling" },
+                    { "pattern": "~features/**", "group": "sibling" },
+                    { "pattern": "~entities/**", "group": "sibling" },
+                    { "pattern": "~shared/**", "group": "sibling" }
                 ],
                 "pathGroupsExcludedImportTypes": ["builtin"],
                 "groups": [
@@ -86,6 +88,7 @@
                             "../**/constants",
                             "../**/lib",
                             "../**/pages",
+                            "../**/shared",
                             "~components/providers/**"
                         ],
                         "message": "Prefer absolute imports instead of relatives"

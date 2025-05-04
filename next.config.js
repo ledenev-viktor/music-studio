@@ -10,7 +10,11 @@ module.exports = {
         clientEmail: process.env.CLIENT_EMAIL,
     },
     sassOptions: {
-        includePaths: [path.join(__dirname, 'styles')],
+        includePaths: [path.join(__dirname, 'src/')],
+        prependData: `
+        @import "app/styles/colors.scss";
+        @import "app/styles/breakpoints.scss";
+        `,
     },
     compiler: {
         styledComponents: true,
@@ -20,7 +24,7 @@ module.exports = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: '*.google.com',
+                hostname: '*',
                 pathname: '**',
             },
         ],
@@ -47,7 +51,41 @@ module.exports = {
         'rc-picker',
         'rc-util',
         'rc-tree',
+        'rc-input',
         'rc-tooltip',
         'next-auth',
     ],
+    webpack(config) {
+        const fileLoaderRule = config.module.rules.find((rule) =>
+            rule.test?.test?.('.svg'),
+        );
+        if (fileLoaderRule) {
+            fileLoaderRule.exclude = /\.svg$/;
+        }
+
+        config.module.rules.push({
+            test: /\.svg$/,
+            issuer: /\.[jt]sx?$/,
+            use: [
+                {
+                    loader: '@svgr/webpack',
+                    options: {
+                        svgo: true,
+                        svgoConfig: {
+                            plugins: [
+                                {
+                                    name: 'preset-default',
+                                    params: {
+                                        overrides: { removeViewBox: false },
+                                    },
+                                },
+                            ],
+                        },
+                    },
+                },
+            ],
+        });
+
+        return config;
+    },
 };

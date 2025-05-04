@@ -3,7 +3,7 @@ import { NextApiResponse } from 'next/types';
 import {
     NextApiRequestWithSession,
     withSessionCheck,
-} from '~lib/withCheckSession';
+} from '~shared/lib/withCheckSession';
 import { drive } from './index';
 
 async function handler(req: NextApiRequestWithSession, res: NextApiResponse) {

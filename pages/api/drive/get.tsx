@@ -3,7 +3,7 @@ import { DriveImages } from 'types/drive';
 import {
     NextApiRequestWithSession,
     withSessionCheck,
-} from '~lib/withCheckSession';
+} from '~shared/lib/withCheckSession';
 import { drive } from './index';
 
 const baseUrlDrive = 'https://drive.google.com';
@@ -18,7 +18,8 @@ async function handler(req: NextApiRequestWithSession, res: NextApiResponse) {
 
         const imagePromises = images.map(async (image) => {
             return {
-                url: `${baseUrlDrive}/thumbnail?id=${image.id}`,
+                url: `${baseUrlDrive}/uc?export=view&id=${image.id}`,
+                thumbnail: `${baseUrlDrive}/thumbnail?id=${image.id}`,
                 urlFileDownload: `${baseUrlDrive}/uc?export=download&id=${image.id}`,
                 uid: image.id,
                 name: image.name,

@@ -1,0 +1,34 @@
+.wrapper {
+    :global {
+        .ant-tag {
+            width: 100%;
+            text-align: center;
+            border: 1px solid $white;
+            border-radius: 10px;
+            padding: 10px 15px 12px;
+            box-sizing: border-box;
+            line-height: 1;
+            font-size: 18px;
+            color: $black;
+            background: $white;
+            transition: all 0.3s ease;
+
+            &:hover {
+                border-color: $white;
+                border: 1px solid $white;
+                color: $black;
+                background: $white;
+            }
+
+            &.ant-tag-checkable-checked {
+                border-color: $white;
+                color: $white;
+                background: none;
+            }
+
+            @media screen and (max-width: $small) {
+                font-size: 12px;
+            }
+        }
+    }
+}

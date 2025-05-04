@@ -1,12 +1,12 @@
 import dayjs from 'dayjs';
 import { google } from 'googleapis';
 import { NextApiResponse } from 'next/types';
+import { Appointment } from '~shared/types/appointments';
 import {
     NextApiRequestWithSession,
     withSessionCheck,
-} from '~lib/withCheckSession';
-import { jwtClientGoogleCalendar } from '~lib/jwtClientGoogleCalendar';
-import { Appointment } from '~types/appointments';
+} from '~shared/lib/withCheckSession';
+import { jwtClientGoogleCalendar } from '~shared/lib/jwtClientGoogleCalendar';
 
 const getSummary = (appointment: Appointment) => {
     let summary = `${appointment.fullName} ${appointment.phone} tlgr: ${appointment.telegram}`;

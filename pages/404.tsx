@@ -2,8 +2,8 @@ import { Flex, Typography } from 'antd';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
-import { BrokenDrumstick, NotFoundSvg } from '~components/ui/icons';
-import { AnimatedBorderButton } from '~components/ui/button-animated-border';
+import { NotFoundIcon } from '~entities/404';
+import { AnimatedBorderButton, Icon } from '~shared/ui';
 
 const NotFound = () => {
     const { t } = useTranslation();
@@ -21,7 +21,7 @@ const NotFound = () => {
                 padding: '0 20px',
             }}
         >
-            <NotFoundSvg
+            <NotFoundIcon
                 svgVariants={{
                     hidden: { rotate: 0 },
                     visible: {
@@ -44,11 +44,11 @@ const NotFound = () => {
                     },
                 }}
             />
-            <BrokenDrumstick
-                stroke="#000"
-                width={300}
+            <Icon
+                name="brokenDrumstick"
+                size={300}
                 height={70}
-                strokeWidth={1}
+                style={{ strokeWidth: 1, stroke: '#000' }}
             />
             <Typography.Title level={3}>{t('404_title')}</Typography.Title>
             <AnimatedBorderButton onClick={() => push('/')} />

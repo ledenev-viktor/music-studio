@@ -1,0 +1,17 @@
+.closeButton {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 0;
+    line-height: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--black);
+
+    &:hover {
+        background: var(--red);
+        color: var(--white);
+    }
+}
