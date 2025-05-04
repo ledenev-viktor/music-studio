@@ -1,4 +1,5 @@
 export type Image = {
+    thumbnail?: string;
     urlFileDownload: string;
     uid: string;
     url: string;

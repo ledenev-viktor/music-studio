@@ -1,8 +1,11 @@
+export type FaqFields = { answer: string; question: string; active: boolean };
+
 export type Faq = {
-    faq: {
+    elements: {
         id: number;
-        question: string;
-        answer: string;
+        en: FaqFields;
+        ka: FaqFields;
+        ru: FaqFields;
     };
     created_at: Intl.DateTimeFormat;
     id: number;

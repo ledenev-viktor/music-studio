@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // TODO: fix when change the file
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Faq } from '~types/faq';
 import { useNotification } from '~shared/providers';
 import api from '~shared/lib/api.helper';
 
@@ -8,19 +9,11 @@ export const useUpdateFaq = () => {
     const { notification } = useNotification();
     const queryClient = useQueryClient();
 
-    return useMutation<
-        any,
-        any,
-        {
-            id: number;
-            question: string;
-            answer: string;
-        }[]
-    >({
+    return useMutation<any, any, Faq['elements'][]>({
         mutationFn: (data) => {
             const prepareData = data?.map((item: any) => {
                 return {
-                    faq: item,
+                    elements: item,
                 };
             });
             return api.post<any>('api/supabase/faq/update', prepareData);

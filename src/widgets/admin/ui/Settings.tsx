@@ -1,15 +1,13 @@
 import { Card, Flex, Typography } from 'antd';
 import { Images } from '~shared/types/images';
-import { Slide } from '~shared/types/settings';
-import { ListSlides, PicturesUpload, ListQuestionsEdit } from '~features/admin';
+import {
+    PicturesUpload,
+    ListQuestionsEdit,
+    ListSlidesEdit,
+} from '~features/admin';
+import { ListTeamEdit } from '~features/admin/ui/settings/team';
 
-export const Settings = ({
-    images,
-    slidesData,
-}: {
-    images?: Images;
-    slidesData: Slide[];
-}) => {
+export const Settings = ({ images }: { images?: Images }) => {
     return (
         <>
             <Flex vertical gap={20} align="center">
@@ -26,7 +24,8 @@ export const Settings = ({
                     </Flex>
                 </Card>
             </Flex>
-            <ListSlides slidesData={slidesData} />
+            <ListSlidesEdit />
+            <ListTeamEdit />
             <ListQuestionsEdit />
         </>
     );

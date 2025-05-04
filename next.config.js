@@ -24,7 +24,7 @@ module.exports = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: '*.google.com',
+                hostname: '*',
                 pathname: '**',
             },
         ],

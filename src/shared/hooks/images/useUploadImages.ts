@@ -11,7 +11,7 @@ export const useUploadImages = () => {
         AxiosApiError,
         {
             fileType: string;
-            url: string; //base64 url
+            url: string;
             fileName: string;
         }
     >({

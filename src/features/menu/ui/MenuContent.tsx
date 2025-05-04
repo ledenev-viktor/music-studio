@@ -3,6 +3,7 @@ import { Button } from 'antd';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
+import s from './CustomMenu.module.scss';
 
 const menu = [
     { text: 'common:menuHomeButton', path: '/' },
@@ -31,8 +32,8 @@ export const MenuContent = ({ toggle }: { toggle: () => void }) => {
     };
 
     return (
-        <nav className="clientMenu" style={{ paddingTop: '30px' }}>
-            <ul className="clientMenuUl">
+        <nav className={s.clientMenu} style={{ paddingTop: '30px' }}>
+            <ul className={s.clientMenuUl}>
                 {menu.map((item) => (
                     <LiComponent
                         key={item.text}
@@ -47,7 +48,7 @@ export const MenuContent = ({ toggle }: { toggle: () => void }) => {
                 ))}
             </ul>
             <ul
-                className="clientMenuUl"
+                className={s.clientMenuUl}
                 style={{
                     paddingTop: '30px',
                 }}
@@ -81,7 +82,7 @@ const LiComponent = ({
     styles?: CSSProperties;
 }) => {
     return (
-        <li className="clientMenuLi">
+        <li className={s.clientMenuLi}>
             <Button
                 type="link"
                 onClick={onClick}

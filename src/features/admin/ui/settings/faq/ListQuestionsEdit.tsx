@@ -1,97 +1,147 @@
-import { useEffect, useRef } from 'react';
-import { Flex, Typography } from 'antd';
-import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import { Flex, Input, Tabs, Button, Checkbox } from 'antd';
+import { Reorder } from 'framer-motion';
+import { Faq } from '~types/faq';
 import s from './faq.module.scss';
-import { FormInput, FormTextarea } from '~shared/ui';
 import { useGetFaq } from '~shared/hooks/faq/useGetFaq';
 import { useUpdateFaq } from '~shared/hooks/faq/useUpdateFaq';
+import { useListAdmin } from '~features/admin/hooks/useListAdmin';
+import { TitleSticky } from '~shared/ui/admin/TitleSticky';
+import { CloseButton } from '~shared/ui/admin/CloseButton';
+import { AppendButton } from '~shared/ui/admin/AppendButton';
 
 export const ListQuestionsEdit = () => {
-    const { mutate: updateFaq } = useUpdateFaq();
     const { data: faqData } = useGetFaq();
+    const { mutate: updateFaq } = useUpdateFaq();
+    const [lang, setLang] = useState<LanguageKey>('en');
 
-    const form = useForm();
-
-    const isDataApplied = useRef(false);
-
-    useEffect(() => {
-        if (faqData && !isDataApplied.current) {
-            form.reset({ groups: faqData });
-            isDataApplied.current = true;
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [faqData, form.reset]);
-
-    const { fields, append, remove } = useFieldArray({
-        control: form.control,
-        name: 'groups',
+    const {
+        dataElements,
+        setDataElements,
+        handleAppendElement,
+        handleResetElements,
+        handleRemoveElement,
+        changeElements,
+        isChangedElements,
+    } = useListAdmin<Faq['elements']>({
+        data: faqData ?? [],
+        newElementFields: {
+            en: {
+                question: '',
+                answer: '',
+                active: true,
+            },
+            ru: {
+                question: '',
+                answer: '',
+                active: true,
+            },
+            ka: {
+                question: '',
+                answer: '',
+                active: true,
+            },
+        },
     });
 
-    const onSubmit = (data) => {
-        const prepareData = createDataFaq(data?.groups);
-        updateFaq(prepareData);
-        console.log(data);
-    };
+    useEffect(() => {
+        if (faqData) {
+            setDataElements(faqData);
+        }
+    }, [faqData, setDataElements]);
 
     return (
         <Flex vertical className={s.wrapper}>
-            <Typography.Title>FAQ</Typography.Title>
-            <div>
-                <FormProvider {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)}>
-                        <Flex vertical gap={25} className={s.questionsList}>
-                            {fields.map((group, groupIndex) => (
-                                <div key={group.id}>
-                                    <div>
-                                        <FormInput
-                                            name={`groups.${groupIndex}.question`}
-                                        />
-                                        <FormTextarea
-                                            name={`groups.${groupIndex}.answer`}
-                                        />
-                                        <FormInput
-                                            name={`groups.${groupIndex}.id`}
-                                            type="hidden"
-                                        />
-                                    </div>
-                                    <button
-                                        type="button"
-                                        onClick={() => {
-                                            remove(groupIndex);
-                                        }}
-                                    >
-                                        Удалить вопрос
-                                    </button>
-                                </div>
-                            ))}
-                        </Flex>
-                        <div className={s.buttonsWrapper}>
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    append({
-                                        id: null,
-                                        question: '',
-                                        answer: '',
-                                    })
-                                }
+            <TitleSticky
+                title="FAQ"
+                rightSlot={
+                    isChangedElements && (
+                        <Flex gap={10}>
+                            <Button onClick={handleResetElements}>Reset</Button>
+                            <Button
+                                onClick={() => {
+                                    updateFaq(dataElements);
+                                }}
                             >
-                                Добавить вопрос
-                            </button>
-                            <button type="submit">Сохранить</button>
-                        </div>
-                    </form>
-                </FormProvider>
+                                Save
+                            </Button>
+                        </Flex>
+                    )
+                }
+            />
+            <div>
+                <Tabs
+                    type="card"
+                    onChange={(key) => {
+                        setLang(key as LanguageKey);
+                    }}
+                    activeKey={lang}
+                    items={[
+                        { key: 'en', label: 'en' },
+                        { key: 'ru', label: 'ru' },
+                        { key: 'ka', label: 'ka' },
+                    ]}
+                />
+                <Reorder.Group
+                    style={{
+                        margin: '0 0 25px',
+                        padding: 0,
+                        listStyle: 'none',
+                        overflow: 'hidden',
+                    }}
+                    className={s.faqList}
+                    axis="y"
+                    onReorder={setDataElements}
+                    values={dataElements}
+                >
+                    {dataElements.map((element) => (
+                        <Reorder.Item
+                            key={element?.id}
+                            value={element}
+                            id={element.id}
+                        >
+                            <div className={s.faqElement}>
+                                <div className={s.closeButtonWrapper}>
+                                    <CloseButton
+                                        callback={() =>
+                                            handleRemoveElement(element.id)
+                                        }
+                                    />
+                                </div>
+                                <Input
+                                    placeholder="Вопрос"
+                                    value={element?.[lang]?.['question']}
+                                    onChange={(e) => {
+                                        changeElements(element.id, lang, {
+                                            question: e.target.value,
+                                        });
+                                    }}
+                                />
+                                <Input.TextArea
+                                    placeholder="Ответ"
+                                    value={element?.[lang]?.['answer']}
+                                    onChange={(e) => {
+                                        changeElements(element.id, lang, {
+                                            answer: e.target.value,
+                                        });
+                                    }}
+                                />
+                                <Checkbox
+                                    checked={element?.[lang]?.['active']}
+                                    onChange={(e) => {
+                                        changeElements(element.id, lang, {
+                                            active: e.target.checked,
+                                        });
+                                    }}
+                                >
+                                    Active
+                                </Checkbox>
+                            </div>
+                        </Reorder.Item>
+                    ))}
+                </Reorder.Group>
             </div>
+            <AppendButton callback={handleAppendElement} />
         </Flex>
     );
 };
-
-const createDataFaq = (data) =>
-    data.map((item, index) => {
-        return {
-            id: index + 1,
-            question: item.question,
-            answer: item.answer,
-        };
-    });

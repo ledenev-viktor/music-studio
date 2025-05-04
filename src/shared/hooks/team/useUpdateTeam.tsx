@@ -1,37 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // TODO: fix when change the file
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Team } from '~types/team';
 import { useNotification } from '~shared/providers';
 import api from '~shared/lib/api.helper';
 
-export const useUpdateSettings = () => {
+export const useUpdateTeam = () => {
     const { notification } = useNotification();
     const queryClient = useQueryClient();
 
-    return useMutation<
-        any,
-        any,
-        {
-            id: number;
-            pictureUrl?: string;
-            fileDownload?: string;
-            title?: string;
-            price?: number;
-            desc?: string;
-            active?: boolean;
-        }[]
-    >({
+    return useMutation<any, any, Team['elements'][]>({
         mutationFn: (data) => {
             const prepareData = data?.map((item: any) => {
                 return {
-                    settings: item,
+                    elements: item,
                 };
             });
-            return api.post<any>('api/supabase/settings/update', prepareData);
+            return api.post<any>('api/supabase/ourTeam/update', prepareData);
         },
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: ['fetchSettings', 'fetchSettingsBase64'],
+                queryKey: ['fetchTeam'],
             });
             notification.success({
                 message: 'Data saved successfully',

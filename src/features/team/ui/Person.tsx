@@ -4,13 +4,13 @@ import s from './Team.module.scss';
 
 export const Person = ({
     name,
-    position,
-    image,
+    desc,
+    img,
     chief,
 }: {
     name: string;
-    position: string;
-    image: string;
+    desc: string;
+    img: string;
     chief?: boolean;
 }) => (
     <div
@@ -23,14 +23,14 @@ export const Person = ({
                 width={500}
                 height={500}
                 className={s.img}
-                src={image}
+                src={img}
                 alt={name}
                 layout="responsive"
             />
         </div>
         <div>
             <div className={s.personName}>{name}</div>
-            <p className={s.personPosition}>{position}</p>
+            <p className={s.personPosition}>{desc}</p>
         </div>
     </div>
 );

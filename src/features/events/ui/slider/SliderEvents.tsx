@@ -4,11 +4,13 @@ import 'swiper/css/effect-cards';
 import { Autoplay, EffectCards, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperInstance } from 'swiper';
-import { SlideWithBase64 } from '~shared/types/settings';
+import { SlideFields } from '~types/slides';
 import { GalleryCard } from './GalleryCard';
 import s from './SliderEvents.module.scss';
 
-export const SliderEvents = ({ slides }: { slides: SlideWithBase64[] }) => {
+export type SlideFieldsWithId = { id: number } & SlideFields;
+
+export const SliderEvents = ({ slides }: { slides: SlideFieldsWithId[] }) => {
     SwiperInstance.use([Autoplay]);
 
     return (

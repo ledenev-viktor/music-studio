@@ -1,1 +1,1 @@
-export { SliderEvents } from './ui/slider/SliderEvents';
+export { SliderEvents, type SlideFieldsWithId } from './ui/slider/SliderEvents';

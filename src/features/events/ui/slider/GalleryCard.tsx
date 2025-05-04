@@ -2,7 +2,7 @@ import { Button, Flex, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 import cn from 'classnames';
-import { SlideWithBase64 } from '~shared/types/settings';
+import { SlideFields } from '~types/slides';
 import { COLORS } from '~shared/constants';
 import s from './SliderEvents.module.scss';
 
@@ -10,7 +10,7 @@ export const GalleryCard = ({
     slide,
     className,
 }: {
-    slide: SlideWithBase64;
+    slide: SlideFields;
     className?: string;
 }) => {
     const { base64, img, title, price } = slide ?? {};

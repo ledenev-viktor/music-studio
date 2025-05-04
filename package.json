@@ -41,6 +41,7 @@
     "framer-motion": "^11.1.9",
     "i18next": "^23.11.3",
     "lodash": "^4.17.21",
+    "lodash.debounce": "^4.0.8",
     "next": "^14.2.3",
     "next-auth": "^4.24.7",
     "next-i18next": "^15.3.1",

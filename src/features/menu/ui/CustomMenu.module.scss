@@ -9,10 +9,9 @@
     will-change: transform;
     z-index: 100;
     overflow: hidden auto;
-}
+    height: 100vh;
 
-@media (max-width: 767px) {
-    .clientMenu {
+    @media (max-width: 767px) {
         width: 100%;
     }
 }

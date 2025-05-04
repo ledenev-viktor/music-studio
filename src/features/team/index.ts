@@ -1,1 +1,1 @@
-export { TeamList } from './ui/TeamList';
+export { TeamList, type TeamFieldsWithId } from './ui/TeamList';

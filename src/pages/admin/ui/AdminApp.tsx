@@ -15,8 +15,8 @@ import { Content, Header } from 'antd/es/layout/layout';
 import Image from 'next/image';
 import { signOut } from 'next-auth/react';
 import { useGetImages } from '~shared/hooks/images';
-import { useGetSettings } from '~shared/hooks/settings';
 import { Settings, Appointments } from '~widgets/admin';
+import { useGetSlides } from '~shared/hooks/slides/useGetSlides';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -41,8 +41,7 @@ export function AdminApp() {
     const onMenuItemClick: MenuProps['onClick'] = (e) => setCurrentTab(e.key);
 
     const { data: images, isLoading: isLoadingImages } = useGetImages();
-    const { data: slidesData, isLoading: isLoadingSlidesData } =
-        useGetSettings();
+    const { data: slidesData, isLoading: isLoadingSlidesData } = useGetSlides();
 
     return (
         <ConfigProvider
@@ -66,7 +65,7 @@ export function AdminApp() {
                     style={{
                         position: 'sticky',
                         top: 0,
-                        zIndex: 1,
+                        zIndex: 99,
                         width: '100%',
                         display: 'flex',
                         alignItems: 'center',

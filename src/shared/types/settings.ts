@@ -13,13 +13,3 @@ export type Settings = {
     created_at: Intl.DateTimeFormat;
     id: number;
 };
-
-export type Slide = {
-    id: number;
-    img?: string;
-    fileDownload?: string;
-    title?: string;
-    desc?: string;
-    price?: number;
-    active: boolean;
-};
